@@ -2,8 +2,17 @@
 
 cc = gcc
 
-MAIN_FOLDER   = src
-LIB_FOLDER    = src/lib
+MAIN_FOLDER = src
+LIB_FOLDER  = src/lib
+
+APP_FOLDER = src/app/cpp
+GRAPHICS_FOLDER = src/graphics/cpp
+MY_RGB_FOLDER = src/my_rgb/cpp
+VECTOR_FOLDER = src/vector/cpp
+TRANSFORM_FOLDER = src/transform/cpp
+MATRIX_FOLDER = src/matrix/cpp
+WIDGETS_FOLDER = src/widgets/cpp
+CLOCK_FOLDER = src/clock/cpp
 
 exefolder = exe
 
@@ -12,7 +21,7 @@ define flags
 endef
 
 define sdl_flags
-	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2
+	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 endef
 
 define flags_sdl_version
@@ -25,12 +34,28 @@ default_name = prog
 default_path = $(exefolder)/$(default_name)
 
 
-all: NAME
+all: program
 
 
-NAME:
+program:
 	$(sc) $(cc) \
 	$(MAIN_FOLDER)/main.cpp \
 	$(LIB_FOLDER)/logs.cpp \
-	-o $(default_path) $(sdl_flags) $(flags_sdl_version) -lstdc++ -Ofast
+	$(GRAPHICS_FOLDER)/graphics.cpp \
+	$(GRAPHICS_FOLDER)/sdl.cpp \
+	$(MY_RGB_FOLDER)/my_rgb.cpp \
+	$(VECTOR_FOLDER)/vector.cpp \
+	$(VECTOR_FOLDER)/point.cpp \
+	$(VECTOR_FOLDER)/pair.cpp \
+	$(WIDGETS_FOLDER)/widget.cpp \
+	$(WIDGETS_FOLDER)/window.cpp \
+	$(WIDGETS_FOLDER)/textured.cpp \
+	$(WIDGETS_FOLDER)/container.cpp \
+	$(TRANSFORM_FOLDER)/stack.cpp \
+	$(TRANSFORM_FOLDER)/transform.cpp \
+	$(MATRIX_FOLDER)/matrix.cpp \
+	$(CLOCK_FOLDER)/clock.cpp \
+	$(CLOCK_FOLDER)/arrow.cpp \
+	$(APP_FOLDER)/app.cpp \
+	-o $(default_path) $(sdl_flags) $(flags_sdl_version) -lstdc++ -O0
 

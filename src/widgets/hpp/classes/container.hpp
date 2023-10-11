@@ -14,9 +14,15 @@
 
 class Widget_Container: public Widget {
 
-    std::list <Widget> widgets_;
-
   public:
+
+    Widget_Container (void);
+
+    void add (Widget* widget);
+
+    //--------------------------------------------------
+
+    void render (Graphic_Window& window, Transform_Stack& transform) override;
 
     Processing_result on_mouse_move    (int mouse_x, int mouse_y) override;
     Processing_result on_mouse_press   (int mouse_x, int mouse_y) override;
@@ -26,6 +32,10 @@ class Widget_Container: public Widget {
     Processing_result on_keyboard_release (SDL_Keycode key) override;
 
     Processing_result on_timer (clock_t current_time) override;
+
+  //protected:
+
+    std::list <Widget*> widgets_;
 };
 
 

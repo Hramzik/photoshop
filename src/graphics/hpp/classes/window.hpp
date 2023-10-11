@@ -22,16 +22,18 @@ class Graphic_Window {
 //--------------------------------------------------
 
   public:
+
     Graphic_Window (void);
 
 //--------------------------------------------------
 
-    SDL_Texture* load_texture (const char* path, bool transparent_flag = false, My_RGB clr = C_WHITE);
+    SDL_Texture* load_texture
+            (const char* path, bool transparent_flag = false, My_RGB clr = C_WHITE) const;
 
 //--------------------------------------------------
 
-    int get_width  (void);
-    int get_height (void);
+    int get_width  (void) const;
+    int get_height (void) const;
 
     void set_drawcolor (My_RGB color);
     void clear_screen  (void);
@@ -41,7 +43,8 @@ class Graphic_Window {
     void draw_line  (int x1, int y1, int x2, int y2);
     void draw_rect  (SDL_Rect rect);
 
-    void render_texture (SDL_Texture* texture, SDL_Rect render_rect);
+    void render_texture (SDL_Texture* texture, SDL_Rect  render_rect);
+    void render_texture (SDL_Texture* texture, SDL_Rect* render_rect = nullptr);
 };
 
 

@@ -39,7 +39,8 @@ Return_code quit_sdl (void) {
 }
 
 
-SDL_Texture* Graphic_Window::load_texture (const char* path, bool transparent_flag, My_RGB clr) {
+SDL_Texture* Graphic_Window::load_texture
+        (const char* path, bool transparent_flag, My_RGB clr) const {
 
     SDL_Surface* temp_surface = IMG_Load (path);
 

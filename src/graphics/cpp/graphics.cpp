@@ -39,7 +39,7 @@ Graphic_Window::Graphic_Window (void):
 
 //--------------------------------------------------
 
-int Graphic_Window::get_width (void) {
+int Graphic_Window::get_width (void) const {
 
     int width = 0;
 
@@ -51,7 +51,7 @@ int Graphic_Window::get_width (void) {
 }
 
 
-int Graphic_Window::get_height (void) {
+int Graphic_Window::get_height (void) const {
 
     int height = 0;
 
@@ -105,6 +105,15 @@ void Graphic_Window::draw_rect (SDL_Rect rect) {
 
 void Graphic_Window::render_texture (SDL_Texture* texture, SDL_Rect render_rect) {
 
-    SDL_RenderCopy (renderer_, texture, nullptr, &render_rect);
+    render_texture (texture, &render_rect);
 }
+
+
+void Graphic_Window::render_texture (SDL_Texture* texture, SDL_Rect* render_rect) {
+
+    SDL_RenderCopy (renderer_, texture, nullptr, render_rect);
+}
+
+//--------------------------------------------------
+
 

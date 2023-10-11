@@ -5,6 +5,7 @@
 
 #include "widget.hpp"
 #include "window.hpp"
+#include "textured.hpp"
 #include "container.hpp"
 #include "button.hpp"
 

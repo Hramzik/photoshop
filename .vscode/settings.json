@@ -7,7 +7,27 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "exe": true,
-        ".vscode": true
+        ".vscode": true,
+        ".gitignore": true,
+        "media": true,
+        "src\\lib": true,
+        "src\\graphics": false,
+        "src\\vector": true,
+        "src\\my_rgb": true,
+        "src\\matrix": true,
+        "src\\transform": true
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
+    "files.associations": {
+        "*.tcc": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "istream": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp"
+    }
 }

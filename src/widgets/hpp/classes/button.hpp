@@ -5,7 +5,7 @@
 
 class Button: public Widget {
 
-    bool is_pressed;
+    bool pressed;
 
   public:
 

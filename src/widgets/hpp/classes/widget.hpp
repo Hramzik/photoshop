@@ -3,6 +3,7 @@
 //--------------------------------------------------
 
 #include "../../../graphics/hpp/graphics.hpp"
+#include "../../../transform/hpp/transform.hpp"
 
 //--------------------------------------------------
 
@@ -15,7 +16,11 @@ class Widget {
 
   public:
 
-    virtual void render (Graphic_Window window/*, Stack transform*/);
+    virtual ~Widget (void);
+
+    //--------------------------------------------------
+
+    virtual void render (Graphic_Window& window, Transform_Stack& transform);
 
     virtual Processing_result on_mouse_move    (int mouse_x, int mouse_y);
     virtual Processing_result on_mouse_press   (int mouse_x, int mouse_y);
