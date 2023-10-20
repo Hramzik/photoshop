@@ -27,7 +27,5 @@ class Clock_Widget: public Widget_Container {
 };
 
 
-
-
 //--------------------------------------------------
 #endif

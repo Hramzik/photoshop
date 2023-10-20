@@ -32,8 +32,5 @@ class Textured_Window: public Window {
 };
 
 
-
-
-
 //--------------------------------------------------
 #endif

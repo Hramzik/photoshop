@@ -14,8 +14,8 @@
         "src\\graphics": false,
         "src\\vector": true,
         "src\\my_rgb": true,
-        "src\\matrix": true,
-        "src\\transform": true
+        "src\\matrix": false,
+        "src\\transform": false
     },
     "explorerExclude.backup": {},
     "files.associations": {
