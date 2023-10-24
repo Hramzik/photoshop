@@ -2,7 +2,9 @@
 #define WIDGETS_CLASS_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "widget.hpp"
+#include "../../../../vector/hpp/vector.hpp"
+
+#include "../widget.hpp"
 
 //--------------------------------------------------
 
@@ -11,14 +13,14 @@ class Window: public Widget {
 
   public:
 
-    Window (double width, double height);
+    Window (Vector2D position, double width, double height);
+    Window (Vector2D position, Vector2D size);
 
-    
+//--------------------------------------------------
 
   protected:
 
-    double width_;
-    double height_;
+    Vector2D size_;
 };
 
 

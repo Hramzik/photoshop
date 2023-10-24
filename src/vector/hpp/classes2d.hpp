@@ -61,6 +61,8 @@ public:
     Vector2D operator* (double value);
     Vector2D operator* (Vector2D vector);
     Vector2D operator/ (double value);
+
+    void operator+= (Vector2D vector);
 };
 
 

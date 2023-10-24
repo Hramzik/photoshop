@@ -109,6 +109,13 @@ Vector2D Vector2D::operator* (Vector2D vector) {
     return { x * vector.x, y * vector.y };
 }
 
+
+void Vector2D::operator+= (Vector2D vector) {
+
+    x += vector.x;
+    y += vector.y;
+}
+
 //--------------------------------------------------
 
 Vector3D Vector3D::operator+ (Vector3D vector) {

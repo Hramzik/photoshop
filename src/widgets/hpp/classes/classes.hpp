@@ -4,10 +4,10 @@
 
 
 #include "widget.hpp"
-#include "window.hpp"
 #include "textured.hpp"
 #include "container.hpp"
-#include "button.hpp"
+#include "windows/windows.hpp"
+#include "buttons/buttons.hpp"
 
 
 //--------------------------------------------------

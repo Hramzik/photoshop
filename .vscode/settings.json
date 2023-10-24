@@ -11,11 +11,12 @@
         ".gitignore": true,
         "media": true,
         "src\\lib": true,
-        "src\\graphics": false,
-        "src\\vector": true,
+        "src\\graphics": true,
+        "src\\vector": false,
         "src\\my_rgb": true,
-        "src\\matrix": false,
-        "src\\transform": false
+        "src\\matrix": true,
+        "src\\transform": false,
+        "src\\clock": true
     },
     "explorerExclude.backup": {},
     "files.associations": {
@@ -28,6 +29,7 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "string_view": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "compare": "cpp"
     }
 }

@@ -8,12 +8,12 @@
 
 //--------------------------------------------------
 
-Widget_Container::Widget_Container (void):
-        widgets_ () {}
+Widget_Container::Widget_Container (Transform transform):
+        Widget (transform) {}
 
 //--------------------------------------------------
 
-void Widget_Container::add (Widget* widget) {
+void Widget_Container::register_widget (Widget* widget) {
 
     widgets_.push_back (widget);
 }
@@ -64,7 +64,6 @@ Processing_result Widget_Container::on_mouse_release (int mouse_x, int mouse_y) 
     return PR_LEFT;
 }
 
-//--------------------------------------------------
 
 Processing_result Widget_Container::on_keyboard_press (SDL_Keycode key) {
 
@@ -89,7 +88,6 @@ Processing_result Widget_Container::on_keyboard_release (SDL_Keycode key) {
     return PR_LEFT;
 }
 
-//--------------------------------------------------
 
 Processing_result Widget_Container::on_timer (clock_t current_time) {
 

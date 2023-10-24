@@ -1,10 +1,10 @@
-#ifndef WIDGETS_CLASSES_TEXTURED_HPP_INCLUDED
-#define WIDGETS_CLASSES_TEXTURED_HPP_INCLUDED
+#ifndef WIDGETS_CLASS_TEXTURED_WINDOW_HPP_INCLUDED
+#define WIDGETS_CLASS_TEXTURED_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
 #include "window.hpp"
 
-#include "../../../graphics/hpp/graphics.hpp"
+#include "../../../../graphics/hpp/graphics.hpp"
 
 //--------------------------------------------------
 

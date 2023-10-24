@@ -19,6 +19,8 @@ class App {
     void run (void);
     void open_clock (void);
 
+//--------------------------------------------------
+
   private:
 
     Widget_Container widgets_;
@@ -27,6 +29,8 @@ class App {
     bool exit_;
 
     //--------------------------------------------------
+
+    void populate (void);
 
     void update (void);
     void render (void);
