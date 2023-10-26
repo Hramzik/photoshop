@@ -21,7 +21,13 @@ class Transform {
 
     //--------------------------------------------------
 
+    Vector2D apply_to_size (Vector2D size) const;
+    Vector2D get_offset (void) const;
+    void     set_offset (Vector2D offset);
+
     void apply_after_me (const Transform& next_transform);
+
+//--------------------------------------------------
 
   private:
 

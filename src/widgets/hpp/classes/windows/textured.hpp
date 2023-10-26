@@ -16,7 +16,6 @@ class Textured_Window: public Window {
     Textured_Window (double width, double height);
 
     void load_texture (const char* path, const Graphic_Window& loader);
-    void render (Graphic_Window& window, Transform_Stack& transform);
 
     SDL_Texture* get_texture (void);
     void         set_texture (SDL_Texture* texture);
@@ -26,7 +25,14 @@ class Textured_Window: public Window {
     Textured_Window (const Textured_Window&) = delete;
     void  operator= (const Textured_Window&) = delete;
 
+//--------------------------------------------------
+
   protected:
+
+    void render_with_final_transform
+            (Graphic_Window& window, const Transform& result_transform) override;
+
+    //--------------------------------------------------
 
     SDL_Texture* texture_;
 };

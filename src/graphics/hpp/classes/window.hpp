@@ -12,12 +12,25 @@
 
 class Graphic_Window {
 
+    enum Coordinate_System {
+
+        SDL_COORDS,
+        CARTESIAN_COORDS,
+    };
+
+    static inline const My_RGB DEFAULT_BACKGROUND_COLOR = C_GRAY;
+
+    //--------------------------------------------------
+
     SDL_Window*   window_;
     SDL_Renderer* renderer_;
 
+    Coordinate_System current_coordinates_;
+
 //--------------------------------------------------
 
-    static inline const My_RGB DEFAULT_BACKGROUND_COLOR = C_GRAY;
+    void convert_to_sdl_coords (int& x, int& y);
+    void convert_to_sdl_coords (SDL_Rect& rect);
 
 //--------------------------------------------------
 

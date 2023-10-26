@@ -11,18 +11,49 @@ Widget::Widget (Vector2D position):
 
 
 Widget::Widget (Transform transform):
-        transform_ (transform),
-        state (OPENED) {}
+        my_transform_ (transform),
+        state         (OPENED) {}
 
 
 Widget::~Widget (void) {}
 
 //--------------------------------------------------
 
-void Widget::render (Graphic_Window& window, Transform_Stack& transform) {
+Vector2D Widget::get_position (void) {
+
+    return my_transform_.get_offset ();
+}
+
+
+void Widget::set_position (Vector2D position) {
+
+    my_transform_.set_offset (position);
+}
+
+//--------------------------------------------------
+
+void Widget::render (Graphic_Window& window, Transform_Stack& stack) {
+
+    stack.push (my_transform_);
+
+
+    render_with_local_stack (window, stack);
+
+
+    stack.pop ();
+}
+
+
+void Widget::render_with_local_stack (Graphic_Window& window, Transform_Stack& result_stack) {
+
+    render_with_final_transform (window, result_stack.get_result ());
+}
+
+
+void Widget::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
 
     (void) window;
-    (void) transform;
+    (void) result_transform;
 }
 
 //--------------------------------------------------

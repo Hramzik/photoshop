@@ -9,7 +9,13 @@
 //--------------------------------------------------
 
 Widget_Container::Widget_Container (Transform transform):
-        Widget (transform) {}
+        Widget         (transform),
+        widgets_       (),
+        active_widget_ (nullptr) {}
+
+
+Widget_Container::Widget_Container (Vector2D position):
+        Widget_Container (Transform (position)) {}
 
 //--------------------------------------------------
 
@@ -20,11 +26,13 @@ void Widget_Container::register_widget (Widget* widget) {
 
 //--------------------------------------------------
 
-void Widget_Container::render (Graphic_Window& window, Transform_Stack& transform) {
+void Widget_Container::render_with_local_stack
+        (Graphic_Window& window, Transform_Stack& stack) {
 
-    for (Widget* widget : widgets_) {
+    for (auto i = widgets_.rbegin (); i != widgets_.rend (); ++i) {
 
-        widget->render (window, transform);
+        Widget* widget = *i;
+        widget->render (window, stack);
     }
 }
 

@@ -8,15 +8,16 @@
         "**/Thumbs.db": true,
         "exe": true,
         ".vscode": true,
-        ".gitignore": true,
+        ".gitignore": false,
         "media": true,
         "src\\lib": true,
         "src\\graphics": true,
-        "src\\vector": false,
-        "src\\my_rgb": true,
+        "src\\vector": true,
+        "src\\my_rgb": false,
         "src\\matrix": true,
-        "src\\transform": false,
-        "src\\clock": true
+        "src\\transform": true,
+        "src\\clock": true,
+        ".VSCodeCounter": false
     },
     "explorerExclude.backup": {},
     "files.associations": {
@@ -30,6 +31,9 @@
         "streambuf": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
-        "compare": "cpp"
+        "compare": "cpp",
+        "type_traits": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp"
     }
 }

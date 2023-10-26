@@ -7,9 +7,12 @@
 //--------------------------------------------------
 
 App::App (void):
-        widgets_ (),
+        widgets_ (Vector2D (0)),
         window_  (),
-        exit_ (false) {}
+        exit_ (false) {
+
+    populate ();
+}
 
 //--------------------------------------------------
 
@@ -54,13 +57,21 @@ void App::render (void) {
     window_.update_screen ();
 }
 
-
+/*
 void App::open_clock (void) {
 
     Clock_Widget* clock = new Clock_Widget (500, 540);
     clock->load_textures (window_);
 
 
-    widgets_.add (clock);
+    widgets_.register_widget (clock);
 }
+*/
 
+void App::populate (void) {
+
+    Colored_Window*       window = new Colored_Window ({0}, {200}, C_WHITE);
+    Framed_Window* framed_window = new Framed_Window (*window);
+
+    widgets_.register_widget (framed_window);
+}

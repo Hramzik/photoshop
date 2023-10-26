@@ -57,12 +57,13 @@ public:
 
     Return_code rotate (double degrees);
 
-    Vector2D operator- (void);
-    Vector2D operator* (double value);
-    Vector2D operator* (Vector2D vector);
-    Vector2D operator/ (double value);
+    Vector2D operator- (void)            const;
+    Vector2D operator* (double value)    const;
+    Vector2D operator* (Vector2D vector) const;
+    Vector2D operator/ (double value)    const;
 
     void operator+= (Vector2D vector);
+    void operator*= (Vector2D vector);
 };
 
 

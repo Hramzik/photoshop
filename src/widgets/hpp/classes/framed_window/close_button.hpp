@@ -2,17 +2,20 @@
 #define WIDGET_CLASS_CLOSE_BUTTON_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../buttons/colored.hpp"
+#include "../buttons/buttons.hpp"
 
 //--------------------------------------------------
 
 
-class Close_Button: public Colored_Button {
+// CURRENTLY NOT USED, LEFT AS A PROTOTYPE
+class Close_Button: public Button {
 
   public:
 
+    static const double DEFAULT_COLOR;
+
     static const double DEFAULT_WIDTH;
-    //                  DEFAULT_HEIGHT = FRAME_HEIGHT
+ // static const double DEFAULT_HEIGHT = FRAME_HEIGHT
 
     //--------------------------------------------------
 
@@ -20,7 +23,7 @@ class Close_Button: public Colored_Button {
 
     //--------------------------------------------------
 
-    void on_mouse_pressed (int mouse_x, int mouse_y) override;
+    Processing_result on_mouse_pressed (int mouse_x, int mouse_y) override;
 
 //--------------------------------------------------
 

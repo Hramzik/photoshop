@@ -12,8 +12,9 @@
 
 Graphic_Window::Graphic_Window (void):
         window_   (nullptr),
-        renderer_ (nullptr) {
-
+        renderer_ (nullptr),
+        current_coordinates_ (CARTESIAN_COORDS)
+{
     window_ = SDL_CreateWindow (
             "", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, 
@@ -38,6 +39,27 @@ Graphic_Window::Graphic_Window (void):
 
 
 //--------------------------------------------------
+
+void Graphic_Window::convert_to_sdl_coords (int& x, int& y) { (void) x, (void) y;
+
+    if (current_coordinates_ == SDL_COORDS) return;
+
+    //--------------------------------------------------
+
+    y = get_height () - y;
+}
+
+
+void Graphic_Window::convert_to_sdl_coords (SDL_Rect& rect) {
+
+    if (current_coordinates_ == SDL_COORDS) return;
+
+    //--------------------------------------------------
+
+    convert_to_sdl_coords (rect.x, rect.y); // correct left bottom
+    rect.y -= rect.h;                       // correct left top
+}
+
 
 int Graphic_Window::get_width (void) const {
 
@@ -86,17 +108,30 @@ void Graphic_Window::update_screen (void) {
 
 void Graphic_Window::draw_point (int x, int y) {
 
+    convert_to_sdl_coords (x, y);
+
+    //--------------------------------------------------
+
     SDL_RenderDrawPoint (renderer_, x, y);
 }
 
 
 void Graphic_Window::draw_line (int x1, int y1, int x2, int y2) {
 
+    convert_to_sdl_coords (x1, y1);
+    convert_to_sdl_coords (x2, y2);
+
+    //--------------------------------------------------
+
     SDL_RenderDrawLine (renderer_, x1, y1, x2, y2);
 }
 
 
 void Graphic_Window::draw_rect (SDL_Rect rect) {
+
+    convert_to_sdl_coords (rect);
+
+    //--------------------------------------------------
 
     SDL_RenderFillRect (renderer_, &rect);
 }

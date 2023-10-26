@@ -17,11 +17,31 @@ void Transform_Stack::push (const Transform& transform) {
 }
 
 
-void Transform_Stack::pop (void) {}
+void Transform_Stack::pop (void) {
 
-/*
-Transform Transform_Stack::get_top (void) {}
-Transform Transform_Stack::get_result (void) {}
-*/
+    transforms_.pop_back ();
+}
+
+
+Transform Transform_Stack::get_top (void) {
+
+    return transforms_.back ();
+}
+
+
+// todo: optimize calculations by storing current result
+Transform Transform_Stack::get_result (void) {
+
+    Transform result;
+
+    for (Transform i : transforms_) {
+
+        result.apply_after_me (i);
+    }
+
+
+    return result;
+}
+
 //--------------------------------------------------
 

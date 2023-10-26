@@ -16,11 +16,14 @@ class Colored_Window: public Window {
 
     Colored_Window (Vector2D position, Vector2D size, My_RGB color);
 
-    void render (Graphic_Window& window, Transform_Stack& transform);
-
-    //--------------------------------------------------
+//--------------------------------------------------
 
   protected:
+
+    void render_with_final_transform
+            (Graphic_Window& window, const Transform& result_transform) override;
+
+    //--------------------------------------------------
 
     My_RGB color_;
 };

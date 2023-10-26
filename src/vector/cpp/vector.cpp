@@ -77,13 +77,13 @@ Return_code Vector2D::rotate (double degrees) {
 
 //--------------------------------------------------
 
-Vector2D Vector2D::operator- (void) {
+Vector2D Vector2D::operator- (void) const {
 
     return {-x, -y};
 }
 
 
-Vector2D Vector2D::operator* (double value) {
+Vector2D Vector2D::operator* (double value) const {
 
     Vector2D ans = *this;
     ans.scale (value);
@@ -93,7 +93,7 @@ Vector2D Vector2D::operator* (double value) {
 }
 
 
-Vector2D Vector2D::operator/ (double value) {
+Vector2D Vector2D::operator/ (double value) const {
 
     Vector2D ans = *this;
     ans.scale (1 / value);
@@ -104,7 +104,7 @@ Vector2D Vector2D::operator/ (double value) {
 
 //--------------------------------------------------
 
-Vector2D Vector2D::operator* (Vector2D vector) {
+Vector2D Vector2D::operator* (Vector2D vector) const {
 
     return { x * vector.x, y * vector.y };
 }
@@ -114,6 +114,13 @@ void Vector2D::operator+= (Vector2D vector) {
 
     x += vector.x;
     y += vector.y;
+}
+
+
+void Vector2D::operator*= (Vector2D vector) {
+
+    x *= vector.x;
+    y *= vector.y;
 }
 
 //--------------------------------------------------

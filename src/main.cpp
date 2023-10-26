@@ -13,7 +13,6 @@ int main (int argc, char** argv) { (void) argc; (void) argv;
     init_sdl ();
 
     App app;
-    app.open_clock ();
 
 //--------------------------------------------------
 

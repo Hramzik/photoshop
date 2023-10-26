@@ -10,7 +10,6 @@ GRAPHICS_FOLDER = src/graphics/cpp
 MY_RGB_FOLDER = src/my_rgb/cpp
 VECTOR_FOLDER = src/vector/cpp
 TRANSFORM_FOLDER = src/transform/cpp
-MATRIX_FOLDER = src/matrix/cpp
 WIDGETS_FOLDER = src/widgets/cpp
 CLOCK_FOLDER = src/clock/cpp
 
@@ -48,14 +47,14 @@ program:
 	$(VECTOR_FOLDER)/point.cpp \
 	$(VECTOR_FOLDER)/pair.cpp \
 	$(WIDGETS_FOLDER)/widget.cpp \
-	$(WIDGETS_FOLDER)/window.cpp \
-	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
+	$(WIDGETS_FOLDER)/button.cpp \
+	$(WIDGETS_FOLDER)/window.cpp \
+	$(WIDGETS_FOLDER)/colored.cpp \
+	$(WIDGETS_FOLDER)/textured.cpp \
+	$(WIDGETS_FOLDER)/framed.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
-	$(MATRIX_FOLDER)/matrix.cpp \
-	$(CLOCK_FOLDER)/clock.cpp \
-	$(CLOCK_FOLDER)/arrow.cpp \
 	$(APP_FOLDER)/app.cpp \
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) -lstdc++ -O0
 

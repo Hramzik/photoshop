@@ -38,7 +38,7 @@ void Clock_Arrow::speed_up (double scale) {
 }
 
 
-void Clock_Arrow::render (Graphic_Window& window, Transform_Stack& transform) {
+void Clock_Arrow::render (Graphic_Window& window, Transform_Stack& stack) {
 
     (void) transform;
 

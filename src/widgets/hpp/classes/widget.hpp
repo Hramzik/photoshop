@@ -31,7 +31,15 @@ class Widget {
 
     //--------------------------------------------------
 
-    virtual void render (Graphic_Window& window, Transform_Stack& transform);
+    Vector2D  get_position  (void);
+    void      set_position  (Vector2D position);
+    Transform get_transform (void) const;
+    void      set_transform (const Transform& transform);
+
+    //--------------------------------------------------
+
+    // pushes my_transform and calls protected render function
+    virtual void render (Graphic_Window& window, Transform_Stack& stack);
 
     virtual Processing_result on_mouse_move    (int mouse_x, int mouse_y);
     virtual Processing_result on_mouse_press   (int mouse_x, int mouse_y);
@@ -40,12 +48,20 @@ class Widget {
     virtual Processing_result on_keyboard_release (SDL_Keycode key);
     virtual Processing_result on_timer (clock_t current_time);
 
-    virtual Transform get_transform (void) const;
-    virtual void      set_transform (const Transform& transform);
 
 //--------------------------------------------------
 
   protected:
+
+    // used by public render function
+    // transform_stack holds local transform
+    virtual void render_with_local_stack
+            (Graphic_Window& window, Transform_Stack& result_stack);
+
+    virtual void render_with_final_transform
+            (Graphic_Window& window, const Transform& result_transform);
+
+    //--------------------------------------------------
 
     Transform my_transform_;
     State     state;

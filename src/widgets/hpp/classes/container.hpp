@@ -17,12 +17,17 @@ class Widget_Container: public Widget {
   public:
 
     Widget_Container (Transform transform);
+    Widget_Container (Vector2D position);
+
+    Widget_Container (const Widget_Container&) = delete;
+    operator=        (const Widget_Container&) = delete;
 
     //--------------------------------------------------
 
     void register_widget (Widget* widget);
 
-    void render (Graphic_Window& window, Transform_Stack& transform) override;
+    void render_with_local_stack
+            (Graphic_Window& window, Transform_Stack& stack) override;
 
     Processing_result on_mouse_move    (int mouse_x, int mouse_y) override;
     Processing_result on_mouse_press   (int mouse_x, int mouse_y) override;

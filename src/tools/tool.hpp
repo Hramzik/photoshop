@@ -17,7 +17,7 @@ class Tool {
     void apply_next     (SDL_Texture* texture, int mouse_x, int mouse_y);
     void apply_end      (SDL_Texture* texture, int mouse_x, int mouse_y);
 
-    void draw_self (Graphic_Window& window, Transform_Stack& transforms);
+    void draw_self (Graphic_Window& window, Transform_Stack& stacks);
 
   private:
 

@@ -30,15 +30,11 @@ void Textured_Window::set_texture (SDL_Texture* texture) {
 
 //--------------------------------------------------
 
-void Textured_Window::render (Graphic_Window& window, Transform_Stack& transform) {
+void Textured_Window::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
 
-    (void) transform;
+    SDL_Rect render_rect = get_render_rect (result_transform);
 
-    SDL_Rect render_rect;
-    render_rect.x = 0;
-    render_rect.y = 0;
-    render_rect.w = (int) width_;
-    render_rect.h = (int) height_;
+    //--------------------------------------------------
 
     window.render_texture (texture_, render_rect);
 }
