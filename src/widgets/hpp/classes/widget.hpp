@@ -48,6 +48,7 @@ class Widget {
     virtual Processing_result on_keyboard_release (SDL_Keycode key);
     virtual Processing_result on_timer (clock_t current_time);
 
+    virtual void on_move (Vector2D offset);
 
 //--------------------------------------------------
 
@@ -56,7 +57,7 @@ class Widget {
     // used by public render function
     // transform_stack holds local transform
     virtual void render_with_local_stack
-            (Graphic_Window& window, Transform_Stack& result_stack);
+            (Graphic_Window& window, Transform_Stack& local_stack);
 
     virtual void render_with_final_transform
             (Graphic_Window& window, const Transform& result_transform);

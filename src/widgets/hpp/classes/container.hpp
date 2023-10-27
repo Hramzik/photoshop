@@ -36,7 +36,13 @@ class Widget_Container: public Widget {
     Processing_result on_keyboard_release (SDL_Keycode key)       override;
     Processing_result on_timer (clock_t current_time)             override;
 
+//--------------------------------------------------
+
   protected:
+
+    Vector2D get_local_mouse_position (int mouse_x, int mouse_y);
+
+    //--------------------------------------------------
 
     std::list <Widget*> widgets_;
     Widget*             active_widget_;

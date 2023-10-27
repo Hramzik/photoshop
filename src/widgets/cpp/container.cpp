@@ -39,9 +39,11 @@ void Widget_Container::render_with_local_stack
 
 Processing_result Widget_Container::on_mouse_move (int mouse_x, int mouse_y) {
 
+    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
+
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_move (mouse_x, mouse_y);
+        widget->on_mouse_move ((int) mouse_position.x, (int) mouse_position.y);
     }
 
 
@@ -51,9 +53,11 @@ Processing_result Widget_Container::on_mouse_move (int mouse_x, int mouse_y) {
 
 Processing_result Widget_Container::on_mouse_press (int mouse_x, int mouse_y) {
 
+    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
+
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_press (mouse_x, mouse_y);
+        widget->on_mouse_press ((int) mouse_position.x, (int) mouse_position.y);
     }
 
 
@@ -63,9 +67,11 @@ Processing_result Widget_Container::on_mouse_press (int mouse_x, int mouse_y) {
 
 Processing_result Widget_Container::on_mouse_release (int mouse_x, int mouse_y) {
 
+    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
+
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_release (mouse_x, mouse_y);
+        widget->on_mouse_release ((int) mouse_position.x, (int) mouse_position.y);
     }
 
 
@@ -109,4 +115,13 @@ Processing_result Widget_Container::on_timer (clock_t current_time) {
 }
 
 //--------------------------------------------------
+
+// todo: rewrite using stack transform
+Vector2D Widget_Container::get_local_mouse_position () {
+
+    Vector2D mouse_position (mouse_x, mouse_y);
+
+
+    return mouse_position - my_transform_.get_offset ();
+}
 

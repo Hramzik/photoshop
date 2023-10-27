@@ -31,12 +31,23 @@ void App::update (void) {
     SDL_Event event;
 
     while (SDL_PollEvent (&event)) {
+    switch (event.type) {
 
-        if (event.type == SDL_QUIT) exit_ = true;
+        case SDL_QUIT: exit_ = true; break;
 
-        if (event.type == SDL_KEYDOWN) widgets_.on_keyboard_press   (event.key.keysym.sym);
-        if (event.type == SDL_KEYUP)   widgets_.on_keyboard_release (event.key.keysym.sym);
-    }
+        case SDL_MOUSEMOTION:
+            widgets_.on_mouse_move (event.motion.x, window_.get_height () - event.motion.y);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            widgets_.on_mouse_press (event.button.x, window_.get_height () - event.button.y);
+            break;
+        case SDL_MOUSEBUTTONUP:
+            widgets_.on_mouse_release (event.button.x, window_.get_height () - event.button.y);
+            break;
+
+        case SDL_KEYDOWN: widgets_.on_keyboard_press   (event.key.keysym.sym); break;
+        case SDL_KEYUP:   widgets_.on_keyboard_release (event.key.keysym.sym); break;
+    }}
 
 
     widgets_.on_timer (clock ());

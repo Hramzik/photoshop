@@ -30,6 +30,18 @@ void Widget::set_position (Vector2D position) {
     my_transform_.set_offset (position);
 }
 
+
+Transform Widget::get_transform (void) const {
+
+    return my_transform_;
+}
+
+
+void Widget::set_transform (const Transform& transform) {
+
+    my_transform_ = transform;
+}
+
 //--------------------------------------------------
 
 void Widget::render (Graphic_Window& window, Transform_Stack& stack) {
@@ -44,9 +56,9 @@ void Widget::render (Graphic_Window& window, Transform_Stack& stack) {
 }
 
 
-void Widget::render_with_local_stack (Graphic_Window& window, Transform_Stack& result_stack) {
+void Widget::render_with_local_stack (Graphic_Window& window, Transform_Stack& local_stack) {
 
-    render_with_final_transform (window, result_stack.get_result ());
+    render_with_final_transform (window, local_stack.get_result ());
 }
 
 
@@ -116,14 +128,12 @@ Processing_result Widget::on_timer (clock_t current_time) {
 
 //--------------------------------------------------
 
-Transform Widget::get_transform (void) const {
+void Widget::on_move (Vector2D offset) {
 
-    return my_transform_;
+    my_transform_.add_offset (offset);
 }
 
+//--------------------------------------------------
 
-void Widget::set_transform (const Transform& transform) {
 
-    my_transform_ = transform;
-}
 

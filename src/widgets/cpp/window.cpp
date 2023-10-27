@@ -42,3 +42,14 @@ SDL_Rect Window::get_render_rect (const Transform& result_transform) {
 
 //--------------------------------------------------
 
+bool Window::mouse_in_me (int mouse_x, int mouse_y) {
+
+    if (mouse_x < my_transform_.get_offset ().x)           return false;
+    if (mouse_y < my_transform_.get_offset ().y)           return false;
+    if (mouse_x > my_transform_.get_offset ().x + size_.x) return false;
+    if (mouse_y > my_transform_.get_offset ().y + size_.y) return false;
+
+
+    return true;
+}
+

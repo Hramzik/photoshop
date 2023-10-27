@@ -8,16 +8,16 @@
         "**/Thumbs.db": true,
         "exe": true,
         ".vscode": true,
-        ".gitignore": false,
+        ".gitignore": true,
         "media": true,
         "src\\lib": true,
         "src\\graphics": true,
-        "src\\vector": true,
+        "src\\vector": false,
         "src\\my_rgb": false,
         "src\\matrix": true,
-        "src\\transform": true,
+        "src\\transform": false,
         "src\\clock": true,
-        ".VSCodeCounter": false
+        ".VSCodeCounter": true
     },
     "explorerExclude.backup": {},
     "files.associations": {

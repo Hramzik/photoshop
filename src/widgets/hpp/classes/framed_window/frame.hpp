@@ -6,6 +6,8 @@
 #include "../container.hpp"
 #include "../buttons/buttons.hpp"
 
+#include "movement_frame.hpp"
+
 //--------------------------------------------------
 
 
@@ -21,7 +23,8 @@ class Window_Frame: public Widget_Container {
 
     //--------------------------------------------------
 
-    Window_Frame (Window model);
+    // !controlled must have matching global scale!
+    Window_Frame (Widget& controlled, Window& model);
 
     Window_Frame (const Window_Frame&) = delete;
     operator=    (const Window_Frame&) = delete;
@@ -30,8 +33,8 @@ class Window_Frame: public Widget_Container {
 
   private:
 
-    Button* close_button_;
-    Window* top_frame_;
+    Button*         close_button_;
+    Movement_Frame* top_frame_;
 };
 
 

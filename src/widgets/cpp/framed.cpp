@@ -21,7 +21,7 @@ Framed_Window::Framed_Window (Window& window):
 {
     // window's position is mine now
     window.set_position (0);
-    frame_ = new Window_Frame (window_);
+    frame_ = new Window_Frame (*this, window_);
 
     //--------------------------------------------------
 
@@ -30,17 +30,19 @@ Framed_Window::Framed_Window (Window& window):
 }
 
 
-Window_Frame::Window_Frame (Window model):
+Window_Frame::Window_Frame (Widget& controlled, Window& model):
         Widget_Container (model.get_position ()),
         close_button_    (nullptr),
         top_frame_       (nullptr)
 {
     Vector2D top_frame_position (0, model.get_size().y - FRAME_HEIGHT);
 
-    top_frame_ = new Colored_Window (
+    Window* top_frame_visible_part = new Colored_Window (
             top_frame_position,
             Vector2D (model.get_size ().x, FRAME_HEIGHT),
             DEFAULT_FRAME_COLOR);
+
+    top_frame_ = new Movement_Frame (controlled, *top_frame_visible_part);
 
     //--------------------------------------------------
 
@@ -59,4 +61,72 @@ Window_Frame::Window_Frame (Window model):
 }
 
 //--------------------------------------------------
+// MOVEMENT FRAME
+
+Movement_Frame::Movement_Frame (Widget& controlled, Window& visible_part):
+        Window (visible_part.get_position (), visible_part.get_size ()),
+
+        status_              (RESTING),
+        controlled_          (controlled),
+        visible_part_        (visible_part),
+        last_mouse_position_ (0)
+{
+    visible_part_.set_position (0);
+}
+
+
+void Movement_Frame::render_with_local_stack
+            (Graphic_Window& window, Transform_Stack& local_stack) {
+
+    visible_part_.render (window, local_stack);
+}
+
+//--------------------------------------------------
+
+Processing_result Movement_Frame::on_mouse_press (int mouse_x, int mouse_y) {
+
+    std::cout << mouse_x << " " << mouse_y << "\n";
+    if (!mouse_in_me (mouse_x, mouse_y)) return PR_LEFT;
+    std::cout << "mouse in me" << "\n";
+
+    status_ = MOVING;
+    last_mouse_position_ = Vector2D (mouse_x, mouse_y);
+
+
+    return PR_PROCESSED;
+}
+
+
+Processing_result Movement_Frame::on_mouse_move (int mouse_x, int mouse_y) {
+
+    if (status_ == RESTING) return PR_LEFT;
+
+
+    Vector2D mouse_position (mouse_x, mouse_y);
+    controlled_.on_move (mouse_position - last_mouse_position_);
+
+    //--------------------------------------------------
+
+    last_mouse_position_ = mouse_position;
+
+
+    return PR_PROCESSED;
+}
+
+
+Processing_result Movement_Frame::on_mouse_release (int mouse_x, int mouse_y) {
+
+    (void) mouse_x, (void) mouse_y;
+
+
+    if (status_ == RESTING) return PR_LEFT;
+
+
+    status_ = RESTING;
+
+
+    return PR_PROCESSED;
+}
+
+
 

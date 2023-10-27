@@ -38,6 +38,12 @@ void Transform::set_offset (Vector2D offset) {
 }
 
 
+void Transform::add_offset (Vector2D offset) {
+
+    offset_ += offset;
+}
+
+
 void Transform::apply_after_me (const Transform& next_transform) {
 
     // offset происходит в относительных единицах
