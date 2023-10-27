@@ -6,11 +6,8 @@
 
 //--------------------------------------------------
 
-const My_RGB Window_Frame::CLOSE_BUTTON_COLOR = C_RED;
-const double Window_Frame::CLOSE_BUTTON_WIDTH = 45;
-
 const My_RGB Window_Frame::DEFAULT_FRAME_COLOR = C_LIGHT_GRAY;
-const double Window_Frame::FRAME_HEIGHT        = 30;
+const double Window_Frame::DEFAULT_FRAME_HEIGHT        = 30;
 
 //--------------------------------------------------
 
@@ -35,11 +32,12 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
         close_button_    (nullptr),
         top_frame_       (nullptr)
 {
-    Vector2D top_frame_position (0, model.get_size().y - FRAME_HEIGHT);
+    Vector2D top_frame_position (0, model.get_size().y - DEFAULT_FRAME_HEIGHT);
+    double top_frame_width = model.get_size ().x;
 
     Window* top_frame_visible_part = new Colored_Window (
             top_frame_position,
-            Vector2D (model.get_size ().x, FRAME_HEIGHT),
+            Vector2D (top_frame_width, DEFAULT_FRAME_HEIGHT),
             DEFAULT_FRAME_COLOR);
 
     top_frame_ = new Movement_Frame (controlled, *top_frame_visible_part);
@@ -47,12 +45,9 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
     //--------------------------------------------------
 
     Vector2D close_button_position = top_frame_position;
-    close_button_position.x += model.get_size().x - CLOSE_BUTTON_WIDTH;
+    close_button_position.x += model.get_size().x - Close_Button::DEFAULT_WIDTH;
 
-    close_button_ = new Button (
-            close_button_position,
-            Vector2D (CLOSE_BUTTON_WIDTH, FRAME_HEIGHT),
-            CLOSE_BUTTON_COLOR);
+    close_button_ = new Close_Button (close_button_position, controlled);
 
     //--------------------------------------------------
 
@@ -83,30 +78,15 @@ void Movement_Frame::render_with_local_stack
 
 //--------------------------------------------------
 
-Processing_result Movement_Frame::on_mouse_press (int mouse_x, int mouse_y) {
+Processing_result Movement_Frame::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
-    std::cout << mouse_x << " " << mouse_y << "\n";
-    if (!mouse_in_me (mouse_x, mouse_y)) return PR_LEFT;
+    std::cout << "global " << mouse_position << "\n";
+    Point2D local_mouse_position = conver_copy_to_local (mouse_position, stack);
+    std::cout << "local: " << mouse_position << "\n";
+    if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
     std::cout << "mouse in me" << "\n";
 
     status_ = MOVING;
-    last_mouse_position_ = Vector2D (mouse_x, mouse_y);
-
-
-    return PR_PROCESSED;
-}
-
-
-Processing_result Movement_Frame::on_mouse_move (int mouse_x, int mouse_y) {
-
-    if (status_ == RESTING) return PR_LEFT;
-
-
-    Vector2D mouse_position (mouse_x, mouse_y);
-    controlled_.on_move (mouse_position - last_mouse_position_);
-
-    //--------------------------------------------------
-
     last_mouse_position_ = mouse_position;
 
 
@@ -114,9 +94,36 @@ Processing_result Movement_Frame::on_mouse_move (int mouse_x, int mouse_y) {
 }
 
 
-Processing_result Movement_Frame::on_mouse_release (int mouse_x, int mouse_y) {
+Processing_result Movement_Frame::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
 
-    (void) mouse_x, (void) mouse_y;
+    if (status_ == RESTING) return PR_LEFT;
+
+
+    stack.push (my_transform_);
+
+    //--------------------------------------------------
+    // where the magic happens
+
+    Vector2D movement_vector = mouse_position - last_mouse_position_;
+    // если у controlled большой scale, его унесет нахуй, поэтому балансим это делением
+    movement_vector / (stack.get_result ().get_scale ());
+    controlled_.on_move (movement_vector);
+
+
+    last_mouse_position_ = mouse_position;
+
+    //--------------------------------------------------
+
+    stack.pop ();
+
+
+    return PR_PROCESSED;
+}
+
+
+Processing_result Movement_Frame::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
+
+    (void) mouse_position, (void) stack;
 
 
     if (status_ == RESTING) return PR_LEFT;

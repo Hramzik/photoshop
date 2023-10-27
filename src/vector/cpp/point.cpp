@@ -19,6 +19,10 @@ Point2D::Point2D (double new_x, double new_y):
     Pair2D (new_x, new_y) {}
 
 
+Point2D::Point2D (int new_x, int new_y):
+    Point2D ((double) new_x, (double) new_y) {}
+
+
 Point2D::Point2D (double both):
     Pair2D (both) {}
 
@@ -73,6 +77,11 @@ Point2D Point2D::move_copy (Vector2D direction) {
 
 
     return ans;
+}
+
+Vector2D operator- (Point2D left, Point2D right) {
+
+    return Vector2D (left.x - right.x, left.y - right.y);
 }
 
 //--------------------------------------------------

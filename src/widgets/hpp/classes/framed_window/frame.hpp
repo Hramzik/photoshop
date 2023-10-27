@@ -15,11 +15,8 @@ class Window_Frame: public Widget_Container {
 
   public:
 
-    static const My_RGB CLOSE_BUTTON_COLOR;
-    static const double CLOSE_BUTTON_WIDTH;
-
     static const My_RGB DEFAULT_FRAME_COLOR;
-    static const double FRAME_HEIGHT;
+    static const double DEFAULT_FRAME_HEIGHT;
 
     //--------------------------------------------------
 

@@ -27,6 +27,8 @@ class Graphic_Window {
 
     Coordinate_System current_coordinates_;
 
+    My_RGB background_color_;
+
 //--------------------------------------------------
 
     void convert_to_sdl_coords (int& x, int& y);
@@ -49,6 +51,7 @@ class Graphic_Window {
     int get_height (void) const;
 
     void set_drawcolor (My_RGB color);
+    void set_background_color (My_RGB color);
     void clear_screen  (void);
     void update_screen (void);
 

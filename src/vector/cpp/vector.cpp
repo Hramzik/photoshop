@@ -116,6 +116,12 @@ Vector2D operator- (Vector2D left, Vector2D right) {
 }
 
 
+Vector2D operator/ (Vector2D left, Vector2D right) {
+
+    return Vector2D (left.x / right.x, left.y / right.y);
+}
+
+
 void Vector2D::operator+= (Vector2D vector) {
 
     x += vector.x;

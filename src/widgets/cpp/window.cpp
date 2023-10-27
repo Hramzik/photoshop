@@ -42,12 +42,12 @@ SDL_Rect Window::get_render_rect (const Transform& result_transform) {
 
 //--------------------------------------------------
 
-bool Window::mouse_in_me (int mouse_x, int mouse_y) {
+bool Window::is_mouse_in_me (Point2D local_mouse_position) {
 
-    if (mouse_x < my_transform_.get_offset ().x)           return false;
-    if (mouse_y < my_transform_.get_offset ().y)           return false;
-    if (mouse_x > my_transform_.get_offset ().x + size_.x) return false;
-    if (mouse_y > my_transform_.get_offset ().y + size_.y) return false;
+    if (local_mouse_position.x < 0)       return false;
+    if (local_mouse_position.y < 0)       return false;
+    if (local_mouse_position.x > size_.x) return false;
+    if (local_mouse_position.y > size_.y) return false;
 
 
     return true;

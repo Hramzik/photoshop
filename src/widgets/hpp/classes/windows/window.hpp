@@ -19,7 +19,7 @@ class Window: public Widget {
     //--------------------------------------------------
 
     Vector2D get_size (void);
-    bool mouse_in_me (int mouse_x, int mouse_y);
+    bool is_mouse_in_me (Point2D local_mouse_position);
 
 //--------------------------------------------------
 

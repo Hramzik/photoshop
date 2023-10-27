@@ -19,14 +19,15 @@ class Movement_Frame: public Window {
 
     //--------------------------------------------------
 
+    // !controlled must have matching global scale!
     Movement_Frame (Widget& controlled, Window& visible_part);
 
     void render_with_local_stack
             (Graphic_Window& window, Transform_Stack& local_stack) override;
 
-    Processing_result on_mouse_press   (int mouse_x, int mouse_y) override;
-    Processing_result on_mouse_move    (int mouse_x, int mouse_y) override;
-    Processing_result on_mouse_release (int mouse_x, int mouse_y) override;
+    Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_move    (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
 
 //--------------------------------------------------
 
@@ -36,7 +37,8 @@ class Movement_Frame: public Window {
     Widget& controlled_;
     Window& visible_part_;
 
-    Vector2D last_mouse_position_;
+    // stored in global coordinates
+    Point2D last_mouse_position_;
 };
 
 

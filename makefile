@@ -49,6 +49,7 @@ program:
 	$(WIDGETS_FOLDER)/widget.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
+	$(WIDGETS_FOLDER)/close_button.cpp \
 	$(WIDGETS_FOLDER)/window.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \

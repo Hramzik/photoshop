@@ -76,7 +76,7 @@ Processing_result Clock_Arrow::on_timer (clock_t current_time) {
 }
 
 
-Processing_result Clock_Arrow::on_keyboard_press (SDL_Keycode key) {
+Processing_result Clock_Arrow::on_keyboard_pressed (SDL_Keycode key) {
 
     if (key == SDLK_r)     reset ();
     if (key == SDLK_SPACE) speed_scale_ = 60;
@@ -86,7 +86,7 @@ Processing_result Clock_Arrow::on_keyboard_press (SDL_Keycode key) {
 }
 
 
-Processing_result Clock_Arrow::on_keyboard_release (SDL_Keycode key) {
+Processing_result Clock_Arrow::on_keyboard_released (SDL_Keycode key) {
 
     if (key == SDLK_SPACE) speed_scale_ = 1;
 

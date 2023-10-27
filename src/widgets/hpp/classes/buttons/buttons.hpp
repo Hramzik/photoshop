@@ -4,6 +4,7 @@
 
 
 #include "button.hpp"
+#include "close_button.hpp"
 
 
 //--------------------------------------------------

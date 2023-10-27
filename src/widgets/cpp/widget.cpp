@@ -12,12 +12,27 @@ Widget::Widget (Vector2D position):
 
 Widget::Widget (Transform transform):
         my_transform_ (transform),
-        state         (OPENED) {}
+        state_        (OPENED) {}
 
 
 Widget::~Widget (void) {}
 
 //--------------------------------------------------
+
+bool Widget::is_closed (void) {
+
+    if (state_ == CLOSED) return true;
+
+
+    return false;
+}
+
+
+void Widget::close (void) {
+
+    state_ = CLOSED;
+}
+
 
 Vector2D Widget::get_position (void) {
 
@@ -70,37 +85,37 @@ void Widget::render_with_final_transform (Graphic_Window& window, const Transfor
 
 //--------------------------------------------------
 
-Processing_result Widget::on_mouse_move (int mouse_x, int mouse_y) {
+Processing_result Widget::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
 
-    (void) mouse_x;
-    (void) mouse_y;
-
-
-    return PR_LEFT;
-}
-
-
-Processing_result Widget::on_mouse_press (int mouse_x, int mouse_y) {
-
-    (void) mouse_x;
-    (void) mouse_y;
+    (void) mouse_position;
+    (void) stack;
 
 
     return PR_LEFT;
 }
 
 
-Processing_result Widget::on_mouse_release (int mouse_x, int mouse_y) {
+Processing_result Widget::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
-    (void) mouse_x;
-    (void) mouse_y;
+    (void) mouse_position;
+    (void) stack;
 
 
     return PR_LEFT;
 }
 
 
-Processing_result Widget::on_keyboard_press (SDL_Keycode key) {
+Processing_result Widget::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
+
+    (void) mouse_position;
+    (void) stack;
+
+
+    return PR_LEFT;
+}
+
+
+Processing_result Widget::on_keyboard_pressed (SDL_Keycode key) {
 
     (void) key;
 
@@ -109,7 +124,7 @@ Processing_result Widget::on_keyboard_press (SDL_Keycode key) {
 }
 
 
-Processing_result Widget::on_keyboard_release (SDL_Keycode key) {
+Processing_result Widget::on_keyboard_released (SDL_Keycode key) {
 
     (void) key;
 
@@ -135,5 +150,32 @@ void Widget::on_move (Vector2D offset) {
 
 //--------------------------------------------------
 
+void Widget::conver_to_local (Point2D& point, Transform_Stack& global_stack) {
 
+    global_stack.push (my_transform_);
+
+
+    Vector2D vector_to_local = global_stack.get_result ().get_offset ();
+    vector_to_local *= -1;
+    point.move (vector_to_local);
+
+
+    global_stack.pop ();
+}
+
+
+Point2D Widget::conver_copy_to_local (Point2D point, Transform_Stack& global_stack) {
+
+    global_stack.push (my_transform_);
+
+
+    Vector2D vector_to_local = global_stack.get_result ().get_offset ();
+    vector_to_local *= -1;
+
+
+    global_stack.pop ();
+
+
+    return point.move_copy (vector_to_local);
+}
 

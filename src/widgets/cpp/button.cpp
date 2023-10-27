@@ -25,13 +25,15 @@ void Button::render (Graphic_Window& window, Transform_Stack& stack) {
 }
 
 
-Processing_result Button::on_mouse_press (int mouse_x, int mouse_y) {
+Processing_result Button::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
+    (void) mouse_position, (void) stack;
+/*
     if (mouse_x < my_transform_.get_offset ().x)           return PR_LEFT;
     if (mouse_y < my_transform_.get_offset ().y)           return PR_LEFT;
     if (mouse_x > my_transform_.get_offset ().x + size_.x) return PR_LEFT;
     if (mouse_y > my_transform_.get_offset ().y + size_.y) return PR_LEFT;
-
+*/
 
     state_ = PRESSED;
 

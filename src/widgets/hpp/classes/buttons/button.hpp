@@ -33,7 +33,7 @@ class Button: public Window {
 
     void render (Graphic_Window& window, Transform_Stack& stack) override;
 
-    Processing_result on_mouse_press (int mouse_x, int mouse_y) override;
+    Processing_result on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) override;
 
 //--------------------------------------------------
 

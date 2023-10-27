@@ -26,6 +26,12 @@ Vector2D Transform::apply_to_size (Vector2D size) const {
 }
 
 
+Vector2D Transform::get_scale (void) const {
+
+    return apply_to_size (1);
+}
+
+
 Vector2D Transform::get_offset (void) const {
 
     return offset_;

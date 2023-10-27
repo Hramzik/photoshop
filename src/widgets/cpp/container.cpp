@@ -37,13 +37,59 @@ void Widget_Container::render_with_local_stack
 }
 
 
-Processing_result Widget_Container::on_mouse_move (int mouse_x, int mouse_y) {
+Processing_result Widget_Container::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
 
-    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
+    stack.push (my_transform_);
 
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_move ((int) mouse_position.x, (int) mouse_position.y);
+        widget->on_mouse_move (mouse_position, stack);
+    }
+
+    stack.pop ();
+
+
+    return PR_LEFT;
+}
+
+
+Processing_result Widget_Container::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
+
+    stack.push (my_transform_);
+
+    for (Widget* widget : widgets_) {
+
+        widget->on_mouse_pressed (mouse_position, stack);
+    }
+
+    stack.pop ();
+
+
+    return PR_LEFT;
+}
+
+
+Processing_result Widget_Container::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
+
+    stack.push (my_transform_);
+
+    for (Widget* widget : widgets_) {
+
+        widget->on_mouse_released (mouse_position, stack);
+    }
+
+    stack.pop ();
+
+
+    return PR_LEFT;
+}
+
+
+Processing_result Widget_Container::on_keyboard_pressed (SDL_Keycode key) {
+
+    for (Widget* widget : widgets_) {
+
+        widget->on_keyboard_pressed (key);
     }
 
 
@@ -51,51 +97,11 @@ Processing_result Widget_Container::on_mouse_move (int mouse_x, int mouse_y) {
 }
 
 
-Processing_result Widget_Container::on_mouse_press (int mouse_x, int mouse_y) {
-
-    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
+Processing_result Widget_Container::on_keyboard_released (SDL_Keycode key) {
 
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_press ((int) mouse_position.x, (int) mouse_position.y);
-    }
-
-
-    return PR_LEFT;
-}
-
-
-Processing_result Widget_Container::on_mouse_release (int mouse_x, int mouse_y) {
-
-    Vector2D mouse_position = get_local_mouse_position (mouse_x, mouse_y);
-
-    for (Widget* widget : widgets_) {
-
-        widget->on_mouse_release ((int) mouse_position.x, (int) mouse_position.y);
-    }
-
-
-    return PR_LEFT;
-}
-
-
-Processing_result Widget_Container::on_keyboard_press (SDL_Keycode key) {
-
-    for (Widget* widget : widgets_) {
-
-        widget->on_keyboard_press (key);
-    }
-
-
-    return PR_LEFT;
-}
-
-
-Processing_result Widget_Container::on_keyboard_release (SDL_Keycode key) {
-
-    for (Widget* widget : widgets_) {
-
-        widget->on_keyboard_release (key);
+        widget->on_keyboard_released (key);
     }
 
 
@@ -111,17 +117,18 @@ Processing_result Widget_Container::on_timer (clock_t current_time) {
     }
 
 
+    for (auto i = widgets_.begin (); i != widgets_.end () ; ++i) {
+
+        if ((*i)->is_closed ()) {
+
+            free (*i);
+            widgets_.erase (i);
+        }
+    }
+
+
     return PR_LEFT;
 }
 
 //--------------------------------------------------
-
-// todo: rewrite using stack transform
-Vector2D Widget_Container::get_local_mouse_position () {
-
-    Vector2D mouse_position (mouse_x, mouse_y);
-
-
-    return mouse_position - my_transform_.get_offset ();
-}
 

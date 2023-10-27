@@ -20,8 +20,8 @@ class Clock_Arrow: public Widget {
     void render (Graphic_Window& window, Transform_Stack& stack) override;
 
     Processing_result on_timer       (clock_t current_time) override;
-    Processing_result on_keyboard_press   (SDL_Keycode key) override;
-    Processing_result on_keyboard_release (SDL_Keycode key) override;
+    Processing_result on_keyboard_pressed   (SDL_Keycode key) override;
+    Processing_result on_keyboard_released (SDL_Keycode key) override;
 
 
   private:

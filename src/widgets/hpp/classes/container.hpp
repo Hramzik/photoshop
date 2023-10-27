@@ -29,12 +29,12 @@ class Widget_Container: public Widget {
     void render_with_local_stack
             (Graphic_Window& window, Transform_Stack& stack) override;
 
-    Processing_result on_mouse_move    (int mouse_x, int mouse_y) override;
-    Processing_result on_mouse_press   (int mouse_x, int mouse_y) override;
-    Processing_result on_mouse_release (int mouse_x, int mouse_y) override;
-    Processing_result on_keyboard_press   (SDL_Keycode key)       override;
-    Processing_result on_keyboard_release (SDL_Keycode key)       override;
-    Processing_result on_timer (clock_t current_time)             override;
+    Processing_result on_mouse_move    (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_keyboard_pressed   (SDL_Keycode key)                       override;
+    Processing_result on_keyboard_released (SDL_Keycode key)                       override;
+    Processing_result on_timer (clock_t current_time)                             override;
 
 //--------------------------------------------------
 

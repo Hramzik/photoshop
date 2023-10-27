@@ -13,7 +13,8 @@
 Graphic_Window::Graphic_Window (void):
         window_   (nullptr),
         renderer_ (nullptr),
-        current_coordinates_ (CARTESIAN_COORDS)
+        current_coordinates_ (CARTESIAN_COORDS),
+        background_color_ (DEFAULT_BACKGROUND_COLOR)
 {
     window_ = SDL_CreateWindow (
             "", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -92,9 +93,15 @@ void Graphic_Window::set_drawcolor (My_RGB color) {
 }
 
 
+void Graphic_Window::set_background_color (My_RGB color) {
+
+    background_color_ = color;
+}
+
+
 void Graphic_Window::clear_screen (void) {
 
-    set_drawcolor   (DEFAULT_BACKGROUND_COLOR);
+    set_drawcolor   (background_color_);
     SDL_RenderClear (renderer_);
 }
 
