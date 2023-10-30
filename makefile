@@ -11,6 +11,7 @@ MY_RGB_FOLDER = src/my_rgb/cpp
 VECTOR_FOLDER = src/vector/cpp
 TRANSFORM_FOLDER = src/transform/cpp
 WIDGETS_FOLDER = src/widgets/cpp
+TOOLS_FOLDER = src/tools/cpp
 CLOCK_FOLDER = src/clock/cpp
 
 exefolder = exe
@@ -56,6 +57,10 @@ program:
 	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/framed.cpp \
 	$(WIDGETS_FOLDER)/canvas.cpp \
+	$(WIDGETS_FOLDER)/photoshop.cpp \
+	$(TOOLS_FOLDER)/palette.cpp \
+	$(TOOLS_FOLDER)/tool.cpp \
+	$(TOOLS_FOLDER)/brush.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(APP_FOLDER)/app.cpp \

@@ -14,7 +14,8 @@ class Framed_Window: public Widget_Container {
 
   public:
 
-    //model - "модель", для которой делается рамочка
+    // model - "модель", для которой делается рамочка
+    // верхняя часть model перекрывается рамочкой
     Framed_Window (Window& window);
 
     Framed_Window (const Framed_Window&) = delete;

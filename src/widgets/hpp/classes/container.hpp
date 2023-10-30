@@ -17,13 +17,14 @@ class Widget_Container: public Widget {
   public:
 
     Widget_Container (Transform transform);
-    Widget_Container (Vector2D position);
+    Widget_Container (Point2D position);
 
     Widget_Container (const Widget_Container&) = delete;
     operator=        (const Widget_Container&) = delete;
 
     //--------------------------------------------------
 
+    int get_widgets_count (void);
     void register_widget (Widget* widget);
 
     void render_with_local_stack
@@ -45,6 +46,9 @@ class Widget_Container: public Widget {
     //--------------------------------------------------
 
     std::list <Widget*> widgets_;
+    std::list <Widget*> priority_widgets_;
+    std::list <Widget*> background_widgets_; // unimportant, indifferent
+
     Widget*             active_widget_;
 };
 

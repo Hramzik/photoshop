@@ -22,7 +22,7 @@ class Button: public Window {
 
     //--------------------------------------------------
 
-    Button (Vector2D position, Vector2D size, My_RGB color);
+    Button (Point2D position, Vector2D size, My_RGB color);
 
     Button    (const Button&) = delete;
     operator= (const Button&) = delete;

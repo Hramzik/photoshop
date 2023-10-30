@@ -18,7 +18,7 @@ class Close_Button: public Button {
 
     //--------------------------------------------------
 
-    Close_Button (Vector2D position, Widget& controlled);
+    Close_Button (Point2D position, Widget& controlled);
 
     Close_Button (Close_Button&) = delete;
     operator=    (Close_Button&) = delete;

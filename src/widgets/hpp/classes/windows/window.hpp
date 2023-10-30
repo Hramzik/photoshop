@@ -13,8 +13,8 @@ class Window: public Widget {
 
   public:
 
-    Window (Vector2D position, double width, double height);
-    Window (Vector2D position, Vector2D size);
+    Window (Point2D position, double width, double height);
+    Window (Point2D position, Vector2D size);
 
     //--------------------------------------------------
 

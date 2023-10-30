@@ -12,7 +12,7 @@ const double Close_Button::DEFAULT_HEIGHT = Window_Frame::DEFAULT_FRAME_HEIGHT;
 
 //--------------------------------------------------
 
-Close_Button::Close_Button (Vector2D position, Widget& controlled):
+Close_Button::Close_Button (Point2D position, Widget& controlled):
         Button (position, Vector2D (DEFAULT_WIDTH, DEFAULT_HEIGHT), DEFAULT_COLOR),
 
         controlled_ (controlled) {}

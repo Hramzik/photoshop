@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 
-Button::Button (Vector2D position, Vector2D size, My_RGB color):
+Button::Button (Point2D position, Vector2D size, My_RGB color):
         Window (position, size),
         visible_part (new Colored_Window (position, size, color)) {}
 

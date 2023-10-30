@@ -6,16 +6,13 @@
 
 //--------------------------------------------------
 
-Widget::Widget (Vector2D position):
+Widget::Widget (Point2D position):
         Widget (Transform (position)) {}
 
 
 Widget::Widget (Transform transform):
         my_transform_ (transform),
         state_        (OPENED) {}
-
-
-Widget::~Widget (void) {}
 
 //--------------------------------------------------
 
@@ -34,13 +31,20 @@ void Widget::close (void) {
 }
 
 
-Vector2D Widget::get_position (void) {
+Point2D Widget::get_position (void) {
 
-    return my_transform_.get_offset ();
+    Point2D position;
+
+
+    position.x = my_transform_.get_offset ().x;
+    position.y = my_transform_.get_offset ().y;
+
+
+    return position;
 }
 
 
-void Widget::set_position (Vector2D position) {
+void Widget::set_position (Point2D position) {
 
     my_transform_.set_offset (position);
 }

@@ -10,6 +10,10 @@ Transform::Transform (void):
         Transform (Vector2D (0), Vector2D (1)) {}
 
 
+Transform::Transform (Point2D offset):
+        Transform (Vector2D (offset.x, offset.y)) {}
+
+
 Transform::Transform (Vector2D offset):
         Transform (offset, Vector2D (1)) {}
 
@@ -41,6 +45,12 @@ Vector2D Transform::get_offset (void) const {
 void Transform::set_offset (Vector2D offset) {
 
     offset_ = offset;
+}
+
+
+void Transform::set_offset (Point2D offset) {
+
+    offset_ = Vector2D (offset.x, offset.y);
 }
 
 

@@ -14,10 +14,16 @@ Widget_Container::Widget_Container (Transform transform):
         active_widget_ (nullptr) {}
 
 
-Widget_Container::Widget_Container (Vector2D position):
+Widget_Container::Widget_Container (Point2D position):
         Widget_Container (Transform (position)) {}
 
 //--------------------------------------------------
+
+int Widget_Container::get_widgets_count (void) {
+
+    return (int) widgets_.size ();
+}
+
 
 void Widget_Container::register_widget (Widget* widget) {
 

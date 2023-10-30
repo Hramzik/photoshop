@@ -26,16 +26,17 @@ class Widget {
     //--------------------------------------------------
 
     Widget (Transform transform);
-    Widget (Vector2D  position);
-    virtual ~Widget (void);
+    Widget (Point2D  position);
+
+    virtual ~Widget (void) = default;
 
     //--------------------------------------------------
 
     bool is_closed (void);
     void close     (void);
 
-    Vector2D  get_position  (void);
-    void      set_position  (Vector2D position);
+    Point2D   get_position  (void);
+    void      set_position  (Point2D position);
     Transform get_transform (void) const;
     void      set_transform (const Transform& transform);
 

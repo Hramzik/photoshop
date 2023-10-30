@@ -18,9 +18,9 @@
 Point2D::Point2D (double new_x, double new_y):
     Pair2D (new_x, new_y) {}
 
-
+/*
 Point2D::Point2D (int new_x, int new_y):
-    Point2D ((double) new_x, (double) new_y) {}
+    Point2D ((double) new_x, (double) new_y) {}*/
 
 
 Point2D::Point2D (double both):

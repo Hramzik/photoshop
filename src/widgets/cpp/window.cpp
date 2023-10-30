@@ -6,11 +6,11 @@
 
 //--------------------------------------------------
 
-Window::Window (Vector2D position, double width, double height):
+Window::Window (Point2D position, double width, double height):
         Window (position, Vector2D (width, height)) {}
 
 
-Window::Window (Vector2D position, Vector2D size):
+Window::Window (Point2D position, Vector2D size):
         Widget (position),
         size_ (size) {}
 

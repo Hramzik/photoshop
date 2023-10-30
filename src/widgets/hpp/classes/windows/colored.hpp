@@ -14,7 +14,7 @@ class Colored_Window: public Window {
 
   public:
 
-    Colored_Window (Vector2D position, Vector2D size, My_RGB color);
+    Colored_Window (Point2D position, Vector2D size, My_RGB color);
 
 //--------------------------------------------------
 

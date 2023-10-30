@@ -6,15 +6,24 @@
 
 //--------------------------------------------------
 
-Canvas::Canvas (Point2D position, Vector2D size /*Tool_Palette& palette*/):
-        Window ({200}, size),
+Canvas::Canvas (Point2D position, Vector2D size, Tool_Palette& palette):
+        Window (position, size),
 
         texture_ (size),
+        palette_ (palette),
+
         drawing_ (false),
         last_mouse_position_ (0) {
 
 
     texture_.set_drawcolor (C_BLACK);
+}
+
+//--------------------------------------------------
+
+My_Texture& Canvas::access_texture (void) {
+
+    return texture_;
 }
 
 //--------------------------------------------------
@@ -34,8 +43,13 @@ Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_St
     conver_to_local (mouse_position, stack);
     if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
+    //--------------------------------------------------
 
-    drawing_ = true;
+    Tool* active_tool = palette_.get_active_tool ();
+    if (!active_tool) return PR_PROCESSED;
+
+
+    active_tool->on_main_button (BS_PRESSED, mouse_position, *this);
 
 
     return PR_PROCESSED;
@@ -44,10 +58,16 @@ Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_St
 
 Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
 
-    if (!drawing_) return PR_LEFT;
+    conver_to_local (mouse_position, stack);
+    if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+
+    //--------------------------------------------------
+
+    Tool* active_tool = palette_.get_active_tool ();
+    if (!active_tool) return PR_PROCESSED;
 
 
-    drawing_ = false;
+    active_tool->on_main_button (BS_RELEASED, mouse_position, *this);
 
 
     return PR_PROCESSED;
@@ -56,11 +76,16 @@ Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_S
 
 Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
-    if (!drawing_) return PR_LEFT;
-
-
     conver_to_local (mouse_position, stack);
-    texture_.draw_point (mouse_position);
+    if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+
+    //--------------------------------------------------
+
+    Tool* active_tool = palette_.get_active_tool ();
+    if (!active_tool) return PR_PROCESSED;
+
+
+    active_tool->on_move (mouse_position, *this);
 
 
     return PR_PROCESSED;
@@ -68,13 +93,13 @@ Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stac
 
 
 Processing_result Canvas::on_keyboard_pressed (SDL_Keycode key) {
-
+    (void) key;
     return PR_LEFT;
 };
 
 
 Processing_result Canvas::on_keyboard_released (SDL_Keycode key) {
-
+    (void) key;
     return PR_LEFT;
 };
 

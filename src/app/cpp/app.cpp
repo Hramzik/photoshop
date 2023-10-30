@@ -12,7 +12,7 @@ App::App (void):
 
         window_ (),
 
-        exit_ (false)
+        sdl_exit_ (false)
 {
     populate ();
 }
@@ -21,13 +21,33 @@ App::App (void):
 
 void App::run (void) {
 
-    while (!exit_) {
+    while (is_alive ()) {
 
         update ();
         render ();
     }
 }
 
+
+bool App::is_alive (void) {
+
+    if (sdl_exit_)                return false;
+    if (!exist_opened_widgets ()) return false;
+
+
+    return true;
+}
+
+
+bool App::exist_opened_widgets (void) {
+
+    if (!widgets_.get_widgets_count ()) return false;
+
+
+    return true;
+}
+
+//--------------------------------------------------
 
 void App::update (void) {
 
@@ -36,11 +56,11 @@ void App::update (void) {
     while (SDL_PollEvent (&event)) {
     switch (event.type) {
 
-        case SDL_QUIT: exit_ = true; break;
+        case SDL_QUIT: sdl_exit_ = true; break;
 
-        case SDL_MOUSEMOTION: on_mouse_event (event, { event.motion.x, event.motion.y }); break;
+        case SDL_MOUSEMOTION:
         case SDL_MOUSEBUTTONDOWN:
-        case SDL_MOUSEBUTTONUP: on_mouse_event (event, { event.button.x, event.button.y }); break;
+        case SDL_MOUSEBUTTONUP: on_mouse_event (event); break;
 
         case SDL_KEYDOWN: widgets_.on_keyboard_pressed  (event.key.keysym.sym); break;
         case SDL_KEYUP:   widgets_.on_keyboard_released (event.key.keysym.sym); break;
@@ -51,10 +71,35 @@ void App::update (void) {
 }
 
 
-void App::on_mouse_event (SDL_Event event, Point2D sdl_mouse_position) {
+void App::on_mouse_event (SDL_Event event) {
 
-    Point2D mouse_position = sdl_mouse_position;
+    //--------------------------------------------------
+    // getting mouse position
+
+    Point2D mouse_position;
+
+    switch (event.type) {
+
+        case SDL_MOUSEMOTION: mouse_position.x = event.motion.x;
+                              mouse_position.y = event.motion.y;
+                              break;
+
+        //--------------------------------------------------
+
+        case SDL_MOUSEBUTTONDOWN:
+        case SDL_MOUSEBUTTONUP: mouse_position.x = event.motion.x;
+                                mouse_position.y = event.motion.y;
+                                break;
+
+        //--------------------------------------------------
+
+        default: LOG_ERROR (BAD_ARGS); return;
+    }
+
     mouse_position.y = window_.get_height () - mouse_position.y;
+
+    //--------------------------------------------------
+    // handling event
 
     switch (event.type) {
 
@@ -67,7 +112,7 @@ void App::on_mouse_event (SDL_Event event, Point2D sdl_mouse_position) {
         case SDL_MOUSEBUTTONUP:
             widgets_.on_mouse_released (mouse_position, transform_stack_); break;
 
-        default: LOG_ERROR (BAD_ARGS); break;
+        default: LOG_ERROR (BAD_ARGS); return;
     }
 }
 
@@ -78,8 +123,7 @@ void App::render (void) {
 
     //--------------------------------------------------
 
-    Transform_Stack tmp;
-    widgets_.render (window_, tmp);
+    widgets_.render (window_, transform_stack_);
 
     //--------------------------------------------------
 
@@ -107,6 +151,6 @@ void App::populate (void) {
 
     //--------------------------------------------------
 
-    Canvas* canvas = new Canvas ({200}, {200});
-    widgets_.register_widget (canvas);
+    Photoshop* photoshop = new Photoshop (Vector2D (400));
+    widgets_.register_widget (photoshop);
 }

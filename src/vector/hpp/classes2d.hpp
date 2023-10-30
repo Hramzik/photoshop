@@ -36,7 +36,7 @@ class Point2D: public Pair2D {
 
 public:
 
-    Point2D (int    new_x, int    new_y);
+    //Point2D (int    new_x, int    new_y);
     Point2D (double new_x, double new_y);
     Point2D (double both);
     Point2D (void);

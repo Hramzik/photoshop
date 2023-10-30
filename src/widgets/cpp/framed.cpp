@@ -32,7 +32,7 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
         close_button_    (nullptr),
         top_frame_       (nullptr)
 {
-    Vector2D top_frame_position (0, model.get_size().y - DEFAULT_FRAME_HEIGHT);
+    Point2D top_frame_position (0, model.get_size().y - DEFAULT_FRAME_HEIGHT);
     double top_frame_width = model.get_size ().x;
 
     Window* top_frame_visible_part = new Colored_Window (
@@ -44,7 +44,7 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
 
     //--------------------------------------------------
 
-    Vector2D close_button_position = top_frame_position;
+    Point2D close_button_position = top_frame_position;
     close_button_position.x += model.get_size().x - Close_Button::DEFAULT_WIDTH;
 
     close_button_ = new Close_Button (close_button_position, controlled);

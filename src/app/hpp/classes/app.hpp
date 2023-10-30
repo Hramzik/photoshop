@@ -27,14 +27,16 @@ class App {
     Transform_Stack  transform_stack_;
     Graphic_Window   window_;
 
-    bool exit_;
+    bool sdl_exit_;
 
     //--------------------------------------------------
 
     void populate (void);
 
-    void update (void);
-    void on_mouse_event (SDL_Event event, Point2D sdl_mouse_position);
+    void update   (void);
+    bool is_alive (void);
+    bool exist_opened_widgets (void);
+    void on_mouse_event (SDL_Event event);
 
     void render (void);
 };
