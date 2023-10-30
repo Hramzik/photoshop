@@ -44,10 +44,10 @@ class Widget {
     // pushes my_transform and calls protected render function
     virtual void render (Graphic_Window& window, Transform_Stack& stack);
 
-    virtual Processing_result on_mouse_move    (Point2D mouse_position, Transform_Stack& stack);
-    virtual Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack);
+    virtual Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack);
+    virtual Processing_result on_mouse_pressed  (Point2D mouse_position, Transform_Stack& stack);
     virtual Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack);
-    virtual Processing_result on_keyboard_pressed   (SDL_Keycode key);
+    virtual Processing_result on_keyboard_pressed  (SDL_Keycode key);
     virtual Processing_result on_keyboard_released (SDL_Keycode key);
     virtual Processing_result on_timer (clock_t current_time);
 

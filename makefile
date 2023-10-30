@@ -41,6 +41,7 @@ program:
 	$(MAIN_FOLDER)/main.cpp \
 	$(LIB_FOLDER)/logs.cpp \
 	$(GRAPHICS_FOLDER)/graphics.cpp \
+	$(GRAPHICS_FOLDER)/texture.cpp \
 	$(GRAPHICS_FOLDER)/sdl.cpp \
 	$(MY_RGB_FOLDER)/my_rgb.cpp \
 	$(VECTOR_FOLDER)/vector.cpp \
@@ -54,6 +55,7 @@ program:
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/framed.cpp \
+	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(APP_FOLDER)/app.cpp \

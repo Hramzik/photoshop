@@ -94,7 +94,7 @@ Processing_result Movement_Frame::on_mouse_pressed (Point2D mouse_position, Tran
 }
 
 
-Processing_result Movement_Frame::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
+Processing_result Movement_Frame::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
     if (status_ == RESTING) return PR_LEFT;
 

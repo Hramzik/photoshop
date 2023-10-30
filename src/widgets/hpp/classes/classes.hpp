@@ -8,6 +8,7 @@
 #include "windows/windows.hpp"
 #include "framed_window/framed_window.hpp"
 #include "buttons/buttons.hpp"
+#include "canvas.hpp"
 
 
 //--------------------------------------------------

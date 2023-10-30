@@ -29,7 +29,7 @@ class Widget_Container: public Widget {
     void render_with_local_stack
             (Graphic_Window& window, Transform_Stack& stack) override;
 
-    Processing_result on_mouse_move    (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_keyboard_pressed   (SDL_Keycode key)                       override;

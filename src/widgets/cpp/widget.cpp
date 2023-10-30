@@ -85,7 +85,7 @@ void Widget::render_with_final_transform (Graphic_Window& window, const Transfor
 
 //--------------------------------------------------
 
-Processing_result Widget::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
+Processing_result Widget::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
     (void) mouse_position;
     (void) stack;

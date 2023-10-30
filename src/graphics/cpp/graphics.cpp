@@ -13,7 +13,10 @@
 Graphic_Window::Graphic_Window (void):
         window_   (nullptr),
         renderer_ (nullptr),
+        surface_  (nullptr),
+
         current_coordinates_ (CARTESIAN_COORDS),
+
         background_color_ (DEFAULT_BACKGROUND_COLOR)
 {
     window_ = SDL_CreateWindow (
@@ -34,6 +37,16 @@ Graphic_Window::Graphic_Window (void):
     if (!renderer_) {
 
         LOG_MESSAGE ("Renderer could not be created!");
+        return;
+    }
+
+    //--------------------------------------------------
+
+    surface_ = SDL_GetWindowSurface (window_);
+
+    if (!surface_) {
+
+        LOG_MESSAGE ("Surface could not be created!");
         return;
     }
 }
@@ -145,17 +158,57 @@ void Graphic_Window::draw_rect (SDL_Rect rect) {
 
 //--------------------------------------------------
 
+void Graphic_Window::render_texture_sdl_coords
+        (SDL_Texture* texture, SDL_Rect* render_rect) {
+
+    SDL_RenderCopy (renderer_, texture, nullptr, render_rect);
+}
+
+
+// все происходит именно в этой версии функции, поскольку
+// для конвертации нужна копия прямоугольника
 void Graphic_Window::render_texture (SDL_Texture* texture, SDL_Rect render_rect) {
 
-    render_texture (texture, &render_rect);
+    convert_to_sdl_coords (render_rect);
+
+    //--------------------------------------------------
+
+    SDL_RenderCopy (renderer_, texture, nullptr, &render_rect);
 }
 
 
 void Graphic_Window::render_texture (SDL_Texture* texture, SDL_Rect* render_rect) {
 
-    SDL_RenderCopy (renderer_, texture, nullptr, render_rect);
+    // рисуем в sdl-овских координатах на весь экран
+    if (!render_rect) render_texture_sdl_coords (texture);
+
+    //--------------------------------------------------
+
+    // переводим координаты, используя копию прямоугольника
+    render_texture (texture, *render_rect);
+}
+
+
+void Graphic_Window::render_texture (My_Texture& texture, SDL_Rect render_rect) {
+
+    render_texture (texture, &render_rect);
+}
+
+
+void Graphic_Window::render_texture (My_Texture& texture, SDL_Rect* render_rect) {
+
+    SDL_Surface* surface = texture.get_surface ();
+    SDL_Texture* sdl_texture = SDL_CreateTextureFromSurface (renderer_, surface);
+
+    //--------------------------------------------------
+
+    // coords conversation happens inside
+    render_texture (sdl_texture, render_rect);
+
+    //--------------------------------------------------
+
+    SDL_DestroyTexture (sdl_texture);
 }
 
 //--------------------------------------------------
-
 

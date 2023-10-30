@@ -59,7 +59,7 @@ void App::on_mouse_event (SDL_Event event, Point2D sdl_mouse_position) {
     switch (event.type) {
 
         case SDL_MOUSEMOTION:
-            widgets_.on_mouse_move (mouse_position, transform_stack_); break;
+            widgets_.on_mouse_moved (mouse_position, transform_stack_); break;
 
         case SDL_MOUSEBUTTONDOWN:
             widgets_.on_mouse_pressed (mouse_position, transform_stack_); break;
@@ -84,6 +84,7 @@ void App::render (void) {
     //--------------------------------------------------
 
     window_.update_screen ();
+
 }
 
 /*
@@ -103,4 +104,9 @@ void App::populate (void) {
     Framed_Window* framed_window = new Framed_Window (*window);
 
     widgets_.register_widget (framed_window);
+
+    //--------------------------------------------------
+
+    Canvas* canvas = new Canvas ({200}, {200});
+    widgets_.register_widget (canvas);
 }

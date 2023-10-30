@@ -37,13 +37,13 @@ void Widget_Container::render_with_local_stack
 }
 
 
-Processing_result Widget_Container::on_mouse_move (Point2D mouse_position, Transform_Stack& stack) {
+Processing_result Widget_Container::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
     stack.push (my_transform_);
 
     for (Widget* widget : widgets_) {
 
-        widget->on_mouse_move (mouse_position, stack);
+        widget->on_mouse_moved (mouse_position, stack);
     }
 
     stack.pop ();

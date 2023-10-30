@@ -4,6 +4,7 @@
 
 #include "../graphics/hpp/graphics.hpp"
 #include "../transform/hpp/transform.hpp"
+#include "../widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 
@@ -12,16 +13,18 @@ class Tool {
 
   public:
 
-    void apply_begin    (SDL_Texture* texture, int mouse_x, int mouse_y);
-    void apply_continue (SDL_Texture* texture, int mouse_x, int mouse_y);
-    void apply_next     (SDL_Texture* texture, int mouse_x, int mouse_y);
-    void apply_end      (SDL_Texture* texture, int mouse_x, int mouse_y);
+    virtual void onMainButton(MouseType key, Vector2f pos, Canvas &canvas)      = 0;
+    virtual void onSecondaryButton(MouseType key, Vector2f pos, Canvas &canvas) = 0;
 
-    void draw_self (Graphic_Window& window, Transform_Stack& stacks);
+    virtual void onModifier1(MouseType key, Vector2f pos, Canvas &canvas) = 0;
+    virtual void onModifier2(MouseType key, Vector2f pos, Canvas &canvas) = 0;
+    virtual void onModifier3(MouseType key, Vector2f pos, Canvas &canvas) = 0;
 
-  private:
+    virtual void onMove(Vector2f pos, Canvas &canvas)    = 0;
+    virtual void onConfirm(Vector2f pos, Canvas &canvas) = 0;
+    virtual void onCancel(Vector2f pos, Canvas &canvas)  = 0;
 
-    
+    virtual Widget* getWidget() = 0;
 };
 
 
