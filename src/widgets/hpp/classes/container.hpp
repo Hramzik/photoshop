@@ -11,10 +11,46 @@
 
 //--------------------------------------------------
 
+typedef std::list <Widget*> Widget_List;
+
+//--------------------------------------------------
+
 
 class Widget_Container: public Widget {
 
   public:
+
+class Iterator {
+
+  public:
+
+    Iterator (Widget_Container& container);
+
+    //--------------------------------------------------
+
+    void add_next_priority_list (Widget_List* list);
+    void set_to_end (void);
+    Widget_Container::Iterator& operator++ (void);
+    Widget_Container::Iterator& operator-- (void);
+    bool                        operator!= (const Iterator& other) const;
+
+//--------------------------------------------------
+
+  private:
+
+    std::vector <Widget_List*> widget_lists_;
+    int                        current_list_index_;
+
+    Widget_List::iterator iterator_;
+
+    //--------------------------------------------------
+
+    Widget_List* get_current_list (void);
+};
+
+    friend class Iterator;
+
+    //--------------------------------------------------
 
     Widget_Container (Transform transform);
     Widget_Container (Point2D position);
@@ -25,32 +61,54 @@ class Widget_Container: public Widget {
     //--------------------------------------------------
 
     int get_widgets_count (void);
-    void register_widget (Widget* widget);
+    void register_widget            (Widget* widget);
+    void register_priority_widget   (Widget* widget);
+    void register_background_widget (Widget* widget);
 
     void render_with_local_stack
             (Graphic_Window& window, Transform_Stack& stack) override;
 
-    Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
-    Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack) override;
-    Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
-    Processing_result on_keyboard_pressed   (SDL_Keycode key)                       override;
-    Processing_result on_keyboard_released (SDL_Keycode key)                       override;
-    Processing_result on_timer (clock_t current_time)                             override;
+    Processing_result
+    on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) override;
+
+    Processing_result
+    on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) override;
+
+    Processing_result
+    on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
+
+    Processing_result
+    on_keyboard_pressed (SDL_Keycode key) override;
+
+    Processing_result
+    on_keyboard_released (SDL_Keycode key) override;
+
+    Processing_result
+    on_timer (clock_t current_time) override;
 
 //--------------------------------------------------
 
   protected:
 
-    Vector2D get_local_mouse_position (int mouse_x, int mouse_y);
+    Widget_List widgets_;
+    Widget_List priority_widgets_;
+    Widget_List background_widgets_; // unimportant, indifferent
+
+    Widget* active_widget_;
 
     //--------------------------------------------------
 
-    std::list <Widget*> widgets_;
-    std::list <Widget*> priority_widgets_;
-    std::list <Widget*> background_widgets_; // unimportant, indifferent
-
-    Widget*             active_widget_;
+    Iterator begin  (void);
+    Iterator end    (void);
+    Iterator rbegin (void);
+    Iterator rend   (void);
 };
+
+//--------------------------------------------------
+// iterator declarations
+
+
+
 
 
 //--------------------------------------------------

@@ -50,6 +50,7 @@ program:
 	$(VECTOR_FOLDER)/pair.cpp \
 	$(WIDGETS_FOLDER)/widget.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
+	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
 	$(WIDGETS_FOLDER)/close_button.cpp \
 	$(WIDGETS_FOLDER)/window.cpp \
@@ -64,5 +65,7 @@ program:
 	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(APP_FOLDER)/app.cpp \
-	-o $(default_path) $(sdl_flags) $(flags_sdl_version) -lstdc++ -O0
+	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \
+	-lstdc++ -O0 \
+	-fmessage-length=60
 

@@ -10,7 +10,9 @@
 
 Widget_Container::Widget_Container (Transform transform):
         Widget         (transform),
-        widgets_       (),
+        widgets_            (),
+        priority_widgets_   (),
+        background_widgets_ (),
         active_widget_ (nullptr) {}
 
 
@@ -21,13 +23,32 @@ Widget_Container::Widget_Container (Point2D position):
 
 int Widget_Container::get_widgets_count (void) {
 
-    return (int) widgets_.size ();
+    int widgets_count = 0;
+
+    widgets_count += (int) widgets_.size ();
+    widgets_count += (int) priority_widgets_.size ();
+    widgets_count += (int) background_widgets_.size ();
+
+
+    return widgets_count;
 }
 
 
 void Widget_Container::register_widget (Widget* widget) {
 
     widgets_.push_back (widget);
+}
+
+
+void Widget_Container::register_priority_widget (Widget* widget) {
+
+    priority_widgets_.push_back (widget);
+}
+
+
+void Widget_Container::register_background_widget (Widget* widget) {
+
+    background_widgets_.push_back (widget);
 }
 
 //--------------------------------------------------
@@ -137,4 +158,46 @@ Processing_result Widget_Container::on_timer (clock_t current_time) {
 }
 
 //--------------------------------------------------
+// iterator code
+
+Widget_Container::Iterator Widget_Container::begin (void) {
+
+    return Iterator (*this);
+}
+
+
+Widget_Container::Iterator Widget_Container::end (void) {
+
+    Iterator iterator (*this);
+
+
+    iterator.set_to_end ();
+
+
+    return iterator;
+}
+
+
+Widget_Container::Iterator Widget_Container::rbegin (void) {
+
+    Iterator iterator = end ();
+
+
+    --iterator;
+
+
+    return iterator;
+}
+
+
+Widget_Container::Iterator Widget_Container::rend (void) {
+
+    Iterator iterator = begin ();
+
+
+    --iterator;
+
+
+    return iterator;
+}
 
