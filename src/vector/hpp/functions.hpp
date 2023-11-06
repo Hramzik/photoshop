@@ -16,7 +16,9 @@ std::ostream& operator<< (std::ostream& stream, const Pair3D& pair);
 
 Vector2D operator- (Point2D left, Point2D right);
 
+Vector2D operator+ (Vector2D left, Vector2D right);
 Vector2D operator- (Vector2D left, Vector2D right);
+Vector2D operator* (Vector2D left, Vector2D right);
 Vector2D operator/ (Vector2D left, Vector2D right);
 
 //--------------------------------------------------

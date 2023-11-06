@@ -3,6 +3,7 @@
 //--------------------------------------------------
 
 #include "brush.hpp"
+#include "rect/rect.hpp"
 
 //--------------------------------------------------
 
@@ -17,20 +18,19 @@ class Tool_Palette {
 
     Tool* get_active_tool (void);
 
-    My_RGB get_active_color (void);
+    My_RGB get_active_color (void) const;
 
-    void select_brush_tool     (void);
-    void select_line_tool      (void);
-    void select_rectangle_tool (void);
-    void select_ellipse_tool   (void);
-    void select_polyline_tool  (void);
-    void select_fill_tool      (void);
+    void select_brush_tool    (void);
+    void select_line_tool     (void);
+    void select_rect_tool     (void);
+    void select_polyline_tool (void);
 
 //--------------------------------------------------
 
   private:
 
     Brush_Tool* brush_tool_;
+    Rect_Tool*  rect_tool_;
 
     Tool* active_tool_;
 

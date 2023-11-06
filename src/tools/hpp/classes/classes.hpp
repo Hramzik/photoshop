@@ -6,7 +6,7 @@
 #include "tool.hpp"
 #include "palette.hpp"
 #include "brush.hpp"
-#include "rect.hpp"
+#include "rect/rect.hpp"
 
 
 //--------------------------------------------------

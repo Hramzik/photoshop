@@ -33,6 +33,8 @@ void Brush_Tool::on_move (Point2D mouse_position, Canvas& canvas) {
     //--------------------------------------------------
 
     My_Texture& render_texture = canvas.access_texture ();
-    render_texture.draw_point (mouse_position);
+
+    render_texture.set_drawcolor (my_palette_.get_active_color ());
+    render_texture.draw_point    (mouse_position);
 }
 

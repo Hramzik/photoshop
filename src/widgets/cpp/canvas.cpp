@@ -28,6 +28,7 @@ My_Texture& Canvas::access_texture (void) {
 
 //--------------------------------------------------
 
+
 void Canvas::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
 
     SDL_Rect render_rect = get_render_rect (result_transform);

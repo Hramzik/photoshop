@@ -23,11 +23,14 @@ class Transform {
     //--------------------------------------------------
 
     Vector2D apply_to_size (Vector2D size) const;
-    Vector2D get_offset (void) const;
+
+    Vector2D get_offset   (void) const;
+    Point2D  get_position (void) const; // same as get_offset (), but Point2D
+    Vector2D get_scale    (void) const;
+
     void     set_offset (Vector2D offset);
     void     set_offset (Point2D  offset);
     void     add_offset (Vector2D offset);
-    Vector2D get_scale (void) const;
 
     void apply_after_me (const Transform& next_transform);
 

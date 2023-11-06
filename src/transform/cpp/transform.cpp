@@ -42,6 +42,12 @@ Vector2D Transform::get_offset (void) const {
 }
 
 
+Point2D Transform::get_position (void) const {
+
+    return get_offset ().as_point ();
+}
+
+
 void Transform::set_offset (Vector2D offset) {
 
     offset_ = offset;

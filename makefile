@@ -45,7 +45,8 @@ program:
 	$(GRAPHICS_FOLDER)/texture.cpp \
 	$(GRAPHICS_FOLDER)/sdl.cpp \
 	$(MY_RGB_FOLDER)/my_rgb.cpp \
-	$(VECTOR_FOLDER)/vector.cpp \
+	$(VECTOR_FOLDER)/vector2d.cpp \
+	$(VECTOR_FOLDER)/vector3d.cpp \
 	$(VECTOR_FOLDER)/point.cpp \
 	$(VECTOR_FOLDER)/pair.cpp \
 	$(WIDGETS_FOLDER)/widget.cpp \
@@ -63,6 +64,8 @@ program:
 	$(TOOLS_FOLDER)/palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \
+	$(TOOLS_FOLDER)/rect.cpp \
+	$(TOOLS_FOLDER)/rect_widget.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(APP_FOLDER)/app.cpp \

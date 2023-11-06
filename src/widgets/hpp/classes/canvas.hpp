@@ -22,8 +22,6 @@ class Canvas: public Window {
 
     My_Texture& access_texture (void);
 
-    void render_with_final_transform (Graphic_Window& window, const Transform& result_transform) override;
-
     Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_pressed  (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
@@ -40,6 +38,16 @@ private:
 
     bool    drawing_;
     Point2D last_mouse_position_;
+
+    //--------------------------------------------------
+
+    void render_with_local_stack
+    (Graphic_Window& window, Transform_Stack& local_stack)
+    override;
+
+    void render_with_final_transform
+    (Graphic_Window& window, const Transform& result_transform)
+    override;
 };
 
 

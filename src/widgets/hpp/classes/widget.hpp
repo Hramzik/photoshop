@@ -61,9 +61,10 @@ class Widget {
     // used by public render function
     // transform_stack holds local transform
     virtual void render_with_local_stack
-            (Graphic_Window& window, Transform_Stack& local_stack);
+    (Graphic_Window& window, Transform_Stack& local_stack);
+
     virtual void render_with_final_transform
-            (Graphic_Window& window, const Transform& result_transform);
+    (Graphic_Window& window, const Transform& result_transform);
 
     // todo: const global_stack&
     void    conver_to_local      (Point2D& point, Transform_Stack& global_stack);
