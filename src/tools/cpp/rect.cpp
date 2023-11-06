@@ -2,7 +2,7 @@
 
 //--------------------------------------------------
 
-#include "../../widgets/hpp/classes/canvas.hpp"
+#include "../../widgets/hpp/classes/photoshop/canvas.hpp"
 
 #include "../hpp/tools.hpp"
 
@@ -30,6 +30,10 @@ void Rect_Tool::on_main_button
     if (state == BS_PRESSED) {
 
         preview_.set_origin (mouse_position);
+
+        // это нужно, так как события on_move может не быть,
+        // и тогда мы должны что-то нарисовать, рисуем точку
+        preview_.set_end    (mouse_position);
         preview_.set_visibility (true);
         return;
     }

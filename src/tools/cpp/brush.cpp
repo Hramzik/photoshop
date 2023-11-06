@@ -2,7 +2,7 @@
 
 //--------------------------------------------------
 
-#include "../../widgets/hpp/classes/canvas.hpp"
+#include "../../widgets/hpp/classes/photoshop/canvas.hpp"
 
 #include "../hpp/tools.hpp"
 

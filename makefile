@@ -61,6 +61,7 @@ program:
 	$(WIDGETS_FOLDER)/framed.cpp \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/photoshop.cpp \
+	$(WIDGETS_FOLDER)/tool_selection.cpp \
 	$(TOOLS_FOLDER)/palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \

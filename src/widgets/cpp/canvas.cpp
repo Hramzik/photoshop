@@ -29,6 +29,31 @@ My_Texture& Canvas::access_texture (void) {
 //--------------------------------------------------
 
 
+void Canvas::render_with_local_stack
+    (Graphic_Window& window, Transform_Stack& local_stack) {
+
+    //--------------------------------------------------
+    // render canvas
+    render_with_final_transform (window, local_stack.get_result ());
+
+    //--------------------------------------------------
+    // render tool preview
+
+    Tool* active_tool = palette_.get_active_tool ();
+    if (!active_tool) return;
+
+    //--------------------------------------------------
+
+    Widget* preview = active_tool->get_widget ();
+    if (!preview) return;
+
+    //--------------------------------------------------
+
+    window.set_drawcolor (palette_.get_active_color ());
+    preview->render (window, local_stack);
+}
+
+
 void Canvas::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
 
     SDL_Rect render_rect = get_render_rect (result_transform);
