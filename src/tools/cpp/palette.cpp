@@ -14,6 +14,10 @@ Tool_Palette::Tool_Palette (void):
         active_color_ (C_BLACK)
 {
     brush_tool_ = new Brush_Tool (*this);
+
+    //--------------------------------------------------
+
+    select_brush_tool ();
 }
 
 //--------------------------------------------------

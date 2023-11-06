@@ -20,35 +20,81 @@ class Widget_Container: public Widget {
 
   public:
 
-class Iterator {
-
-  public:
-
-    Iterator (Widget_Container& container);
-
-    //--------------------------------------------------
-
-    void add_next_priority_list (Widget_List* list);
-    void set_to_end (void);
-    Widget_Container::Iterator& operator++ (void);
-    Widget_Container::Iterator& operator-- (void);
-    bool                        operator!= (const Iterator& other) const;
-
-//--------------------------------------------------
-
-  private:
-
-    std::vector <Widget_List*> widget_lists_;
-    int                        current_list_index_;
-
-    Widget_List::iterator iterator_;
-
-    //--------------------------------------------------
-
-    Widget_List* get_current_list (void);
-};
+    class Iterator;
+    class Reverse_Iterator;
 
     friend class Iterator;
+    friend class Reverse_Iterator;
+
+    //--------------------------------------------------
+
+    // возможно, стоит переписать функции в стиле begin, true_begin, end, true_end
+    class Iterator {
+    friend class Reverse_Iterator;
+
+    public:
+
+        // sets iterator to begin of the container
+        Iterator (Widget_Container& container);
+
+        //--------------------------------------------------
+
+        void set_to_begin (void);
+        void set_to_end   (void);
+
+        Iterator& operator++ (void);
+        Iterator& operator-- (void);
+        Widget*   operator*  (void) const;
+        bool      operator!= (const Iterator& other) const;
+
+    //--------------------------------------------------
+
+    private:
+
+        std::vector <Widget_List*> widget_lists_;
+        int                        current_list_index_;
+        Widget_List::iterator      iterator_;
+
+        //--------------------------------------------------
+
+        Widget_List*          get_current_list       (void) const;
+        int                   get_current_list_size  (void) const;
+        Widget_List::iterator get_current_list_begin (void) const;
+        Widget_List::iterator get_current_list_end   (void) const;
+
+        void add_next_priority_list (Widget_List* list);
+    };
+
+    // implemented as in stl,
+    // reverse iterator contains iterator pointing to
+    // the next container element
+    class Reverse_Iterator {
+
+    public:
+
+        // sets iterator to the rbegin of the container
+        Reverse_Iterator (Widget_Container& container);
+
+        //--------------------------------------------------
+
+        void set_to_rbegin (void);
+        void set_to_rend   (void);
+
+        Reverse_Iterator& operator++ (void);
+        Reverse_Iterator& operator-- (void);
+
+        // todo: make this function const
+        // although it does -- and ++ on base_
+        Widget* operator*  (void);
+        bool    operator!= (const Reverse_Iterator& other) const;
+
+    //--------------------------------------------------
+
+    protected:
+
+        // reverse_iterator points to the previous container element
+        Iterator base_;
+    };
 
     //--------------------------------------------------
 
@@ -98,10 +144,10 @@ class Iterator {
 
     //--------------------------------------------------
 
-    Iterator begin  (void);
-    Iterator end    (void);
-    Iterator rbegin (void);
-    Iterator rend   (void);
+    Iterator         begin  (void);
+    Iterator         end    (void);
+    Reverse_Iterator rbegin (void);
+    Reverse_Iterator rend   (void);
 };
 
 //--------------------------------------------------

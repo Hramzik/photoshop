@@ -30,6 +30,9 @@ class Brush_Tool: public Tool {
 
     double brush_radius_;
     bool   drawing_;
+
+    //--------------------------------------------------
+
     const Tool_Palette& my_palette_;
 };
 

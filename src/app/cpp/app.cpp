@@ -144,7 +144,7 @@ void App::open_clock (void) {
 
 void App::populate (void) {
 
-    Colored_Window*       window = new Colored_Window ({0}, {200}, C_WHITE);
+    Colored_Window*       window = new Colored_Window ({0}, {200}, C_DARK_GRAY);
     Framed_Window* framed_window = new Framed_Window (*window);
 
     widgets_.register_widget (framed_window);

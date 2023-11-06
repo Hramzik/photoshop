@@ -22,8 +22,8 @@ Framed_Window::Framed_Window (Window& window):
 
     //--------------------------------------------------
 
-    register_widget (frame_);
-    register_widget (&window_);
+    register_background_widget (&window_);
+    register_priority_widget   (frame_);
 }
 
 

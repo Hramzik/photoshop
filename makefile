@@ -51,6 +51,7 @@ program:
 	$(WIDGETS_FOLDER)/widget.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
+	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
 	$(WIDGETS_FOLDER)/close_button.cpp \
 	$(WIDGETS_FOLDER)/window.cpp \

@@ -48,7 +48,7 @@ void Widget_Container::register_priority_widget (Widget* widget) {
 
 void Widget_Container::register_background_widget (Widget* widget) {
 
-    background_widgets_.push_back (widget);
+    background_widgets_.push_front (widget);
 }
 
 //--------------------------------------------------
@@ -56,10 +56,9 @@ void Widget_Container::register_background_widget (Widget* widget) {
 void Widget_Container::render_with_local_stack
         (Graphic_Window& window, Transform_Stack& stack) {
 
-    for (auto i = widgets_.rbegin (); i != widgets_.rend (); ++i) {
+    for (auto i = rbegin (); i != rend (); ++i) {
 
-        Widget* widget = *i;
-        widget->render (window, stack);
+        (*i)->render (window, stack);
     }
 }
 
@@ -68,9 +67,9 @@ Processing_result Widget_Container::on_mouse_moved (Point2D mouse_position, Tran
 
     stack.push (my_transform_);
 
-    for (Widget* widget : widgets_) {
+    for (auto i = begin (); i != end (); ++i) {
 
-        widget->on_mouse_moved (mouse_position, stack);
+        (*i)->on_mouse_moved (mouse_position, stack);
     }
 
     stack.pop ();
@@ -84,9 +83,9 @@ Processing_result Widget_Container::on_mouse_pressed (Point2D mouse_position, Tr
 
     stack.push (my_transform_);
 
-    for (Widget* widget : widgets_) {
+    for (auto i = begin (); i != end (); ++i) {
 
-        widget->on_mouse_pressed (mouse_position, stack);
+        (*i)->on_mouse_pressed (mouse_position, stack);
     }
 
     stack.pop ();
@@ -100,9 +99,9 @@ Processing_result Widget_Container::on_mouse_released (Point2D mouse_position, T
 
     stack.push (my_transform_);
 
-    for (Widget* widget : widgets_) {
+    for (auto i = begin (); i != end (); ++i) {
 
-        widget->on_mouse_released (mouse_position, stack);
+        (*i)->on_mouse_released (mouse_position, stack);
     }
 
     stack.pop ();
@@ -178,24 +177,20 @@ Widget_Container::Iterator Widget_Container::end (void) {
 }
 
 
-Widget_Container::Iterator Widget_Container::rbegin (void) {
+Widget_Container::Reverse_Iterator
+Widget_Container::rbegin (void) {
 
-    Iterator iterator = end ();
-
-
-    --iterator;
-
-
-    return iterator;
+    return Reverse_Iterator (*this);
 }
 
 
-Widget_Container::Iterator Widget_Container::rend (void) {
+Widget_Container::Reverse_Iterator
+Widget_Container::rend (void) {
 
-    Iterator iterator = begin ();
+    Reverse_Iterator iterator (*this);
 
 
-    --iterator;
+    iterator.set_to_rend ();
 
 
     return iterator;

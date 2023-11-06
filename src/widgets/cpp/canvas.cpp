@@ -59,7 +59,7 @@ Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_St
 Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
 
     conver_to_local (mouse_position, stack);
-    if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+    //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
 
@@ -77,7 +77,7 @@ Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_S
 Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
     conver_to_local (mouse_position, stack);
-    if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+    //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
 
