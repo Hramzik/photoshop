@@ -6,11 +6,16 @@
 
 //--------------------------------------------------
 
-Canvas::Canvas (Point2D position, Vector2D size, Tool_Palette& palette):
-        Window (position, size),
+Canvas::Canvas
+(Point2D position,          Vector2D size,
+Tool_Palette& tool_palette, Filter_Palette& filter_palette):
 
+        Window (position, size),
         texture_ (size),
-        palette_ (palette),
+
+        my_tool_palette_   (tool_palette),
+        my_filter_mask_ ((int) size.x, (int) size.y),
+        my_filter_palette_ (filter_palette),
 
         drawing_ (false),
         last_mouse_position_ (0) {
@@ -18,6 +23,12 @@ Canvas::Canvas (Point2D position, Vector2D size, Tool_Palette& palette):
 
     texture_.set_drawcolor (C_BLACK);
 }
+
+Canvas::Canvas
+(Vector2D size,
+Tool_Palette& tool_palette, Filter_Palette& filter_palette):
+
+    Canvas (0, size, tool_palette, filter_palette) {}
 
 //--------------------------------------------------
 
@@ -39,7 +50,7 @@ void Canvas::render_with_local_stack
     //--------------------------------------------------
     // render tool preview
 
-    Tool* active_tool = palette_.get_active_tool ();
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
     if (!active_tool) return;
 
     //--------------------------------------------------
@@ -49,7 +60,7 @@ void Canvas::render_with_local_stack
 
     //--------------------------------------------------
 
-    window.set_drawcolor (palette_.get_active_color ());
+    window.set_drawcolor (my_tool_palette_.get_active_color ());
     preview->render (window, local_stack);
 }
 
@@ -66,12 +77,12 @@ void Canvas::render_with_final_transform (Graphic_Window& window, const Transfor
 
 Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
-    conver_to_local (mouse_position, stack);
+    convert_to_local (mouse_position, stack);
     if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
 
-    Tool* active_tool = palette_.get_active_tool ();
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
     if (!active_tool) return PR_PROCESSED;
 
 
@@ -84,12 +95,12 @@ Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_St
 
 Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
 
-    conver_to_local (mouse_position, stack);
+    convert_to_local (mouse_position, stack);
     //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
 
-    Tool* active_tool = palette_.get_active_tool ();
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
     if (!active_tool) return PR_PROCESSED;
 
 
@@ -102,12 +113,12 @@ Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_S
 
 Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
 
-    conver_to_local (mouse_position, stack);
+    convert_to_local (mouse_position, stack);
     //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
 
-    Tool* active_tool = palette_.get_active_tool ();
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
     if (!active_tool) return PR_PROCESSED;
 
 
@@ -119,13 +130,48 @@ Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stac
 
 
 Processing_result Canvas::on_keyboard_pressed (SDL_Keycode key) {
-    (void) key;
-    return PR_LEFT;
+
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
+    if (!active_tool) return PR_LEFT;
+
+    //--------------------------------------------------
+
+    switch (key) {
+
+        case SDLK_LSHIFT: active_tool->on_modifier1 (BS_PRESSED, *this); return PR_PROCESSED;
+        case SDLK_LCTRL:  active_tool->on_modifier2 (BS_PRESSED, *this); return PR_PROCESSED;
+        case SDLK_LALT:   active_tool->on_modifier3 (BS_PRESSED, *this); return PR_PROCESSED;
+
+        default: return PR_LEFT;
+    }
 };
 
 
 Processing_result Canvas::on_keyboard_released (SDL_Keycode key) {
-    (void) key;
-    return PR_LEFT;
+
+    // rewrite, tool_event and filter_event
+    Tool* active_tool = my_tool_palette_.get_active_tool ();
+    if (!active_tool) return PR_LEFT;
+
+    Filter* filter1 = my_filter_palette_.filters_ [0]; assert (filter1);
+    Filter* filter2 = my_filter_palette_.filters_ [1]; assert (filter2);
+    Filter* filter3 = my_filter_palette_.filters_ [2]; assert (filter3);
+
+    //--------------------------------------------------
+
+    switch (key) {
+
+        case SDLK_LSHIFT: active_tool->on_modifier1 (BS_RELEASED, *this); return PR_PROCESSED;
+        case SDLK_LCTRL:  active_tool->on_modifier2 (BS_RELEASED, *this); return PR_PROCESSED;
+        case SDLK_LALT:   active_tool->on_modifier3 (BS_RELEASED, *this); return PR_PROCESSED;
+
+        case SDLK_ESCAPE: active_tool->on_cancel (); return PR_PROCESSED;
+
+        case SDLK_z: filter1->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
+        case SDLK_r: filter2->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
+        case SDLK_m: filter3->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
+
+        default: return PR_LEFT;
+    }
 };
 

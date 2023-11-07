@@ -83,15 +83,22 @@ Processing_result Widget_Container::on_mouse_pressed (Point2D mouse_position, Tr
 
     stack.push (my_transform_);
 
+    //--------------------------------------------------
+
+    Processing_result result;
+
     for (auto i = begin (); i != end (); ++i) {
 
-        (*i)->on_mouse_pressed (mouse_position, stack);
+        result = (*i)->on_mouse_pressed (mouse_position, stack);
+        if (result == PR_PROCESSED) break;
     }
+
+    //--------------------------------------------------
 
     stack.pop ();
 
 
-    return PR_LEFT;
+    return result;
 }
 
 
@@ -113,9 +120,9 @@ Processing_result Widget_Container::on_mouse_released (Point2D mouse_position, T
 
 Processing_result Widget_Container::on_keyboard_pressed (SDL_Keycode key) {
 
-    for (Widget* widget : widgets_) {
+    for (auto i = begin (); i != end (); ++i) {
 
-        widget->on_keyboard_pressed (key);
+        (*i)->on_keyboard_pressed (key);
     }
 
 
@@ -125,9 +132,9 @@ Processing_result Widget_Container::on_keyboard_pressed (SDL_Keycode key) {
 
 Processing_result Widget_Container::on_keyboard_released (SDL_Keycode key) {
 
-    for (Widget* widget : widgets_) {
+    for (auto i = begin (); i != end (); ++i) {
 
-        widget->on_keyboard_released (key);
+        (*i)->on_keyboard_released (key);
     }
 
 

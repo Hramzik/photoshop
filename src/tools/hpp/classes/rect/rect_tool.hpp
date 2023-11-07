@@ -14,10 +14,15 @@ class Tool_Palette;
 
 
 // пробрасывает всю инфу в свой виджет,
-// она хранится там
+// она хранится там.
+// пока виджет виден, инструмент зажат
 class Rect_Tool: public Tool {
 
   public:
+
+    static const bool DEFAULT_RECT_FILLING = false;
+
+    //--------------------------------------------------
 
     Rect_Tool (const Tool_Palette& palette);
 
@@ -29,16 +34,16 @@ class Rect_Tool: public Tool {
     (Button_state state, Point2D mouse_position, Canvas& canvas)
     override;
 
-    /*void on_modifier1
-    (Button_state state, Point2D mouse_position, Canvas& canvas)
+    void on_modifier1
+    (Button_state state, Canvas& canvas)
     override;
 
-    void on_modifier2
+    /*void on_modifier2
     (Button_state state, Point2D mouse_position, Canvas& canvas)
     override;*/
 
     void on_move   (Point2D mouse_position, Canvas& canvas) override;
-    void on_cancel (Point2D mouse_position, Canvas& canvas) override;
+    void on_cancel (void) override;
 
 //--------------------------------------------------
 

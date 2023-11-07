@@ -147,6 +147,16 @@ void Graphic_Window::draw_line (int x1, int y1, int x2, int y2) {
 }
 
 
+void Graphic_Window::draw_rect (SDL_Rect rect, bool is_filled) {
+
+    if (is_filled) draw_rect (rect);
+
+    //--------------------------------------------------
+
+    draw_rect_outline (rect);
+}
+
+
 void Graphic_Window::draw_rect (SDL_Rect rect) {
 
     convert_to_sdl_coords (rect);
@@ -156,11 +166,21 @@ void Graphic_Window::draw_rect (SDL_Rect rect) {
     SDL_RenderFillRect (renderer_, &rect);
 }
 
+
+void Graphic_Window::draw_rect_outline (SDL_Rect rect) {
+
+    convert_to_sdl_coords (rect);
+
+    //--------------------------------------------------
+
+    SDL_RenderDrawRect (renderer_, &rect);
+}
+
 //--------------------------------------------------
 
 void Graphic_Window::render_texture_sdl_coords
-        (SDL_Texture* texture, SDL_Rect* render_rect) {
-
+(SDL_Texture* texture, SDL_Rect* render_rect)
+{
     SDL_RenderCopy (renderer_, texture, nullptr, render_rect);
 }
 

@@ -6,20 +6,23 @@
 
 //--------------------------------------------------
 
+const My_RGB Tool_Palette::DEFAULT_ACTIVE_COLOR = C_GRAY;
+
+//--------------------------------------------------
 
 Tool_Palette::Tool_Palette (void):
         brush_tool_  (nullptr),
         rect_tool_   (nullptr),
         active_tool_ (nullptr),
 
-        active_color_ (C_BLACK)
+        active_color_ (DEFAULT_ACTIVE_COLOR)
 {
     brush_tool_ = new Brush_Tool (*this);
     rect_tool_  = new Rect_Tool  (*this);
 
     //--------------------------------------------------
 
-    select_rect_tool ();
+    select_brush_tool ();
 }
 
 //--------------------------------------------------

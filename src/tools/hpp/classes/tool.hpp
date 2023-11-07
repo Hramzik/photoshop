@@ -25,23 +25,23 @@ class Tool {
     virtual Widget* get_widget (void);
 
     virtual void on_main_button
-            (Button_state state, Point2D mouse_position, Canvas& canvas);
+    (Button_state state, Point2D mouse_position, Canvas& canvas);
 
     virtual void on_secondary_button
-            (Button_state state, Point2D mouse_position, Canvas& canvas);
+    (Button_state state, Point2D mouse_position, Canvas& canvas);
 
-    virtual void on_modifier1
-            (Button_state state, Point2D mouse_position, Canvas& canvas);
+    virtual void on_modifier1 // shift
+    (Button_state state, Canvas& canvas);
 
-    virtual void on_modifier2
-            (Button_state state, Point2D mouse_position, Canvas& canvas);
+    virtual void on_modifier2 // ctrl
+    (Button_state state, Canvas& canvas);
 
-    virtual void on_modifier3
-            (Button_state state, Point2D mouse_position, Canvas& canvas);
+    virtual void on_modifier3 // alt
+    (Button_state state, Canvas& canvas);
 
     virtual void on_move    (Point2D mouse_position, Canvas& canvas);
-    virtual void on_confirm (Point2D mouse_position, Canvas& canvas);
-    virtual void on_cancel  (Point2D mouse_position, Canvas& canvas);
+    virtual void on_confirm (Canvas& canvas);
+    virtual void on_cancel  (void);
 };
 
 

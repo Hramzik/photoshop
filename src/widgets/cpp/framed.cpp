@@ -80,15 +80,15 @@ void Movement_Frame::render_with_local_stack
 
 Processing_result Movement_Frame::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
-    std::cout << "global " << mouse_position << "\n";
-    Point2D local_mouse_position = conver_copy_to_local (mouse_position, stack);
-    std::cout << "local: " << mouse_position << "\n";
+    Point2D local_mouse_position = convert_copy_to_local (mouse_position, stack);
     if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
-    std::cout << "mouse in me" << "\n";
+
+    //--------------------------------------------------
 
     status_ = MOVING;
     last_mouse_position_ = mouse_position;
 
+    //--------------------------------------------------
 
     return PR_PROCESSED;
 }

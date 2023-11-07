@@ -2,6 +2,8 @@
 #define WIDGETS_CLASS_CANVAS_HPP_INCLUDED
 //--------------------------------------------------
 
+#include "../../../../filters/hpp/filters.hpp"
+
 #include "../windows/window.hpp"
 
 //--------------------------------------------------
@@ -15,7 +17,11 @@ class Canvas: public Window {
   public:
 
     // size = pixel_size = local_size
-    Canvas (Point2D position, Vector2D size, Tool_Palette& palette);
+    Canvas (Point2D       position,     Vector2D        size,
+            Tool_Palette& tool_palette, Filter_Palette& filter_palette);
+
+    Canvas (Vector2D      size,
+            Tool_Palette& tool_palette, Filter_Palette& filter_palette);
 
     //--------------------------------------------------
 
@@ -33,7 +39,10 @@ class Canvas: public Window {
 private:
 
     My_Texture texture_;
-    Tool_Palette& palette_;
+
+    Tool_Palette&   my_tool_palette_;
+    Filter_Mask     my_filter_mask_;
+    Filter_Palette& my_filter_palette_;
 
     bool    drawing_;
     Point2D last_mouse_position_;

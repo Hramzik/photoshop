@@ -18,10 +18,12 @@ class Rect_Tool_Widget: public Window {
     Point2D get_origin (void);
     Point2D get_end    (void);
     bool is_visible    (void);
-    void set_origin     (Point2D origin);
-    void set_end        (Point2D end);
-    void set_visibility (bool is_visible);
-    void set_filling    (bool is_filled);
+    bool is_filled     (void);
+    void set_origin      (Point2D origin);
+    void set_end         (Point2D end);
+    void set_visibility  (bool is_visible);
+    void set_filling     (bool is_filled);
+    void reverse_filling (void);
 
 //--------------------------------------------------
 

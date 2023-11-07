@@ -67,8 +67,8 @@ class Widget {
     (Graphic_Window& window, const Transform& result_transform);
 
     // todo: const global_stack&
-    void    conver_to_local      (Point2D& point, Transform_Stack& global_stack);
-    Point2D conver_copy_to_local (Point2D  point, Transform_Stack& global_stack);
+    void    convert_to_local      (Point2D& point, Transform_Stack& global_stack);
+    Point2D convert_copy_to_local (Point2D  point, Transform_Stack& global_stack);
 
     //--------------------------------------------------
 

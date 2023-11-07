@@ -19,9 +19,11 @@ class Tool_Selection_Widget: public Widget {
 
     Tool_Palette& get_palette (void);
 
-    void render
-    (Graphic_Window& window, Transform_Stack& stack)
-    override;
+    //--------------------------------------------------
+
+    void render (Graphic_Window& window, Transform_Stack& stack) override;
+
+    Processing_result on_keyboard_released (SDL_Keycode key) override;
 
 //--------------------------------------------------
 

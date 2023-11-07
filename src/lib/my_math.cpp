@@ -24,11 +24,18 @@ size_t my_max (size_t value1, size_t value2) {
     return value2;
 }
 
+
 double my_min (double value1, double value2) {
 
     if (value1 < value2) return value1;
 
 
     return value2;
+}
+
+
+void ensure_is_not_less_than (int& value, int goal) {
+
+    if (value < goal) value = goal;
 }
 

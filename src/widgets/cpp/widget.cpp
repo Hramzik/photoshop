@@ -154,7 +154,7 @@ void Widget::on_move (Vector2D offset) {
 
 //--------------------------------------------------
 
-void Widget::conver_to_local (Point2D& point, Transform_Stack& global_stack) {
+void Widget::convert_to_local (Point2D& point, Transform_Stack& global_stack) {
 
     global_stack.push (my_transform_);
 
@@ -168,7 +168,7 @@ void Widget::conver_to_local (Point2D& point, Transform_Stack& global_stack) {
 }
 
 
-Point2D Widget::conver_copy_to_local (Point2D point, Transform_Stack& global_stack) {
+Point2D Widget::convert_copy_to_local (Point2D point, Transform_Stack& global_stack) {
 
     global_stack.push (my_transform_);
 

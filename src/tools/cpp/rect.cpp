@@ -35,6 +35,7 @@ void Rect_Tool::on_main_button
         // и тогда мы должны что-то нарисовать, рисуем точку
         preview_.set_end    (mouse_position);
         preview_.set_visibility (true);
+        preview_.set_filling    (DEFAULT_RECT_FILLING);
         return;
     }
 
@@ -54,23 +55,24 @@ void Rect_Tool::on_main_button
     Point2D corner2 = preview_.get_end ();
 
     render_texture.set_drawcolor (my_palette_.get_active_color ());
-    render_texture.draw_rect (corner1, corner2);
+    render_texture.draw_rect (corner1, corner2, preview_.is_filled ());
 }
 
-/*
+
 void Rect_Tool::on_modifier1
-(Button_state state, Point2D mouse_position, Canvas& canvas) {
+(Button_state state, Canvas& canvas) {
 
+    (void) canvas;
 
+    //--------------------------------------------------
+
+    if (state == BS_PRESSED) return;
+
+    //--------------------------------------------------
+
+    preview_.reverse_filling ();
 }
 
-
-void Rect_Tool::on_modifier2
-(Button_state state, Point2D mouse_position, Canvas& canvas) {
-
-
-}
-*/
 
 void Rect_Tool::on_move (Point2D mouse_position, Canvas& canvas) {
 
@@ -86,11 +88,7 @@ void Rect_Tool::on_move (Point2D mouse_position, Canvas& canvas) {
 }
 
 
-void Rect_Tool::on_cancel (Point2D mouse_position, Canvas& canvas) {
-
-    (void) mouse_position; (void) canvas;
-
-    //--------------------------------------------------
+void Rect_Tool::on_cancel (void) {
 
     preview_.set_visibility (false);
 }

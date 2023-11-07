@@ -15,70 +15,46 @@ Widget* Tool::get_widget (void) {
 void Tool::on_main_button (Button_state state, Point2D mouse_position, Canvas& canvas) {
 
     (void) state; (void) mouse_position; (void) canvas;
-
-
-    return;
 }
 
 
 void Tool::on_secondary_button (Button_state state, Point2D mouse_position, Canvas& canvas) {
 
     (void) state; (void) mouse_position; (void) canvas;
-
-
-    return;
 }
 
 
-void Tool::on_modifier1 (Button_state state, Point2D mouse_position, Canvas& canvas) {
+void Tool::on_modifier1 (Button_state state, Canvas& canvas) {
 
-    (void) state; (void) mouse_position; (void) canvas;
-
-
-    return;
+    (void) state; (void) canvas;
 }
 
 
-void Tool::on_modifier2 (Button_state state, Point2D mouse_position, Canvas& canvas) {
+void Tool::on_modifier2 (Button_state state, Canvas& canvas) {
 
-    (void) state; (void) mouse_position; (void) canvas;
-
-
-    return;
+    (void) state; (void) canvas;
 }
 
 
-void Tool::on_modifier3 (Button_state state, Point2D mouse_position, Canvas& canvas) {
+void Tool::on_modifier3 (Button_state state, Canvas& canvas) {
 
-    (void) state; (void) mouse_position; (void) canvas;
-
-
-    return;
+    (void) state; (void) canvas;
 }
 
 
 void Tool::on_move (Point2D mouse_position, Canvas& canvas) {
 
     (void) mouse_position; (void) canvas;
-
-
-    return;
 }
 
 
-void Tool::on_confirm (Point2D mouse_position, Canvas& canvas) {
+void Tool::on_confirm (Canvas& canvas) {
 
-    (void) mouse_position; (void) canvas;
-
-
-    return;
+    (void) canvas;
 }
 
 
-void Tool::on_cancel  (Point2D mouse_position, Canvas& canvas) {
-
-    (void) mouse_position; (void) canvas;
-
+void Tool::on_cancel (void) {
 
     return;
 }

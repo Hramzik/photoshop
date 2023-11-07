@@ -39,3 +39,17 @@ void Textured_Window::render_with_final_transform (Graphic_Window& window, const
     window.render_texture (texture_, render_rect);
 }
 
+
+Processing_result Textured_Window::on_mouse_pressed
+(Point2D mouse_position, Transform_Stack& stack) {
+
+    convert_to_local (mouse_position, stack);
+
+    //--------------------------------------------------
+
+    if (is_mouse_in_me (mouse_position)) return PR_PROCESSED;
+
+    //--------------------------------------------------
+
+    return PR_LEFT;
+}

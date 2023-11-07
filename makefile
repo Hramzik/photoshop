@@ -5,14 +5,15 @@ cc = gcc
 MAIN_FOLDER = src
 LIB_FOLDER  = src/lib
 
-APP_FOLDER = src/app/cpp
-GRAPHICS_FOLDER = src/graphics/cpp
-MY_RGB_FOLDER = src/my_rgb/cpp
-VECTOR_FOLDER = src/vector/cpp
+APP_FOLDER       = src/app/cpp
+GRAPHICS_FOLDER  = src/graphics/cpp
+MY_RGB_FOLDER    = src/my_rgb/cpp
+VECTOR_FOLDER    = src/vector/cpp
 TRANSFORM_FOLDER = src/transform/cpp
-WIDGETS_FOLDER = src/widgets/cpp
-TOOLS_FOLDER = src/tools/cpp
-CLOCK_FOLDER = src/clock/cpp
+WIDGETS_FOLDER   = src/widgets/cpp
+TOOLS_FOLDER     = src/tools/cpp
+FILTERS_FOLDER   = src/filters/cpp
+CLOCK_FOLDER     = src/clock/cpp
 
 exefolder = exe
 
@@ -40,7 +41,9 @@ all: program
 program:
 	$(sc) $(cc) \
 	$(MAIN_FOLDER)/main.cpp \
+	$(APP_FOLDER)/app.cpp \
 	$(LIB_FOLDER)/logs.cpp \
+	$(LIB_FOLDER)/my_math.cpp \
 	$(GRAPHICS_FOLDER)/graphics.cpp \
 	$(GRAPHICS_FOLDER)/texture.cpp \
 	$(GRAPHICS_FOLDER)/sdl.cpp \
@@ -51,6 +54,8 @@ program:
 	$(VECTOR_FOLDER)/pair.cpp \
 	$(WIDGETS_FOLDER)/widget.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
+	$(TRANSFORM_FOLDER)/transform.cpp \
+	$(TRANSFORM_FOLDER)/stack.cpp \
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
@@ -62,14 +67,18 @@ program:
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/photoshop.cpp \
 	$(WIDGETS_FOLDER)/tool_selection.cpp \
+	$(WIDGETS_FOLDER)/filter_selection.cpp \
 	$(TOOLS_FOLDER)/palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \
 	$(TOOLS_FOLDER)/rect.cpp \
 	$(TOOLS_FOLDER)/rect_widget.cpp \
-	$(TRANSFORM_FOLDER)/stack.cpp \
-	$(TRANSFORM_FOLDER)/transform.cpp \
-	$(APP_FOLDER)/app.cpp \
+	$(FILTERS_FOLDER)/mask.cpp \
+	$(FILTERS_FOLDER)/palette.cpp \
+	$(FILTERS_FOLDER)/filter.cpp \
+	$(FILTERS_FOLDER)/brightness.cpp \
+	$(FILTERS_FOLDER)/contrast.cpp \
+	$(FILTERS_FOLDER)/monochrome.cpp \
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \
 	-lstdc++ -O0 \
 	-fmessage-length=60

@@ -12,6 +12,10 @@ class Tool_Palette {
 
   public:
 
+    static const My_RGB DEFAULT_ACTIVE_COLOR;
+
+    //--------------------------------------------------
+
     Tool_Palette (void);
 
     //--------------------------------------------------

@@ -58,7 +58,9 @@ class Graphic_Window {
 // все рисование происходит в текущих координатах (current_coordinates_)
     void draw_point (int x,  int y);
     void draw_line  (int x1, int y1, int x2, int y2);
-    void draw_rect  (SDL_Rect rect);
+    void draw_rect         (SDL_Rect rect, bool is_filled);
+    void draw_rect         (SDL_Rect rect);
+    void draw_rect_outline (SDL_Rect rect);
 
     void render_texture (SDL_Texture* texture, SDL_Rect  render_rect);
     void render_texture (SDL_Texture* texture, SDL_Rect* render_rect = nullptr);

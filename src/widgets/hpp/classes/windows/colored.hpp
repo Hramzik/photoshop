@@ -21,7 +21,12 @@ class Colored_Window: public Window {
   protected:
 
     void render_with_final_transform
-            (Graphic_Window& window, const Transform& result_transform) override;
+    (Graphic_Window& window, const Transform& result_transform)
+    override;
+
+    Processing_result on_mouse_pressed
+    (Point2D mouse_position, Transform_Stack& stack)
+    override;
 
     //--------------------------------------------------
 
