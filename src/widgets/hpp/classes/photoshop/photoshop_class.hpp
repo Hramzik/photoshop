@@ -7,6 +7,7 @@
 #include "canvas.hpp"
 #include "tool_selection.hpp"
 #include "filter_selection.hpp"
+#include "color_selection.hpp"
 
 //--------------------------------------------------
 

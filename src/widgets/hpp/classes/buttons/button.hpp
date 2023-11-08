@@ -34,6 +34,7 @@ class Button: public Window {
     void render (Graphic_Window& window, Transform_Stack& stack) override;
 
     Processing_result on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) override;
+    virtual void      do_when_pressed  (void);
 
 //--------------------------------------------------
 

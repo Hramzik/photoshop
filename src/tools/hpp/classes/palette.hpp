@@ -23,6 +23,7 @@ class Tool_Palette {
     Tool* get_active_tool (void);
 
     My_RGB get_active_color (void) const;
+    void   set_active_color (My_RGB color);
 
     void select_brush_tool    (void);
     void select_line_tool     (void);

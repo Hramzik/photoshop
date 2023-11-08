@@ -4,6 +4,7 @@
 
 
 #include "photoshop_class.hpp"
+#include "color_selection_button.hpp"
 
 
 //--------------------------------------------------

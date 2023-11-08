@@ -27,19 +27,22 @@ void Button::render (Graphic_Window& window, Transform_Stack& stack) {
 
 Processing_result Button::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
 
-    (void) mouse_position, (void) stack;
-/*
-    if (mouse_x < my_transform_.get_offset ().x)           return PR_LEFT;
-    if (mouse_y < my_transform_.get_offset ().y)           return PR_LEFT;
-    if (mouse_x > my_transform_.get_offset ().x + size_.x) return PR_LEFT;
-    if (mouse_y > my_transform_.get_offset ().y + size_.y) return PR_LEFT;
-*/
+    Point2D local_mouse_position = convert_copy_to_local (mouse_position, stack);
+    if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
+
+    //--------------------------------------------------
 
     state_ = PRESSED;
+    do_when_pressed ();
 
+    //--------------------------------------------------
 
     return PR_PROCESSED;
 }
 
 //--------------------------------------------------
 
+void Button::do_when_pressed (void) {
+
+    return;
+}

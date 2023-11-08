@@ -18,7 +18,7 @@ class Filter_Selection_Widget: public Widget {
 
     //--------------------------------------------------
 
-    Filter_Palette& get_palette (void);
+    Filter_Palette& access_palette (void);
 
     void add_filter (Filter& filter);
 

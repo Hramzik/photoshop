@@ -38,6 +38,12 @@ My_RGB Tool_Palette::get_active_color (void) const {
     return active_color_;
 }
 
+
+void Tool_Palette::set_active_color (My_RGB color) {
+
+    active_color_ = color;
+}
+
 //--------------------------------------------------
 // TOOL SELECTION
 

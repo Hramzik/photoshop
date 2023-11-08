@@ -13,7 +13,7 @@ Filter_Selection_Widget::Filter_Selection_Widget (void):
 
 //--------------------------------------------------
 
-Filter_Palette& Filter_Selection_Widget::get_palette (void) {
+Filter_Palette& Filter_Selection_Widget::access_palette (void) {
 
     return palette_;
 }

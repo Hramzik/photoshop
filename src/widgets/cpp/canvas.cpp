@@ -168,8 +168,8 @@ Processing_result Canvas::on_keyboard_released (SDL_Keycode key) {
         case SDLK_ESCAPE: active_tool->on_cancel (); return PR_PROCESSED;
 
         case SDLK_z: filter1->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
-        case SDLK_r: filter2->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
-        case SDLK_m: filter3->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
+        case SDLK_x: filter2->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
+        case SDLK_c: filter3->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
 
         default: return PR_LEFT;
     }

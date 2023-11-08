@@ -21,6 +21,10 @@ class Framed_Window: public Widget_Container {
     Framed_Window (const Framed_Window&) = delete;
     operator=     (const Framed_Window&) = delete;
 
+    //--------------------------------------------------
+
+    Vector2D get_size (void);
+
 //--------------------------------------------------
 
   protected:

@@ -68,6 +68,8 @@ program:
 	$(WIDGETS_FOLDER)/photoshop.cpp \
 	$(WIDGETS_FOLDER)/tool_selection.cpp \
 	$(WIDGETS_FOLDER)/filter_selection.cpp \
+	$(WIDGETS_FOLDER)/color_selection.cpp \
+	$(WIDGETS_FOLDER)/color_selection_button.cpp \
 	$(TOOLS_FOLDER)/palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \

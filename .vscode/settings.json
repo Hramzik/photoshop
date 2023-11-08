@@ -13,7 +13,7 @@
         "src\\lib": true,
         "src\\graphics": false,
         "src\\vector": true,
-        "src\\my_rgb": true,
+        "src\\my_rgb": false,
         "src\\transform": true,
         "src\\clock": true,
         ".VSCodeCounter": true,

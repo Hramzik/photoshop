@@ -11,15 +11,15 @@
 
 // графическое представление палитры
 // владеет своей палитрой
-class Tool_Selection_Widget: public Widget {
+class Tool_Selection_Widget: public Framed_Window {
 
   public:
 
-    Tool_Selection_Widget (void);
+    Tool_Selection_Widget (/*Point2D position, Vector2D size*/);
 
     //--------------------------------------------------
 
-    Tool_Palette& get_palette (void);
+    Tool_Palette& access_palette (void);
 
     //--------------------------------------------------
 

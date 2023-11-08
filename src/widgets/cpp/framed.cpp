@@ -26,6 +26,15 @@ Framed_Window::Framed_Window (Window& window):
     register_priority_widget   (frame_);
 }
 
+//--------------------------------------------------
+
+Vector2D Framed_Window::get_size (void) {
+
+    return window_.get_size ();
+}
+
+//--------------------------------------------------
+// FRAMES CODE
 
 Window_Frame::Window_Frame (Widget& controlled, Window& model):
         Widget_Container (model.get_position ()),

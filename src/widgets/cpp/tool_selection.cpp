@@ -6,15 +6,18 @@
 
 //--------------------------------------------------
 
-Tool_Selection_Widget::Tool_Selection_Widget (void):
+Tool_Selection_Widget::Tool_Selection_Widget (/*Point2D position, Vector2D size*/):
 
-        Widget (),
+        Framed_Window (*new Colored_Window (0, 0, C_LIGHT_GRAY)),
 
-        palette_ () {}
+        palette_ ()
+{
+    // add_selection_button
+}
 
 //--------------------------------------------------
 
-Tool_Palette& Tool_Selection_Widget::get_palette (void) {
+Tool_Palette& Tool_Selection_Widget::access_palette (void) {
 
     return palette_;
 }
