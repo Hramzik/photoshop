@@ -10,7 +10,7 @@ App::App (void):
         widgets_         (Vector2D (0)),
         transform_stack_ (),
 
-        window_ (),
+        window_ (SDL_WINDOW_FULLSCREEN_DESKTOP),
 
         sdl_exit_ (false)
 {
@@ -151,6 +151,12 @@ void App::populate (void) {
 
     //--------------------------------------------------
 
-    Photoshop* photoshop = new Photoshop (Vector2D (400));
+    Point2D  position (200, 40);
+    Vector2D size     (1400, 1000);
+
+    Photoshop* photoshop = new Photoshop (position, size);
+
+    //--------------------------------------------------
+
     widgets_.register_widget (photoshop);
 }

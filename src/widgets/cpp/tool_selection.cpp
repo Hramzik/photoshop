@@ -7,7 +7,9 @@
 //--------------------------------------------------
 
 Tool_Selection_Widget::Tool_Selection_Widget (void):
-        Widget   (0),
+
+        Widget (),
+
         palette_ () {}
 
 //--------------------------------------------------
@@ -23,6 +25,7 @@ void Tool_Selection_Widget::render
 
     (void) window, (void) stack;
 }
+
 
 Processing_result Tool_Selection_Widget::on_keyboard_released (SDL_Keycode key) {
 

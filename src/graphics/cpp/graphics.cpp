@@ -2,15 +2,12 @@
 
 //--------------------------------------------------
 
-
 #include "../hpp/graphics.hpp"
 #include "../../lib/logs.hpp"
 
-
 //--------------------------------------------------
 
-
-Graphic_Window::Graphic_Window (void):
+Graphic_Window::Graphic_Window (Uint32 sdl_flags):
         window_   (nullptr),
         renderer_ (nullptr),
         surface_  (nullptr),
@@ -22,7 +19,7 @@ Graphic_Window::Graphic_Window (void):
     window_ = SDL_CreateWindow (
             "", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, 
-            OUTPUT_FLAGS); // empty header
+            OUTPUT_FLAGS | sdl_flags); // empty header
 
     if(!window_) {
 
@@ -51,6 +48,24 @@ Graphic_Window::Graphic_Window (void):
     }
 }
 
+
+Graphic_Window::Graphic_Window (void):
+        Graphic_Window (0) {}
+
+//--------------------------------------------------
+
+void Graphic_Window::set_fullscreen (bool is_fullscreen) {
+
+    if (!is_fullscreen) {
+
+        SDL_SetWindowFullscreen (window_, 0);
+        return;
+    }
+
+    //--------------------------------------------------
+
+    SDL_SetWindowFullscreen (window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
+}
 
 //--------------------------------------------------
 

@@ -22,6 +22,10 @@ class Photoshop: public Framed_Window {
     Photoshop (Vector2D size);
     Photoshop (Point2D position, Vector2D size);
 
+    //--------------------------------------------------
+
+    
+
 //--------------------------------------------------
 
   private:
@@ -29,7 +33,7 @@ class Photoshop: public Framed_Window {
     Tool_Selection_Widget   tool_selection_;
     Filter_Selection_Widget filter_selection_;
 
-    Canvas canvas_;
+    //Canvas canvas_;
 };
 
 //--------------------------------------------------

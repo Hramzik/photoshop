@@ -39,13 +39,19 @@ class Graphic_Window {
   public:
 
     Graphic_Window (void);
+    Graphic_Window (Uint32 sdl_flags);
 
-//--------------------------------------------------
+    //--------------------------------------------------
+
+    void set_fullscreen (bool is_fullscreen);
+
+    //--------------------------------------------------
 
     SDL_Texture* load_texture
-            (const char* path, bool transparent_flag = false, My_RGB clr = C_WHITE) const;
+    (const char* path, bool transparent_flag = false, My_RGB clr = C_WHITE)
+    const;
 
-//--------------------------------------------------
+    //--------------------------------------------------
 
     int get_width  (void) const;
     int get_height (void) const;

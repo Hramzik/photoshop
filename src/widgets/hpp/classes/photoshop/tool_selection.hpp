@@ -4,6 +4,8 @@
 
 #include "../../../../tools/hpp/tools.hpp"
 
+#include "../framed_window/framed_window.hpp"
+
 //--------------------------------------------------
 
 
