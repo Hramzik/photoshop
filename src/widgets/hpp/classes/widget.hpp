@@ -20,6 +20,7 @@ class Widget {
     enum State {
 
         OPENED,
+        HIDDEN,
         CLOSED,
     };
 
@@ -34,6 +35,9 @@ class Widget {
 
     bool is_closed (void);
     void close     (void);
+    void show (void);
+    void hide (void);
+    void inverse_visibility (void);
 
     Point2D   get_position  (void);
     void      set_position  (Point2D position);

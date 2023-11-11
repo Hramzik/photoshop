@@ -31,6 +31,35 @@ void Widget::close (void) {
 }
 
 
+void Widget::show (void) {
+
+    if (state_ != HIDDEN) return;
+
+    //--------------------------------------------------
+
+    state_ = OPENED;
+}
+
+
+void Widget::hide (void) {
+
+    if (state_ != OPENED) return;
+
+    //--------------------------------------------------
+
+    state_ = HIDDEN;
+}
+
+
+void Widget::inverse_visibility (void) {
+
+    if (state_ == CLOSED) return;
+
+    if (state_ == OPENED) hide ();
+    else                  show ();
+}
+
+
 Point2D Widget::get_position (void) {
 
     Point2D position;
@@ -64,6 +93,10 @@ void Widget::set_transform (const Transform& transform) {
 //--------------------------------------------------
 
 void Widget::render (Graphic_Window& window, Transform_Stack& stack) {
+
+    if (state_ == HIDDEN) return;
+
+    //--------------------------------------------------
 
     stack.push (my_transform_);
 

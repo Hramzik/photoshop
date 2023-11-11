@@ -6,26 +6,12 @@
 
 //--------------------------------------------------
 
-Textured_Window::Textured_Window (double width, double height):
-        Window (width, height),
-        texture_ (nullptr) {}
+Textured_Window::Textured_Window (Point2D position, Vector2D size, const char* path):
+        Window (position, size),
 
-//--------------------------------------------------
-
-void Textured_Window::load_texture (const char* path, const Graphic_Window& loader) {
-
-    texture_ = loader.load_texture (path);
-}
-
-
-SDL_Texture* Textured_Window::get_texture (void) {
-
-    return texture_;
-}
-
-
-void Textured_Window::set_texture (SDL_Texture* texture) {
-    texture_ = texture;
+        texture_ (size)
+{
+    texture_.load_from_file (path);
 }
 
 //--------------------------------------------------
@@ -53,3 +39,6 @@ Processing_result Textured_Window::on_mouse_pressed
 
     return PR_LEFT;
 }
+
+//--------------------------------------------------
+

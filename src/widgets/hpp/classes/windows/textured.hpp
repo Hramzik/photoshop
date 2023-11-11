@@ -13,9 +13,9 @@ class Textured_Window: public Window {
 
   public:
 
-    Textured_Window (double width, double height);
+    Textured_Window (Point2D position, Vector2D size, const char* path);
 
-    void load_texture (const char* path, const Graphic_Window& loader);
+    //--------------------------------------------------
 
     SDL_Texture* get_texture (void);
     void         set_texture (SDL_Texture* texture);
@@ -39,7 +39,7 @@ class Textured_Window: public Window {
 
     //--------------------------------------------------
 
-    SDL_Texture* texture_;
+    My_Texture texture_;
 };
 
 

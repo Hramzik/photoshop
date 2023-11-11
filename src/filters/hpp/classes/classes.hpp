@@ -8,6 +8,7 @@
 #include "brightness.hpp"
 #include "contrast.hpp"
 #include "monochrome.hpp"
+#include "binary.hpp"
 
 
 //--------------------------------------------------

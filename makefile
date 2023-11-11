@@ -59,17 +59,23 @@ program:
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
+	$(WIDGETS_FOLDER)/button_manager.cpp \
 	$(WIDGETS_FOLDER)/close_button.cpp \
+	$(WIDGETS_FOLDER)/show_button.cpp \
 	$(WIDGETS_FOLDER)/window.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
+	$(WIDGETS_FOLDER)/menu.cpp \
 	$(WIDGETS_FOLDER)/framed.cpp \
+	$(WIDGETS_FOLDER)/moving_scrollbar.cpp \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/photoshop.cpp \
 	$(WIDGETS_FOLDER)/tool_selection.cpp \
-	$(WIDGETS_FOLDER)/filter_selection.cpp \
 	$(WIDGETS_FOLDER)/color_selection.cpp \
+	$(WIDGETS_FOLDER)/filter_selection.cpp \
+	$(WIDGETS_FOLDER)/tool_selection_button.cpp \
 	$(WIDGETS_FOLDER)/color_selection_button.cpp \
+	$(WIDGETS_FOLDER)/filter_selection_button.cpp \
 	$(TOOLS_FOLDER)/palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \
@@ -81,6 +87,7 @@ program:
 	$(FILTERS_FOLDER)/brightness.cpp \
 	$(FILTERS_FOLDER)/contrast.cpp \
 	$(FILTERS_FOLDER)/monochrome.cpp \
+	$(FILTERS_FOLDER)/binary.cpp \
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \
 	-lstdc++ -O0 \
 	-fmessage-length=60

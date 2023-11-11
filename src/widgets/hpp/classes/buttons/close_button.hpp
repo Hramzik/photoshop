@@ -2,12 +2,10 @@
 #define WIDGET_CLASS_CLOSE_BUTTON_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../buttons/buttons.hpp"
+#include "button.hpp"
 
 //--------------------------------------------------
 
-
-// CURRENTLY NOT USED, LEFT AS A PROTOTYPE
 class Close_Button: public Button {
 
   public:
@@ -25,7 +23,7 @@ class Close_Button: public Button {
 
     //--------------------------------------------------
 
-    Processing_result on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) override;
+    void do_when_pressed (void) override;
 
 //--------------------------------------------------
 

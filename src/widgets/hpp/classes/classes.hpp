@@ -6,8 +6,10 @@
 #include "widget.hpp"
 #include "container.hpp"
 #include "windows/windows.hpp"
-#include "framed_window/framed_window.hpp"
+#include "menu.hpp"
 #include "buttons/buttons.hpp"
+#include "framed_window/framed_window.hpp"
+#include "scrollbar/scrollbar.hpp"
 #include "photoshop/photoshop.hpp"
 
 

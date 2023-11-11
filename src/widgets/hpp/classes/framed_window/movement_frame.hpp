@@ -25,7 +25,7 @@ class Movement_Frame: public Window {
     void render_with_local_stack
             (Graphic_Window& window, Transform_Stack& local_stack) override;
 
-    Processing_result on_mouse_pressed   (Point2D mouse_position, Transform_Stack& stack) override;
+    Processing_result on_mouse_pressed  (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
 

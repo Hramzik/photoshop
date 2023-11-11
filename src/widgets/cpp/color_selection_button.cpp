@@ -7,9 +7,9 @@
 //--------------------------------------------------
 
 Color_Selection_Button::Color_Selection_Button
-(Point2D position, Vector2D size, My_RGB color, Tool_Palette& palette):
+(Window& model, My_RGB color, Tool_Palette& palette):
 
-    Button (position, size, color),
+    Button (model),
 
     color_   (color),
     palette_ (palette) {}

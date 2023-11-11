@@ -17,14 +17,20 @@ Photoshop::Photoshop (Vector2D size):
 Photoshop::Photoshop (Point2D position, Vector2D size):
         Framed_Window (*new Colored_Window (position, size, C_DARK_GRAY)),
 
-        tool_selection_   (),
-        filter_selection_ ()
+        tool_selection_   ({50, 400}, {200, 135}),
+        filter_selection_ ({250, 150}, canvas_),
 
-        //canvas_ (size, tool_selection_.access_palette (),
-        //             filter_selection_.access_palette ())
+        canvas_ ({400, 100}, 800, tool_selection_.access_palette (),
+                                filter_selection_.access_palette ())
 {
     register_widget (&tool_selection_);
     register_widget (&filter_selection_);
+
+    //--------------------------------------------------
+    // tool selection
+
+    tool_selection_.add_tool_selection_button (Tool_Selection_Button::PENCIL);
+    tool_selection_.add_tool_selection_button (Tool_Selection_Button::RECT);
 
     //--------------------------------------------------
     // color selection
@@ -50,28 +56,31 @@ Photoshop::Photoshop (Point2D position, Vector2D size):
     //--------------------------------------------------
     // canvas 1
 
-    Point2D position1 (400, 100);
-    Canvas* canvas1 = new Canvas (position1, 800, tool_selection_.access_palette (),
-                                                filter_selection_.access_palette ());
+    //Point2D position1 (400, 100);
+    //canvas_ = new Canvas (position1, 800, tool_selection_.access_palette (),
+    //                                            filter_selection_.access_palette ());
 
-    My_Texture& canvas_texture = canvas1->access_texture ();
+    My_Texture& canvas_texture = canvas_.access_texture ();
     canvas_texture.load_from_file (DEFAULT_CANVAS_IMAGE_PATH);
 
-    register_widget (new Framed_Window (*canvas1));
+    register_widget (new Framed_Window (canvas_));
 
+    register_widget (new Moving_Scrollbar ({50, 50}, {500, 40}, *this));
     //--------------------------------------------------
-    // canvas 2
+    // menu
 
-    //Point2D position2 (900, 300);
-    //Canvas* canvas2 = new Canvas (position2, 400, tool_selection_.access_palette (),
-    //                                            filter_selection_.get_palette ());
+    Window_Menu* menu = new Window_Menu ({0, 940}, {1400, 30});
 
-    //register_widget (new Framed_Window (*canvas2));
+    menu->add_menu_button (nullptr, filter_selection_);
+    filter_selection_.hide ();
+
+    register_widget (menu);
 
     //--------------------------------------------------
 
     filter_selection_.add_filter (*new Brightness_Filter (-10));
     filter_selection_.add_filter (*new Contrast_Filter   (1));
     filter_selection_.add_filter (*new Monochrome_Filter ());
+    filter_selection_.add_filter (*new Binary_Filter     ());
 }
 

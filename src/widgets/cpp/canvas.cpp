@@ -37,6 +37,12 @@ My_Texture& Canvas::access_texture (void) {
     return texture_;
 }
 
+
+Filter_Mask& Canvas::access_filter_mask (void) {
+
+    return my_filter_mask_;
+}
+
 //--------------------------------------------------
 
 

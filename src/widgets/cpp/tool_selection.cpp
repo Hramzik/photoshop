@@ -6,27 +6,40 @@
 
 //--------------------------------------------------
 
-Tool_Selection_Widget::Tool_Selection_Widget (/*Point2D position, Vector2D size*/):
+Tool_Selection_Widget::Tool_Selection_Widget (Point2D position, Vector2D size):
 
-        Framed_Window (*new Colored_Window (0, 0, C_LIGHT_GRAY)),
+        Framed_Window (*new Window (position, size)),
 
-        palette_ ()
+        palette_ (),
+        tools_   (*new Colored_Window (0, size, C_LIGHT_GRAY), 2, 0.05)
 {
-    // add_selection_button
+    register_widget (&tools_);
 }
 
 //--------------------------------------------------
 
-Tool_Palette& Tool_Selection_Widget::access_palette (void) {
+void Tool_Selection_Widget::add_tool_selection_button (Tool_Selection_Button::Tool_type tool) {
 
-    return palette_;
+    Point2D  position = tools_.get_new_button_position ();
+    Vector2D size     = tools_.get_button_size ();
+
+    const char* path = "media/pencil.png";
+    if (tool == Tool_Selection_Button::RECT) path = "media/rect.png";
+
+    //--------------------------------------------------
+
+    Window* button_model = new Textured_Window (position, size, path);
+    Button* new_button   = new Tool_Selection_Button (*button_model, tool, palette_);
+
+    //--------------------------------------------------
+
+    tools_.add_button (*new_button);
 }
 
 
-void Tool_Selection_Widget::render
-(Graphic_Window& window, Transform_Stack& stack) {
+Tool_Palette& Tool_Selection_Widget::access_palette (void) {
 
-    (void) window, (void) stack;
+    return palette_;
 }
 
 

@@ -30,7 +30,7 @@ class Window_Frame: public Widget_Container {
 
   private:
 
-    Button*         close_button_;
+    Close_Button*   close_button_;
     Movement_Frame* top_frame_;
 };
 

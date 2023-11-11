@@ -14,8 +14,7 @@ class Color_Selection_Button: public Button {
 
   public:
 
-    Color_Selection_Button
-    (Point2D position, Vector2D size, My_RGB color, Tool_Palette& palette);
+    Color_Selection_Button (Window& model, My_RGB color, Tool_Palette& palette);
 
     //--------------------------------------------------
 

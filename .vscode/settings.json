@@ -9,11 +9,11 @@
         "exe": true,
         ".vscode": true,
         ".gitignore": true,
-        "media": true,
+        "media": false,
         "src\\lib": true,
-        "src\\graphics": false,
+        "src\\graphics": true,
         "src\\vector": true,
-        "src\\my_rgb": false,
+        "src\\my_rgb": true,
         "src\\transform": true,
         "src\\clock": true,
         ".VSCodeCounter": true,
@@ -21,8 +21,9 @@
         "src\\widgets\\hpp\\widgets.hpp": true,
         "src\\widgets\\hpp\\enums.hpp": true,
         "src\\tools\\hpp\\tools.hpp": true,
-        "src\\tools": false,
-        "src\\app": false
+        "src\\tools": true,
+        "src\\app": false,
+        "src\\filters": false
     },
     "explorerExclude.backup": {},
     "files.associations": {

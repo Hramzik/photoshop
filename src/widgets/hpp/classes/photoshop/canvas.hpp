@@ -25,7 +25,11 @@ class Canvas: public Window {
 
     //--------------------------------------------------
 
-    My_Texture& access_texture (void);
+    My_Texture&  access_texture     (void);
+    Filter_Mask& access_filter_mask (void);
+
+    //--------------------------------------------------
+
 
     Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_pressed  (Point2D mouse_position, Transform_Stack& stack) override;
