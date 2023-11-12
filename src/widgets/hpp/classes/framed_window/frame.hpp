@@ -6,8 +6,6 @@
 #include "../container.hpp"
 #include "../buttons/buttons.hpp"
 
-#include "movement_frame.hpp"
-
 //--------------------------------------------------
 
 
@@ -31,7 +29,7 @@ class Window_Frame: public Widget_Container {
   private:
 
     Close_Button*   close_button_;
-    Movement_Frame* top_frame_;
+    Driving_Button* top_frame_;
 };
 
 

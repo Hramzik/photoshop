@@ -14,14 +14,16 @@ class Show_Button: public Button {
 
     //--------------------------------------------------
 
-    void do_when_pressed   (void) override;
-    void do_when_unhovered (void) override;
 
 //--------------------------------------------------
 
   private:
 
     Widget& controlled_;
+
+    //--------------------------------------------------
+
+    void do_when_pressed (void) override;
 };
 
 

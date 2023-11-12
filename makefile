@@ -62,6 +62,7 @@ program:
 	$(WIDGETS_FOLDER)/button_manager.cpp \
 	$(WIDGETS_FOLDER)/close_button.cpp \
 	$(WIDGETS_FOLDER)/show_button.cpp \
+	$(WIDGETS_FOLDER)/driving_button.cpp \
 	$(WIDGETS_FOLDER)/window.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
@@ -90,5 +91,6 @@ program:
 	$(FILTERS_FOLDER)/binary.cpp \
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \
 	-lstdc++ -O0 \
-	-fmessage-length=60
+	-fmessage-length=60 \
+	-I src
 

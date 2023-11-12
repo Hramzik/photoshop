@@ -2,7 +2,7 @@
 
 //--------------------------------------------------
 
-#include "../hpp/widgets.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 
@@ -22,6 +22,16 @@ Button::State Button::get_state (void) {
 void Button::do_when_pressed (void) {
 
     return;
+}
+
+
+void Button::do_when_pressed_at (Point2D global_mouse_position) {
+
+    (void) global_mouse_position;
+
+    //--------------------------------------------------
+
+    do_when_pressed ();
 }
 
 
@@ -58,7 +68,7 @@ Processing_result Button::on_mouse_pressed (Point2D mouse_position, Transform_St
     //--------------------------------------------------
 
     state_ = PRESSED;
-    do_when_pressed ();
+    do_when_pressed_at (mouse_position);
 
     //--------------------------------------------------
 
@@ -105,6 +115,16 @@ Processing_result Button::on_mouse_moved (Point2D mouse_position, Transform_Stac
 
 
     return PR_LEFT;
+}
+
+
+void Button::on_move (Vector2D offset) {
+
+    Widget::on_move (offset);
+
+    //--------------------------------------------------
+
+    model_.on_move (offset);
 }
 
 //--------------------------------------------------

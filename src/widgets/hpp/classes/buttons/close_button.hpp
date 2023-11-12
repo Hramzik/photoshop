@@ -18,18 +18,15 @@ class Close_Button: public Button {
 
     Close_Button (Point2D position, Widget& controlled);
 
-    Close_Button (Close_Button&) = delete;
-    operator=    (Close_Button&) = delete;
-
-    //--------------------------------------------------
-
-    void do_when_pressed (void) override;
-
 //--------------------------------------------------
 
   private:
 
     Widget& controlled_;
+
+    //--------------------------------------------------
+
+    void do_when_pressed (void) override;
 };
 
 

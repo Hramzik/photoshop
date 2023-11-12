@@ -2,7 +2,7 @@
 
 //--------------------------------------------------
 
-#include "../hpp/widgets.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 
@@ -22,9 +22,6 @@ void Show_Button::do_when_pressed (void) {
     state_ = HOVERED;
 }
 
+//--------------------------------------------------
 
-void Show_Button::do_when_unhovered (void) {
-
-    //controlled_.hide ();
-}
 

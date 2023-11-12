@@ -2,7 +2,7 @@
 
 //--------------------------------------------------
 
-#include "../hpp/widgets.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 
@@ -49,7 +49,7 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
             Vector2D (top_frame_width, DEFAULT_FRAME_HEIGHT),
             DEFAULT_FRAME_COLOR);
 
-    top_frame_ = new Movement_Frame (controlled, *top_frame_visible_part);
+    top_frame_ = new Driving_Button (*top_frame_visible_part, controlled);
 
     //--------------------------------------------------
 
@@ -66,83 +66,3 @@ Window_Frame::Window_Frame (Widget& controlled, Window& model):
 
 //--------------------------------------------------
 // MOVEMENT FRAME
-
-Movement_Frame::Movement_Frame (Widget& controlled, Window& visible_part):
-        Window (visible_part.get_position (), visible_part.get_size ()),
-
-        status_              (RESTING),
-        controlled_          (controlled),
-        visible_part_        (visible_part),
-        last_mouse_position_ (0)
-{
-    visible_part_.set_position (0);
-}
-
-
-void Movement_Frame::render_with_local_stack
-            (Graphic_Window& window, Transform_Stack& local_stack) {
-
-    visible_part_.render (window, local_stack);
-}
-
-//--------------------------------------------------
-
-Processing_result Movement_Frame::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
-
-    Point2D local_mouse_position = convert_copy_to_local (mouse_position, stack);
-    if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
-
-    //--------------------------------------------------
-
-    status_ = MOVING;
-    last_mouse_position_ = mouse_position;
-
-    //--------------------------------------------------
-
-    return PR_PROCESSED;
-}
-
-
-Processing_result Movement_Frame::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
-
-    if (status_ == RESTING) return PR_LEFT;
-
-
-    stack.push (my_transform_);
-
-    //--------------------------------------------------
-    // where the magic happens
-
-    Vector2D movement_vector = mouse_position - last_mouse_position_;
-    // если у controlled большой scale, его унесет нахуй, поэтому балансим это делением
-    movement_vector / (stack.get_result ().get_scale ());
-    controlled_.on_move (movement_vector);
-
-
-    last_mouse_position_ = mouse_position;
-
-    //--------------------------------------------------
-
-    stack.pop ();
-
-
-    return PR_PROCESSED;
-}
-
-
-Processing_result Movement_Frame::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
-
-    (void) mouse_position, (void) stack;
-
-
-    if (status_ == RESTING) return PR_LEFT;
-
-
-    status_ = RESTING;
-
-
-    return PR_PROCESSED;
-}
-
-
-

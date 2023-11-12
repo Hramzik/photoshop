@@ -17,10 +17,6 @@ class Filter_Selection_Button: public Button {
 
     Filter_Selection_Button (Window& model, int filter_id, Filter_Palette& palette, Canvas& canvas);
 
-    //--------------------------------------------------
-
-    void do_when_pressed (void) override;
-
 //--------------------------------------------------
 
   private:
@@ -28,6 +24,10 @@ class Filter_Selection_Button: public Button {
     int             filter_id_;
     Filter_Palette& palette_;
     Canvas&         canvas_;
+
+    //--------------------------------------------------
+
+    void do_when_pressed (void) override;
 };
 
 

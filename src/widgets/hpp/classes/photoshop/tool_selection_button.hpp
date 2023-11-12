@@ -24,16 +24,16 @@ class Tool_Selection_Button: public Button {
 
     Tool_Selection_Button (Window& model, Tool_type tool, Tool_Palette& palette);
 
-    //--------------------------------------------------
-
-    void do_when_pressed (void) override;
-
 //--------------------------------------------------
 
   private:
 
     Tool_type tool_;
     Tool_Palette& palette_;
+
+    //--------------------------------------------------
+
+    void do_when_pressed (void) override;
 };
 
 

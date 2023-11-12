@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-#include "../hpp/widgets.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 

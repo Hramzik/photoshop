@@ -16,16 +16,16 @@ class Color_Selection_Button: public Button {
 
     Color_Selection_Button (Window& model, My_RGB color, Tool_Palette& palette);
 
-    //--------------------------------------------------
-
-    void do_when_pressed (void) override;
-
 //--------------------------------------------------
 
   private:
 
     My_RGB color_;
     Tool_Palette& palette_;
+
+    //--------------------------------------------------
+
+    void do_when_pressed (void) override;
 };
 
 

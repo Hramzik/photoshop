@@ -26,17 +26,9 @@ class Button: public Window {
     // model is rendered not using button transform
     Button (Window& model);
 
-    Button    (const Button&) = delete;
-    operator= (const Button&) = delete;
-
     //--------------------------------------------------
 
     State get_state (void);
-
-    virtual void do_when_pressed  (void);
-    virtual void do_when_released (void);
-    virtual void do_when_hovered   (void);
-    virtual void do_when_unhovered (void);
 
     //--------------------------------------------------
 
@@ -46,6 +38,7 @@ class Button: public Window {
     Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
     Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
 
+    void on_move (Vector2D offset) override;
 
 //--------------------------------------------------
 
@@ -53,6 +46,15 @@ class Button: public Window {
 
     Window& model_;
     State   state_ = RELEASED;
+
+    //--------------------------------------------------
+
+    virtual void do_when_pressed    (void);
+    virtual void do_when_pressed_at (Point2D global_mouse_position);
+    virtual void do_when_released   (void);
+
+    virtual void do_when_hovered   (void);
+    virtual void do_when_unhovered (void);
 };
 
 
