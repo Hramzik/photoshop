@@ -66,7 +66,6 @@ Processing_result Button::on_mouse_pressed (Point2D mouse_position, Transform_St
     if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
 
     //--------------------------------------------------
-
     state_ = PRESSED;
     do_when_pressed_at (mouse_position);
 

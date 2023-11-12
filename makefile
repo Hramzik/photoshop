@@ -53,6 +53,7 @@ program:
 	$(VECTOR_FOLDER)/point.cpp \
 	$(VECTOR_FOLDER)/pair.cpp \
 	$(WIDGETS_FOLDER)/widget.cpp \
+	$(WIDGETS_FOLDER)/movement_controller.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
@@ -68,7 +69,7 @@ program:
 	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/menu.cpp \
 	$(WIDGETS_FOLDER)/framed.cpp \
-	$(WIDGETS_FOLDER)/moving_scrollbar.cpp \
+	$(WIDGETS_FOLDER)/driving_scrollbar.cpp \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/photoshop.cpp \
 	$(WIDGETS_FOLDER)/tool_selection.cpp \

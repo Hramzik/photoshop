@@ -12,8 +12,9 @@ Driving_Button::Driving_Button (Window& model, Widget& controlled):
 
         controlled_    (controlled),
         follow_target_ (false),
-        working_status_      (IDLE),
-        last_mouse_position_ (0) {}
+        working_status_        (IDLE),
+        last_mouse_position_   (0),
+        my_movement_controller (*this) {}
 
 //--------------------------------------------------
 
@@ -22,6 +23,19 @@ void Driving_Button::follow_target (void) {
     follow_target_ = true;
 }
 
+
+void Driving_Button::set_bottom_left_border (Point2D border) {
+
+    my_movement_controller.set_bottom_left_border (border);
+}
+
+
+void Driving_Button::set_top_right_border (Point2D border) {
+
+    my_movement_controller.set_top_right_border (border);
+}
+
+//--------------------------------------------------
 
 void Driving_Button::do_when_pressed_at (Point2D global_mouse_position){
 
@@ -57,8 +71,12 @@ Processing_result Driving_Button::on_mouse_moved (Point2D mouse_position, Transf
     //--------------------------------------------------
     // movement
 
+    if (follow_target_) {
+
+        movement_vector = my_movement_controller.move (movement_vector);
+    }
+
     controlled_.on_move (movement_vector);
-    if (follow_target_) on_move (movement_vector);
 
     //--------------------------------------------------
     // service

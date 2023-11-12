@@ -4,7 +4,7 @@
 
 #include "../windows/window.hpp"
 
-#include "moving_scrollbar.hpp"
+#include "driving_scrollbar.hpp"
 
 //--------------------------------------------------
 

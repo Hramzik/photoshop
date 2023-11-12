@@ -65,7 +65,11 @@ Photoshop::Photoshop (Point2D position, Vector2D size):
 
     register_widget (new Framed_Window (canvas_));
 
-    register_widget (new Moving_Scrollbar ({50, 50}, {500, 40}, *this));
+    //--------------------------------------------------
+    // scrollbar
+
+    register_widget (new Driving_Scrollbar ({50, 50}, {500, 40}, canvas_));
+
     //--------------------------------------------------
     // menu
 

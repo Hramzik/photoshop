@@ -32,6 +32,17 @@ Pair2D::Pair2D (double both):
 Pair2D::Pair2D (void):
     Pair2D (NAN) {}
 
+
+bool Pair2D::isnan (void) {
+
+    if (std::isnan (x)) return true;
+    if (std::isnan (y)) return true;
+
+    //--------------------------------------------------
+
+    return false;
+}
+
 //--------------------------------------------------
 
 Pair3D::Pair3D (double new_x, double new_y, double new_z):

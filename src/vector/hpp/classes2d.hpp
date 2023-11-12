@@ -26,8 +26,12 @@ public:
     Pair2D (double both);
     Pair2D (void);
 
+    //--------------------------------------------------
+
     Return_code scale (double scale);
     Return_code print (void);
+
+    bool isnan (void);
 };
 
 //--------------------------------------------------
