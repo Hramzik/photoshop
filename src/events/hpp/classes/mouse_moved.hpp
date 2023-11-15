@@ -2,22 +2,20 @@
 #define CLASS_MOUSE_MOVED_EVENT_HPP_INCLUDED
 //--------------------------------------------------
 
-
 #include "event.hpp"
 
 //--------------------------------------------------
 
 
-struct Mouse_Move_Event: public Event {
+struct Mouse_Moved_Event: public Event {
 
-    bool shift;
-    bool ctrl;
-    bool alt;
+    bool shift, ctrl, alt;
 
     //--------------------------------------------------
 
     Vec2d pos;
 }
+
 
 
 //--------------------------------------------------

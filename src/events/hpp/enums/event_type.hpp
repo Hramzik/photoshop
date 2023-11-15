@@ -1,9 +1,9 @@
-#ifndef EVENTS_ENUMS_HPP_INCLUDED
-#define EVENTS_ENUMS_HPP_INCLUDED
+#ifndef EVENTS_ENUM_EVENT_TYPE_HPP_INCLUDED
+#define EVENTS_ENUM_EVENT_TYPE_HPP_INCLUDED
 //--------------------------------------------------
 
 
-enum EventType {
+enum Event_Type {
 
     Tick             = 0,
     MouseMove        = 1,
@@ -13,7 +13,9 @@ enum EventType {
     KeyboardReleased = 5,
 };
 
-typedef EventType Event_Type
+//--------------------------------------------------
+
+typedef Event_Type EventType;
 
 //--------------------------------------------------
 #endif
