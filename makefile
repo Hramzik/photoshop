@@ -10,6 +10,7 @@ GRAPHICS_FOLDER  = src/graphics/cpp
 MY_RGB_FOLDER    = src/my_rgb/cpp
 VECTOR_FOLDER    = src/vector/cpp
 TRANSFORM_FOLDER = src/transform/cpp
+EVENTS_FOLDER    = src/events/cpp
 WIDGETS_FOLDER   = src/widgets/cpp
 TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
@@ -57,6 +58,7 @@ program:
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(TRANSFORM_FOLDER)/transform.cpp \
 	$(TRANSFORM_FOLDER)/stack.cpp \
+	$(EVENTS_FOLDER)/event.cpp \
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \

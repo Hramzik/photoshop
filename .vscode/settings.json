@@ -9,7 +9,7 @@
         "exe": true,
         ".vscode": true,
         ".gitignore": true,
-        "media": false,
+        "media": true,
         "src\\lib": true,
         "src\\graphics": true,
         "src\\vector": true,
