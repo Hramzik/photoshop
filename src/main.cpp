@@ -3,24 +3,24 @@
 
 #include <iostream>
 
-#include "app/hpp/app.hpp"
+//#include "app/hpp/app.hpp"
 
 //--------------------------------------------------
 
 
 int main (int argc, char** argv) { (void) argc; (void) argv;
 
-    init_sdl ();
+    //init_sdl ();
 
-    App app;
-
-//--------------------------------------------------
-
-    app.run ();
+    //App app;
 
 //--------------------------------------------------
 
-    quit_sdl ();
+    //app.run ();
+
+//--------------------------------------------------
+
+    //quit_sdl ();
 
     std::cout << "goodbye!\n";
 

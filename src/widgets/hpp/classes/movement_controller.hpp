@@ -2,7 +2,7 @@
 #define CLASS_MOVEMENT_CONTROLLER_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "widgets/hpp/classes/widget.hpp"
+#include "widgets/hpp/classes/MyWidget.hpp"
 
 //--------------------------------------------------
 

@@ -2,10 +2,7 @@
 #define APP_CLASS_APP_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../../../graphics/hpp/sdl.hpp"
-#include "../../../widgets/hpp/widgets.hpp"
-#include "../../../clock/hpp/clock.hpp"
-#include "../../../transform/hpp/transform.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 

@@ -46,56 +46,7 @@ all: program
 program:
 	$(sc) $(cc) \
 	$(SRC_FOLDER)/main.cpp \
-	$(APP_FOLDER)/app.cpp \
-	$(LIB_FOLDER)/logs.cpp \
-	$(LIB_FOLDER)/my_math.cpp \
-	$(GRAPHICS_FOLDER)/graphics.cpp \
-	$(GRAPHICS_FOLDER)/texture.cpp \
-	$(GRAPHICS_FOLDER)/sdl.cpp \
-	$(MY_RGB_FOLDER)/my_rgb.cpp \
-	$(VECTOR_FOLDER)/vector2d.cpp \
-	$(VECTOR_FOLDER)/vector3d.cpp \
-	$(VECTOR_FOLDER)/point.cpp \
-	$(VECTOR_FOLDER)/pair.cpp \
-	$(WIDGETS_FOLDER)/widget.cpp \
-	$(WIDGETS_FOLDER)/movement_controller.cpp \
-	$(WIDGETS_FOLDER)/container.cpp \
-	$(TRANSFORM_FOLDER)/transform.cpp \
-	$(TRANSFORM_FOLDER)/stack.cpp \
-	$(EVENTS_FOLDER)/event.cpp \
-	$(WIDGETS_FOLDER)/container_iterator.cpp \
-	$(WIDGETS_FOLDER)/container_riterator.cpp \
-	$(WIDGETS_FOLDER)/button.cpp \
-	$(WIDGETS_FOLDER)/button_manager.cpp \
-	$(WIDGETS_FOLDER)/close_button.cpp \
-	$(WIDGETS_FOLDER)/show_button.cpp \
-	$(WIDGETS_FOLDER)/driving_button.cpp \
-	$(WIDGETS_FOLDER)/window.cpp \
-	$(WIDGETS_FOLDER)/colored.cpp \
-	$(WIDGETS_FOLDER)/textured.cpp \
-	$(WIDGETS_FOLDER)/menu.cpp \
-	$(WIDGETS_FOLDER)/framed.cpp \
-	$(WIDGETS_FOLDER)/driving_scrollbar.cpp \
-	$(WIDGETS_FOLDER)/canvas.cpp \
-	$(WIDGETS_FOLDER)/photoshop.cpp \
-	$(WIDGETS_FOLDER)/tool_selection.cpp \
-	$(WIDGETS_FOLDER)/color_selection.cpp \
-	$(WIDGETS_FOLDER)/filter_selection.cpp \
-	$(WIDGETS_FOLDER)/tool_selection_button.cpp \
-	$(WIDGETS_FOLDER)/color_selection_button.cpp \
-	$(WIDGETS_FOLDER)/filter_selection_button.cpp \
-	$(TOOLS_FOLDER)/palette.cpp \
-	$(TOOLS_FOLDER)/tool.cpp \
-	$(TOOLS_FOLDER)/brush.cpp \
-	$(TOOLS_FOLDER)/rect.cpp \
-	$(TOOLS_FOLDER)/rect_widget.cpp \
-	$(FILTERS_FOLDER)/mask.cpp \
-	$(FILTERS_FOLDER)/palette.cpp \
-	$(FILTERS_FOLDER)/filter.cpp \
-	$(FILTERS_FOLDER)/brightness.cpp \
-	$(FILTERS_FOLDER)/contrast.cpp \
-	$(FILTERS_FOLDER)/monochrome.cpp \
-	$(FILTERS_FOLDER)/binary.cpp \
+	$(WIDGETS_FOLDER)/my_widget.cpp \
 	\
 	$(SDL_ADAPTERS_FOLDER)/MyVertexArray.cpp \
 	$(SDL_ADAPTERS_FOLDER)/MyRenderTarget.cpp \

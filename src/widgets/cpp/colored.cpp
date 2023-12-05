@@ -7,8 +7,8 @@
 //--------------------------------------------------
 
 
-Colored_Window::Colored_Window (Point2D position, Vector2D size, My_RGB color):
-        Window (position, size),
+Colored_Window::Colored_Window (plug::LayoutBox box, My_RGB color):
+        My_Widget (box),
         color_ (color) {}
 
 //--------------------------------------------------

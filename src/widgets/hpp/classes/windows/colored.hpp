@@ -2,30 +2,28 @@
 #define WIDGETS_CLASS_COLORED_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "window.hpp"
-
-#include "../../../../graphics/hpp/graphics.hpp"
-#include "../../../../my_rgb/hpp/my_rgb.hpp"
+#include "my_rgb/hpp/my_rgb.hpp"
+#include "widgets/hpp/classes/my_widget.hpp"
 
 //--------------------------------------------------
 
 
-class Colored_Window: public Window {
+class Colored_Window: public My_Widget {
 
   public:
 
-    Colored_Window (Point2D position, Vector2D size, My_RGB color);
+    Colored_Window (plug::LayoutBox box, My_RGB color);
 
 //--------------------------------------------------
 
   protected:
 
-    void render_with_final_transform
-    (Graphic_Window& window, const Transform& result_transform)
+    virtual void draw_with_local_stack
+    (plug::RenderTarget& target, plug::TransformStack& stack)
     override;
 
-    Processing_result on_mouse_pressed
-    (Point2D mouse_position, Transform_Stack& stack)
+    virtual void draw_with_final_transform
+    (plug::RenderTarget& target, plug::Transform& transform)
     override;
 
     //--------------------------------------------------

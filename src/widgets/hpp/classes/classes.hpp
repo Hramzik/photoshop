@@ -3,17 +3,17 @@
 //--------------------------------------------------
 
 
-#include "widget.hpp"
-#include "movement_controller.hpp"
-#include "container.hpp"
-#include "windows/windows.hpp"
-#include "buttons/buttons.hpp"
-
-#include "framed_window/framed_window.hpp"
-#include "scrollbar/scrollbar.hpp"
-
-#include "menu.hpp"
-#include "photoshop/photoshop.hpp"
+#include "my_widget.hpp"
+//#include "movement_controller.hpp"
+//#include "container.hpp"
+//#include "windows/windows.hpp"
+//#include "buttons/buttons.hpp"
+//
+//#include "framed_window/framed_window.hpp"
+//#include "scrollbar/scrollbar.hpp"
+//
+//#include "menu.hpp"
+//#include "photoshop/photoshop.hpp"
 
 
 //--------------------------------------------------
