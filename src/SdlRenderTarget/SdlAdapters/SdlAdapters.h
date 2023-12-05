@@ -7,5 +7,7 @@
 #include "MyRenderTexture.h"
 #include "MyRenderWindow.h"
 
+#include "Converters.h"
+
 //--------------------------------------------------
 #endif

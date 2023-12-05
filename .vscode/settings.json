@@ -17,7 +17,7 @@
         "src\\transform": true,
         "src\\clock": true,
         ".VSCodeCounter": true,
-        "src\\main.cpp": true,
+        "src\\main.cpp": false,
         "src\\widgets\\hpp\\widgets.hpp": true,
         "src\\widgets\\hpp\\enums.hpp": true,
         "src\\tools\\hpp\\tools.hpp": true,

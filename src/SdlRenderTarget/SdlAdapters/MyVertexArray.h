@@ -20,8 +20,8 @@ class MyVertexArray {
 
   public:
 
-    //VertexArray (int size);
-    MyVertexArray (plug::VertexArray& array);
+    MyVertexArray (int size);
+    MyVertexArray (const plug::VertexArray& array);
     ~MyVertexArray (void);
 
     MyVertexArray            (const MyVertexArray& other) = delete;

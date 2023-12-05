@@ -17,7 +17,7 @@ FILTERS_FOLDER   = src/filters/cpp
 CLOCK_FOLDER     = src/clock/cpp
 
 RENDER_TARGET_FOLDER = src/SdlRenderTarget
-SDL_ADAPTERS_FOLDER  = src/SdlRenderTarget/sdl_adapters
+SDL_ADAPTERS_FOLDER  = src/SdlRenderTarget/SdlAdapters
 
 exefolder = exe
 
@@ -100,6 +100,7 @@ program:
 	$(SDL_ADAPTERS_FOLDER)/MyRenderTarget.cpp \
 	$(SDL_ADAPTERS_FOLDER)/MyRenderTexture.cpp \
 	$(SDL_ADAPTERS_FOLDER)/MyRenderWindow.cpp \
+	$(SDL_ADAPTERS_FOLDER)/Converters.cpp \
 	$(RENDER_TARGET_FOLDER)/RenderTarget.cpp \
 	\
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \

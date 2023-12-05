@@ -26,3 +26,7 @@ MyRenderWindow::MyRenderWindow (int width, int height):
 
 //--------------------------------------------------
 
+void MyRenderWindow::show (void) {
+
+    SDL_RenderPresent (accessRenderer ());
+}

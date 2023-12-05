@@ -11,7 +11,16 @@ MyRenderTarget::MyRenderTarget (void):
 
 void MyRenderTarget::setRenderer (SDL_Renderer* renderer) {
 
+    SDL_DestroyRenderer (m_renderer);
+
+    //--------------------------------------------------
+
     m_renderer = renderer;
+}
+
+SDL_Renderer* MyRenderTarget::accessRenderer (void) {
+
+    return m_renderer;
 }
 
 //--------------------------------------------------

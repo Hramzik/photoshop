@@ -6,6 +6,17 @@
 
 #include <SDL.h>
 
+//--------------------------------------------------
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+
+#include "Plug/Graphics/Texture.h"
+
+#pragma GCC diagnostic pop
+
+//--------------------------------------------------
+
 #include "MyVertexArray.h"
 
 //--------------------------------------------------
@@ -15,6 +26,8 @@ SDL_FPoint getSDL_FPoint (plug::Vec2d plug_vector);
 
 void copyToSDL_Vertex    (SDL_Vertex&    sdl_vertex, const plug::Vertex&      plug_vertex);
 void copyToMyVertexArray (MyVertexArray& my_array,   const plug::VertexArray& plug_array);
+
+void copyToMyTexture (MyRenderTexture& my_texture, const plug::Texture& plug_texture);
 
 //--------------------------------------------------
 #endif

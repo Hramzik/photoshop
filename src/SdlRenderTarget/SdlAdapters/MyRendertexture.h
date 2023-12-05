@@ -10,9 +10,11 @@ class MyRenderTexture: public MyRenderTarget {
 
   public:
 
+    MyRenderTexture (void);
     MyRenderTexture (int width, int height);
 
     const SDL_Surface* getSdlSurface (void) const;
+    void               setSdlSurface (SDL_Surface* surface);
 
   private:
 

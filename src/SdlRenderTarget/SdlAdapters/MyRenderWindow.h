@@ -16,6 +16,8 @@ class MyRenderWindow: public MyRenderTarget {
 
     MyRenderWindow (int width, int height);
 
+    void show (void);
+
   private:
 
     SDL_Window* m_window;

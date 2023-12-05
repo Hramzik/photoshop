@@ -2,9 +2,16 @@
 #define __IMPL_SDL_RENDER_TARGET_H
 //--------------------------------------------------
 
-#include "Plug/Graphics.h"
+#pragma GCC diagnostic push 
+#pragma GCC diagnostic ignored "-Weffc++"
 
-#include "sdl_adapters/MyRenderTarget.h"
+#include "Plug/Graphics/RenderTarget.h"
+
+#pragma GCC diagnostic pop
+
+//--------------------------------------------------
+
+#include "SdlAdapters/MyRenderTarget.h"
 
 //--------------------------------------------------
 
