@@ -148,8 +148,7 @@ plug::Texture getTexture (const MyRenderTexture& my_texture) {
     plug::Texture plug_texture (width, height);
 
     //--------------------------------------------------
-std::cout << (int) surface->format->Rshift << (int) surface->format->Gshift << (int) surface->format->Bshift << "\n";
-std::cout << (int) surface->format->Rloss << (int) surface->format->Gloss << (int) surface->format->Bloss << "\n";
+
     for (int x = 0; x < width; ++x) {
     for (int y = 0; y < height; ++y) {
 
