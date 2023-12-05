@@ -12,21 +12,15 @@ class Colored_Window: public My_Widget {
 
   public:
 
-    Colored_Window (plug::LayoutBox box, My_RGB color);
+    Colored_Window (plug::LayoutBox& box, My_RGB color);
+
+    //--------------------------------------------------
+
+    virtual void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
 
 //--------------------------------------------------
 
-  protected:
-
-    virtual void draw_with_local_stack
-    (plug::RenderTarget& target, plug::TransformStack& stack)
-    override;
-
-    virtual void draw_with_final_transform
-    (plug::RenderTarget& target, plug::Transform& transform)
-    override;
-
-    //--------------------------------------------------
+  private:
 
     My_RGB color_;
 };

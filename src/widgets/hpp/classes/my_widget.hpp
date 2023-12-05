@@ -29,10 +29,10 @@ class My_Widget: public Widget {
     //--------------------------------------------------
 
     // my function
-    virtual void draw (plug::RenderTarget&  target, plug::TransformStack& stack);
+    virtual void render (plug::RenderTarget&  target, plug::TransformStack& stack);
 
     // standart function
-    void         draw (plug::TransformStack& stack, plug::RenderTarget&   target) override;
+    void           draw (plug::TransformStack& stack, plug::RenderTarget&   target) override;
 
     //--------------------------------------------------
 
@@ -62,21 +62,13 @@ class My_Widget: public Widget {
 
   protected:
 
+    plug::VertexArray get_render_shape (plug::TransformStack& stack);
+
+//--------------------------------------------------
+
+  private:
+
     State state_;
-
-    //--------------------------------------------------
-
-    //used by public draw function
-    //transform_stack holds local transform
-    virtual void draw_with_local_stack
-    (plug::RenderTarget& target, plug::TransformStack& stack);
-
-    virtual void draw_with_final_transform
-    (plug::RenderTarget& target, plug::Transform& transform);
-
-    //--------------------------------------------------
-
-    plug::VertexArray get_render_shape (void);
 };
 
 

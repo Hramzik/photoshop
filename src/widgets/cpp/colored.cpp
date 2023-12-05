@@ -7,34 +7,24 @@
 //--------------------------------------------------
 
 
-Colored_Window::Colored_Window (plug::LayoutBox box, My_RGB color):
+Colored_Window::Colored_Window (plug::LayoutBox& box, My_RGB color):
         My_Widget (box),
         color_ (color) {}
 
 //--------------------------------------------------
 
-void Colored_Window::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
+void Colored_Window::render (plug::RenderTarget& target, plug::TransformStack& stack) {
 
-    SDL_Rect render_rect = get_render_rect (result_transform);
+    plug::VertexArray shape = get_render_shape (stack);
+
+    for (int i = 0; i < (int) shape.getSize (); ++i) {
+
+        shape [i].color = plug::Color (color_.r, color_.g, color_.b);
+    }
 
     //--------------------------------------------------
 
-    window.set_drawcolor (color_);
-    window.draw_rect (render_rect);
+    target.draw (shape);
 }
 
-
-Processing_result Colored_Window::on_mouse_pressed
-(Point2D mouse_position, Transform_Stack& stack) {
-
-    convert_to_local (mouse_position, stack);
-
-    //--------------------------------------------------
-
-    if (is_mouse_in_me (mouse_position)) return PR_PROCESSED;
-
-    //--------------------------------------------------
-
-    return PR_LEFT;
-}
 

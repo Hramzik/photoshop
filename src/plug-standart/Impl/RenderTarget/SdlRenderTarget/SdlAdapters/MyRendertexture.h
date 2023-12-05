@@ -13,8 +13,11 @@ class MyRenderTexture: public MyRenderTarget {
     MyRenderTexture (void);
     MyRenderTexture (int width, int height);
 
+    void loadFromFile (const char* path);
+
     const SDL_Surface* getSdlSurface (void) const;
     void               setSdlSurface (SDL_Surface* surface);
+    SDL_Surface*       accessSdlSurface (void);
 
   private:
 

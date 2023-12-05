@@ -33,56 +33,45 @@ void My_Widget::close (void) {
 
 void My_Widget::draw (plug::TransformStack& stack, plug::RenderTarget& target) {
 
-    draw (target, stack);
+    render (target, stack);
 }
 
 //--------------------------------------------------
 // my draw function (switched parameter places)
 
-void My_Widget::draw (plug::RenderTarget& target, plug::TransformStack& stack) {
+void My_Widget::render (plug::RenderTarget& target, plug::TransformStack& stack) {
 
-    plug::Transform transform (getLayoutBox ().getPosition (), plug::Vec2d (1));
-    stack.enter(transform);
-
-    //--------------------------------------------------
-
-    draw_with_local_stack (target, stack);
-
-    //--------------------------------------------------
-
-    stack.leave();
-}
-
-//--------------------------------------------------
-
-void My_Widget::draw_with_local_stack
-(plug::RenderTarget& target, plug::TransformStack& stack)
-{
-    plug::Transform result_transform = stack.top();
-    draw_with_final_transform (target, result_transform);
-}
-
-//--------------------------------------------------
-
-void My_Widget::draw_with_final_transform
-(plug::RenderTarget& target, plug::Transform& transform)
-{
-    (void) target;
-    (void) transform;
+    (void) target; (void) stack;
 }
 
 //--------------------------------------------------
 
 plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
 
-    plug::VertexArray shape (plug::Quads, 4);
+    plug::Transform transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    stack.enter(transform);
 
     //--------------------------------------------------
 
-    shape [0].position = getCorner (Corner::TopLeft,     stack);
-    shape [1].position = getCorner (Corner::TopRight,    stack);
-    shape [2].position = getCorner (Corner::BottomRight, stack);
-    shape [3].position = getCorner (Corner::BottomLeft,  stack);
+    plug::Transform top_transform = stack.top ();
+
+    plug::Vec2d position = top_transform.apply (plug::Vec2d (0));
+    plug::Vec2d size     = top_transform.getScale () * getLayoutBox ().getSize ();
+
+    //--------------------------------------------------
+
+
+    plug::VertexArray shape (plug::Quads, 4);
+
+    shape [0].position = plug::Vec2d (position.x,          position.y);
+    shape [1].position = plug::Vec2d (position.x + size.x, position.y);
+    shape [2].position = plug::Vec2d (position.x + size.x, position.y + size.y);
+    shape [3].position = plug::Vec2d (position.x,          position.y + size.y);
+
+    shape [0].tex_coords = plug::Vec2d (0, 0);
+    shape [1].tex_coords = plug::Vec2d (1, 0);
+    shape [2].tex_coords = plug::Vec2d (1, 1);
+    shape [3].tex_coords = plug::Vec2d (0, 1);
 
     //--------------------------------------------------
 
@@ -92,6 +81,9 @@ plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
     }
 
     //--------------------------------------------------
+
+    stack.leave ();
+
 
     return shape;
 }

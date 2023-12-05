@@ -3,6 +3,19 @@
 
 #include <iostream>
 
+#include "graphics/hpp/graphics.hpp"
+
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/SdlAdapters.h"
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/MyRenderWindow.h"
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/MyRenderTexture.h"
+#include "Impl/RenderTarget/SdlRenderTarget/RenderTarget.h"
+
+#include "Impl/LayoutBox/LayoutBox.h"
+#include "Impl/LayoutBox/Units.h"
+#include "Impl/TransformStack.h"
+
+#include "widgets/hpp/classes/windows/textured.hpp"
+
 //#include "app/hpp/app.hpp"
 
 //--------------------------------------------------
@@ -10,8 +23,23 @@
 
 int main (int argc, char** argv) { (void) argc; (void) argv;
 
-    //init_sdl ();
+    init_sdl ();
 
+    MyRenderWindow true_window (500, 500);
+    SdlRenderTarget window (true_window);
+
+    LayoutBox box (200_px, 200_px);
+
+    MyRenderTexture true_texture; true_texture.loadFromFile ("media/cat.jpeg");
+    plug::Texture texture = getTexture (true_texture);
+    Textured_Window widget (box, texture);
+
+    TransformStack stack;
+    widget.render (window, stack);
+
+
+    true_window.show ();
+    while (true);
     //App app;
 
 //--------------------------------------------------
@@ -20,7 +48,7 @@ int main (int argc, char** argv) { (void) argc; (void) argv;
 
 //--------------------------------------------------
 
-    //quit_sdl ();
+    quit_sdl ();
 
     std::cout << "goodbye!\n";
 

@@ -2,44 +2,26 @@
 #define WIDGETS_CLASS_TEXTURED_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "window.hpp"
-
-#include "../../../../graphics/hpp/graphics.hpp"
+#include "widgets/hpp/classes/my_widget.hpp"
 
 //--------------------------------------------------
 
 
-class Textured_Window: public Window {
+class Textured_Window: public My_Widget {
 
   public:
 
-    Textured_Window (Point2D position, Vector2D size, const char* path);
+    Textured_Window (plug::LayoutBox& box, plug::Texture& texture);
 
     //--------------------------------------------------
 
-    SDL_Texture* get_texture (void);
-    void         set_texture (SDL_Texture* texture);
-
-    //--------------------------------------------------
-
-    Textured_Window (const Textured_Window&) = delete;
-    void  operator= (const Textured_Window&) = delete;
+    virtual void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
 
 //--------------------------------------------------
 
-  protected:
+  private:
 
-    void render_with_final_transform
-    (Graphic_Window& window, const Transform& result_transform)
-    override;
-
-    Processing_result on_mouse_pressed
-    (Point2D mouse_position, Transform_Stack& stack)
-    override;
-
-    //--------------------------------------------------
-
-    My_Texture texture_;
+    plug::Texture texture_;
 };
 
 

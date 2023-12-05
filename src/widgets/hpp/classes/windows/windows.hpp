@@ -3,7 +3,6 @@
 //--------------------------------------------------
 
 
-#include "window.hpp"
 #include "colored.hpp"
 #include "textured.hpp"
 

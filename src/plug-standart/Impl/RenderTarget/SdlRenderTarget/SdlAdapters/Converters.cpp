@@ -110,6 +110,62 @@ void copyToMyTexture (MyRenderTexture& my_texture, const plug::Texture& plug_tex
     my_texture.setSdlSurface (plug_surface);
 }
 
+#include <iostream>
+
+static Uint32 getpixel (const SDL_Surface* surface, int x, int y);
+static Uint32 getpixel (const SDL_Surface* surface, int x, int y) {
+
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch (bpp) {
+
+        case 1: return *p;
+
+        case 2: return *(Uint16 *)p;
+
+        case 3:
+            if (SDL_BYTEORDER == SDL_LIL_ENDIAN) return p [0] << 16 | p [1] << 8 | p [2];
+            else                                 //return p [0] | p [1] << 8 | p [2] << 16;
+                                                 return p [2] << 16 | p [1] << 8 | p [0];
+
+        case 4: return *(Uint32 *)p;
+
+        default: return 0;
+    }
+}
+
+plug::Texture getTexture (const MyRenderTexture& my_texture) {
+
+    const SDL_Surface* surface = my_texture.getSdlSurface ();
+
+    //--------------------------------------------------
+
+    int width  = surface->w;
+    int height = surface->h;
+
+    plug::Texture plug_texture (width, height);
+
+    //--------------------------------------------------
+std::cout << (int) surface->format->Rshift << (int) surface->format->Gshift << (int) surface->format->Bshift << "\n";
+std::cout << (int) surface->format->Rloss << (int) surface->format->Gloss << (int) surface->format->Bloss << "\n";
+    for (int x = 0; x < width; ++x) {
+    for (int y = 0; y < height; ++y) {
+
+        Uint32 pixel = getpixel (surface, x, y);
+        plug::Color color;
+        SDL_GetRGBA (pixel, surface->format, &color.r, &color.g, &color.b, &color.a);
+
+        plug_texture.setPixel (x, y, color);
+    }
+    }
+
+    //--------------------------------------------------
+
+    return plug_texture;
+}
+
 //--------------------------------------------------
 
 
