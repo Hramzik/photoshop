@@ -16,6 +16,9 @@ TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
 CLOCK_FOLDER     = src/clock/cpp
 
+RENDER_TARGET_FOLDER = src/SdlRenderTarget
+SDL_ADAPTERS_FOLDER  = src/SdlRenderTarget/sdl_adapters
+
 exefolder = exe
 
 define flags
@@ -92,8 +95,17 @@ program:
 	$(FILTERS_FOLDER)/contrast.cpp \
 	$(FILTERS_FOLDER)/monochrome.cpp \
 	$(FILTERS_FOLDER)/binary.cpp \
+	\
+	$(SDL_ADAPTERS_FOLDER)/MyVertexArray.cpp \
+	$(SDL_ADAPTERS_FOLDER)/MyRenderTarget.cpp \
+	$(SDL_ADAPTERS_FOLDER)/MyRenderTexture.cpp \
+	$(SDL_ADAPTERS_FOLDER)/MyRenderWindow.cpp \
+	$(RENDER_TARGET_FOLDER)/RenderTarget.cpp \
+	\
 	-o $(default_path) $(sdl_flags) $(flags_sdl_version) \
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
-	-I src
+	-fcompare-debug-second \
+	-I src \
+	-I C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2
 

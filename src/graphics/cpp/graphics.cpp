@@ -136,6 +136,37 @@ void Graphic_Window::clear_screen (void) {
 
 void Graphic_Window::update_screen (void) {
 
+    const SDL_Vertex triangleVertex[3] = {
+		{
+			{ 10.f, 10.f }, 
+			{ 220, 220, 220, 0xFF },
+			{ 0.f, 0.f }
+		},
+		{
+			{ 10.f, 310.f }, 
+			{ 220, 220, 220, 0xFF },
+			{ 0.f, 0.f }
+		},
+
+		{
+			{ 310.f, 120.f }, 
+			{ 220, 220, 220, 0xFF },
+			{ 0.f, 0.f }
+		}
+	};
+
+    //--------------------------------------------------
+
+    SDL_Surface*  tmp   = SDL_CreateRGBSurface (0, 500, 500, 32,0,0,0,0);
+    SDL_Renderer* rndrr = SDL_CreateSoftwareRenderer (tmp);
+
+    SDL_RenderGeometry (rndrr, nullptr, triangleVertex, 3, NULL, 0);
+
+    SDL_Texture*  txtr  = SDL_CreateTextureFromSurface (renderer_, tmp);
+    SDL_RenderCopy (renderer_, txtr, nullptr, nullptr);
+
+    //--------------------------------------------------
+
     SDL_RenderPresent (renderer_);
 }
 
