@@ -2,7 +2,7 @@
 
 cc = gcc
 
-MAIN_FOLDER = src
+SRC_FOLDER = src
 LIB_FOLDER  = src/lib
 
 APP_FOLDER       = src/app/cpp
@@ -16,8 +16,9 @@ TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
 CLOCK_FOLDER     = src/clock/cpp
 
-RENDER_TARGET_FOLDER = src/SdlRenderTarget
-SDL_ADAPTERS_FOLDER  = src/SdlRenderTarget/SdlAdapters
+PLUGIN_STANDART_FOLDER = src/plug-standart
+RENDER_TARGET_FOLDER   = src/plug-standart/Impl/RenderTarget/SdlRenderTarget
+SDL_ADAPTERS_FOLDER    = src/plug-standart/Impl/RenderTarget/SdlRenderTarget/SdlAdapters
 
 exefolder = exe
 
@@ -44,7 +45,7 @@ all: program
 
 program:
 	$(sc) $(cc) \
-	$(MAIN_FOLDER)/main.cpp \
+	$(SRC_FOLDER)/main.cpp \
 	$(APP_FOLDER)/app.cpp \
 	$(LIB_FOLDER)/logs.cpp \
 	$(LIB_FOLDER)/my_math.cpp \
@@ -107,6 +108,7 @@ program:
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
 	-fcompare-debug-second \
-	-I src \
+	-I $(SRC_FOLDER) \
+	-I $(PLUGIN_STANDART_FOLDER) \
 	-I C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2
 
