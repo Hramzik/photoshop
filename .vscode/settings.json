@@ -14,7 +14,7 @@
         "src\\graphics": false,
         "src\\vector": true,
         "src\\my_rgb": false,
-        "src\\transform": true,
+        "src\\transform": false,
         "src\\clock": true,
         ".VSCodeCounter": true,
         "src\\main.cpp": false,
@@ -24,14 +24,14 @@
         "src\\tools": true,
         "src\\app": false,
         "src\\filters": false,
-        "src\\widgets\\cpp\\window.cpp": true,
+        "src\\widgets\\cpp\\window.cpp": false,
         "src\\widgets\\cpp\\widget.cpp": false,
         "src\\widgets\\cpp\\colored.cpp": false,
         "src\\widgets\\cpp\\textured.cpp": false,
         "src\\widgets\\cpp\\framed.cpp": false,
-        "src\\widgets\\cpp\\container.cpp": true,
-        "src\\widgets\\cpp\\container_iterator.cpp": true,
-        "src\\widgets\\cpp\\container_riterator.cpp": true
+        "src\\widgets\\cpp\\container.cpp": false,
+        "src\\widgets\\cpp\\container_iterator.cpp": false,
+        "src\\widgets\\cpp\\container_riterator.cpp": false
     },
     "explorerExclude.backup": {},
     "files.associations": {

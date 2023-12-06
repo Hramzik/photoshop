@@ -47,13 +47,13 @@ Widget_Container::Reverse_Iterator::operator-- (void) {
 }
 
 
-Widget* Widget_Container::Reverse_Iterator::operator* (void) {
+My_Widget* Widget_Container::Reverse_Iterator::operator* (void) {
 
     --base_;
 
     //--------------------------------------------------
 
-    Widget* result = *base_;
+    My_Widget* result = *base_;
     ++base_;
 
     //--------------------------------------------------

@@ -126,9 +126,8 @@ static Uint32 getpixel (const SDL_Surface* surface, int x, int y) {
         case 2: return *(Uint16 *)p;
 
         case 3:
-            if (SDL_BYTEORDER == SDL_LIL_ENDIAN) return p [0] << 16 | p [1] << 8 | p [2];
-            else                                 //return p [0] | p [1] << 8 | p [2] << 16;
-                                                 return p [2] << 16 | p [1] << 8 | p [0];
+            if   (SDL_BYTEORDER == SDL_BIG_ENDIAN)  return p [2] << 24 | p [1] << 16 | p [0] << 8;
+            else/*SDL_BYTEORDER == SDL_LIL_ENDIAN*/ return p [0] << 16 | p [1] << 8  | p [2];
 
         case 4: return *(Uint32 *)p;
 

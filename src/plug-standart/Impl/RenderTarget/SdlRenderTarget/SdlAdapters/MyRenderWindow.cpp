@@ -26,7 +26,12 @@ MyRenderWindow::MyRenderWindow (int width, int height):
 
 //--------------------------------------------------
 
-void MyRenderWindow::show (void) {
+void MyRenderWindow::clear_screen (void) {
+
+    SDL_RenderClear (accessRenderer ());
+}
+
+void MyRenderWindow::update_screen (void) {
 
     SDL_RenderPresent (accessRenderer ());
 }

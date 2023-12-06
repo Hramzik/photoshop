@@ -7,16 +7,16 @@
 
 //--------------------------------------------------
 
-#include "MyWidget.hpp"
+#include "My_Widget.hpp"
 
 //--------------------------------------------------
 
-typedef std::list <Widget*> Widget_List;
+typedef std::list <My_Widget*> Widget_List;
 
 //--------------------------------------------------
 
 
-class Widget_Container: public Widget {
+class Widget_Container: public My_Widget {
 
   public:
 
@@ -42,10 +42,10 @@ class Widget_Container: public Widget {
         void set_to_begin (void);
         void set_to_end   (void);
 
-        Iterator& operator++ (void);
-        Iterator& operator-- (void);
-        Widget*   operator*  (void) const;
-        bool      operator!= (const Iterator& other) const;
+        Iterator&  operator++ (void);
+        Iterator&  operator-- (void);
+        My_Widget* operator*  (void) const;
+        bool       operator!= (const Iterator& other) const;
 
     //--------------------------------------------------
 
@@ -85,8 +85,8 @@ class Widget_Container: public Widget {
 
         // todo: make this function const
         // although it does -- and ++ on base_
-        Widget* operator*  (void);
-        bool    operator!= (const Reverse_Iterator& other) const;
+        My_Widget* operator*  (void);
+        bool       operator!= (const Reverse_Iterator& other) const;
 
     //--------------------------------------------------
 
@@ -98,8 +98,7 @@ class Widget_Container: public Widget {
 
     //--------------------------------------------------
 
-    Widget_Container (Transform transform);
-    Widget_Container (Point2D position);
+    explicit Widget_Container (const plug::LayoutBox& box);
 
     Widget_Container (const Widget_Container&) = delete;
     operator=        (const Widget_Container&) = delete;
@@ -107,30 +106,14 @@ class Widget_Container: public Widget {
     //--------------------------------------------------
 
     int get_widgets_count (void);
-    void register_widget            (Widget* widget);
-    void register_priority_widget   (Widget* widget);
-    void register_background_widget (Widget* widget);
+    void register_widget            (My_Widget* widget);
+    void register_priority_widget   (My_Widget* widget);
+    void register_background_widget (My_Widget* widget);
 
-    void render_with_local_stack
-            (Graphic_Window& window, Transform_Stack& stack) override;
+    //--------------------------------------------------
 
-    Processing_result
-    on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) override;
-
-    Processing_result
-    on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) override;
-
-    Processing_result
-    on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
-
-    Processing_result
-    on_keyboard_pressed (SDL_Keycode key) override;
-
-    Processing_result
-    on_keyboard_released (SDL_Keycode key) override;
-
-    Processing_result
-    on_timer (clock_t current_time) override;
+    void onEvent (const  plug::Event& event,  plug::EHC&          context) override;
+    void render  (plug::RenderTarget& target, plug::TransformStack& stack) override;
 
 //--------------------------------------------------
 
@@ -140,7 +123,7 @@ class Widget_Container: public Widget {
     Widget_List priority_widgets_;
     Widget_List background_widgets_; // unimportant, indifferent
 
-    Widget* active_widget_;
+    My_Widget* active_widget_;
 
     //--------------------------------------------------
 

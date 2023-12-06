@@ -2,6 +2,9 @@
 #define APP_CLASS_APP_HPP_INCLUDED
 //--------------------------------------------------
 
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/MyRenderWindow.h"
+#include "Impl/TransformStack.h"
+
 #include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
@@ -10,6 +13,9 @@
 class App {
 
   public:
+
+    static const double DEFAULT_APP_WINDOW_WIDTH;
+    static const double DEFAULT_APP_WINDOW_HEIGHT;
 
     App (void);
 
@@ -21,8 +27,9 @@ class App {
   private:
 
     Widget_Container widgets_;
-    Transform_Stack  transform_stack_;
-    Graphic_Window   window_;
+    TransformStack   transform_stack_;
+
+    MyRenderWindow window_;
 
     bool sdl_exit_;
 

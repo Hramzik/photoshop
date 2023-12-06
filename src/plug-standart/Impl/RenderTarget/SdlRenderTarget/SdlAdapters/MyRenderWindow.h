@@ -16,7 +16,8 @@ class MyRenderWindow: public MyRenderTarget {
 
     MyRenderWindow (int width, int height);
 
-    void show (void);
+    void clear_screen  (void);
+    void update_screen (void);
 
   private:
 

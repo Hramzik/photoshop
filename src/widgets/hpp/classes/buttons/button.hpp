@@ -2,19 +2,19 @@
 #define WIDGETS_CLASS_BUTTON_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../../../../vector/hpp/vector.hpp"
-#include "../../../../transform/hpp/transform.hpp"
+#include "widgets/hpp/classes/my_widget.hpp"
 
-#include "../windows/windows.hpp"
+#include "widgets/hpp/classes/actions/action.hpp"
+#include "widgets/hpp/classes/actions/button_action.hpp"
 
 //--------------------------------------------------
 
 
-class Button: public Window {
+class Button: public My_Widget {
 
   public:
 
-    enum State {
+    enum Button_state {
 
         PRESSED,
         RELEASED,
@@ -24,37 +24,36 @@ class Button: public Window {
     //--------------------------------------------------
 
     // model is rendered not using button transform
-    Button (Window& model);
+    Button (My_Widget& model);
+
+    void add_pressed_action (Action*        action);
+    void add_held_action    (Button_Action* action);
+
+    plug::Vec2d get_last_held_position (void);
 
     //--------------------------------------------------
 
-    State get_state (void);
+    void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
 
-    //--------------------------------------------------
-
-    void render (Graphic_Window& window, Transform_Stack& stack) override;
-
-    Processing_result on_mouse_pressed  (Point2D mouse_position, Transform_Stack& stack) override;
-    Processing_result on_mouse_released (Point2D mouse_position, Transform_Stack& stack) override;
-    Processing_result on_mouse_moved    (Point2D mouse_position, Transform_Stack& stack) override;
-
-    void on_move (Vector2D offset) override;
+    void onMousePressed  (const plug::MousePressedEvent&  event, plug::EHC& context) override;
+    void onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& context) override;
+    void onMouseMove     (const plug::MouseMoveEvent&     event, plug::EHC& context) override;
 
 //--------------------------------------------------
 
-  protected:
+  private:
 
-    Window& model_;
-    State   state_ = RELEASED;
+    My_Widget& model_;
+
+    Action* pressed_action_ = nullptr;
+    Action* held_action_    = nullptr;
+
+    Button_state button_state_       = RELEASED;
+    plug::Vec2d  last_held_position_ = plug::Vec2d ();
 
     //--------------------------------------------------
 
-    virtual void do_when_pressed    (void);
-    virtual void do_when_pressed_at (Point2D global_mouse_position);
-    virtual void do_when_released   (void);
-
-    virtual void do_when_hovered   (void);
-    virtual void do_when_unhovered (void);
+    void call_action (Action* action);
 };
 
 

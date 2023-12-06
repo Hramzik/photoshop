@@ -2,12 +2,7 @@
 #define CLASS_MY_WIDGET_HPP_INCLUDED
 //--------------------------------------------------
 
-#pragma GCC diagnostic push 
-#pragma GCC diagnostic ignored "-Weffc++"
-
 #include "Impl/Widget.h"
-
-#pragma GCC diagnostic pop
 
 //--------------------------------------------------
 

@@ -6,124 +6,130 @@
 
 //--------------------------------------------------
 
-Button::Button (Window& model):
-        Window (model.get_position (), model.get_size ()),
+Button::Button (My_Widget& model):
+        My_Widget (model.getLayoutBox ()),
 
         model_ (model) {}
 
 //--------------------------------------------------
 
-Button::State Button::get_state (void) {
+void Button::render (plug::RenderTarget& target, plug::TransformStack& stack) {
 
-    return state_;
+    model_.render (target, stack);
 }
 
+void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context){
 
-void Button::do_when_pressed (void) {
-
-    return;
-}
-
-
-void Button::do_when_pressed_at (Point2D global_mouse_position) {
-
-    (void) global_mouse_position;
+    if (context.stopped)          return;
+    if (button_state_ == PRESSED) return;
 
     //--------------------------------------------------
 
-    do_when_pressed ();
+    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    context.stack.enter (my_transform);
+
+    context.stopped = covers (context.stack, event.pos);
+
+    context.stack.leave();
+
+    //--------------------------------------------------
+    // not pressed
+
+    if (!context.stopped || event.button_id != plug::MouseButton::Left) return;
+
+    //--------------------------------------------------
+    // pressed
+
+    button_state_       = PRESSED;
+    last_held_position_ = event.pos;
+
+    call_action (pressed_action_);
 }
 
+void Button::onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& context){
 
-void Button::do_when_released (void) {
+    (void) context;
 
-    return;
+    //--------------------------------------------------
+
+    if (event.button_id != plug::MouseButton::Left) return;
+
+    //--------------------------------------------------
+
+    button_state_ = RELEASED;
 }
 
+void Button::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context){
 
-void Button::do_when_hovered (void) {
+    if (context.stopped) return;
 
-    return;
-}
+    //--------------------------------------------------
 
+    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    context.stack.enter (my_transform);
 
-void Button::do_when_unhovered (void) {
+    bool hovered = covers (context.stack, event.pos);
 
-    return;
+    context.stack.leave();
+
+    //--------------------------------------------------
+    // held
+
+    if (button_state_ == PRESSED) {
+
+        last_held_position_ = event.pos;
+        call_action (held_action_);
+        return;
+    }
+
+    //--------------------------------------------------
+    // hovered
+
+    if (hovered) {
+
+        button_state_ = HOVERED;
+        return;
+    }
+
+    //--------------------------------------------------
+    // unhovered
+
+    button_state_ = RELEASED;
 }
 
 //--------------------------------------------------
 
-void Button::render (Graphic_Window& window, Transform_Stack& stack) {
+void Button::call_action (Action* action) {
 
-    model_.render (window, stack);
+    if (!action) return;
+
+    //--------------------------------------------------
+
+    action->act ();
 }
 
+void Button::add_pressed_action (Action* action) {
 
-Processing_result Button::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
-
-    Point2D local_mouse_position = convert_copy_to_local (mouse_position, stack);
-    if (!is_mouse_in_me (local_mouse_position)) return PR_LEFT;
-
-    //--------------------------------------------------
-    state_ = PRESSED;
-    do_when_pressed_at (mouse_position);
-
-    //--------------------------------------------------
-
-    return PR_PROCESSED;
+    pressed_action_ = action;
 }
 
-
-Processing_result Button::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
-
-    (void) mouse_position; (void) stack;
+void Button::add_held_action (Button_Action* action) {
 
     //--------------------------------------------------
+    // add action
 
-    if (state_ == RELEASED) return PR_LEFT;
-
-    //--------------------------------------------------
-
-    state_ = RELEASED;
-    do_when_released ();
+    held_action_ = action;
 
     //--------------------------------------------------
+    // set owner
 
-    return PR_PROCESSED;
+    if (!action) return;
+    action->set_owner (*this);
 }
 
+plug::Vec2d Button::get_last_held_position (void) {
 
-Processing_result Button::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
-
-    convert_to_local (mouse_position, stack);
-
-    //--------------------------------------------------
-
-    if (state_ == PRESSED) return PR_LEFT;
-    if (state_ == RELEASED && !is_mouse_in_me (mouse_position)) return PR_LEFT;
-    if (state_ == HOVERED  &&  is_mouse_in_me (mouse_position)) return PR_LEFT;
-
-    //--------------------------------------------------
-    // hover ended, or started
-    // я выделил эту секцию, так как в будущем тут нужно возвращать не pr_left, а pr_чтототам
-    // чтобы кнопка подо мой не хаверилась
-
-    if (is_mouse_in_me (mouse_position)) { state_ = HOVERED;  do_when_hovered ();   }
-    else                                 { state_ = RELEASED; do_when_unhovered (); }
-
-
-    return PR_LEFT;
-}
-
-
-void Button::on_move (Vector2D offset) {
-
-    Widget::on_move (offset);
-
-    //--------------------------------------------------
-
-    model_.on_move (offset);
+    return last_held_position_;
 }
 
 //--------------------------------------------------

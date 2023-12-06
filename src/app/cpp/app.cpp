@@ -2,16 +2,23 @@
 
 //--------------------------------------------------
 
+#include "Impl/LayoutBox/LayoutBox.h"
+
 #include "../hpp/app.hpp"
 
 //--------------------------------------------------
 
+const double App::DEFAULT_APP_WINDOW_WIDTH  = 500;
+const double App::DEFAULT_APP_WINDOW_HEIGHT = 500;
+
+//--------------------------------------------------
+
 App::App (void):
-        widgets_         (Vector2D (0)),
+        widgets_ (LayoutBox (Length (DEFAULT_APP_WINDOW_WIDTH,  Unit::Pixel),
+                             Length (DEFAULT_APP_WINDOW_HEIGHT, Unit::Pixel))),
         transform_stack_ (),
 
-        window_ (SDL_WINDOW_FULLSCREEN_DESKTOP),
-
+        window_ (DEFAULT_APP_WINDOW_WIDTH, DEFAULT_APP_WINDOW_HEIGHT),
         sdl_exit_ (false)
 {
     populate ();
@@ -62,58 +69,53 @@ void App::update (void) {
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP: on_mouse_event (event); break;
 
-        case SDL_KEYDOWN: widgets_.on_keyboard_pressed  (event.key.keysym.sym); break;
-        case SDL_KEYUP:   widgets_.on_keyboard_released (event.key.keysym.sym); break;
+        //case SDL_KEYDOWN: widgets_.on_keyboard_pressed  (event.key.keysym.sym); break;
+        //case SDL_KEYUP:   widgets_.on_keyboard_released (event.key.keysym.sym); break;
     }}
 
 
-    widgets_.on_timer (clock ());
+    //widgets_. (clock ());
 }
 
 
-void App::on_mouse_event (SDL_Event event) {
+void App::on_mouse_event (SDL_Event sdl_event) {
 
     //--------------------------------------------------
     // getting mouse position
 
-    Point2D mouse_position;
+    plug::Event* plug_event = nullptr;
+    plug::Vec2d position;
 
-    switch (event.type) {
+    switch (sdl_event.type) {
 
-        case SDL_MOUSEMOTION: mouse_position.x = event.motion.x;
-                              mouse_position.y = event.motion.y;
-                              break;
+        case SDL_MOUSEMOTION:
+            position   = plug::Vec2d (sdl_event.motion.x, sdl_event.motion.y);
+            plug_event = &plug::MouseMoveEvent (position. false, false, false);
+            break;
 
         //--------------------------------------------------
 
         case SDL_MOUSEBUTTONDOWN:
-        case SDL_MOUSEBUTTONUP: mouse_position.x = event.motion.x;
-                                mouse_position.y = event.motion.y;
-                                break;
+            position   = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
+            plug_event = plug::MousePressedEvent (plug::MouseButton::LEFT, position, false, false, false);
+            break;
+
+        //--------------------------------------------------
+
+        case SDL_MOUSEBUTTONUP: 
+            position   = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
+            plug_event = plug::MouseReleasedEvent (plug::MouseButton::LEFT, position, false, false, false);
+            break;
 
         //--------------------------------------------------
 
         default: LOG_ERROR (BAD_ARGS); return;
     }
-
-    mouse_position.y = window_.get_height () - mouse_position.y;
 
     //--------------------------------------------------
     // handling event
 
-    switch (event.type) {
-
-        case SDL_MOUSEMOTION:
-            widgets_.on_mouse_moved (mouse_position, transform_stack_); break;
-
-        case SDL_MOUSEBUTTONDOWN:
-            widgets_.on_mouse_pressed (mouse_position, transform_stack_); break;
-
-        case SDL_MOUSEBUTTONUP:
-            widgets_.on_mouse_released (mouse_position, transform_stack_); break;
-
-        default: LOG_ERROR (BAD_ARGS); return;
-    }
+    //widgets_.onEvent (plug_event, context);
 }
 
 
@@ -151,12 +153,12 @@ void App::populate (void) {
 
     //--------------------------------------------------
 
-    Point2D  position (200, 40);
-    Vector2D size     (1400, 1000);
+    // Point2D  position (200, 40);
+    // Vector2D size     (1400, 1000);
 
-    Photoshop* photoshop = new Photoshop (position, size);
+    // Photoshop* photoshop = new Photoshop (position, size);
 
-    //--------------------------------------------------
+    // //--------------------------------------------------
 
-    widgets_.register_widget (photoshop);
+    // widgets_.register_widget (photoshop);
 }

@@ -70,9 +70,16 @@ program:
 	$(RENDER_TARGET_FOLDER)/RenderTarget.cpp \
 \
 	$(SRC_FOLDER)/main.cpp \
+	$(APP_FOLDER)/app.cpp \
 	$(WIDGETS_FOLDER)/my_widget.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
+	$(WIDGETS_FOLDER)/actions.cpp \
+	$(WIDGETS_FOLDER)/button.cpp \
+	$(WIDGETS_FOLDER)/container.cpp \
+	$(WIDGETS_FOLDER)/container_iterator.cpp \
+	$(WIDGETS_FOLDER)/container_riterator.cpp \
+	$(WIDGETS_FOLDER)/framed_window.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

@@ -14,7 +14,7 @@
 #include "Impl/LayoutBox/Units.h"
 #include "Impl/TransformStack.h"
 
-#include "widgets/hpp/classes/windows/textured.hpp"
+#include "widgets/hpp/widgets.hpp"
 
 //#include "app/hpp/app.hpp"
 
@@ -26,7 +26,7 @@ int main (int argc, char** argv) { (void) argc; (void) argv;
     init_sdl ();
 
     MyRenderWindow true_window (500, 500);
-    SdlRenderTarget window (true_window);
+    SdlRenderTarget target (true_window);
 
     LayoutBox box (200_px, 200_px);
 
@@ -34,8 +34,10 @@ int main (int argc, char** argv) { (void) argc; (void) argv;
     plug::Texture texture = getTexture (true_texture);
     Textured_Window widget (box, texture);
 
+    Framed_Window window (widget);
+
     TransformStack stack;
-    widget.render (window, stack);
+    window.render (target, stack);
 
 
     true_window.show ();

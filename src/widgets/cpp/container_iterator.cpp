@@ -140,7 +140,7 @@ bool Widget_Container::Iterator::operator!= (const Iterator& other) const {
 }
 
 
-Widget* Widget_Container::Iterator::operator* (void) const {
+My_Widget* Widget_Container::Iterator::operator* (void) const {
 
     if (iterator_ == get_current_list_end ()) {
 
