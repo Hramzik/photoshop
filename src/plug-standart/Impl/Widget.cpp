@@ -78,7 +78,7 @@ plug::Vec2d Widget::getCorner(Corner corner,
 }
 
 static inline bool isSmall(double a) { return fabs(a) < 1e-6; }
-
+#include <iostream>
 bool Widget::covers(plug::TransformStack &stack,
                     const plug::Vec2d &position) const {
   if (isSmall(box_->getSize().x) || isSmall(box_->getSize().y)) {
@@ -97,6 +97,7 @@ bool Widget::covers(plug::TransformStack &stack,
   bool left_check     = plug::cross(bl - tl, position - tl) <= 0.0;
   // clang-format on
 
+std::cout << (top_check && right_check && bottom_check && left_check) << "\n";
   return top_check && right_check && bottom_check && left_check;
 
   return false;

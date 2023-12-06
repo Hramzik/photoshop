@@ -25,12 +25,16 @@ void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& co
 
     //--------------------------------------------------
 
-    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
-    context.stack.enter (my_transform);
+    //plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    //context.stack.enter (my_transform);
 
     context.stopped = covers (context.stack, event.pos);
 
-    context.stack.leave();
+    std::cout << getCorner(TopLeft, context.stack).x << " " << getCorner(TopLeft, context.stack).y << "\n";
+    std::cout << getCorner(BottomLeft, context.stack).x << " " << getCorner(BottomLeft, context.stack).y << "\n";
+    std::cout << event.pos.x << " " << event.pos.y << "\n";
+    std::cout << context.stopped << "\n";
+    //context.stack.leave();
 
     //--------------------------------------------------
     // not pressed

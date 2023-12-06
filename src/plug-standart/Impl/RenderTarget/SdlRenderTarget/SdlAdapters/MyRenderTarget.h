@@ -25,7 +25,9 @@ class MyRenderTarget {
 
   protected:
 
-    MyRenderTarget (void);
+    MyRenderTarget  (void);
+    ~MyRenderTarget (void);
+
     void          setRenderer    (SDL_Renderer* renderer);
     SDL_Renderer* accessRenderer (void);
 

@@ -2,7 +2,8 @@
 #define APP_CLASS_APP_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/MyRenderWindow.h"
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/SdlAdapters.h"
+#include "Impl/RenderTarget/SdlRenderTarget/RenderTarget.h"
 #include "Impl/TransformStack.h"
 
 #include "widgets/hpp/widgets.hpp"
@@ -29,7 +30,8 @@ class App {
     Widget_Container widgets_;
     TransformStack   transform_stack_;
 
-    MyRenderWindow window_;
+    MyRenderWindow  window_;
+    SdlRenderTarget target_;
 
     bool sdl_exit_;
 

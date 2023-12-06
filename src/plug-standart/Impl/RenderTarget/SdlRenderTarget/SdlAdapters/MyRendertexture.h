@@ -12,6 +12,7 @@ class MyRenderTexture: public MyRenderTarget {
 
     MyRenderTexture (void);
     MyRenderTexture (int width, int height);
+    ~MyRenderTexture (void);
 
     void loadFromFile (const char* path);
 

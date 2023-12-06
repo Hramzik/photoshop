@@ -52,13 +52,17 @@ void Widget_Container::register_background_widget (My_Widget* widget) {
 
 void Widget_Container::render (plug::RenderTarget& target, plug::TransformStack& stack) {
 
-    plug::Transform transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
-    stack.enter(transform);
+    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    stack.enter(my_transform);
+
+    //--------------------------------------------------
 
     for (auto i = rbegin (); i != rend (); ++i) {
 
         (*i)->render (target, stack);
     }
+
+    //--------------------------------------------------
 
     stack.leave ();
 }
@@ -66,10 +70,19 @@ void Widget_Container::render (plug::RenderTarget& target, plug::TransformStack&
 
 void Widget_Container::onEvent (const plug::Event& event, plug::EHC& context) {
 
+    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    context.stack.enter(my_transform);
+
+    //--------------------------------------------------
+
     for (auto i = begin (); i != end (); ++i) {
 
         (*i)->onEvent (event, context);
     }
+
+    //--------------------------------------------------
+
+    context.stack.leave ();
 }
 
 //--------------------------------------------------

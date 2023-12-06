@@ -63,10 +63,10 @@ plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
 
     plug::VertexArray shape (plug::Quads, 4);
 
-    shape [0].position = plug::Vec2d (position.x,          position.y);
-    shape [1].position = plug::Vec2d (position.x + size.x, position.y);
-    shape [2].position = plug::Vec2d (position.x + size.x, position.y + size.y);
-    shape [3].position = plug::Vec2d (position.x,          position.y + size.y);
+    shape [0].position = plug::Vec2d (position.x - size.x / 2, position.y - size.y / 2);
+    shape [1].position = plug::Vec2d (position.x + size.x / 2, position.y - size.y / 2);
+    shape [2].position = plug::Vec2d (position.x + size.x / 2, position.y + size.y / 2);
+    shape [3].position = plug::Vec2d (position.x - size.x / 2, position.y + size.y / 2);
 
     shape [0].tex_coords = plug::Vec2d (0, 0);
     shape [1].tex_coords = plug::Vec2d (1, 0);

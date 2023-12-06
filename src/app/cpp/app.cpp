@@ -8,8 +8,8 @@
 
 //--------------------------------------------------
 
-const double App::DEFAULT_APP_WINDOW_WIDTH  = 500;
-const double App::DEFAULT_APP_WINDOW_HEIGHT = 500;
+const double App::DEFAULT_APP_WINDOW_WIDTH  = 800;
+const double App::DEFAULT_APP_WINDOW_HEIGHT = 800;
 
 //--------------------------------------------------
 
@@ -19,6 +19,7 @@ App::App (void):
         transform_stack_ (),
 
         window_ (DEFAULT_APP_WINDOW_WIDTH, DEFAULT_APP_WINDOW_HEIGHT),
+        target_ (window_),
         sdl_exit_ (false)
 {
     populate ();
@@ -89,22 +90,22 @@ void App::on_mouse_event (SDL_Event sdl_event) {
     switch (sdl_event.type) {
 
         case SDL_MOUSEMOTION:
-            position   = plug::Vec2d (sdl_event.motion.x, sdl_event.motion.y);
-            plug_event = &plug::MouseMoveEvent (position. false, false, false);
+            position  = plug::Vec2d (sdl_event.motion.x, sdl_event.motion.y);
+            plug_event = new plug::MouseMoveEvent (position, false, false, false);
             break;
 
         //--------------------------------------------------
 
         case SDL_MOUSEBUTTONDOWN:
-            position   = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
-            plug_event = plug::MousePressedEvent (plug::MouseButton::LEFT, position, false, false, false);
+            position  = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
+            plug_event = new plug::MousePressedEvent (plug::MouseButton::Left, position, false, false, false);
             break;
 
         //--------------------------------------------------
 
         case SDL_MOUSEBUTTONUP: 
-            position   = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
-            plug_event = plug::MouseReleasedEvent (plug::MouseButton::LEFT, position, false, false, false);
+            position  = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
+            plug_event = new plug::MouseReleasedEvent (plug::MouseButton::Left, position, false, false, false);
             break;
 
         //--------------------------------------------------
@@ -115,7 +116,8 @@ void App::on_mouse_event (SDL_Event sdl_event) {
     //--------------------------------------------------
     // handling event
 
-    //widgets_.onEvent (plug_event, context);
+    plug::EHC context = { transform_stack_, false, false };
+    widgets_.onEvent (*plug_event, context);
 }
 
 
@@ -125,7 +127,7 @@ void App::render (void) {
 
     //--------------------------------------------------
 
-    widgets_.render (window_, transform_stack_);
+    widgets_.render (target_, transform_stack_);
 
     //--------------------------------------------------
 
@@ -133,16 +135,6 @@ void App::render (void) {
 
 }
 
-/*
-void App::open_clock (void) {
-
-    Clock_Widget* clock = new Clock_Widget (500, 540);
-    clock->load_textures (window_);
-
-
-    widgets_.register_widget (clock);
-}
-*/
 
 void App::populate (void) {
 
@@ -156,9 +148,23 @@ void App::populate (void) {
     // Point2D  position (200, 40);
     // Vector2D size     (1400, 1000);
 
-    // Photoshop* photoshop = new Photoshop (position, size);
+    LayoutBox box (Length (500, Unit::Pixel),
+                   Length (500, Unit::Pixel));
+
+    box.setPosition (plug::Vec2d (260, 260));
+
+    //--------------------------------------------------
+
+    MyRenderTexture true_cat_texture; true_cat_texture.loadFromFile ("media/cat.jpeg");
+    plug::Texture cat_texture = getTexture (true_cat_texture);
+    My_Widget& cat_widget = *new Textured_Window (box, cat_texture);
+    My_Widget& photoshop  = *new Framed_Window (cat_widget);
+    //Photoshop* photoshop = new Photoshop (position, size);
 
     // //--------------------------------------------------
 
-    // widgets_.register_widget (photoshop);
+    widgets_.register_widget (&photoshop);
 }
+
+//--------------------------------------------------
+

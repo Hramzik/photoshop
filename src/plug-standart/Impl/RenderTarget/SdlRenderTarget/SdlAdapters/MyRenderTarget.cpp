@@ -9,6 +9,13 @@
 MyRenderTarget::MyRenderTarget (void):
         m_renderer (nullptr) {}
 
+MyRenderTarget::~MyRenderTarget (void) {
+
+    SDL_DestroyRenderer (m_renderer);
+}
+
+//--------------------------------------------------
+
 void MyRenderTarget::setRenderer (SDL_Renderer* renderer) {
 
     SDL_DestroyRenderer (m_renderer);
@@ -57,6 +64,10 @@ void MyRenderTarget::draw (const MyVertexArray& array, const MyRenderTexture& te
     //--------------------------------------------------
 
     SDL_RenderGeometry (m_renderer, sdl_texture, vertexes, vertex_count, NULL, 0);
+
+    //--------------------------------------------------
+
+    SDL_DestroyTexture (sdl_texture);
 }
 
 void MyRenderTarget::clear (SDL_Color color) {

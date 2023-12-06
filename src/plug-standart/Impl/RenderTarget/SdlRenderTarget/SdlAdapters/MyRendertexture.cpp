@@ -22,6 +22,11 @@ MyRenderTexture::MyRenderTexture (int width, int height):
     setSdlSurface (surface);
 }
 
+MyRenderTexture::~MyRenderTexture (void) {
+
+    SDL_FreeSurface (m_surface);
+}
+
 //--------------------------------------------------
 
 void MyRenderTexture::loadFromFile (const char* path) {
