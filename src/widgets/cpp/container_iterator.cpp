@@ -61,6 +61,7 @@ void Widget_Container::Iterator::add_next_priority_list
     widget_lists_.push_back (list);
 }
 
+//--------------------------------------------------
 
 void Widget_Container::Iterator::set_to_begin (void) {
 
@@ -79,6 +80,13 @@ void Widget_Container::Iterator::set_to_end (void) {
     iterator_           = get_current_list_end ();
 }
 
+
+Widget_List::iterator Widget_Container::Iterator::get_iterator (void) {
+
+    return iterator_;
+}
+
+//--------------------------------------------------
 
 Widget_Container::Iterator&
 Widget_Container::Iterator::operator++ (void) {

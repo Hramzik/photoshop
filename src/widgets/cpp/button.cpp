@@ -25,16 +25,7 @@ void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& co
 
     //--------------------------------------------------
 
-    //plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
-    //context.stack.enter (my_transform);
-
     context.stopped = covers (context.stack, event.pos);
-
-    std::cout << getCorner(TopLeft, context.stack).x << " " << getCorner(TopLeft, context.stack).y << "\n";
-    std::cout << getCorner(BottomLeft, context.stack).x << " " << getCorner(BottomLeft, context.stack).y << "\n";
-    std::cout << event.pos.x << " " << event.pos.y << "\n";
-    std::cout << context.stopped << "\n";
-    //context.stack.leave();
 
     //--------------------------------------------------
     // not pressed
@@ -59,22 +50,15 @@ void Button::onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& 
     if (event.button_id != plug::MouseButton::Left) return;
 
     //--------------------------------------------------
+    // released
 
     button_state_ = RELEASED;
+    call_action (released_action_);
 }
 
 void Button::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context){
 
-    if (context.stopped) return;
-
-    //--------------------------------------------------
-
-    plug::Transform my_transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
-    context.stack.enter (my_transform);
-
     bool hovered = covers (context.stack, event.pos);
-
-    context.stack.leave();
 
     //--------------------------------------------------
     // held
@@ -129,6 +113,18 @@ void Button::add_held_action (Button_Action* action) {
 
     if (!action) return;
     action->set_owner (*this);
+}
+
+void Button::add_released_action (Action* action) {
+
+    released_action_ = action;
+}
+
+//--------------------------------------------------
+
+Button::Button_state Button::get_button_state (void) {
+
+    return button_state_;
 }
 
 plug::Vec2d Button::get_last_held_position (void) {

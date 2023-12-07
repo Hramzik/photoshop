@@ -42,6 +42,8 @@ class Widget_Container: public My_Widget {
         void set_to_begin (void);
         void set_to_end   (void);
 
+        Widget_List::iterator get_iterator (void);
+
         Iterator&  operator++ (void);
         Iterator&  operator-- (void);
         My_Widget* operator*  (void) const;

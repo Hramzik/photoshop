@@ -36,7 +36,10 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
     My_Widget* top_frame_model = new Colored_Window (top_frame_box, DEFAULT_FRAME_COLOR);
 
     top_frame_ = new Button (*top_frame_model);
-    top_frame_->add_pressed_action (new Drive_Action (controlled));
+
+    Button_Action* drive_action = new Drive_Action (controlled);
+    top_frame_->add_held_action     (drive_action);
+    top_frame_->add_released_action (drive_action);
 
     //--------------------------------------------------
     // close button

@@ -26,9 +26,11 @@ class Button: public My_Widget {
     // model is rendered not using button transform
     Button (My_Widget& model);
 
-    void add_pressed_action (Action*        action);
-    void add_held_action    (Button_Action* action);
+    void add_pressed_action  (Action*        action);
+    void add_held_action     (Button_Action* action);
+    void add_released_action (Action*        action);
 
+    Button_state get_button_state (void);
     plug::Vec2d get_last_held_position (void);
 
     //--------------------------------------------------
@@ -45,8 +47,9 @@ class Button: public My_Widget {
 
     My_Widget& model_;
 
-    Action* pressed_action_ = nullptr;
-    Action* held_action_    = nullptr;
+    Action* pressed_action_  = nullptr;
+    Action* held_action_     = nullptr;
+    Action* released_action_ = nullptr;
 
     Button_state button_state_       = RELEASED;
     plug::Vec2d  last_held_position_ = plug::Vec2d ();

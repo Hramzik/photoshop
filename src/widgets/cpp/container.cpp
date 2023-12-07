@@ -77,6 +77,14 @@ void Widget_Container::onEvent (const plug::Event& event, plug::EHC& context) {
 
     for (auto i = begin (); i != end (); ++i) {
 
+        if ((*i)->is_closed ()) {
+
+            widgets_.erase (i.get_iterator ());
+            continue;
+        }
+
+        //--------------------------------------------------
+
         (*i)->onEvent (event, context);
     }
 
