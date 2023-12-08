@@ -59,8 +59,9 @@ program:
 	$(LIB_FOLDER)/logs.cpp \
 \
 	$(PLUGIN_IMPLEMENTATION_FOLDER)/LayoutBox/LayoutBox.cpp \
-	$(PLUGIN_IMPLEMENTATION_FOLDER)/Widget.cpp \
 	$(PLUGIN_IMPLEMENTATION_FOLDER)/TransformStack.cpp \
+	$(PLUGIN_IMPLEMENTATION_FOLDER)/Widget.cpp \
+	$(PLUGIN_IMPLEMENTATION_FOLDER)/Canvas/SelectionMask.cpp \
 \
 	$(SDL_ADAPTERS_FOLDER)/MyVertexArray.cpp \
 	$(SDL_ADAPTERS_FOLDER)/MyRenderTarget.cpp \
@@ -80,6 +81,13 @@ program:
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/framed_window.cpp \
+	$(WIDGETS_FOLDER)/canvas.cpp \
+	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
+\
+	$(TOOLS_FOLDER)/color_palette.cpp \
+	$(TOOLS_FOLDER)/tool_palette.cpp \
+	$(TOOLS_FOLDER)/tool.cpp \
+	$(TOOLS_FOLDER)/brush.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

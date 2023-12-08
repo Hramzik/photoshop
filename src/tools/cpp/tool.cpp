@@ -6,56 +6,103 @@
 
 //--------------------------------------------------
 
-Widget* Tool::get_widget (void) {
+Tool::Tool (const char* name, const char* texture_path):
+
+        color_palette_ (nullptr),
+        canvas_        (nullptr)
+{
+    (void) name; (void) texture_path;
+}
+
+//--------------------------------------------------
+
+void Tool::setColorPalette (plug::ColorPalette& palette) {
+
+    color_palette_ = &palette;
+}
+
+void Tool::setActiveCanvas (plug::Canvas& canvas) {
+
+    canvas_ = &canvas;
+}
+
+//--------------------------------------------------
+
+void Tool::onMainButton (const plug::ControlState& state, const plug::Vec2d& position) {
+
+    (void) state; (void) position;
+}
+
+void Tool::onSecondaryButton (const plug::ControlState& state, const plug::Vec2d& position) {
+
+    (void) state; (void) position;
+}
+
+//--------------------------------------------------
+
+void Tool::onModifier1 (const plug::ControlState& state) {
+
+    (void) state;
+}
+
+void Tool::onModifier2 (const plug::ControlState& state) {
+
+    (void) state;
+}
+
+void Tool::onModifier3 (const plug::ControlState& state) {
+
+    (void) state;
+}
+
+//--------------------------------------------------
+
+void Tool::onMove (const plug::Vec2d& position) {
+
+    (void) position;
+}
+
+void Tool::onConfirm (void) {
+
+    return;
+}
+
+void Tool::onCancel  (void) {
+
+    return;
+}
+
+
+plug::Widget* Tool::getWidget (void) {
 
     return nullptr;
 }
 
+//--------------------------------------------------
 
-void Tool::on_main_button (Button_state state, Point2D mouse_position, Canvas& canvas) {
+plug::Plugin* Tool::tryGetInterface (size_t interface_id) {
 
-    (void) state; (void) mouse_position; (void) canvas;
+    (void) interface_id;
+
+    //--------------------------------------------------
+
+    return nullptr;
 }
 
+const plug::PluginData* Tool::getPluginData (void) const {
 
-void Tool::on_secondary_button (Button_state state, Point2D mouse_position, Canvas& canvas) {
-
-    (void) state; (void) mouse_position; (void) canvas;
+    return nullptr;
 }
 
-
-void Tool::on_modifier1 (Button_state state, Canvas& canvas) {
-
-    (void) state; (void) canvas;
-}
-
-
-void Tool::on_modifier2 (Button_state state, Canvas& canvas) {
-
-    (void) state; (void) canvas;
-}
-
-
-void Tool::on_modifier3 (Button_state state, Canvas& canvas) {
-
-    (void) state; (void) canvas;
-}
-
-
-void Tool::on_move (Point2D mouse_position, Canvas& canvas) {
-
-    (void) mouse_position; (void) canvas;
-}
-
-
-void Tool::on_confirm (Canvas& canvas) {
-
-    (void) canvas;
-}
-
-
-void Tool::on_cancel (void) {
+void Tool::addReference (void) {
 
     return;
 }
+
+void Tool::release (void) {
+
+    return;
+}
+
+//--------------------------------------------------
 

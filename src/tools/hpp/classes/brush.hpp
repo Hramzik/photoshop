@@ -15,26 +15,19 @@ class Brush_Tool: public Tool {
 
   public:
 
-    Brush_Tool (const Tool_Palette& palette);
+    Brush_Tool (void);
 
     //--------------------------------------------------
 
-    void on_main_button
-    (Button_state state, Point2D mouse_position, Canvas& canvas)
-    override;
-
-    void on_move (Point2D mouse_position, Canvas& canvas) override;
+    void onMainButton (const plug::ControlState& state, const plug::Vec2d& position) override;
+    void onMove                                        (const plug::Vec2d& position) override;
 
 //--------------------------------------------------
 
   private:
 
     double brush_radius_;
-    bool   drawing_;
-
-    //--------------------------------------------------
-
-    const Tool_Palette& my_palette_;
+    bool   is_brush_down;
 };
 
 

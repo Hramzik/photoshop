@@ -11,7 +11,7 @@
 
 //--------------------------------------------------
 
-#include "SdlAdapters/MyRenderTarget.h"
+#include "SdlAdapters/SdlAdapters.h"
 
 //--------------------------------------------------
 

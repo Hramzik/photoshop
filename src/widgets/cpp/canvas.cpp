@@ -2,182 +2,144 @@
 
 //--------------------------------------------------
 
+#include "Impl/RenderTarget/SdlRenderTarget/SdlAdapters/Converters.h"
+
+#include "graphics/hpp/sdl.hpp"
+
 #include "widgets/hpp/widgets.hpp"
 
 //--------------------------------------------------
 
-Canvas::Canvas
-(Point2D position,          Vector2D size,
-Tool_Palette& tool_palette, Filter_Palette& filter_palette):
+Canvas::Canvas (void):
 
-        Window (position, size),
-        texture_ (size),
+        main_texture_  (nullptr),
+        plug_texture_ (nullptr),
 
-        my_tool_palette_   (tool_palette),
-        my_filter_mask_ ((int) size.x, (int) size.y),
-        my_filter_palette_ (filter_palette),
+        is_plug_texture_updated (false),
 
-        drawing_ (false),
-        last_mouse_position_ (0) {
+        selection_mask_ (nullptr) {}
 
+Canvas::Canvas (const int width, const int height):
+        Canvas ()
+{
+    main_texture_ = new MyRenderTexture (width, height);
+    main_texture_->clear (getSDL_Color (DEFAULT_CANVAS_COLOR));
 
-    texture_.set_drawcolor (C_BLACK);
+    //--------------------------------------------------
+
+    plug_texture_ = new plug::Texture (width, height);
+
+    //--------------------------------------------------
+
+    selection_mask_ = new SelectionMask (width, height);
+    selection_mask_->fill (true);
 }
 
-Canvas::Canvas
-(Vector2D size,
-Tool_Palette& tool_palette, Filter_Palette& filter_palette):
+Canvas::Canvas (const char* path):
+        Canvas ()
+{
+    main_texture_ = new MyRenderTexture ();
+    main_texture_->setSdlSurface (IMG_Load (path));
 
-    Canvas (0, size, tool_palette, filter_palette) {}
+    int width  = main_texture_->getSdlSurface ()->w;
+    int height = main_texture_->getSdlSurface ()->h;
+
+    //--------------------------------------------------
+
+    plug_texture_ = new plug::Texture (width, height);
+
+    //--------------------------------------------------
+
+    selection_mask_ = new SelectionMask (width, height);
+    selection_mask_->fill (true);
+}
+
+Canvas::~Canvas (void) {
+
+    delete main_texture_;
+    delete plug_texture_;
+    delete selection_mask_;
+}
 
 //--------------------------------------------------
 
-My_Texture& Canvas::access_texture (void) {
+void Canvas::draw (const plug::VertexArray& vertex_array) {
 
-    return texture_;
+    main_texture_->draw (vertex_array);
 }
 
+void Canvas::draw (const plug::VertexArray& vertex_array, const plug::Texture& texture) {
 
-Filter_Mask& Canvas::access_filter_mask (void) {
+    MyRenderTexture tmp;
+    copyToMyTexture (tmp, texture);
 
-    return my_filter_mask_;
+    //--------------------------------------------------
+
+    main_texture_->draw (vertex_array, tmp);
 }
 
 //--------------------------------------------------
 
+plug::Vec2d Canvas::getSize (void) const {
 
-void Canvas::render_with_local_stack
-    (Graphic_Window& window, Transform_Stack& local_stack) {
+    int width  = main_texture_->getSdlSurface ()->w;
+    int height = main_texture_->getSdlSurface ()->h;
 
-    //--------------------------------------------------
-    // render canvas
-    render_with_final_transform (window, local_stack.get_result ());
 
-    //--------------------------------------------------
-    // render tool preview
-
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return;
-
-    //--------------------------------------------------
-
-    Widget* preview = active_tool->get_widget ();
-    if (!preview) return;
-
-    //--------------------------------------------------
-
-    window.set_drawcolor (my_tool_palette_.get_active_color ());
-    preview->render (window, local_stack);
+    return plug::Vec2d (width, height);
 }
 
+void Canvas::setSize (const plug::Vec2d& size) {
 
-void Canvas::render_with_final_transform (Graphic_Window& window, const Transform& result_transform) {
+    (void) size;
+    // todo
+}
 
-    SDL_Rect render_rect = get_render_rect (result_transform);
+plug::SelectionMask& Canvas::getSelectionMask (void) {
 
-    //--------------------------------------------------
+    return *selection_mask_;
+}
 
-    window.render_texture (texture_, render_rect);
-};
+plug::Color Canvas::getPixel (size_t x, size_t y) const {
 
-
-Processing_result Canvas::on_mouse_pressed (Point2D mouse_position, Transform_Stack& stack) {
-
-    convert_to_local (mouse_position, stack);
-    if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
-
-    //--------------------------------------------------
-
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return PR_PROCESSED;
-
-
-    active_tool->on_main_button (BS_PRESSED, mouse_position, *this);
-
-
-    return PR_PROCESSED;
-};
-
-
-Processing_result Canvas::on_mouse_released (Point2D mouse_position, Transform_Stack& stack) {
-
-    convert_to_local (mouse_position, stack);
-    //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+    const_cast <Canvas&> (*this).update_plug_texture ();
 
     //--------------------------------------------------
 
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return PR_PROCESSED;
+    return plug_texture_->getPixel (x, y);
+}
 
+void Canvas::setPixel (size_t x, size_t y, const plug::Color& color) {
 
-    active_tool->on_main_button (BS_RELEASED, mouse_position, *this);
+    plug::VertexArray point (plug::PrimitiveType::Points, 1);
 
-
-    return PR_PROCESSED;
-};
-
-
-Processing_result Canvas::on_mouse_moved (Point2D mouse_position, Transform_Stack& stack) {
-
-    convert_to_local (mouse_position, stack);
-    //if (!is_mouse_in_me (mouse_position)) return PR_LEFT;
+    point [0].position = plug::Vec2d (x, y);
+    point [0].color    = color;
 
     //--------------------------------------------------
 
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return PR_PROCESSED;
+    draw (point);
+}
 
+const plug::Texture& Canvas::getTexture (void) const {
 
-    active_tool->on_move (mouse_position, *this);
-
-
-    return PR_PROCESSED;
-};
-
-
-Processing_result Canvas::on_keyboard_pressed (SDL_Keycode key) {
-
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return PR_LEFT;
+    const_cast <Canvas&> (*this).update_plug_texture ();
 
     //--------------------------------------------------
 
-    switch (key) {
+    return *plug_texture_;
+}
 
-        case SDLK_LSHIFT: active_tool->on_modifier1 (BS_PRESSED, *this); return PR_PROCESSED;
-        case SDLK_LCTRL:  active_tool->on_modifier2 (BS_PRESSED, *this); return PR_PROCESSED;
-        case SDLK_LALT:   active_tool->on_modifier3 (BS_PRESSED, *this); return PR_PROCESSED;
+//--------------------------------------------------
 
-        default: return PR_LEFT;
-    }
-};
+void Canvas::update_plug_texture (void) {
 
-
-Processing_result Canvas::on_keyboard_released (SDL_Keycode key) {
-
-    // rewrite, tool_event and filter_event
-    Tool* active_tool = my_tool_palette_.get_active_tool ();
-    if (!active_tool) return PR_LEFT;
-
-    Filter* filter1 = my_filter_palette_.filters_ [0]; assert (filter1);
-    Filter* filter2 = my_filter_palette_.filters_ [1]; assert (filter2);
-    Filter* filter3 = my_filter_palette_.filters_ [2]; assert (filter3);
+    delete plug_texture_;
 
     //--------------------------------------------------
 
-    switch (key) {
+    plug_texture_ = &::getTexture (*main_texture_);
+}
 
-        case SDLK_LSHIFT: active_tool->on_modifier1 (BS_RELEASED, *this); return PR_PROCESSED;
-        case SDLK_LCTRL:  active_tool->on_modifier2 (BS_RELEASED, *this); return PR_PROCESSED;
-        case SDLK_LALT:   active_tool->on_modifier3 (BS_RELEASED, *this); return PR_PROCESSED;
-
-        case SDLK_ESCAPE: active_tool->on_cancel (); return PR_PROCESSED;
-
-        case SDLK_z: filter1->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
-        case SDLK_x: filter2->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
-        case SDLK_c: filter3->apply_filter (*this, my_filter_mask_); return PR_PROCESSED;
-
-        default: return PR_LEFT;
-    }
-};
+//--------------------------------------------------
 

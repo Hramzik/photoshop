@@ -2,12 +2,12 @@
 #define TOOLS_CLASSES_HPP_INCLUDED
 //--------------------------------------------------
 
+#include "color_palette.hpp"
+#include "tool_palette.hpp"
 
 #include "tool.hpp"
-#include "palette.hpp"
-#include "brush.hpp"
-#include "rect/rect.hpp"
 
+#include "brush.hpp"
 
 //--------------------------------------------------
 #endif

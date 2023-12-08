@@ -4,6 +4,8 @@
 
 #include "Impl/LayoutBox/LayoutBox.h"
 
+#include "tools/hpp/tools.hpp"
+
 #include "../hpp/app.hpp"
 
 //--------------------------------------------------
@@ -61,6 +63,8 @@ void App::update (void) {
 
     SDL_Event event;
 
+    //--------------------------------------------------
+
     while (SDL_PollEvent (&event)) {
     switch (event.type) {
 
@@ -72,8 +76,13 @@ void App::update (void) {
 
         //case SDL_KEYDOWN: widgets_.on_keyboard_pressed  (event.key.keysym.sym); break;
         //case SDL_KEYUP:   widgets_.on_keyboard_released (event.key.keysym.sym); break;
+
+        //--------------------------------------------------
+
+        default: break;
     }}
 
+    //--------------------------------------------------
 
     //widgets_. (clock ());
 }
@@ -132,9 +141,9 @@ void App::render (void) {
     //--------------------------------------------------
 
     window_.update_screen ();
-
 }
 
+//--------------------------------------------------
 
 void App::populate (void) {
 
@@ -155,15 +164,27 @@ void App::populate (void) {
 
     //--------------------------------------------------
 
-    MyRenderTexture true_cat_texture; true_cat_texture.loadFromFile ("media/cat.jpeg");
-    plug::Texture cat_texture = getTexture (true_cat_texture);
-    My_Widget& cat_widget = *new Textured_Window (box, cat_texture);
-    My_Widget& photoshop  = *new Framed_Window (cat_widget);
-    //Photoshop* photoshop = new Photoshop (position, size);
+    Canvas&        canvas = *new Canvas (100, 100);
+    Canvas_Viewer& viewer = *new Canvas_Viewer (box, canvas);
 
-    // //--------------------------------------------------
+    Color_Palette& colors = *new Color_Palette ();
+    Tool_Palette&  tools  = *new Tool_Palette ();
 
-    widgets_.register_widget (&photoshop);
+    Tool& brush = *new Brush_Tool ();
+    brush.setActiveCanvas (canvas);
+    brush.setColorPalette (colors);
+    tools.add_tool (brush);
+
+    //--------------------------------------------------
+
+    viewer.set_tool_palette (tools);
+
+    viewer.choose_tool    (0);
+    viewer.set_is_focused (true);
+
+    //--------------------------------------------------
+
+    widgets_.register_widget (&viewer);
 }
 
 //--------------------------------------------------

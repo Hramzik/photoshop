@@ -13,7 +13,8 @@
 
 #include "framed_window/framed_window.hpp"
 
-//#include "movement_controller.hpp"
+#include "canvas/canvas.hpp"
+
 //
 //#include "scrollbar/scrollbar.hpp"
 //

@@ -2,39 +2,45 @@
 
 //--------------------------------------------------
 
-#include "../../widgets/hpp/classes/photoshop/canvas.hpp"
+#include <iostream>
 
 #include "../hpp/tools.hpp"
 
 //--------------------------------------------------
 
-Brush_Tool::Brush_Tool (const Tool_Palette& palette):
+Brush_Tool::Brush_Tool (void):
+        Tool (nullptr, nullptr),
+
         brush_radius_ (1),
-        drawing_      (false),
-        my_palette_   (palette) {}
+        is_brush_down (false) {}
 
 //--------------------------------------------------
 
-void Brush_Tool::on_main_button (Button_state state, Point2D mouse_position, Canvas& canvas) {
+void Brush_Tool::onMainButton (const plug::ControlState& state, const plug::Vec2d& position) {
 
-    (void) mouse_position; (void) canvas;
+    (void) position;
 
     //--------------------------------------------------
 
-    if (state == BS_PRESSED) drawing_ = true;
-    else                     drawing_ = false;
+    if (state.state == plug::State::Pressed) is_brush_down = true;
+    else                                     is_brush_down = false;
 }
 
 
-void Brush_Tool::on_move (Point2D mouse_position, Canvas& canvas) {
-
-    if (!drawing_) return;
-
+void Brush_Tool::onMove (const plug::Vec2d& position) {
+std::cout << "brush" << "\n";
+    if (!is_brush_down) return;
+std::cout << "is down" << "\n";
     //--------------------------------------------------
 
-    My_Texture& render_texture = canvas.access_texture ();
+    plug::VertexArray point (plug::PrimitiveType::Points, 1);
+    plug::Color       color = color_palette_->getFGColor ();
 
-    render_texture.set_drawcolor (my_palette_.get_active_color ());
-    render_texture.draw_point    (mouse_position);
+    point [0] = {position,                                     plug::Vec2d (0, 0), color};
+    //point [1] = {plug::Vec2d (position.x + 2, position.y),     plug::Vec2d (0, 0), color};
+    //point [2] = {plug::Vec2d (position.x + 2, position.y + 2), plug::Vec2d (0, 0), color};
+    //point [3] = {plug::Vec2d (position.x,     position.y + 2), plug::Vec2d (0, 0), color};
+    canvas_->draw (point);
+//std::cout << (int) canvas_->getPixel (position.x, position.y).r << "\n";
 }
 

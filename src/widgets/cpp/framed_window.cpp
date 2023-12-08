@@ -74,8 +74,6 @@ Framed_Window::Framed_Window (My_Widget& controlled):
 {
     // window's position is mine now
     controlled.getLayoutBox ().setPosition (plug::Vec2d (0, 0));
-    std::cout << controlled.getLayoutBox ().getPosition ().x << "\n";
-    std::cout << controlled.getLayoutBox ().getPosition ().y << "\n";
 
     //--------------------------------------------------
     // create frame

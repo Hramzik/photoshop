@@ -2,19 +2,59 @@
 #define TOOLS_CLASS_TOOL_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../../../graphics/hpp/graphics.hpp"
-#include "../../../widgets/hpp/classes/widget.hpp"
-
-#include "../enums.hpp"
+#include "Plug/Tool.h"
+#include "Plug/Canvas.h"
 
 //--------------------------------------------------
 
-class Canvas;
+class Color_Palette;
 
 //--------------------------------------------------
 
+class Tool: public plug::Tool {
 
-class Tool {
+  public:
+
+    Tool (const char *name, const char *texture_path);
+
+    //--------------------------------------------------
+
+    void setColorPalette (plug::ColorPalette& palette) override;
+    void setActiveCanvas (plug::Canvas&       canvas)  override;
+
+    void onMainButton      (const plug::ControlState& state, const plug::Vec2d& position) override;
+    void onSecondaryButton (const plug::ControlState& state, const plug::Vec2d& position) override;
+
+    void onModifier1 (const plug::ControlState& state) override;
+    void onModifier2 (const plug::ControlState& state) override;
+    void onModifier3 (const plug::ControlState& state) override;
+
+    void onMove (const plug::Vec2d& position) override;
+    void onConfirm (void) override;
+    void onCancel  (void) override;
+
+    plug:: Widget* getWidget(void) override;
+
+    //--------------------------------------------------
+
+    plug::Plugin*           tryGetInterface (size_t interface_id) override;
+    const plug::PluginData* getPluginData   (void)          const override;
+
+    void addReference (void) override;
+    void release      (void) override;
+
+//--------------------------------------------------
+
+  protected:
+
+    plug::ColorPalette* color_palette_;
+    plug::Canvas*       canvas_;
+    //size_t m_cnt_reference;
+    //const BaseData m_data;
+};
+
+
+/*class Tool {
 
   public:
 
@@ -42,7 +82,7 @@ class Tool {
     virtual void on_move    (Point2D mouse_position, Canvas& canvas);
     virtual void on_confirm (Canvas& canvas);
     virtual void on_cancel  (void);
-};
+};*/
 
 
 //--------------------------------------------------

@@ -89,6 +89,48 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
     }
 
     //--------------------------------------------------
+    // Points
+
+    if (plug_array.getPrimitive () == plug::Points) {
+
+        my_array.resize (plug_array_size * 6);
+
+        for (int i = 0; i < plug_array_size; ++i) {
+
+            plug::Vec2d corner1 ((int) plug_array [i].position.x,     (int) plug_array [i].position.y);
+            plug::Vec2d corner2 (corner1.x + 1, corner1.y);
+            plug::Vec2d corner3 (corner1.x + 1, corner1.y + 1);
+            plug::Vec2d corner4 (corner1.x,     corner1.y + 1);
+
+            plug::Color color  = plug_array [i].color;
+
+            plug::Vertex vertex1;
+            vertex1.position = corner1;
+            vertex1.color    = color;
+
+            plug::Vertex vertex2;
+            vertex2.position = corner2;
+            vertex2.color    = color;
+
+            plug::Vertex vertex3;
+            vertex3.position = corner3;
+            vertex3.color    = color;
+
+            plug::Vertex vertex4;
+            vertex4.position = corner4;
+            vertex4.color    = color;
+
+            copyToSDL_Vertex (my_array [i],     vertex1);
+            copyToSDL_Vertex (my_array [i + 1], vertex2);
+            copyToSDL_Vertex (my_array [i + 2], vertex3);
+            copyToSDL_Vertex (my_array [i + 3], vertex3);
+            copyToSDL_Vertex (my_array [i + 4], vertex4);
+            copyToSDL_Vertex (my_array [i + 5], vertex1);
+        }
+
+        return;
+    }
+    //--------------------------------------------------
     // TODO: rest
 }
 
@@ -135,7 +177,7 @@ static Uint32 getpixel (const SDL_Surface* surface, int x, int y) {
     }
 }
 
-plug::Texture getTexture (const MyRenderTexture& my_texture) {
+plug::Texture& getTexture (const MyRenderTexture& my_texture) {
 
     const SDL_Surface* surface = my_texture.getSdlSurface ();
 
@@ -144,7 +186,7 @@ plug::Texture getTexture (const MyRenderTexture& my_texture) {
     int width  = surface->w;
     int height = surface->h;
 
-    plug::Texture plug_texture (width, height);
+    plug::Texture& plug_texture = *new plug::Texture (width, height);
 
     //--------------------------------------------------
 
