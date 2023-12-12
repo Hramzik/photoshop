@@ -29,7 +29,7 @@ class Canvas_Viewer: public My_Widget {
     void choose_tool    (int tool_id);
     void apply_filter   (int filter_id);
 
-    void set_tool_palette  (Tool_Palette&  palette);
+    void set_tool_palette (Tool_Palette& palette);
 
     //--------------------------------------------------
 

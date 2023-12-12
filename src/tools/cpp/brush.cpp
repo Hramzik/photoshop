@@ -35,7 +35,6 @@ void Brush_Tool::onMove (const plug::Vec2d& position) {
 
     plug::VertexArray point (plug::PrimitiveType::Points, 1);
     plug::Color       color = color_palette_->getFGColor ();
-
     point [0] = {position, plug::Vec2d (0, 0), color};
     canvas_->draw (point);
 }

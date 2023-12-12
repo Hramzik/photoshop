@@ -2,11 +2,9 @@
 
 //--------------------------------------------------
 
-#include "Impl/LayoutBox/LayoutBox.h"
+#include "photoshop/hpp/photoshop.hpp"
 
-#include "tools/hpp/tools.hpp"
-
-#include "../hpp/app.hpp"
+#include "app/hpp/app.hpp"
 
 //--------------------------------------------------
 
@@ -24,6 +22,11 @@ App::App (void):
         target_ (window_),
         sdl_exit_ (false)
 {
+    plug::Transform to_screen_center (plug::Vec2d (400, 400));
+    transform_stack_.enter (to_screen_center);
+
+    //--------------------------------------------------
+
     populate ();
 }
 
@@ -157,34 +160,16 @@ void App::populate (void) {
     // Point2D  position (200, 40);
     // Vector2D size     (1400, 1000);
 
-    LayoutBox box (Length (500, Unit::Pixel),
-                   Length (500, Unit::Pixel));
-
-    box.setPosition (plug::Vec2d (260, 260));
+    LayoutBox box (Length (800, Unit::Pixel),
+                   Length (800, Unit::Pixel));
 
     //--------------------------------------------------
 
-    Canvas&        canvas = *new Canvas (100, 100);
-    Canvas_Viewer& viewer = *new Canvas_Viewer (box, canvas);
-
-    Color_Palette& colors = *new Color_Palette ();
-    Tool_Palette&  tools  = *new Tool_Palette ();
-
-    Tool& brush = *new Brush_Tool ();
-    brush.setActiveCanvas (canvas);
-    brush.setColorPalette (colors);
-    tools.add_tool (brush);
+    My_Widget& photoshop = *new Photoshop (box);
 
     //--------------------------------------------------
 
-    viewer.set_tool_palette (tools);
-
-    viewer.choose_tool    (0);
-    viewer.set_is_focused (true);
-
-    //--------------------------------------------------
-
-    widgets_.register_widget (&viewer);
+    widgets_.register_widget (&photoshop);
 }
 
 //--------------------------------------------------

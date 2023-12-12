@@ -2,6 +2,8 @@
 #define CLASS_MY_WIDGET_HPP_INCLUDED
 //--------------------------------------------------
 
+#include "Impl/LayoutBox/LayoutBox.h"
+
 #include "Impl/Widget.h"
 
 //--------------------------------------------------

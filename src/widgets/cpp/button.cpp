@@ -85,6 +85,15 @@ void Button::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context)
     button_state_ = RELEASED;
 }
 
+void Button::setLayoutBox (const plug::LayoutBox& box) {
+
+    model_.setLayoutBox (box);
+
+    //--------------------------------------------------
+
+    //My_Widget::setLayoutBox (box);
+}
+
 //--------------------------------------------------
 
 void Button::call_action (Action* action) {
@@ -96,12 +105,12 @@ void Button::call_action (Action* action) {
     action->act ();
 }
 
-void Button::add_pressed_action (Action* action) {
+void Button::set_pressed_action (Action* action) {
 
     pressed_action_ = action;
 }
 
-void Button::add_held_action (Button_Action* action) {
+void Button::set_held_action (Button_Action* action) {
 
     //--------------------------------------------------
     // add action
@@ -115,7 +124,7 @@ void Button::add_held_action (Button_Action* action) {
     action->set_owner (*this);
 }
 
-void Button::add_released_action (Action* action) {
+void Button::set_released_action (Action* action) {
 
     released_action_ = action;
 }

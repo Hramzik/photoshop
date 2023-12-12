@@ -38,8 +38,8 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
     top_frame_ = new Button (*top_frame_model);
 
     Button_Action* drive_action = new Drive_Action (controlled);
-    top_frame_->add_held_action     (drive_action);
-    top_frame_->add_released_action (drive_action);
+    top_frame_->set_held_action     (drive_action);
+    top_frame_->set_released_action (drive_action);
 
     //--------------------------------------------------
     // close button
@@ -55,7 +55,7 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
             new Colored_Window (close_button_box, DEFAULT_CLOSE_BUTTON_COLOR);
 
     close_button_ = new Button (*close_button_model);
-    close_button_->add_pressed_action (new Close_Action (controlled));
+    close_button_->set_pressed_action (new Close_Action (controlled));
 
     //--------------------------------------------------
 

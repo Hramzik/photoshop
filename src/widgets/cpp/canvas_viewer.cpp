@@ -24,7 +24,7 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
 
     //--------------------------------------------------
 
-    if (!get_active_tool ()) return;
+    if (!is_focused || !get_active_tool ()) return;
 
     //--------------------------------------------------
 

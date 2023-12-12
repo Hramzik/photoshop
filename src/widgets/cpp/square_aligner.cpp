@@ -59,12 +59,14 @@ double Square_Aligner::get_widget_size (void) {
 
 void Square_Aligner::resize_new_widget (My_Widget& new_widget) {
 
-    double new_widget_width = get_widget_size ();
-    plug::Vec2d new_widget_size = plug::Vec2d (new_widget_width, new_widget_width);
+    double new_width = get_widget_size ();
+    plug::Vec2d new_size = plug::Vec2d (new_width, new_width);
 
     //--------------------------------------------------
 
-    new_widget.getLayoutBox ().setSize (new_widget_size);
+    plug::LayoutBox& box = new_widget.getLayoutBox ();
+    box.setSize (new_size);
+    new_widget.setLayoutBox (box);
 }
 
 
@@ -87,10 +89,13 @@ void Square_Aligner::move_new_widget (My_Widget& new_widget) {
     plug::Vec2d new_position (x, y);
     plug::Vec2d widget_size = new_widget.getLayoutBox ().getSize ();
     new_position += widget_size / 2;
+    new_position -= getLayoutBox ().getSize () / 2;
 
     //--------------------------------------------------
 
-    new_widget.getLayoutBox ().setPosition (new_position);
+    plug::LayoutBox& box = new_widget.getLayoutBox ();
+    box.setPosition (new_position);
+    new_widget.setLayoutBox (box);
 }
 
 //--------------------------------------------------

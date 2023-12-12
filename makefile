@@ -15,7 +15,7 @@ EVENTS_FOLDER    = src/events/cpp
 WIDGETS_FOLDER   = src/widgets/cpp
 TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
-CLOCK_FOLDER     = src/clock/cpp
+PHOTOSHOP_FOLDER = src/photoshop/cpp
 
 PLUGIN_STANDART_FOLDER       = src/plug-standart
 PLUGIN_IMPLEMENTATION_FOLDER = src/plug-standart/Impl
@@ -93,6 +93,10 @@ program:
 	$(TOOLS_FOLDER)/tool_palette.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \
+\
+	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
+	$(PHOTOSHOP_FOLDER)/color_selection.cpp \
+	$(PHOTOSHOP_FOLDER)/color_selection_action.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

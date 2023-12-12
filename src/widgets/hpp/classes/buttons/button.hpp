@@ -26,9 +26,9 @@ class Button: public My_Widget {
     // model is rendered not using button transform
     Button (My_Widget& model);
 
-    void add_pressed_action  (Action*        action);
-    void add_held_action     (Button_Action* action);
-    void add_released_action (Action*        action);
+    void set_pressed_action  (Action*        action);
+    void set_held_action     (Button_Action* action);
+    void set_released_action (Action*        action);
 
     Button_state get_button_state (void);
     plug::Vec2d get_last_held_position (void);
@@ -40,6 +40,8 @@ class Button: public My_Widget {
     void onMousePressed  (const plug::MousePressedEvent&  event, plug::EHC& context) override;
     void onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& context) override;
     void onMouseMove     (const plug::MouseMoveEvent&     event, plug::EHC& context) override;
+
+    void setLayoutBox (const plug::LayoutBox& box) override;
 
 //--------------------------------------------------
 
