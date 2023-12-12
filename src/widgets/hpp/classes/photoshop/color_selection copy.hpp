@@ -18,7 +18,7 @@ class Color_Selection_Widget: public Framed_Window {
 
     //--------------------------------------------------
 
-    void add_color_selection_button (My_RGB color);
+    void add_button (My_RGB color);
 
 //--------------------------------------------------
 

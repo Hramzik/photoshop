@@ -107,7 +107,7 @@ void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& c
 void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context) {
 
     if (!is_canvas_focused_) return;
-    if (!active_tool_)       {std::cout << "shit" << "\n";return;}
+    if (!active_tool_)       return;
 
     context.stopped = covers (context.stack, event.pos);
     if (!context.stopped) return;
@@ -121,8 +121,6 @@ void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::
     //--------------------------------------------------
 
     plug::Vec2d canvas_pos = get_canvas_position (viewer_pos);
-    std::cout << canvas_pos.x << " " << canvas_pos.y << "\n";
-
     if (event.button_id == plug::MouseButton::Left) active_tool_->onMainButton ({plug::State::Pressed}, canvas_pos);
 }
 

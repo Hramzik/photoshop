@@ -77,10 +77,15 @@ program:
 	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/actions.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
+	$(WIDGETS_FOLDER)/decorator.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \
 	$(WIDGETS_FOLDER)/framed_window.cpp \
+	$(WIDGETS_FOLDER)/hider.cpp \
+	$(WIDGETS_FOLDER)/aligner.cpp \
+	$(WIDGETS_FOLDER)/square_aligner.cpp \
+\
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 \

@@ -2,11 +2,12 @@
 #define CLASS_CANVAS_HPP_INCLUDED
 //--------------------------------------------------
 
-
 #include "Plug/Canvas/Canvas.h"
 
 #include "Impl/RenderTarget/SdlRenderTarget/RenderTarget.h"
 #include "Impl/Canvas/SelectionMask.h"
+
+//--------------------------------------------------
 
 class Canvas: public plug::Canvas {
 

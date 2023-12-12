@@ -10,10 +10,14 @@
 #include "actions/actions.hpp"
 
 #include "container.hpp"
+#include "decorator.hpp"
 
 #include "framed_window/framed_window.hpp"
 
 #include "canvas/canvas.hpp"
+
+#include "widget_hider/widget_hider.hpp"
+#include "widget_aligners/widget_aligners.hpp"
 
 //
 //#include "scrollbar/scrollbar.hpp"

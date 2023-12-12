@@ -2,12 +2,9 @@
 #define WIDGETS_CLASS_PHOTOSHOP_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "../framed_window/framed_window.hpp"
+#include "widgets/hpp/classes/framed_window/framed_window.hpp"
 
-#include "canvas.hpp"
-#include "tool_selection.hpp"
-#include "filter_selection.hpp"
-#include "color_selection.hpp"
+#include "widgets/hpp/classes/canvas/canvas.hpp"
 
 //--------------------------------------------------
 
@@ -20,8 +17,7 @@ class Photoshop: public Framed_Window {
 
     //--------------------------------------------------
 
-    Photoshop (Vector2D size);
-    Photoshop (Point2D position, Vector2D size);
+    Photoshop (plug::LayoutBox box);
 
 //--------------------------------------------------
 

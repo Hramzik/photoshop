@@ -27,7 +27,7 @@
         "src\\widgets\\cpp\\colored.cpp": true,
         "src\\widgets\\cpp\\textured.cpp": true,
         "src\\widgets\\cpp\\framed.cpp": true,
-        "src\\widgets\\cpp\\container.cpp": true,
+        "src\\widgets\\cpp\\container.cpp": false,
         "src\\widgets\\cpp\\container_iterator.cpp": true,
         "src\\widgets\\cpp\\container_riterator.cpp": true
     },
