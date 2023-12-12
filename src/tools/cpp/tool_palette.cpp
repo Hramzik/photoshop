@@ -9,7 +9,7 @@
 Tool_Palette::Tool_Palette (void):
         tools_ (),
 
-        active_tool_id_ (0) {}
+        active_tool_id_ (-1) {}
 
 //--------------------------------------------------
 
@@ -38,6 +38,7 @@ int Tool_Palette::add_tool (plug::Tool& tool) {
 
 plug::Tool* Tool_Palette::get_tool (int tool_id) {
 
+    if (tool_id <  0)                    return nullptr;
     if (tool_id >= (int) tools_.size ()) return nullptr;
 
     //--------------------------------------------------
@@ -56,6 +57,11 @@ void Tool_Palette::set_active_tool (int tool_id) {
 }
 
 //--------------------------------------------------
+
+int Tool_Palette::get_tools_count (void) {
+
+    return (int) tools_.size ();
+}
 
 /*
 plug::Tool* ToolPalette::getTool(const size_t tool_id)

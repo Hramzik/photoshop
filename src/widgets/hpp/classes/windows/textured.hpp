@@ -11,6 +11,7 @@ class Textured_Window: public My_Widget {
 
   public:
 
+    Textured_Window (plug::LayoutBox& box, const char* texture_path);
     Textured_Window (plug::LayoutBox& box, plug::Texture& texture);
 
     //--------------------------------------------------
@@ -21,7 +22,7 @@ class Textured_Window: public My_Widget {
 
   private:
 
-    plug::Texture texture_;
+    plug::Texture* texture_;
 };
 
 

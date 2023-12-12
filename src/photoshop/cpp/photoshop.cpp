@@ -14,33 +14,61 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 
     canvas_ (nullptr)
 {
+    init_tools ();
+    init_colors ();
+    init_canvases ();
+}
 
-    //--------------------------------------------------
-    // tool palette
+void Photoshop::init_tools (void) {
 
     Tool& brush = *new Brush_Tool ();
     brush.setColorPalette (color_palette_);
     tool_palette_.add_tool (brush);
 
-    tool_palette_.set_active_tool (0);
+    //--------------------------------------------------
+
+    //tool_palette_.set_active_tool (0);
 
     //--------------------------------------------------
-    // color palette
 
-    LayoutBox colors_box (Length (200, Unit::Pixel),
-                          Length (200, Unit::Pixel));
-    colors_box.setPosition (plug::Vec2d (-150, 0));
+    LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
+    box.setPosition (plug::Vec2d (-150, 50));
+
+    My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
+
+    //--------------------------------------------------
+
+    register_widget (new Framed_Window (tools, false));
+}
+
+void Photoshop::init_colors (void) {
+
+    LayoutBox colors_box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
+    colors_box.setPosition (plug::Vec2d (-150, -200));
 
     Color_Selection_Widget& colors = *new Color_Selection_Widget (colors_box, color_palette_);
-    colors.add_color (C_RED);
-    colors.add_color (C_GREEN);
-    colors.add_color (C_BLUE);
-    colors.add_color (C_YELLOW);
-
-    register_widget (&colors);
 
     //--------------------------------------------------
-    // canvases
+
+    colors.add_color (C_RED);
+    colors.add_color (C_GREEN);
+    colors.add_color (C_YELLOW);
+    colors.add_color (C_BLUE);
+    colors.add_color (C_BLACK);
+    colors.add_color (C_DARK_GRAY);
+    colors.add_color (C_GRAY);
+    colors.add_color (C_WHITE);
+    colors.add_color (C_BROWN);
+    colors.add_color (C_ORANGE);
+    colors.add_color (C_PINK);
+    colors.add_color (C_PURPLE);
+
+    //--------------------------------------------------
+
+    register_widget (new Framed_Window (colors, false));
+}
+
+void Photoshop::init_canvases (void) {
 
     LayoutBox canvas_box (Length (400, Unit::Pixel),
                           Length (400, Unit::Pixel));
@@ -52,4 +80,14 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_->set_is_focused (true);
 
     register_widget (new Framed_Window (*canvas_));
+
+    //--------------------------------------------------
+
+    MyRenderTexture true_cat_texture; true_cat_texture.loadFromFile ("media/cat.jpeg");
+    plug::Texture cat_texture = getTexture (true_cat_texture);
+
+    register_widget (new Textured_Window (getLayoutBox (), cat_texture));
 }
+
+//--------------------------------------------------
+

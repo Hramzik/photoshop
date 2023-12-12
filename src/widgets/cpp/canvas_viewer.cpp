@@ -161,7 +161,16 @@ plug::Vec2d Canvas_Viewer::get_canvas_position (plug::Vec2d viewer_position) {
 
 plug::Tool* Canvas_Viewer::get_active_tool (void) {
 
-    return tool_palette_->get_active_tool ();
+    plug::Tool* active_tool = tool_palette_->get_active_tool ();
+    if (!active_tool) return nullptr;
+
+    //--------------------------------------------------
+
+    active_tool->setActiveCanvas (canvas_);
+
+    //--------------------------------------------------
+
+    return active_tool;
 }
 
 //--------------------------------------------------

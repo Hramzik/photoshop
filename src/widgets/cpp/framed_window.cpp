@@ -66,7 +66,7 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
 //--------------------------------------------------
 // FRAMED WINDOW CODE
 
-Framed_Window::Framed_Window (My_Widget& controlled):
+Framed_Window::Framed_Window (My_Widget& controlled, bool overlapping_frame):
         Widget_Container (controlled.getLayoutBox ()),
 
         controlled_ (controlled),
@@ -79,6 +79,16 @@ Framed_Window::Framed_Window (My_Widget& controlled):
     // create frame
 
     frame_ = new Window_Frame (*this, controlled_);
+
+    // moving up
+    if (!overlapping_frame) {
+
+        plug::Vec2d frame_position = frame_->getLayoutBox ().getPosition ();
+        frame_position.y -= Window_Frame::DEFAULT_FRAME_HEIGHT;
+        frame_->getLayoutBox ().setPosition (frame_position);
+
+        // change my layoutbox
+    }
 
     //--------------------------------------------------
 

@@ -91,12 +91,15 @@ program:
 \
 	$(TOOLS_FOLDER)/color_palette.cpp \
 	$(TOOLS_FOLDER)/tool_palette.cpp \
+	$(TOOLS_FOLDER)/plugin_data.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
 	$(TOOLS_FOLDER)/brush.cpp \
 \
 	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
 	$(PHOTOSHOP_FOLDER)/color_selection.cpp \
 	$(PHOTOSHOP_FOLDER)/color_selection_action.cpp \
+	$(PHOTOSHOP_FOLDER)/tool_selection.cpp \
+	$(PHOTOSHOP_FOLDER)/tool_selection_action.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

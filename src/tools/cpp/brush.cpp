@@ -39,3 +39,12 @@ void Brush_Tool::onMove (const plug::Vec2d& position) {
     canvas_->draw (point);
 }
 
+//--------------------------------------------------
+
+const plug::PluginData* Brush_Tool::getPluginData (void) const {
+
+    return new Texture_Data ("media/pencil.png");
+}
+
+//--------------------------------------------------
+

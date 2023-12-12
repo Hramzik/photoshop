@@ -22,6 +22,8 @@ class Brush_Tool: public Tool {
     void onMainButton (const plug::ControlState& state, const plug::Vec2d& position) override;
     void onMove                                        (const plug::Vec2d& position) override;
 
+    const plug::PluginData* getPluginData (void) const override;
+
 //--------------------------------------------------
 
   private:

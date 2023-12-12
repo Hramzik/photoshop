@@ -24,7 +24,7 @@ Square_Aligner::Square_Aligner
 }
 
 Square_Aligner::Square_Aligner (My_Widget& background, int widgets_in_line):
-        Square_Aligner (background, widgets_in_line, plug::Vec2d (0.15, 0.15)) {}
+        Square_Aligner (background, widgets_in_line, plug::Vec2d (0.3, 0.3)) {}
 
 //--------------------------------------------------
 

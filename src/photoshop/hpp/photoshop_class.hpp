@@ -20,12 +20,13 @@ class Photoshop: public Framed_Window {
 
   private:
 
-    //Tool_Selection_Widget   tool_selection_;
-    //Filter_Selection_Widget filter_selection_;
-
     Tool_Palette  tool_palette_;
     Color_Palette color_palette_;
     Canvas_Viewer* canvas_;
+
+    void init_tools    (void);
+    void init_colors   (void);
+    void init_canvases (void);
 };
 
 //--------------------------------------------------

@@ -26,8 +26,7 @@ public:
     plug::Tool* get_active_tool (void);
     void        set_active_tool (int tool_id);
 
-    //size_t getSize(){ return m_tools.getSize(); }
-
+    int get_tools_count (void);
 
 //--------------------------------------------------
 
