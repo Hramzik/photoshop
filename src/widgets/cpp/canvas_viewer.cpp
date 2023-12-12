@@ -14,9 +14,7 @@ Canvas_Viewer::Canvas_Viewer (const plug::LayoutBox& box, Canvas& canvas):
         canvas_ (canvas),
         is_canvas_focused_ (false),
 
-        color_palette_  (nullptr),
-        tool_palette_   (nullptr),
-        filter_palette_ (nullptr) {}
+        tool_palette_ (nullptr) {}
 
 //--------------------------------------------------
 
