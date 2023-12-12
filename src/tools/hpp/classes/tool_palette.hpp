@@ -21,7 +21,10 @@ public:
     //void loadPlugins (Container<plug::Plugin*> &plugin_list);
 
     int         add_tool (plug::Tool& tool);
-    plug::Tool* get_tool (const int   tool_id);
+    plug::Tool* get_tool (int tool_id);
+
+    plug::Tool* get_active_tool (void);
+    void        set_active_tool (int tool_id);
 
     //size_t getSize(){ return m_tools.getSize(); }
 
@@ -31,6 +34,7 @@ public:
   private:
 
     std::vector <plug::Tool*> tools_;
+    int active_tool_id_;
 };
 
 //--------------------------------------------------

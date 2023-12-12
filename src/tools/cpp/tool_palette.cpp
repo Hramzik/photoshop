@@ -7,7 +7,9 @@
 //--------------------------------------------------
 
 Tool_Palette::Tool_Palette (void):
-        tools_ () {}
+        tools_ (),
+
+        active_tool_id_ (0) {}
 
 //--------------------------------------------------
 
@@ -34,7 +36,7 @@ int Tool_Palette::add_tool (plug::Tool& tool) {
     return (int) tools_.size ();
 }
 
-plug::Tool* Tool_Palette::get_tool (const int tool_id) {
+plug::Tool* Tool_Palette::get_tool (int tool_id) {
 
     if (tool_id >= (int) tools_.size ()) return nullptr;
 
@@ -42,6 +44,18 @@ plug::Tool* Tool_Palette::get_tool (const int tool_id) {
 
     return tools_ [tool_id];
 }
+
+plug::Tool* Tool_Palette::get_active_tool (void) {
+
+    return get_tool (active_tool_id_);
+}
+
+void Tool_Palette::set_active_tool (int tool_id) {
+
+    active_tool_id_ = tool_id;
+}
+
+//--------------------------------------------------
 
 /*
 plug::Tool* ToolPalette::getTool(const size_t tool_id)

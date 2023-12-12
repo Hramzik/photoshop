@@ -16,9 +16,7 @@ Canvas_Viewer::Canvas_Viewer (const plug::LayoutBox& box, Canvas& canvas):
 
         color_palette_  (nullptr),
         tool_palette_   (nullptr),
-        filter_palette_ (nullptr),
-
-        active_tool_ (nullptr) {}
+        filter_palette_ (nullptr) {}
 
 //--------------------------------------------------
 
@@ -28,23 +26,11 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
 
     //--------------------------------------------------
 
-    if (!active_tool_) return;
+    if (!get_active_tool ()) return;
 
     //--------------------------------------------------
 
-    active_tool_->setActiveCanvas (canvas_);
-
-    if (!color_palette_) return;
-    active_tool_->setColorPalette (*color_palette_);
-}
-
-void Canvas_Viewer::choose_tool (int tool_id) {
-
-    if (!tool_palette_) return;
-
-    //--------------------------------------------------
-
-    active_tool_ = tool_palette_->get_tool (tool_id);
+    get_active_tool ()->setActiveCanvas (canvas_);
 }
 
 /*
@@ -72,12 +58,13 @@ void Canvas_Viewer::render (plug::RenderTarget& target, plug::TransformStack& st
 
     //--------------------------------------------------
 
-    if (!is_canvas_focused_ || !active_tool_) return;
+
+    if (!is_canvas_focused_ || !get_active_tool ()) return;
 
     //--------------------------------------------------
     // tool preview
 
-    plug::Widget* preview = active_tool_->getWidget();
+    plug::Widget* preview = get_active_tool ()->getWidget();
     if (!preview) return;
 
     stack.enter (plug::Transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1)));
@@ -88,7 +75,7 @@ void Canvas_Viewer::render (plug::RenderTarget& target, plug::TransformStack& st
 void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context) {
 
     if (!is_canvas_focused_) return;
-    if (!active_tool_)       return;
+    if (!get_active_tool ()) return;
 
     if (!covers (context.stack, event.pos)) return;
 
@@ -101,13 +88,13 @@ void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& c
     //--------------------------------------------------
 
     plug::Vec2d canvas_pos = get_canvas_position (viewer_pos);
-    active_tool_->onMove (canvas_pos);
+    get_active_tool ()->onMove (canvas_pos);
 }
 
 void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context) {
 
     if (!is_canvas_focused_) return;
-    if (!active_tool_)       return;
+    if (!get_active_tool ()) return;
 
     context.stopped = covers (context.stack, event.pos);
     if (!context.stopped) return;
@@ -121,7 +108,7 @@ void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::
     //--------------------------------------------------
 
     plug::Vec2d canvas_pos = get_canvas_position (viewer_pos);
-    if (event.button_id == plug::MouseButton::Left) active_tool_->onMainButton ({plug::State::Pressed}, canvas_pos);
+    if (event.button_id == plug::MouseButton::Left) get_active_tool ()->onMainButton ({plug::State::Pressed}, canvas_pos);
 }
 
 void Canvas_Viewer::onMouseReleased (const plug::MouseReleasedEvent &event, plug::EHC& context) {
@@ -131,7 +118,7 @@ void Canvas_Viewer::onMouseReleased (const plug::MouseReleasedEvent &event, plug
     //--------------------------------------------------
 
     if (!is_canvas_focused_) return;
-    if (!active_tool_)       return;
+    if (!get_active_tool ()) return;
 
     //--------------------------------------------------
 
@@ -142,7 +129,7 @@ void Canvas_Viewer::onMouseReleased (const plug::MouseReleasedEvent &event, plug
     //--------------------------------------------------
 
     plug::Vec2d canvas_pos = get_canvas_position (viewer_pos);
-    if (event.button_id == plug::MouseButton::Left) active_tool_->onMainButton ({plug::State::Released}, canvas_pos);
+    if (event.button_id == plug::MouseButton::Left) get_active_tool ()->onMainButton ({plug::State::Released}, canvas_pos);
 }
 
 void Canvas_Viewer::onKeyboardPressed (const plug::KeyboardPressedEvent& event, plug::EHC& context) {
@@ -151,11 +138,11 @@ void Canvas_Viewer::onKeyboardPressed (const plug::KeyboardPressedEvent& event, 
 
     //--------------------------------------------------
 
-    if (!active_tool_) return;
+    if (!get_active_tool ()) return;
 
     //--------------------------------------------------
 
-    if (event.key_id == plug::KeyCode::Escape) active_tool_->onCancel();
+    if (event.key_id == plug::KeyCode::Escape) get_active_tool ()->onCancel();
 }
 
 //--------------------------------------------------
@@ -172,6 +159,11 @@ plug::Vec2d Canvas_Viewer::get_canvas_position (plug::Vec2d viewer_position) {
     //--------------------------------------------------
 
     return viewer_position * scaling;
+}
+
+plug::Tool* Canvas_Viewer::get_active_tool (void) {
+
+    return tool_palette_->get_active_tool ();
 }
 
 //--------------------------------------------------

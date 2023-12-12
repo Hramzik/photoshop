@@ -58,11 +58,9 @@ private:
     Tool_Palette*   tool_palette_;
     Filter_Palette* filter_palette_;
 
-    plug::Tool* active_tool_;
-
     //--------------------------------------------------
 
-    void        updateTexture (void);
+    plug::Tool* get_active_tool (void);
     plug::Vec2d get_canvas_position (plug::Vec2d viewer_position);
 };
 
