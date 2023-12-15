@@ -4,11 +4,6 @@
 
 
 #include "filter.hpp"
-#include "palette.hpp"
-#include "brightness.hpp"
-#include "contrast.hpp"
-#include "monochrome.hpp"
-#include "binary.hpp"
 
 
 //--------------------------------------------------

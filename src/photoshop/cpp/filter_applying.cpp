@@ -9,7 +9,7 @@
 //--------------------------------------------------
 
 Filter_Applying_Widget::Filter_Applying_Widget
-(plug::LayoutBox& box, Canvas& canvas);
+(plug::LayoutBox& box, Canvas& canvas):
         Column_Aligner (*new Colored_Window (box, C_LIGHT_GRAY)),
 
         canvas_ (canvas) {}
@@ -24,7 +24,7 @@ void Filter_Applying_Widget::add_filter (plug::Filter& filter) {
 
     //--------------------------------------------------
 
-    Action& action = *new Filter_Selection_Action (canvas_, filter);
+    Action& action = *new Filter_Applying_Action (canvas_, filter);
     button.set_pressed_action (&action);
 
     //--------------------------------------------------

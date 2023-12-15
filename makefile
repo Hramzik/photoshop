@@ -84,15 +84,17 @@ program:
 	$(WIDGETS_FOLDER)/hider.cpp \
 	$(WIDGETS_FOLDER)/aligner.cpp \
 	$(WIDGETS_FOLDER)/square_aligner.cpp \
+	$(WIDGETS_FOLDER)/column_aligner.cpp \
 \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 \
 	$(TOOLS_FOLDER)/color_palette.cpp \
 	$(TOOLS_FOLDER)/tool_palette.cpp \
-	$(TOOLS_FOLDER)/plugin_data.cpp \
-	$(TOOLS_FOLDER)/tool.cpp \
-	$(TOOLS_FOLDER)/pencil.cpp \
+\
+	$(FILTERS_FOLDER)/filter.cpp \
+	$(FILTERS_FOLDER)/monochrome.cpp \
+	$(FILTERS_FOLDER)/black_and_white.cpp \
 \
 	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
 	$(PHOTOSHOP_FOLDER)/plugin_loader.cpp \
@@ -100,6 +102,8 @@ program:
 	$(PHOTOSHOP_FOLDER)/color_selection_action.cpp \
 	$(PHOTOSHOP_FOLDER)/tool_selection.cpp \
 	$(PHOTOSHOP_FOLDER)/tool_selection_action.cpp \
+	$(PHOTOSHOP_FOLDER)/filter_applying.cpp \
+	$(PHOTOSHOP_FOLDER)/filter_applying_action.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

@@ -10,7 +10,7 @@ Column_Aligner::Column_Aligner
 (My_Widget& background, plug::Vec2d relative_padding_size):
         Widget_Aligner (background),
 
-        free_line_index (0),
+        next_widget_vertical_offset_ (relative_padding_size.x),
 
         inner_padding_size_ (relative_padding_size),
         tl_padding_size_    (inner_padding_size_),
@@ -29,7 +29,6 @@ void Column_Aligner::post_adding_procedure (void) {
 
     ++free_line_index;
 }
-
 
 //--------------------------------------------------
 
@@ -60,7 +59,7 @@ void Column_Aligner::resize_new_widget (My_Widget& new_widget) {
 
 void Column_Aligner::move_new_widget (My_Widget& new_widget) {
 
-    double x = tl_padding_size_.x * get_widget_size ();
+    double x = tl_padding_size_.x * get_widget_width ();
 
     double
     taken_relative_y  = free_line_index;

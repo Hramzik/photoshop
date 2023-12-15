@@ -6,7 +6,7 @@
 
 //--------------------------------------------------
 
-void Monochrome_Filter::apply_filter_to_pixel (plug::Color& pixel) {
+void Monochrome_Filter::apply_filter_to_pixel (plug::Color& pixel) const {
 
     double r = pixel.r;
     double g = pixel.g;

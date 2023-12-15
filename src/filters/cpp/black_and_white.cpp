@@ -6,17 +6,17 @@
 
 //--------------------------------------------------
 
-void Black_And_White_Filter::apply_filter_to_pixel (plug::Color pixel) {
+void Black_And_White_Filter::apply_filter_to_pixel (plug::Color& pixel) const {
 
     double r = pixel.r;
     double g = pixel.g;
     double b = pixel.b;
 
-    double result = (r + g + b) / 3;
+    double average = (r + g + b) / 3;
 
     //--------------------------------------------------
 
-    if (result >= 128) {
+    if (average >= 128) {
 
         pixel = plug::Color (255, 255, 255);
         return;

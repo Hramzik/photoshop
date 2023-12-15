@@ -23,7 +23,7 @@ class Column_Aligner: public Widget_Aligner {
 
   private:
 
-    int free_line_index;
+    double next_widget_vertical_offset_;
 
     //--------------------------------------------------
 
@@ -34,7 +34,7 @@ class Column_Aligner: public Widget_Aligner {
 
     //--------------------------------------------------
 
-    double get_widget_size (void);
+    double get_widget_width (void);
 };
 
 //--------------------------------------------------

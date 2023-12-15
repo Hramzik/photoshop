@@ -11,7 +11,7 @@ class Black_And_White_Filter: public Filter {
 
   public:
 
-    void apply_filter_to_pixel (plug::Color& pixel) override;
+    void apply_filter_to_pixel (plug::Color& pixel) const override;
 };
 
 

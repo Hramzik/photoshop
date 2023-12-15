@@ -22,7 +22,7 @@ void Plugin_Loader::load_plugin (const char* path) {
 
     //--------------------------------------------------
 
-    Plug_Function dll_function  = (Plug_Function) GetProcAddress (dll_handle, "loadPlugin");
+    Plug_Function dll_function = (Plug_Function) (void*) GetProcAddress (dll_handle, "loadPlugin");
     if (!dll_function) return;
 
     //--------------------------------------------------

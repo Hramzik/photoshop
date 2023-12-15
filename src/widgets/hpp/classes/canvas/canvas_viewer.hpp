@@ -25,11 +25,10 @@ class Canvas_Viewer: public My_Widget {
 
     //--------------------------------------------------
 
-    void set_is_focused (bool is_focused);
-    void choose_tool    (int tool_id);
-    void apply_filter   (int filter_id);
-
+    void set_is_focused   (bool is_focused);
     void set_tool_palette (Tool_Palette& palette);
+
+    Canvas& access_canvas (void);
 
     //--------------------------------------------------
 

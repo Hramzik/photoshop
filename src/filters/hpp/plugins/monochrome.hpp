@@ -10,7 +10,7 @@ class Monochrome_Filter: public Filter {
 
   public:
 
-    void apply_filter_to_pixel (plug::Color& color) override;
+    void apply_filter_to_pixel (plug::Color& color) const override;
 };
 
 //--------------------------------------------------

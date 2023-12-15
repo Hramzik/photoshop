@@ -28,8 +28,9 @@ class Photoshop: public Framed_Window {
     Color_Palette color_palette_;
     Canvas_Viewer* canvas_;
 
-    void init_tools    (void);
     void init_colors   (void);
+    void init_tools    (void);
+    void init_filters  (void);
     void init_canvases (void);
 };
 

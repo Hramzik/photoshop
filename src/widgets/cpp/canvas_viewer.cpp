@@ -31,20 +31,14 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
     get_active_tool ()->setActiveCanvas (canvas_);
 }
 
-/*
-void Canvas_Viewer::apply_filter (int filter_id) {
-
-    plug::Filter* filter = filter_palette_.get_filter (filter_id);
-    if (!filter) return;
-
-    //--------------------------------------------------
-
-    filter->applyFilter (canvas_);
-}*/
-
 void Canvas_Viewer::set_tool_palette (Tool_Palette& palette) {
 
     tool_palette_ = &palette;
+}
+
+Canvas& Canvas_Viewer::access_canvas (void) {
+
+    return canvas_;
 }
 
 //--------------------------------------------------

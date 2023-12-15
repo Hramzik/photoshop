@@ -14,29 +14,12 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 
     canvas_ (nullptr)
 {
-    init_tools ();
     init_colors ();
+    init_tools ();
     init_canvases (); std::cout << "created photoshop" << "\n";
 }
 
 //--------------------------------------------------
-
-void Photoshop::init_tools (void) {
-
-    Plugin_Loader loader (*this);
-    loader.load_plugin ("dll/pencil.dll");
-
-    //--------------------------------------------------
-
-    LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
-    box.setPosition (plug::Vec2d (-200, 100));
-
-    My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
-
-    //--------------------------------------------------
-
-    register_widget (new Framed_Window (tools, false));
-}
 
 void Photoshop::init_colors (void) {
 
@@ -63,6 +46,42 @@ void Photoshop::init_colors (void) {
     //--------------------------------------------------
 
     register_widget (new Framed_Window (colors, false));
+}
+
+void Photoshop::init_tools (void) {
+
+    Plugin_Loader loader (*this);
+    loader.load_plugin ("dll/pencil.dll");
+
+    //--------------------------------------------------
+
+    LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
+    box.setPosition (plug::Vec2d (-200, 100));
+
+    My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
+
+    //--------------------------------------------------
+
+    register_widget (new Framed_Window (tools, false));
+}
+
+#include "filters/hpp/plugins/monochrome.hpp"
+#include "filters/hpp/plugins/black_and_white.hpp"
+void Photoshop::init_filters (void) {
+
+    LayoutBox filters_box (Length (150, Unit::Pixel), Length (150, Unit::Pixel));
+    filters_box.setPosition (plug::Vec2d (-300, -300));
+
+    Filter_Applying_Widget& filters = *new Filter_Applying_Widget (filters_box, canvas_->access_canvas ());
+
+    //--------------------------------------------------
+
+    filters.add_filter (*new Monochrome_Filter ());
+    filters.add_filter (*new Black_And_White_Filter ());
+
+    //--------------------------------------------------
+
+    register_widget (&filters);
 }
 
 void Photoshop::init_canvases (void) {
