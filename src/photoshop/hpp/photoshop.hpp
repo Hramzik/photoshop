@@ -5,6 +5,7 @@
 
 #include "color_selection/color_selection.hpp"
 #include "tool_selection/tool_selection.hpp"
+#include "filter_applying/filter_applying.hpp"
 
 #include "photoshop_class.hpp"
 

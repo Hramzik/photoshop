@@ -23,7 +23,6 @@ void Plugin_Loader::load_plugin (const char* path) {
     //--------------------------------------------------
 
     Plug_Function dll_function  = (Plug_Function) GetProcAddress (dll_handle, "loadPlugin");
-    std::cout << (void*) dll_function << "\n";
     if (!dll_function) return;
 
     //--------------------------------------------------
@@ -35,7 +34,6 @@ void Plugin_Loader::load_plugin (const char* path) {
 
     size_t interface_id = static_cast <size_t> (plug::PluginGuid::Tool);
     plug::Tool* tool    = static_cast <plug::Tool*> (plugin->tryGetInterface (interface_id));
-    std::cout << "tool" << tool << "\n";
     //plug::Tool* tool = static_cast <plug::Tool*> (plugin);
     if (!tool) return;
 

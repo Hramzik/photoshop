@@ -15,8 +15,8 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_ (nullptr)
 {
     init_tools ();
-    init_colors (); std::cout << "colors" << "\n";
-    init_canvases (); std::cout << "photoshop" << "\n";
+    init_colors ();
+    init_canvases (); std::cout << "created photoshop" << "\n";
 }
 
 //--------------------------------------------------
@@ -30,12 +30,12 @@ void Photoshop::init_tools (void) {
 
     LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
     box.setPosition (plug::Vec2d (-200, 100));
-std::cout << "creating selection" << "\n";
+
     My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
-std::cout << "selection done" << "\n";
+
     //--------------------------------------------------
 
-    register_widget (new Framed_Window (tools, false)); std::cout << "registered" << "\n";
+    register_widget (new Framed_Window (tools, false));
 }
 
 void Photoshop::init_colors (void) {
