@@ -2,41 +2,42 @@
 
 //--------------------------------------------------
 
-#include "../../my_rgb/hpp/my_rgb.hpp"
-
-#include "../../widgets/hpp/classes/photoshop/canvas.hpp"
-
-#include "../hpp/filters.hpp"
+#include "filters/hpp/filters.hpp"
 
 //--------------------------------------------------
 
-void Filter::apply_filter_to_pixel (My_RGB& pixel_color) {
+void Filter::applyFilter (plug::Canvas& canvas) {
 
-    (void) pixel_color;
+    plug::Texture& texture = canvas.getTexture ();
+
+    //--------------------------------------------------
+
+    for (int x = 0; x < texture.width;  ++x) {
+    for (int y = 0; y < texture.height; ++y) {
+
+        if (!canvas.getSelectionMask ().getPixel (x, y)) continue;
+
+        //--------------------------------------------------
+
+        plug::Color pixel_color = texture.getPixel (x, y);
+        apply_filter_to_pixel (pixel_color);
+
+        texture.setPixel (x, y, pixel_color);
+    }
+    }
+}
+
+
+void Filter::apply_filter_to_pixel (plug::Color& pixel) {
+
+    (void) pixel;
 }
 
 //--------------------------------------------------
 
-void Filter::apply_filter (Canvas& canvas, const Filter_Mask& mask) {
+plug::Widget* getWidget (void) {
 
-    My_Texture& texture = canvas.access_texture ();
-
-    //--------------------------------------------------
-
-    for (int x = 0; x < mask.get_width  (); ++x) {
-    for (int y = 0; y < mask.get_height (); ++y) {
-
-        if (!mask.get_value (x, y)) continue;
-
-        //--------------------------------------------------
-
-        My_RGB pixel_color = texture.get_pixel (x, y);
-        apply_filter_to_pixel (pixel_color);
-
-        texture.set_drawcolor (pixel_color);
-        texture.draw_point (x, y);
-    }
-    }
+    return nullptr;
 }
 
 //--------------------------------------------------

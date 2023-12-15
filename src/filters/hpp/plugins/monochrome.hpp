@@ -2,18 +2,20 @@
 #define FILTERS_CLASS_MONOCHROME_FILTER_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "filter.hpp"
+#include "filters/hpp/filters.hpp"
 
 //--------------------------------------------------
-
 
 class Monochrome_Filter: public Filter {
 
   public:
 
-    void apply_filter_to_pixel (My_RGB& pixel_color) override;
+    void apply_filter_to_pixel (plug::Color& color) override;
 };
 
+//--------------------------------------------------
+
+extern "C" plug::Plugin* loadPlugin (void);
 
 //--------------------------------------------------
 #endif
