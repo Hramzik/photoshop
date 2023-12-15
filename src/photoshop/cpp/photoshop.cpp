@@ -15,36 +15,33 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_ (nullptr)
 {
     init_tools ();
-    init_colors ();
-    init_canvases ();
+    init_colors (); std::cout << "colors" << "\n";
+    init_canvases (); std::cout << "photoshop" << "\n";
 }
+
+//--------------------------------------------------
 
 void Photoshop::init_tools (void) {
 
-    Tool& brush = *new Brush_Tool ();
-    brush.setColorPalette (color_palette_);
-    tool_palette_.add_tool (brush);
-
-    //--------------------------------------------------
-
-    //tool_palette_.set_active_tool (0);
+    Plugin_Loader loader (*this);
+    loader.load_plugin ("dll/pencil.dll");
 
     //--------------------------------------------------
 
     LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
-    box.setPosition (plug::Vec2d (-150, 50));
-
+    box.setPosition (plug::Vec2d (-200, 100));
+std::cout << "creating selection" << "\n";
     My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
-
+std::cout << "selection done" << "\n";
     //--------------------------------------------------
 
-    register_widget (new Framed_Window (tools, false));
+    register_widget (new Framed_Window (tools, false)); std::cout << "registered" << "\n";
 }
 
 void Photoshop::init_colors (void) {
 
-    LayoutBox colors_box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
-    colors_box.setPosition (plug::Vec2d (-150, -200));
+    LayoutBox colors_box (Length (200, Unit::Pixel), Length (155, Unit::Pixel));
+    colors_box.setPosition (plug::Vec2d (-200, -100));
 
     Color_Selection_Widget& colors = *new Color_Selection_Widget (colors_box, color_palette_);
 
@@ -72,7 +69,7 @@ void Photoshop::init_canvases (void) {
 
     LayoutBox canvas_box (Length (400, Unit::Pixel),
                           Length (400, Unit::Pixel));
-    canvas_box.setPosition (plug::Vec2d (200, 0));
+    canvas_box.setPosition (plug::Vec2d (175, 0));
 
     Canvas& canvas = *new Canvas (100, 100);
     canvas_ = new Canvas_Viewer (canvas_box, canvas);
@@ -80,13 +77,14 @@ void Photoshop::init_canvases (void) {
     canvas_->set_is_focused (true);
 
     register_widget (new Framed_Window (*canvas_));
+}
 
-    //--------------------------------------------------
+//--------------------------------------------------
 
-    MyRenderTexture true_cat_texture; true_cat_texture.loadFromFile ("media/cat.jpeg");
-    plug::Texture cat_texture = getTexture (true_cat_texture);
+void Photoshop::add_tool (plug::Tool& tool) {
 
-    register_widget (new Textured_Window (getLayoutBox (), cat_texture));
+    tool.setColorPalette (color_palette_);
+    tool_palette_.add_tool (tool);
 }
 
 //--------------------------------------------------

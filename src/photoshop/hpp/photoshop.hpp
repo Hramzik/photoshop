@@ -8,6 +8,8 @@
 
 #include "photoshop_class.hpp"
 
+#include "plugin_loader/plugin_loader.hpp"
+
 
 //--------------------------------------------------
 #endif

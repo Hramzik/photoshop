@@ -35,6 +35,7 @@ void Tool_Selection_Widget::add_tool (int tool_id) {
     //--------------------------------------------------
 
     const plug::PluginData* data = tool->getPluginData ();
+    std::cout << "got data" << "\n";
     if (!data) return;
 
     //--------------------------------------------------

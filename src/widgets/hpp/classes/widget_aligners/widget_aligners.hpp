@@ -5,6 +5,7 @@
 
 #include "aligner.hpp"
 #include "square_aligner.hpp"
+#include "column_aligner.hpp"
 
 
 //--------------------------------------------------

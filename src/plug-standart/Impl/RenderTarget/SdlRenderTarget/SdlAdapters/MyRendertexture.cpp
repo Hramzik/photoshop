@@ -31,11 +31,17 @@ MyRenderTexture::~MyRenderTexture (void) {
 
 void MyRenderTexture::loadFromFile (const char* path) {
 
-    SDL_Surface* surface = IMG_Load (path);
+    SDL_Surface* img_surface   = IMG_Load (path);
+    SDL_Surface* white_surface = SDL_CreateRGBSurface (0, img_surface->w, img_surface->h, 32,0,0,0,0);
+    SDL_FillRect (white_surface, nullptr, -1);
 
     //--------------------------------------------------
 
-    setSdlSurface (surface);
+    SDL_BlitScaled (img_surface, nullptr, white_surface, nullptr);
+
+    //--------------------------------------------------
+
+    setSdlSurface (white_surface);
 }
 
 const SDL_Surface* MyRenderTexture::getSdlSurface (void) const {

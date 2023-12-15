@@ -7,15 +7,11 @@
 
 //--------------------------------------------------
 
-class Color_Palette;
-
-//--------------------------------------------------
-
 class Tool: public plug::Tool {
 
   public:
 
-    Tool (const char *name, const char *texture_path);
+    Tool (const char* name, const char *texture_path);
 
     //--------------------------------------------------
 
@@ -52,38 +48,6 @@ class Tool: public plug::Tool {
     //size_t m_cnt_reference;
     //const BaseData m_data;
 };
-
-
-/*class Tool {
-
-  public:
-
-    virtual ~Tool (void) = default;
-
-    //--------------------------------------------------
-
-    virtual Widget* get_widget (void);
-
-    virtual void on_main_button
-    (Button_state state, Point2D mouse_position, Canvas& canvas);
-
-    virtual void on_secondary_button
-    (Button_state state, Point2D mouse_position, Canvas& canvas);
-
-    virtual void on_modifier1 // shift
-    (Button_state state, Canvas& canvas);
-
-    virtual void on_modifier2 // ctrl
-    (Button_state state, Canvas& canvas);
-
-    virtual void on_modifier3 // alt
-    (Button_state state, Canvas& canvas);
-
-    virtual void on_move    (Point2D mouse_position, Canvas& canvas);
-    virtual void on_confirm (Canvas& canvas);
-    virtual void on_cancel  (void);
-};*/
-
 
 //--------------------------------------------------
 #endif

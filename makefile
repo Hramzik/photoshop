@@ -44,11 +44,10 @@ sc = @ #showcommands
 default_name = prog
 default_path = $(exefolder)/$(default_name)
 
-
 all: program
 
-
 program:
+
 	$(sc) $(cc) \
 	$(GRAPHICS_FOLDER)/sdl.cpp \
 	$(MY_RGB_FOLDER)/my_rgb.cpp \
@@ -93,9 +92,10 @@ program:
 	$(TOOLS_FOLDER)/tool_palette.cpp \
 	$(TOOLS_FOLDER)/plugin_data.cpp \
 	$(TOOLS_FOLDER)/tool.cpp \
-	$(TOOLS_FOLDER)/brush.cpp \
+	$(TOOLS_FOLDER)/pencil.cpp \
 \
 	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
+	$(PHOTOSHOP_FOLDER)/plugin_loader.cpp \
 	$(PHOTOSHOP_FOLDER)/color_selection.cpp \
 	$(PHOTOSHOP_FOLDER)/color_selection_action.cpp \
 	$(PHOTOSHOP_FOLDER)/tool_selection.cpp \
@@ -111,3 +111,20 @@ program:
 	-I C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2
 
 
+pencil:
+
+	$(sc) $(cc) \
+	$(TOOLS_FOLDER)/pencil.cpp \
+\
+	$(TOOLS_FOLDER)/tool.cpp \
+	$(TOOLS_FOLDER)/plugin_data.cpp \
+\
+	-shared \
+\
+	-o dll/pencil.dll \
+	$(flags_standart_version) \
+	-lstdc++ -O0 \
+	-fmessage-length=60 \
+	-fcompare-debug-second \
+	-I $(SRC_FOLDER) \
+	-I $(PLUGIN_STANDART_FOLDER) \

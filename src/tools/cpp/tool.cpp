@@ -2,6 +2,8 @@
 
 //--------------------------------------------------
 
+#include <iostream>
+
 #include "../hpp/tools.hpp"
 
 //--------------------------------------------------
@@ -82,11 +84,24 @@ plug::Widget* Tool::getWidget (void) {
 
 plug::Plugin* Tool::tryGetInterface (size_t interface_id) {
 
-    (void) interface_id;
+    switch (interface_id) {
 
-    //--------------------------------------------------
+        case static_cast <size_t> (plug::PluginGuid::Plugin):
+        {
+            addReference ();
+            return static_cast <plug::Plugin*> (this);
+        }
 
-    return nullptr;
+        case static_cast <size_t> (plug::PluginGuid::Tool):
+        {
+            addReference ();
+            return static_cast <plug::Tool*> (this);
+        }
+
+        //--------------------------------------------------
+
+        default: return nullptr;
+    }
 }
 
 const plug::PluginData* Tool::getPluginData (void) const {

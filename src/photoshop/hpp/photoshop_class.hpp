@@ -16,6 +16,10 @@ class Photoshop: public Framed_Window {
 
     Photoshop (plug::LayoutBox& box);
 
+    //--------------------------------------------------
+
+    void add_tool (plug::Tool& tool);
+
 //--------------------------------------------------
 
   private:

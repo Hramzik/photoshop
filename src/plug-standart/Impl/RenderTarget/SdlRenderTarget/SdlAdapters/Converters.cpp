@@ -145,7 +145,7 @@ void copyToMyTexture (MyRenderTexture& my_texture, const plug::Texture& plug_tex
     //--------------------------------------------------
 
     SDL_Surface* plug_surface = SDL_CreateRGBSurfaceFrom (plug_texture.data, width, height,
-            32, 4 * width, 0, 0, 0, 0);
+            32, 4 * width, 0, 0, 0, 0xFF000000);
 
     //--------------------------------------------------
 
