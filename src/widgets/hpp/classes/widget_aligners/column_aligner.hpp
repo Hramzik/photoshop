@@ -17,20 +17,18 @@ class Column_Aligner: public Widget_Aligner {
 
   protected:
 
-    void resize_new_widget (My_Widget& new_widget) override;
-    void   move_new_widget (My_Widget& new_widget) override;
-    void post_adding_procedure (void)              override;
+    void resize_new_widget     (My_Widget& new_widget) override;
+    void   move_new_widget     (My_Widget& new_widget) override;
+    void post_adding_procedure (My_Widget& new_widget) override;
 
   private:
 
-    double next_widget_vertical_offset_;
-
-    //--------------------------------------------------
-
-    // from 0 to 1 in widget sizes
+    // relative to widget width
     const plug::Vec2d inner_padding_size_; // only y is used
     const plug::Vec2d tl_padding_size_;
     const plug::Vec2d br_padding_size_;
+
+    double next_widget_vertical_offset_;
 
     //--------------------------------------------------
 

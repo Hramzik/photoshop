@@ -16,7 +16,14 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 {
     init_colors ();
     init_tools ();
-    init_canvases (); std::cout << "created photoshop" << "\n";
+    init_canvases ();
+
+    // filters need canvas
+    init_filters ();
+
+    //--------------------------------------------------
+
+    std::cout << "created photoshop" << "\n";
 }
 
 //--------------------------------------------------
@@ -53,6 +60,8 @@ void Photoshop::init_tools (void) {
     Plugin_Loader loader (*this);
     loader.load_plugin ("dll/pencil.dll");
 
+    tool_palette_.set_active_tool (0);
+
     //--------------------------------------------------
 
     LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
@@ -70,7 +79,7 @@ void Photoshop::init_tools (void) {
 void Photoshop::init_filters (void) {
 
     LayoutBox filters_box (Length (150, Unit::Pixel), Length (150, Unit::Pixel));
-    filters_box.setPosition (plug::Vec2d (-300, -300));
+    filters_box.setPosition (plug::Vec2d (-100, -100));
 
     Filter_Applying_Widget& filters = *new Filter_Applying_Widget (filters_box, canvas_->access_canvas ());
 

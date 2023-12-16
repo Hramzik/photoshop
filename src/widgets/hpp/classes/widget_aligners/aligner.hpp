@@ -24,9 +24,9 @@ class Widget_Aligner: public Widget_Container {
 
     My_Widget& background_;
 
-    virtual void resize_new_widget (My_Widget& new_widget);
-    virtual void   move_new_widget (My_Widget& new_widget);
-    virtual void post_adding_procedure (void);
+    virtual void resize_new_widget     (My_Widget& new_widget);
+    virtual void   move_new_widget     (My_Widget& new_widget);
+    virtual void post_adding_procedure (My_Widget& new_widget);
 };
 
 //--------------------------------------------------

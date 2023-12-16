@@ -8,6 +8,10 @@
 
 void Filter::applyFilter (plug::Canvas& canvas) const {
 
+    const plug::Texture& texture = canvas.getTexture ();
+
+    //--------------------------------------------------
+
     for (int x = 0; x < (int) canvas.getSize ().x; ++x) {
     for (int y = 0; y < (int) canvas.getSize ().y; ++y) {
 
@@ -15,7 +19,7 @@ void Filter::applyFilter (plug::Canvas& canvas) const {
 
         //--------------------------------------------------
 
-        plug::Color pixel_color = canvas.getPixel (x, y);
+        plug::Color pixel_color = texture.getPixel (x, y);
         apply_filter_to_pixel (pixel_color);
 
         canvas.setPixel (x, y, pixel_color);

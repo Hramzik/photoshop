@@ -29,7 +29,7 @@ void Widget_Aligner::add_widget (My_Widget& widget) {
 
     //--------------------------------------------------
 
-    post_adding_procedure ();
+    post_adding_procedure (widget);
 }
 
 //--------------------------------------------------
@@ -44,9 +44,9 @@ void Widget_Aligner::move_new_widget (My_Widget& new_widget) {
     (void) new_widget;
 }
 
-void Widget_Aligner::post_adding_procedure (void) {
+void Widget_Aligner::post_adding_procedure (My_Widget& new_widget) {
 
-    return;
+    (void) new_widget;
 }
 
 //--------------------------------------------------

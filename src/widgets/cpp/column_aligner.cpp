@@ -1,5 +1,4 @@
 
-
 //--------------------------------------------------
 
 #include "widgets/hpp/widgets.hpp"
@@ -10,14 +9,13 @@ Column_Aligner::Column_Aligner
 (My_Widget& background, plug::Vec2d relative_padding_size):
         Widget_Aligner (background),
 
-        next_widget_vertical_offset_ (relative_padding_size.x),
-
         inner_padding_size_ (relative_padding_size),
         tl_padding_size_    (inner_padding_size_),
-        br_padding_size_    (inner_padding_size_)
+        br_padding_size_    (inner_padding_size_),
+
+        next_widget_vertical_offset_ (0)
 {
-    background_.getLayoutBox ().setPosition (plug::Vec2d (0, 0));
-    register_background_widget (&background_);
+    next_widget_vertical_offset_ = tl_padding_size_.y * get_widget_width ();
 }
 
 Column_Aligner::Column_Aligner (My_Widget& background):
@@ -25,9 +23,10 @@ Column_Aligner::Column_Aligner (My_Widget& background):
 
 //--------------------------------------------------
 
-void Column_Aligner::post_adding_procedure (void) {
+void Column_Aligner::post_adding_procedure (My_Widget& new_widget) {
 
-    ++free_line_index;
+    next_widget_vertical_offset_ += new_widget.getLayoutBox ().getSize ().y;
+    next_widget_vertical_offset_ += inner_padding_size_.y * get_widget_width ();
 }
 
 //--------------------------------------------------
@@ -47,7 +46,7 @@ double Column_Aligner::get_widget_width (void) {
 void Column_Aligner::resize_new_widget (My_Widget& new_widget) {
 
     double new_width = get_widget_width ();
-    plug::Vec2d new_size = plug::Vec2d (new_width, new_widget.getLayoutBox ().getSize ().x);
+    plug::Vec2d new_size = plug::Vec2d (new_width, new_widget.getLayoutBox ().getSize ().y);
 
     //--------------------------------------------------
 
@@ -60,12 +59,7 @@ void Column_Aligner::resize_new_widget (My_Widget& new_widget) {
 void Column_Aligner::move_new_widget (My_Widget& new_widget) {
 
     double x = tl_padding_size_.x * get_widget_width ();
-
-    double
-    taken_relative_y  = free_line_index;
-    taken_relative_y += free_line_index * inner_padding_size_.y;
-    taken_relative_y += tl_padding_size_.y;
-    double y = taken_relative_y * get_widget_size ();
+    double y = next_widget_vertical_offset_;
 
     //--------------------------------------------------
 

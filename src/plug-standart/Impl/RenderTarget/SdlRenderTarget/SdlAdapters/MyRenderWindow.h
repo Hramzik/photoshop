@@ -16,8 +16,19 @@ class MyRenderWindow: public MyRenderTarget {
 
     MyRenderWindow (int width, int height);
 
+    //--------------------------------------------------
+
     void clear_screen  (void);
     void update_screen (void);
+
+    plug::Vec2d get_size (void) const;
+
+    void go_fullscreen   (void);
+    void exit_fullscreen (void);
+
+
+
+//--------------------------------------------------
 
   private:
 

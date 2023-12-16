@@ -46,7 +46,7 @@ class Canvas: public plug::Canvas {
 
     MyRenderTexture* main_texture_;
     plug::Texture*   plug_texture_;
-    bool   is_plug_texture_updated;
+    bool  is_plug_texture_updated_;
 
     plug::SelectionMask* selection_mask_;
 

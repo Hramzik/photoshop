@@ -19,8 +19,6 @@ Square_Aligner::Square_Aligner
         tl_padding_size_    (inner_padding_size_),
         br_padding_size_    (inner_padding_size_)
 {
-    background_.getLayoutBox ().setPosition (plug::Vec2d (0, 0));
-    register_background_widget (&background_);
 }
 
 Square_Aligner::Square_Aligner (My_Widget& background, int widgets_in_line):
@@ -28,12 +26,13 @@ Square_Aligner::Square_Aligner (My_Widget& background, int widgets_in_line):
 
 //--------------------------------------------------
 
-void Square_Aligner::post_adding_procedure (void) {
+void Square_Aligner::post_adding_procedure (My_Widget& new_widget) {
 
-    ++widgets_in_free_line_count_;
+    (void) new_widget;
 
     //--------------------------------------------------
 
+    ++widgets_in_free_line_count_;
     if (widgets_in_free_line_count_ != widgets_in_line_) return;
 
     //--------------------------------------------------

@@ -22,7 +22,12 @@ App::App (void):
         target_ (window_),
         sdl_exit_ (false)
 {
-    plug::Transform to_screen_center (plug::Vec2d (400, 400));
+    window_.go_fullscreen ();
+    plug::Vec2d window_size = window_.get_size ();
+
+    //--------------------------------------------------
+
+    plug::Transform to_screen_center (window_size / 2);
     transform_stack_.enter (to_screen_center);
 
     //--------------------------------------------------

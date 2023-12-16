@@ -18,8 +18,8 @@ Filter_Applying_Widget::Filter_Applying_Widget
 
 void Filter_Applying_Widget::add_filter (plug::Filter& filter) {
 
-    LayoutBox  box (100_px, 100_px);
-    My_Widget& model  = *new Colored_Window (box, C_GRAY); // can be any size, will be resized after
+    LayoutBox  box (666_px, 30_px);
+    My_Widget& model  = *new Colored_Window (box, C_BLACK); // width will be resized
     Button&    button = *new Button (model);
 
     //--------------------------------------------------

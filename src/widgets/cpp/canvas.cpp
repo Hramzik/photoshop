@@ -15,7 +15,7 @@ Canvas::Canvas (void):
         main_texture_  (nullptr),
         plug_texture_ (nullptr),
 
-        is_plug_texture_updated (false),
+        is_plug_texture_updated_ (false),
 
         selection_mask_ (nullptr) {}
 
@@ -66,16 +66,21 @@ Canvas::~Canvas (void) {
 void Canvas::draw (const plug::VertexArray& vertex_array) {
 
     main_texture_->draw (vertex_array);
+
+    //--------------------------------------------------
+
+    is_plug_texture_updated_ = false;
 }
 
 void Canvas::draw (const plug::VertexArray& vertex_array, const plug::Texture& texture) {
 
     MyRenderTexture tmp;
     copyToMyTexture (tmp, texture);
+    main_texture_->draw (vertex_array, tmp);
 
     //--------------------------------------------------
 
-    main_texture_->draw (vertex_array, tmp);
+    is_plug_texture_updated_ = false;
 }
 
 //--------------------------------------------------
@@ -112,13 +117,14 @@ plug::Color Canvas::getPixel (size_t x, size_t y) const {
 void Canvas::setPixel (size_t x, size_t y, const plug::Color& color) {
 
     plug::VertexArray point (plug::PrimitiveType::Points, 1);
-
     point [0].position = plug::Vec2d (x, y);
     point [0].color    = color;
 
+    draw (point);
+
     //--------------------------------------------------
 
-    draw (point);
+    is_plug_texture_updated_ = false;
 }
 
 const plug::Texture& Canvas::getTexture (void) const {
@@ -134,11 +140,16 @@ const plug::Texture& Canvas::getTexture (void) const {
 
 void Canvas::update_plug_texture (void) {
 
-    delete plug_texture_;
+    if (is_plug_texture_updated_) return;
 
     //--------------------------------------------------
 
+    delete plug_texture_;
     plug_texture_ = &::getTexture (*main_texture_);
+
+    //--------------------------------------------------
+
+    is_plug_texture_updated_ = true;
 }
 
 //--------------------------------------------------
