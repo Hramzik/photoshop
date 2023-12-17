@@ -38,10 +38,10 @@ void Close_Action::act (void) {
 
 //--------------------------------------------------
 
-Drive_Action::Drive_Action (My_Widget& controlled):
+Driving_Action::Driving_Action (My_Widget& controlled):
         controlled_ (controlled) {}
 
-void Drive_Action::act (void) {
+void Driving_Action::act (void) {
 
     if (!owner_) return;
 

@@ -39,14 +39,10 @@ Canvas::Canvas (const char* path):
         Canvas ()
 {
     main_texture_ = new MyRenderTexture ();
-    main_texture_->setSdlSurface (IMG_Load (path));
+    main_texture_->loadFromFile (path);
 
     int width  = main_texture_->getSdlSurface ()->w;
     int height = main_texture_->getSdlSurface ()->h;
-
-    //--------------------------------------------------
-
-    plug_texture_ = new plug::Texture (width, height);
 
     //--------------------------------------------------
 

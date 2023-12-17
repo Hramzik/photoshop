@@ -18,11 +18,10 @@ App::App (void):
                              Length (DEFAULT_APP_WINDOW_HEIGHT, Unit::Pixel))),
         transform_stack_ (),
 
-        window_ (DEFAULT_APP_WINDOW_WIDTH, DEFAULT_APP_WINDOW_HEIGHT),
+        window_ (DEFAULT_APP_WINDOW_WIDTH, DEFAULT_APP_WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP),
         target_ (window_),
         sdl_exit_ (false)
 {
-    window_.go_fullscreen ();
     plug::Vec2d window_size = window_.get_size ();
 
     //--------------------------------------------------
@@ -155,18 +154,8 @@ void App::render (void) {
 
 void App::populate (void) {
 
-    /*Colored_Window*       window = new Colored_Window ({0}, {200}, C_DARK_GRAY);
-    Framed_Window* framed_window = new Framed_Window (*window);
-
-    widgets_.register_widget (framed_window);*/
-
-    //--------------------------------------------------
-
-    // Point2D  position (200, 40);
-    // Vector2D size     (1400, 1000);
-
-    LayoutBox box (Length (800, Unit::Pixel),
-                   Length (800, Unit::Pixel));
+    LayoutBox box (1400_px, 1000_px);
+    //box.setPosition ()
 
     //--------------------------------------------------
 

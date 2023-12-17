@@ -30,8 +30,8 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 
 void Photoshop::init_colors (void) {
 
-    LayoutBox colors_box (Length (200, Unit::Pixel), Length (155, Unit::Pixel));
-    colors_box.setPosition (plug::Vec2d (-200, -100));
+    LayoutBox colors_box (250_px, 190_px);
+    colors_box.setPosition (plug::Vec2d (-500, -120));
 
     Color_Selection_Widget& colors = *new Color_Selection_Widget (colors_box, color_palette_);
 
@@ -64,8 +64,8 @@ void Photoshop::init_tools (void) {
 
     //--------------------------------------------------
 
-    LayoutBox box (Length (200, Unit::Pixel), Length (150, Unit::Pixel));
-    box.setPosition (plug::Vec2d (-200, 100));
+    LayoutBox box (250_px, 210_px);
+    box.setPosition (plug::Vec2d (-500, 200));
 
     My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
 
@@ -78,8 +78,8 @@ void Photoshop::init_tools (void) {
 #include "filters/hpp/plugins/black_and_white.hpp"
 void Photoshop::init_filters (void) {
 
-    LayoutBox filters_box (Length (150, Unit::Pixel), Length (150, Unit::Pixel));
-    filters_box.setPosition (plug::Vec2d (-100, -100));
+    LayoutBox filters_box (250_px, 125_px);
+    filters_box.setPosition (plug::Vec2d (-500, -350));
 
     Filter_Applying_Widget& filters = *new Filter_Applying_Widget (filters_box, canvas_->access_canvas ());
 
@@ -95,11 +95,10 @@ void Photoshop::init_filters (void) {
 
 void Photoshop::init_canvases (void) {
 
-    LayoutBox canvas_box (Length (400, Unit::Pixel),
-                          Length (400, Unit::Pixel));
-    canvas_box.setPosition (plug::Vec2d (175, 0));
+    LayoutBox canvas_box (800_px, 800_px);
+    canvas_box.setPosition (plug::Vec2d (100, 0));
 
-    Canvas& canvas = *new Canvas (100, 100);
+    Canvas& canvas = *new Canvas ("media/cat.jpeg");
     canvas_ = new Canvas_Viewer (canvas_box, canvas);
     canvas_->set_tool_palette (tool_palette_);
     canvas_->set_is_focused (true);

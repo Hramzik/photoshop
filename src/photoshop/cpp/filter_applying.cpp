@@ -10,7 +10,7 @@
 
 Filter_Applying_Widget::Filter_Applying_Widget
 (plug::LayoutBox& box, Canvas& canvas):
-        Column_Aligner (*new Colored_Window (box, C_LIGHT_GRAY)),
+        Column_Aligner (*new Colored_Window (box, C_LIGHT_GRAY), plug::Vec2d (0.1, 0.1)),
 
         canvas_ (canvas) {}
 

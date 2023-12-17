@@ -8,11 +8,11 @@
 
 //--------------------------------------------------
 
-class Drive_Action: public Button_Action {
+class Driving_Action: public Button_Action {
 
   public:
 
-    Drive_Action (My_Widget& controlled);
+    Driving_Action (My_Widget& controlled);
 
     //--------------------------------------------------
 

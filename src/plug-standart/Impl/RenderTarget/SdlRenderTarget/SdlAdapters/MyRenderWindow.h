@@ -15,6 +15,7 @@ class MyRenderWindow: public MyRenderTarget {
     //--------------------------------------------------
 
     MyRenderWindow (int width, int height);
+    MyRenderWindow (int width, int height, Uint32 sdl_flags);
 
     //--------------------------------------------------
 

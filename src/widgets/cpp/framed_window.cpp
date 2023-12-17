@@ -37,7 +37,7 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
 
     top_frame_ = new Button (*top_frame_model);
 
-    Button_Action* drive_action = new Drive_Action (controlled);
+    Button_Action* drive_action = new Driving_Action (controlled);
     top_frame_->set_held_action     (drive_action);
     top_frame_->set_released_action (drive_action);
 

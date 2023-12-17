@@ -11,18 +11,21 @@ const Uint32 MyRenderWindow::DEFAULT_SDL_WINDOW_FLAGS =
 
 //--------------------------------------------------
 
-MyRenderWindow::MyRenderWindow (int width, int height):
+MyRenderWindow::MyRenderWindow (int width, int height, Uint32 sdl_flags):
         MyRenderTarget (),
 
         m_window (nullptr)
 {
     m_window = SDL_CreateWindow ("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-            width, height, DEFAULT_SDL_WINDOW_FLAGS);
+            width, height, DEFAULT_SDL_WINDOW_FLAGS | sdl_flags);
 
     //--------------------------------------------------
 
     setRenderer (SDL_CreateRenderer (m_window, -1, SDL_RENDERER_ACCELERATED));
 }
+
+MyRenderWindow::MyRenderWindow (int width, int height):
+        MyRenderWindow (width, height, 0) {}
 
 //--------------------------------------------------
 
