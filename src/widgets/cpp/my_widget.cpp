@@ -48,7 +48,7 @@ void My_Widget::render (plug::RenderTarget& target, plug::TransformStack& stack)
 
 plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
 
-    plug::Transform transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1));
+    plug::Transform transform (getLayoutBox ().getPosition ());
     stack.enter(transform);
 
     //--------------------------------------------------

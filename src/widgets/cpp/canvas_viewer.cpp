@@ -28,7 +28,15 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
 
     //--------------------------------------------------
 
-    get_active_tool ()->setActiveCanvas (canvas_);
+    for (int i = 0; i < tool_palette_->get_tools_count (); ++i) {
+
+        plug::Tool* tool = tool_palette_->get_tool (i);
+        if (!tool) continue;
+
+        //--------------------------------------------------
+
+        tool->setActiveCanvas (canvas_);
+    }
 }
 
 void Canvas_Viewer::set_tool_palette (Tool_Palette& palette) {
@@ -50,17 +58,22 @@ void Canvas_Viewer::render (plug::RenderTarget& target, plug::TransformStack& st
 
     //--------------------------------------------------
 
-
     if (!is_canvas_focused_ || !get_active_tool ()) return;
 
     //--------------------------------------------------
     // tool preview
 
-    plug::Widget* preview = get_active_tool ()->getWidget();
+    plug::Widget* preview = get_active_tool ()->getWidget ();
     if (!preview) return;
 
-    stack.enter (plug::Transform (getLayoutBox ().getPosition (), plug::Vec2d (1, 1)));
+    plug::Vec2d canvas_scaling;
+    canvas_scaling.x = 1 / canvas_.getSize ().x * getLayoutBox ().getSize ().x;
+    canvas_scaling.y = 1 / canvas_.getSize ().y * getLayoutBox ().getSize ().y;
+
+    stack.enter (plug::Transform (getLayoutBox ().getPosition ()));
+    stack.enter (plug::Transform (-1 * getLayoutBox ().getSize () / 2, canvas_scaling));
     preview->draw (stack, target);
+    stack.leave ();
     stack.leave ();
 }
 
@@ -141,7 +154,7 @@ void Canvas_Viewer::onKeyboardPressed (const plug::KeyboardPressedEvent& event, 
 
 plug::Vec2d Canvas_Viewer::get_canvas_position (plug::Vec2d viewer_position) {
 
-    plug::Vec2d to_right_down_corner (getLayoutBox ().getSize ().x / 2, getLayoutBox ().getSize ().x / 2);
+    plug::Vec2d to_right_down_corner = getLayoutBox ().getSize () / 2;
     viewer_position += to_right_down_corner;
 
     //--------------------------------------------------
@@ -157,10 +170,6 @@ plug::Tool* Canvas_Viewer::get_active_tool (void) {
 
     plug::Tool* active_tool = tool_palette_->get_active_tool ();
     if (!active_tool) return nullptr;
-
-    //--------------------------------------------------
-
-    active_tool->setActiveCanvas (canvas_);
 
     //--------------------------------------------------
 

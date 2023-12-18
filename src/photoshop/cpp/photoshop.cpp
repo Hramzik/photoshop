@@ -60,6 +60,9 @@ void Photoshop::init_tools (void) {
 
     Plugin_Loader loader (*this);
     loader.load_plugin ("dll/pencil.dll");
+    loader.load_plugin ("dll/line.dll");
+    loader.load_plugin ("dll/rect.dll");
+    //loader.load_plugin ("dll/circle.dll");
 
     tool_palette_.set_active_tool (0);
 
@@ -79,6 +82,7 @@ void Photoshop::init_filters (void) {
 
     Plugin_Loader loader (*this);
     loader.load_plugin ("dll/monochrome.dll");
+    //loader.load_plugin ("dll/negative.dll");
 
     //--------------------------------------------------
 

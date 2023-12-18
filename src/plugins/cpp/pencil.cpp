@@ -11,19 +11,27 @@
 Pencil_Tool::Pencil_Tool (void):
         Tool ("pencil", "media/pencil.png"),
 
-        brush_radius_ (1),
+        prev_mouse_position_ (),
         is_brush_down (false) {}
 
 //--------------------------------------------------
 
 void Pencil_Tool::onMainButton (const plug::ControlState& state, const plug::Vec2d& position) {
 
-    (void) position;
+    //--------------------------------------------------
+    // finishing drawing
+
+    if (state.state == plug::State::Released) {
+
+        is_brush_down = false;
+        return;
+    }
 
     //--------------------------------------------------
+    // starting drawing
 
-    if (state.state == plug::State::Pressed) is_brush_down = true;
-    else                                     is_brush_down = false;
+    is_brush_down        = true;
+    prev_mouse_position_ = position;
 }
 
 void Pencil_Tool::onMove (const plug::Vec2d& position) {
@@ -32,10 +40,16 @@ void Pencil_Tool::onMove (const plug::Vec2d& position) {
 
     //--------------------------------------------------
 
-    plug::VertexArray point (plug::PrimitiveType::Points, 1);
+    plug::VertexArray line (plug::PrimitiveType::Lines, 2);
     plug::Color       color = color_palette_->getFGColor ();
-    point [0] = {position, plug::Vec2d (0, 0), color};
-    canvas_->draw (point);
+    line [0] = {prev_mouse_position_, plug::Vec2d (), color};
+    line [1] = {position,             plug::Vec2d (), color};
+
+    canvas_->draw (line);
+
+    //--------------------------------------------------
+
+    prev_mouse_position_ = position;
 }
 
 //--------------------------------------------------

@@ -67,6 +67,42 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
     }
 
     //--------------------------------------------------
+    // TriangleStrip
+
+    if (plug_array.getPrimitive () == plug::TriangleStrip) {
+
+        my_array.resize (3 * (plug_array_size - 2));
+
+        // i - new vertex
+        for (int i = 2; i < plug_array_size; ++i) {
+
+            copyToSDL_Vertex (my_array [3 * i], plug_array [i - 2]);
+            copyToSDL_Vertex (my_array [3 * i], plug_array [i - 1]);
+            copyToSDL_Vertex (my_array [3 * i], plug_array [i]);
+        }
+
+        return;
+    }
+
+    //--------------------------------------------------
+    // TriangleFan
+
+    if (plug_array.getPrimitive () == plug::TriangleFan) {
+
+        my_array.resize (3 * (plug_array_size - 1) / 2);
+
+        // i - triangle number
+        for (int i = 1; i < (plug_array_size - 1) / 2; ++i) {
+
+            copyToSDL_Vertex (my_array [3 * i], plug_array [0]);
+            copyToSDL_Vertex (my_array [3 * i], plug_array [2 * i]);
+            copyToSDL_Vertex (my_array [3 * i], plug_array [2 * i + 1]);
+        }
+
+        return;
+    }
+
+    //--------------------------------------------------
     // Quads
 
     if (plug_array.getPrimitive () == plug::Quads) {
@@ -74,15 +110,80 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
         // instead of one quad we have two triangles
         my_array.resize (plug_array_size * 6 / 4);
 
-        for (int i = 0; i < plug_array_size; i += 4) {
+        for (int i = 0; i < plug_array_size / 4; i += 1) {
 
-            copyToSDL_Vertex (my_array [i],     plug_array [i]);
-            copyToSDL_Vertex (my_array [i + 1], plug_array [i + 1]);
-            copyToSDL_Vertex (my_array [i + 2], plug_array [i + 2]);
+            copyToSDL_Vertex (my_array [6 * i],     plug_array [4 * i]);
+            copyToSDL_Vertex (my_array [6 * i + 1], plug_array [4 * i + 1]);
+            copyToSDL_Vertex (my_array [6 * i + 2], plug_array [4 * i + 2]);
 
-            copyToSDL_Vertex (my_array [i + 3], plug_array [i]);
-            copyToSDL_Vertex (my_array [i + 4], plug_array [i + 2]);
-            copyToSDL_Vertex (my_array [i + 5], plug_array [i + 3]);
+            copyToSDL_Vertex (my_array [6 * i + 3], plug_array [4 * i]);
+            copyToSDL_Vertex (my_array [6 * i + 4], plug_array [4 * i + 2]);
+            copyToSDL_Vertex (my_array [6 * i + 5], plug_array [4 * i + 3]);
+        }
+
+        return;
+    }
+
+    //--------------------------------------------------
+    // Lines
+
+    if (plug_array.getPrimitive () == plug::Lines) {
+
+        // line is two quad with width = 1
+        // (vertical and horizontal)
+        int line_width = 1;
+        my_array.resize (plug_array_size * 6);
+
+        for (int i = 0; i < plug_array_size / 2; i += 1) {
+
+
+            plug::Vec2d anker1   ((int) plug_array [2 * i].position.x,     (int) plug_array [2 * i].position.y);
+            plug::Vec2d corner1a (anker1.x + line_width,                   anker1.y);
+            plug::Vec2d corner1b (anker1.x,                                anker1.y + line_width);
+            plug::Vec2d anker2   ((int) plug_array [2 * i + 1].position.x, (int) plug_array [2 * i + 1].position.y);
+            plug::Vec2d corner2a (anker2.x + line_width,                   anker2.y);
+            plug::Vec2d corner2b (anker2.x,                                anker2.y + line_width);
+
+            plug::Color color1 = plug_array [i]    .color;
+            plug::Color color2 = plug_array [i + 1].color;
+
+            plug::Vertex vertex1;
+            vertex1.position = anker1;
+            vertex1.color    = color1;
+
+            plug::Vertex vertex2;
+            vertex2.position = corner1a;
+            vertex2.color    = color1;
+
+            plug::Vertex vertex3;
+            vertex3.position = corner1b;
+            vertex3.color    = color1;
+
+            plug::Vertex vertex4;
+            vertex4.position = anker2;
+            vertex4.color    = color2;
+
+            plug::Vertex vertex5;
+            vertex5.position = corner2a;
+            vertex5.color    = color2;
+
+            plug::Vertex vertex6;
+            vertex6.position = corner2b;
+            vertex6.color    = color2;
+
+            copyToSDL_Vertex (my_array [12*i],     vertex1);
+            copyToSDL_Vertex (my_array [12*i + 1], vertex2);
+            copyToSDL_Vertex (my_array [12*i + 2], vertex5);
+            copyToSDL_Vertex (my_array [12*i + 3], vertex1);
+            copyToSDL_Vertex (my_array [12*i + 4], vertex4);
+            copyToSDL_Vertex (my_array [12*i + 5], vertex5);
+
+            copyToSDL_Vertex (my_array [12*i + 6],  vertex1);
+            copyToSDL_Vertex (my_array [12*i + 7],  vertex3);
+            copyToSDL_Vertex (my_array [12*i + 8],  vertex6);
+            copyToSDL_Vertex (my_array [12*i + 9],  vertex1);
+            copyToSDL_Vertex (my_array [12*i + 10], vertex4);
+            copyToSDL_Vertex (my_array [12*i + 11], vertex6);
         }
 
         return;
@@ -97,15 +198,15 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
 
         for (int i = 0; i < plug_array_size; ++i) {
 
-            plug::Vec2d corner1 ((int) plug_array [i].position.x,     (int) plug_array [i].position.y);
-            plug::Vec2d corner2 (corner1.x + 1, corner1.y);
-            plug::Vec2d corner3 (corner1.x + 1, corner1.y + 1);
-            plug::Vec2d corner4 (corner1.x,     corner1.y + 1);
+            plug::Vec2d anker1 ((int) plug_array [i].position.x, (int) plug_array [i].position.y);
+            plug::Vec2d corner2 (anker1.x + 1, anker1.y);
+            plug::Vec2d corner3 (anker1.x + 1, anker1.y + 1);
+            plug::Vec2d anker2 (anker1.x,     anker1.y + 1);
 
             plug::Color color  = plug_array [i].color;
 
             plug::Vertex vertex1;
-            vertex1.position = corner1;
+            vertex1.position = anker1;
             vertex1.color    = color;
 
             plug::Vertex vertex2;
@@ -117,15 +218,15 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
             vertex3.color    = color;
 
             plug::Vertex vertex4;
-            vertex4.position = corner4;
+            vertex4.position = anker2;
             vertex4.color    = color;
 
             copyToSDL_Vertex (my_array [i],     vertex1);
             copyToSDL_Vertex (my_array [i + 1], vertex2);
             copyToSDL_Vertex (my_array [i + 2], vertex3);
-            copyToSDL_Vertex (my_array [i + 3], vertex3);
+            copyToSDL_Vertex (my_array [i + 3], vertex1);
             copyToSDL_Vertex (my_array [i + 4], vertex4);
-            copyToSDL_Vertex (my_array [i + 5], vertex1);
+            copyToSDL_Vertex (my_array [i + 5], vertex3);
         }
 
         return;

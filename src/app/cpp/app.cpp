@@ -134,6 +134,8 @@ void App::on_mouse_event (SDL_Event sdl_event) {
 
     plug::EHC context = { transform_stack_, false, false };
     widgets_.onEvent (*plug_event, context);
+
+    delete plug_event;
 }
 
 

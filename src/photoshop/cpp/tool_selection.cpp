@@ -40,8 +40,10 @@ void Tool_Selection_Widget::add_tool (int tool_id) {
     //--------------------------------------------------
 
     const char* texture_path = data->getTexturePath ();
-    LayoutBox  box (100_px, 100_px);
-    My_Widget& model  = *new Textured_Window (box, texture_path); // can be any size, will be resized after
+    //if (!texture_path) return;
+
+    LayoutBox  box (100_px, 100_px); // can be any size, will be resized after
+    My_Widget& model  = *new Textured_Window (box, texture_path);
     Button&    button = *new Button (model);
 
     //--------------------------------------------------

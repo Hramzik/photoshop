@@ -21,8 +21,8 @@ class Pencil_Tool: public Tool {
 
   private:
 
-    double brush_radius_;
-    bool   is_brush_down;
+    plug::Vec2d prev_mouse_position_;
+    bool        is_brush_down;
 };
 
 //--------------------------------------------------
