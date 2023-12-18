@@ -4,6 +4,7 @@
 
 
 #include "filter.hpp"
+#include "palette.hpp"
 
 
 //--------------------------------------------------

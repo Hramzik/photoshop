@@ -9,10 +9,22 @@
 //--------------------------------------------------
 
 Filter_Applying_Widget::Filter_Applying_Widget
-(plug::LayoutBox& box, Canvas& canvas):
+(plug::LayoutBox& box, Filter_Palette& palette, Canvas& canvas):
         Column_Aligner (*new Colored_Window (box, C_LIGHT_GRAY), plug::Vec2d (0.1, 0.1)),
 
-        canvas_ (canvas) {}
+        palette_ (palette),
+        canvas_  (canvas)
+{
+    for (int i = 0; i < palette_.get_filters_count (); ++i) {
+
+        plug::Filter* filter = palette_.get_filter (i);
+        if (!filter) continue;
+
+        //--------------------------------------------------
+
+        add_filter (*filter);
+    }
+}
 
 //--------------------------------------------------
 

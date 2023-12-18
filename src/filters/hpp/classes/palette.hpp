@@ -18,14 +18,15 @@ class Filter_Palette {
     //--------------------------------------------------
 
     // returns filter_id
-    int     add_filter (Filter& filter);
-    Filter* get_filter (int     filter_id);
+    int           add_filter (plug::Filter& filter);
+    plug::Filter* get_filter (int           filter_id);
+    int           get_filters_count (void);
 
 //--------------------------------------------------
 
-  //private:
+  private:
 
-    std::vector <Filter*> filters_;
+    std::vector <plug::Filter*> filters_;
 };
 
 

@@ -96,9 +96,7 @@ program:
 	$(TOOLS_FOLDER)/color_palette.cpp \
 	$(TOOLS_FOLDER)/tool_palette.cpp \
 \
-	$(FILTERS_FOLDER)/filter.cpp \
-	$(PLUGINS_FOLDER)/monochrome.cpp \
-	$(PLUGINS_FOLDER)/black_and_white.cpp \
+	$(FILTERS_FOLDER)/palette.cpp \
 \
 	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
 	$(PHOTOSHOP_FOLDER)/plugin_loader.cpp \
@@ -130,6 +128,24 @@ pencil:
 	-shared \
 \
 	-o dll/pencil.dll \
+	$(flags_standart_version) \
+	-lstdc++ -O0 \
+	-fmessage-length=60 \
+	-fcompare-debug-second \
+	-I $(SRC_FOLDER) \
+	-I $(PLUGIN_STANDART_FOLDER) \
+
+monochrome:
+
+	$(sc) $(cc) \
+	$(PLUGINS_FOLDER)/monochrome.cpp \
+\
+	$(FILTERS_FOLDER)/filter.cpp \
+	$(PLUGIN_DATA_FOLDER)/plugin_data.cpp \
+\
+	-shared \
+\
+	-o dll/monochrome.dll \
 	$(flags_standart_version) \
 	-lstdc++ -O0 \
 	-fmessage-length=60 \

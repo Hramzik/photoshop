@@ -9,8 +9,9 @@
 Photoshop::Photoshop (plug::LayoutBox& box):
     Framed_Window (*new Colored_Window (box, C_GRAY)),
 
-    tool_palette_  (),
     color_palette_ (),
+    tool_palette_  (),
+    filter_palette_  (),
 
     canvas_ (nullptr)
 {
@@ -74,19 +75,18 @@ void Photoshop::init_tools (void) {
     register_widget (new Framed_Window (tools, false));
 }
 
-#include "plugins/hpp/filters/monochrome.hpp"
-#include "plugins/hpp/filters/black_and_white.hpp"
 void Photoshop::init_filters (void) {
+
+    Plugin_Loader loader (*this);
+    loader.load_plugin ("dll/monochrome.dll");
+
+    //--------------------------------------------------
 
     LayoutBox filters_box (250_px, 125_px);
     filters_box.setPosition (plug::Vec2d (-500, -350));
 
-    Filter_Applying_Widget& filters = *new Filter_Applying_Widget (filters_box, canvas_->access_canvas ());
-
-    //--------------------------------------------------
-
-    filters.add_filter (*new Monochrome_Filter ());
-    filters.add_filter (*new Black_And_White_Filter ());
+    Filter_Applying_Widget& filters =
+            *new Filter_Applying_Widget (filters_box, filter_palette_, canvas_->access_canvas ());
 
     //--------------------------------------------------
 
@@ -112,6 +112,11 @@ void Photoshop::add_tool (plug::Tool& tool) {
 
     tool.setColorPalette (color_palette_);
     tool_palette_.add_tool (tool);
+}
+
+void Photoshop::add_filter (plug::Filter& filter) {
+
+    filter_palette_.add_filter (filter);
 }
 
 //--------------------------------------------------

@@ -33,13 +33,16 @@ void Plugin_Loader::load_plugin (const char* path) {
     //--------------------------------------------------
 
     size_t interface_id = static_cast <size_t> (plug::PluginGuid::Tool);
-    plug::Tool* tool    = static_cast <plug::Tool*> (plugin->tryGetInterface (interface_id));
-    //plug::Tool* tool = static_cast <plug::Tool*> (plugin);
-    if (!tool) return;
+    plug::Tool*    tool = static_cast <plug::Tool*> (plugin->tryGetInterface (interface_id));
+
+    if (tool) photoshop_.add_tool (*tool);
 
     //--------------------------------------------------
 
-    photoshop_.add_tool (*tool);
+    interface_id         = static_cast <size_t> (plug::PluginGuid::Filter);
+    plug::Filter* filter = static_cast <plug::Filter*> (plugin->tryGetInterface (interface_id));
+
+    if (filter) photoshop_.add_filter (*filter);
 }
 
 //--------------------------------------------------

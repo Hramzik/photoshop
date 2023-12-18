@@ -29,7 +29,7 @@
         "src\\widgets\\cpp\\container.cpp": true,
         "src\\widgets\\cpp\\container_iterator.cpp": true,
         "src\\widgets\\cpp\\container_riterator.cpp": true,
-        "dll": true,
+        "dll": false,
         "src\\plug-standart": false
     },
     "explorerExclude.backup": {},

@@ -48,16 +48,29 @@ plug::Widget* Filter::getWidget (void) {
 
 plug::Plugin* Filter::tryGetInterface (size_t interface_id) {
 
-    (void) interface_id;
+    switch (interface_id) {
 
-    //--------------------------------------------------
+        case static_cast <size_t> (plug::PluginGuid::Plugin):
+        {
+            addReference ();
+            return static_cast <plug::Plugin*> (this);
+        }
 
-    return nullptr;
+        case static_cast <size_t> (plug::PluginGuid::Filter):
+        {
+            addReference ();
+            return static_cast <plug::Filter*> (this);
+        }
+
+        //--------------------------------------------------
+
+        default: return nullptr;
+    }
 }
 
 const plug::PluginData* Filter::getPluginData (void) const {
 
-    return nullptr;
+    return &plugin_data_;
 }
 
 void Filter::addReference (void) {

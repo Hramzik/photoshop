@@ -4,6 +4,8 @@
 
 #include "widgets/hpp/widgets.hpp"
 
+#include "filters/hpp/filters.hpp"
+
 //--------------------------------------------------
 
 class Photoshop: public Framed_Window {
@@ -18,14 +20,17 @@ class Photoshop: public Framed_Window {
 
     //--------------------------------------------------
 
-    void add_tool (plug::Tool& tool);
+    void add_tool   (plug::Tool&   tool);
+    void add_filter (plug::Filter& filter);
 
 //--------------------------------------------------
 
   private:
 
-    Tool_Palette  tool_palette_;
-    Color_Palette color_palette_;
+    Color_Palette  color_palette_;
+    Tool_Palette   tool_palette_;
+    Filter_Palette filter_palette_;
+
     Canvas_Viewer* canvas_;
 
     void init_colors   (void);

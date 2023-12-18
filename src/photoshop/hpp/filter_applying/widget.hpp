@@ -10,7 +10,7 @@ class Filter_Applying_Widget: public Column_Aligner {
 
   public:
 
-    Filter_Applying_Widget (plug::LayoutBox& box, Canvas& canvas);
+    Filter_Applying_Widget (plug::LayoutBox& box, Filter_Palette& palette, Canvas& canvas);
 
     //--------------------------------------------------
 
@@ -20,7 +20,8 @@ class Filter_Applying_Widget: public Column_Aligner {
 
   private:
 
-    Canvas& canvas_;
+    Filter_Palette& palette_;
+    Canvas&         canvas_;
 };
 
 

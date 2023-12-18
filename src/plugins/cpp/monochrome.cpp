@@ -28,3 +28,10 @@ void Monochrome_Filter::apply_filter_to_pixel (plug::Color& pixel) const {
 
 //--------------------------------------------------
 
+plug::Plugin* loadPlugin (void) {
+
+    return new Monochrome_Filter;
+}
+
+//--------------------------------------------------
+
