@@ -4,11 +4,17 @@
 
 #include "Plug/Filter.h"
 
+#include "plugin_data/hpp/plugin_data.hpp"
+
 //--------------------------------------------------
 
 class Filter: public plug::Filter {
 
   public:
+
+    Filter (const char* name);
+
+    //--------------------------------------------------
 
     void          applyFilter (plug::Canvas& canvas) const override;
     plug::Widget* getWidget   (void)                       override;
@@ -23,6 +29,10 @@ class Filter: public plug::Filter {
   protected:
 
     virtual void apply_filter_to_pixel (plug::Color& pixel) const;
+
+  private:
+
+    Plugin_Data plugin_data_;
 };
 
 

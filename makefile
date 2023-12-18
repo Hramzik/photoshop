@@ -10,11 +10,13 @@ APP_FOLDER       = src/app/cpp
 GRAPHICS_FOLDER  = src/graphics/cpp
 MY_RGB_FOLDER    = src/my_rgb/cpp
 VECTOR_FOLDER    = src/vector/cpp
-TRANSFORM_FOLDER = src/transform/cpp
-EVENTS_FOLDER    = src/events/cpp
+
 WIDGETS_FOLDER   = src/widgets/cpp
 TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
+PLUGINS_FOLDER   = src/plugins/cpp
+PLUGIN_DATA_FOLDER = src/plugin_data/cpp
+
 PHOTOSHOP_FOLDER = src/photoshop/cpp
 
 PLUGIN_STANDART_FOLDER       = src/plug-standart
@@ -89,12 +91,14 @@ program:
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 \
+	$(PLUGIN_DATA_FOLDER)/plugin_data.cpp \
+\
 	$(TOOLS_FOLDER)/color_palette.cpp \
 	$(TOOLS_FOLDER)/tool_palette.cpp \
 \
 	$(FILTERS_FOLDER)/filter.cpp \
-	$(FILTERS_FOLDER)/monochrome.cpp \
-	$(FILTERS_FOLDER)/black_and_white.cpp \
+	$(PLUGINS_FOLDER)/monochrome.cpp \
+	$(PLUGINS_FOLDER)/black_and_white.cpp \
 \
 	$(PHOTOSHOP_FOLDER)/photoshop.cpp \
 	$(PHOTOSHOP_FOLDER)/plugin_loader.cpp \
@@ -118,10 +122,10 @@ program:
 pencil:
 
 	$(sc) $(cc) \
-	$(TOOLS_FOLDER)/pencil.cpp \
+	$(PLUGINS_FOLDER)/pencil.cpp \
 \
 	$(TOOLS_FOLDER)/tool.cpp \
-	$(TOOLS_FOLDER)/plugin_data.cpp \
+	$(PLUGIN_DATA_FOLDER)/plugin_data.cpp \
 \
 	-shared \
 \

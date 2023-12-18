@@ -6,6 +6,11 @@
 
 //--------------------------------------------------
 
+Filter::Filter (const char* name):
+        plugin_data_ (name, nullptr) {}
+
+//--------------------------------------------------
+
 void Filter::applyFilter (plug::Canvas& canvas) const {
 
     const plug::Texture& texture = canvas.getTexture ();
@@ -25,7 +30,6 @@ void Filter::applyFilter (plug::Canvas& canvas) const {
         canvas.setPixel (x, y, pixel_color);
     }}
 }
-
 
 void Filter::apply_filter_to_pixel (plug::Color& pixel) const {
 

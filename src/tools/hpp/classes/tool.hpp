@@ -5,13 +5,15 @@
 #include "Plug/Tool.h"
 #include "Plug/Canvas.h"
 
+#include "plugin_data/hpp/plugin_data.hpp"
+
 //--------------------------------------------------
 
 class Tool: public plug::Tool {
 
   public:
 
-    Tool (const char* name, const char *texture_path);
+    Tool (const char* name, const char* texture_path);
 
     //--------------------------------------------------
 
@@ -45,8 +47,8 @@ class Tool: public plug::Tool {
 
     plug::ColorPalette* color_palette_;
     plug::Canvas*       canvas_;
-    //size_t m_cnt_reference;
-    //const BaseData m_data;
+
+    Plugin_Data plugin_data_;
 };
 
 //--------------------------------------------------

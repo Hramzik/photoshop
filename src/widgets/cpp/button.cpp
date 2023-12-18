@@ -67,7 +67,6 @@ void Button::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context)
     if (button_state_ == PRESSED) {
 
         last_held_position_ = event.pos;
-        std::cout << "given " << event.pos.x << " " << event.pos.y << "\n";
         call_action (held_action_);
         return;
     }

@@ -37,11 +37,22 @@ void MyRenderTexture::loadFromFile (const char* path) {
 
     //--------------------------------------------------
 
-    SDL_BlitScaled (img_surface, nullptr, white_surface, nullptr);
+    SDL_Surface* result_surface = white_surface;
+    SDL_BlitScaled (img_surface, nullptr, result_surface, nullptr);
 
     //--------------------------------------------------
+    // full texture size
 
-    setSdlSurface (white_surface);
+    if (!m_surface) {
+
+        setSdlSurface (result_surface);
+        return;
+    }
+
+    //--------------------------------------------------
+    // scale to original size
+
+    SDL_BlitScaled (result_surface, nullptr, m_surface, nullptr);
 }
 
 const SDL_Surface* MyRenderTexture::getSdlSurface (void) const {

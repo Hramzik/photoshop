@@ -4,17 +4,16 @@
 
 #include <iostream>
 
-#include "../hpp/tools.hpp"
+#include "tools/hpp/tools.hpp"
 
 //--------------------------------------------------
 
 Tool::Tool (const char* name, const char* texture_path):
 
         color_palette_ (nullptr),
-        canvas_        (nullptr)
-{
-    (void) name; (void) texture_path;
-}
+        canvas_        (nullptr),
+
+        plugin_data_ (name, texture_path) {}
 
 //--------------------------------------------------
 
@@ -106,7 +105,7 @@ plug::Plugin* Tool::tryGetInterface (size_t interface_id) {
 
 const plug::PluginData* Tool::getPluginData (void) const {
 
-    return nullptr;
+    return &plugin_data_;
 }
 
 void Tool::addReference (void) {

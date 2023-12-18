@@ -19,7 +19,7 @@ Canvas::Canvas (void):
 
         selection_mask_ (nullptr) {}
 
-Canvas::Canvas (const int width, const int height):
+Canvas::Canvas (int width, int height):
         Canvas ()
 {
     main_texture_ = new MyRenderTexture (width, height);
@@ -43,6 +43,18 @@ Canvas::Canvas (const char* path):
 
     int width  = main_texture_->getSdlSurface ()->w;
     int height = main_texture_->getSdlSurface ()->h;
+
+    //--------------------------------------------------
+
+    selection_mask_ = new SelectionMask (width, height);
+    selection_mask_->fill (true);
+}
+
+Canvas::Canvas (int width, int height, const char* path):
+        Canvas ()
+{
+    main_texture_ = new MyRenderTexture (width, height);
+    main_texture_->loadFromFile (path);
 
     //--------------------------------------------------
 

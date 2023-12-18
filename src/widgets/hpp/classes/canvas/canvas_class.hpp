@@ -17,8 +17,9 @@ class Canvas: public plug::Canvas {
 
     //--------------------------------------------------
 
-    Canvas (const int width, const int height);
     Canvas (const char* path);
+    Canvas (int width, int height);
+    Canvas (int width, int height, const char* path);
 
     ~Canvas (void);
 

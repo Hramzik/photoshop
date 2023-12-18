@@ -31,7 +31,7 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 void Photoshop::init_colors (void) {
 
     LayoutBox colors_box (250_px, 190_px);
-    colors_box.setPosition (plug::Vec2d (-500, -120));
+    colors_box.setPosition (plug::Vec2d (-500, -60));
 
     Color_Selection_Widget& colors = *new Color_Selection_Widget (colors_box, color_palette_);
 
@@ -74,8 +74,8 @@ void Photoshop::init_tools (void) {
     register_widget (new Framed_Window (tools, false));
 }
 
-#include "filters/hpp/plugins/monochrome.hpp"
-#include "filters/hpp/plugins/black_and_white.hpp"
+#include "plugins/hpp/filters/monochrome.hpp"
+#include "plugins/hpp/filters/black_and_white.hpp"
 void Photoshop::init_filters (void) {
 
     LayoutBox filters_box (250_px, 125_px);
@@ -98,7 +98,7 @@ void Photoshop::init_canvases (void) {
     LayoutBox canvas_box (800_px, 800_px);
     canvas_box.setPosition (plug::Vec2d (100, 0));
 
-    Canvas& canvas = *new Canvas ("media/cat.jpeg");
+    Canvas& canvas = *new Canvas (500, 500, "media/cat.jpeg");
     canvas_ = new Canvas_Viewer (canvas_box, canvas);
     canvas_->set_tool_palette (tool_palette_);
     canvas_->set_is_focused (true);

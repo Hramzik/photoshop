@@ -19,7 +19,7 @@
         "src\\main.cpp": true,
         "src\\widgets\\hpp\\widgets.hpp": true,
         "src\\tools\\hpp\\tools.hpp": true,
-        "src\\tools": true,
+        "src\\tools": false,
         "src\\app": false,
         "src\\filters": false,
         "src\\widgets\\cpp\\widget.cpp": true,
