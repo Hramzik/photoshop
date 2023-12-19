@@ -27,6 +27,22 @@ void Column_Aligner::post_adding_procedure (My_Widget& new_widget) {
 
     next_widget_vertical_offset_ += new_widget.getLayoutBox ().getSize ().y;
     next_widget_vertical_offset_ += inner_padding_size_.y * get_widget_width ();
+
+    //--------------------------------------------------
+    // moving and resizing
+
+    plug::Vec2d new_size (getLayoutBox ().getSize ().x, next_widget_vertical_offset_);
+
+    // we need to move down, otherwise we will grow up and down (and we want ONLY down XDD)
+    plug::Vec2d new_position = getLayoutBox ().getPosition ();
+    new_position.y += 1 / 2 * (next_widget_vertical_offset_ - getLayoutBox ().getSize ().y);
+
+    //--------------------------------------------------
+
+    plug::LayoutBox& new_box = getLayoutBox ();
+    new_box.setSize     (new_size);
+    new_box.setPosition (new_position);
+    setLayoutBox (new_box);
 }
 
 //--------------------------------------------------
@@ -54,7 +70,6 @@ void Column_Aligner::resize_new_widget (My_Widget& new_widget) {
     box.setSize (new_size);
     new_widget.setLayoutBox (box);
 }
-
 
 void Column_Aligner::move_new_widget (My_Widget& new_widget) {
 

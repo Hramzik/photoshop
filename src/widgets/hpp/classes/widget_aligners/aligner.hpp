@@ -18,6 +18,10 @@ class Widget_Aligner: public Widget_Container {
     // widget will be moved and resized
     void add_widget (My_Widget& widget);
 
+    //--------------------------------------------------
+
+    void setLayoutBox (const plug::LayoutBox& box) override;
+
 //--------------------------------------------------
 
   protected:

@@ -92,7 +92,7 @@ void Button::setLayoutBox (const plug::LayoutBox& box) {
 
     //--------------------------------------------------
 
-    //My_Widget::setLayoutBox (box);
+    My_Widget::setLayoutBox (box);
 }
 
 //--------------------------------------------------

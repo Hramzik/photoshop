@@ -88,6 +88,7 @@ program:
 	$(WIDGETS_FOLDER)/aligner.cpp \
 	$(WIDGETS_FOLDER)/square_aligner.cpp \
 	$(WIDGETS_FOLDER)/column_aligner.cpp \
+	$(WIDGETS_FOLDER)/row_aligner.cpp \
 \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
@@ -107,6 +108,7 @@ program:
 	$(PHOTOSHOP_FOLDER)/tool_selection_action.cpp \
 	$(PHOTOSHOP_FOLDER)/filter_applying.cpp \
 	$(PHOTOSHOP_FOLDER)/filter_applying_action.cpp \
+	$(PHOTOSHOP_FOLDER)/menu.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 Photoshop::Photoshop (plug::LayoutBox& box):
-    Framed_Window (*new Colored_Window (box, C_GRAY)),
+    Framed_Window (*new Colored_Window (box, C_GRAY), false),
 
     color_palette_ (),
     tool_palette_  (),
@@ -98,7 +98,12 @@ void Photoshop::init_filters (void) {
 
     //--------------------------------------------------
 
-    register_widget (&filters);
+    LayoutBox menu_box (250_px, 30_px);
+    menu_box.setPosition (plug::Vec2d (-700 + 125, -500 + 15));
+    Menu& menu = *new Menu (menu_box);
+    menu.add_widget (filters);
+
+    register_widget (&menu);
 }
 
 void Photoshop::init_canvases (void) {

@@ -65,6 +65,11 @@ void Widget::onParentUpdate(const plug::LayoutBox &parent_box) {
 }
 
 void Widget::setLayoutBox(const plug::LayoutBox &box) {
+
+    if (&box == &getLayoutBox ()) return;
+
+    //--------------------------------------------------
+
   delete box_;
   box_ = box.clone();
 }
