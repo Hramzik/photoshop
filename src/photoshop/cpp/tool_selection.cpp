@@ -10,7 +10,7 @@
 
 Tool_Selection_Widget::Tool_Selection_Widget
 (plug::LayoutBox& box, Tool_Palette& palette):
-        Square_Aligner (*new Colored_Window (box, C_LIGHT_GRAY), 4),
+        Square_Aligner (*new Colored_Window (box, C_LIGHT_GRAY), 3),
 
         palette_ (palette)
 {

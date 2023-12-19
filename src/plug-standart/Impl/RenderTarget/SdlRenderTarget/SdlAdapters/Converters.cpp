@@ -73,12 +73,12 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
 
         my_array.resize (3 * (plug_array_size - 2));
 
-        // i - new vertex
-        for (int i = 2; i < plug_array_size; ++i) {
+        // i - new triangle index index
+        for (int i = 0; i < plug_array_size - 2; ++i) {
 
-            copyToSDL_Vertex (my_array [3 * i], plug_array [i - 2]);
-            copyToSDL_Vertex (my_array [3 * i], plug_array [i - 1]);
-            copyToSDL_Vertex (my_array [3 * i], plug_array [i]);
+            copyToSDL_Vertex (my_array [3 * i],     plug_array [i]);
+            copyToSDL_Vertex (my_array [3 * i + 1], plug_array [i + 1]);
+            copyToSDL_Vertex (my_array [3 * i + 2], plug_array [i + 2]);
         }
 
         return;
@@ -92,11 +92,11 @@ void copyToMyVertexArray (MyVertexArray& my_array, const plug::VertexArray& plug
         my_array.resize (3 * (plug_array_size - 1) / 2);
 
         // i - triangle number
-        for (int i = 1; i < (plug_array_size - 1) / 2; ++i) {
+        for (int i = 0; i < (plug_array_size - 1) / 2; ++i) {
 
-            copyToSDL_Vertex (my_array [3 * i], plug_array [0]);
-            copyToSDL_Vertex (my_array [3 * i], plug_array [2 * i]);
-            copyToSDL_Vertex (my_array [3 * i], plug_array [2 * i + 1]);
+            copyToSDL_Vertex (my_array [3 * i],     plug_array [0]);
+            copyToSDL_Vertex (my_array [3 * i + 1], plug_array [2 * i + 1]);
+            copyToSDL_Vertex (my_array [3 * i + 2], plug_array [2 * i + 2]);
         }
 
         return;

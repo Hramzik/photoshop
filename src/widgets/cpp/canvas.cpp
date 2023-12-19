@@ -115,7 +115,7 @@ plug::SelectionMask& Canvas::getSelectionMask (void) {
 
 plug::Color Canvas::getPixel (size_t x, size_t y) const {
 
-    const_cast <Canvas&> (*this).update_plug_texture ();
+    //const_cast <Canvas&> (*this).update_plug_texture ();
 
     //--------------------------------------------------
 

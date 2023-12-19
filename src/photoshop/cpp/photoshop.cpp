@@ -60,6 +60,7 @@ void Photoshop::init_tools (void) {
 
     Plugin_Loader loader (*this);
     loader.load_plugin ("dll/pencil.dll");
+    loader.load_plugin ("dll/brush.dll");
     loader.load_plugin ("dll/line.dll");
     loader.load_plugin ("dll/rect.dll");
     loader.load_plugin ("dll/circle.dll");
@@ -69,7 +70,7 @@ void Photoshop::init_tools (void) {
 
     //--------------------------------------------------
 
-    LayoutBox box (250_px, 210_px);
+    LayoutBox box (250_px, 180_px);
     box.setPosition (plug::Vec2d (-500, 200));
 
     My_Widget& tools = *new Tool_Selection_Widget (box, tool_palette_);
@@ -84,6 +85,8 @@ void Photoshop::init_filters (void) {
     Plugin_Loader loader (*this);
     loader.load_plugin ("dll/monochrome.dll");
     loader.load_plugin ("dll/negative.dll");
+    loader.load_plugin ("dll/posterize.dll");
+    loader.load_plugin ("dll/edge_detect.dll");
 
     //--------------------------------------------------
 

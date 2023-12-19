@@ -147,6 +147,7 @@ void Canvas_Viewer::onKeyboardPressed (const plug::KeyboardPressedEvent& event, 
 
     //--------------------------------------------------
 
+    // везде сделать так!
     if (event.key_id == plug::KeyCode::Escape) get_active_tool ()->onCancel();
 
     if (event.shift) get_active_tool ()->onModifier1 ({plug::State::Pressed});
@@ -164,9 +165,9 @@ void Canvas_Viewer::onKeyboardReleased (const plug::KeyboardReleasedEvent& event
 
     //--------------------------------------------------
 
-    if (event.shift) get_active_tool ()->onModifier1 ({plug::State::Released});
-    if (event.ctrl)  get_active_tool ()->onModifier2 ({plug::State::Released});
-    if (event.alt)   get_active_tool ()->onModifier3 ({plug::State::Released});
+    if (!event.shift) get_active_tool ()->onModifier1 ({plug::State::Released});
+    if (!event.ctrl)  get_active_tool ()->onModifier2 ({plug::State::Released});
+    if (!event.alt)   get_active_tool ()->onModifier3 ({plug::State::Released});
 }
 
 //--------------------------------------------------
