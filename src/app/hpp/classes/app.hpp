@@ -35,6 +35,10 @@ class App {
 
     bool sdl_exit_;
 
+    bool shift_pressed_ = false;
+    bool ctrl_pressed_  = false;
+    bool alt_pressed_   = false;
+
     //--------------------------------------------------
 
     void populate (void);
@@ -42,7 +46,8 @@ class App {
     void update   (void);
     bool is_alive (void);
     bool exist_opened_widgets (void);
-    void on_mouse_event (SDL_Event event);
+    void on_mouse_event    (SDL_Event event);
+    void on_keyboard_event (SDL_Event event);
 
     void render (void);
 };

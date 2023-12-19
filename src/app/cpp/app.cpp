@@ -45,7 +45,6 @@ void App::run (void) {
     }
 }
 
-
 bool App::is_alive (void) {
 
     if (sdl_exit_)                return false;
@@ -54,7 +53,6 @@ bool App::is_alive (void) {
 
     return true;
 }
-
 
 bool App::exist_opened_widgets (void) {
 
@@ -81,8 +79,8 @@ void App::update (void) {
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP: on_mouse_event (event); break;
 
-        //case SDL_KEYDOWN: widgets_.on_keyboard_pressed  (event.key.keysym.sym); break;
-        //case SDL_KEYUP:   widgets_.on_keyboard_released (event.key.keysym.sym); break;
+        case SDL_KEYDOWN: on_keyboard_event (event); break;
+        case SDL_KEYUP:   on_keyboard_event (event); break;
 
         //--------------------------------------------------
 
@@ -93,51 +91,6 @@ void App::update (void) {
 
     //widgets_. (clock ());
 }
-
-
-void App::on_mouse_event (SDL_Event sdl_event) {
-
-    //--------------------------------------------------
-    // getting mouse position
-
-    plug::Event* plug_event = nullptr;
-    plug::Vec2d position;
-
-    switch (sdl_event.type) {
-
-        case SDL_MOUSEMOTION:
-            position  = plug::Vec2d (sdl_event.motion.x, sdl_event.motion.y);
-            plug_event = new plug::MouseMoveEvent (position, false, false, false);
-            break;
-
-        //--------------------------------------------------
-
-        case SDL_MOUSEBUTTONDOWN:
-            position  = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
-            plug_event = new plug::MousePressedEvent (plug::MouseButton::Left, position, false, false, false);
-            break;
-
-        //--------------------------------------------------
-
-        case SDL_MOUSEBUTTONUP: 
-            position  = plug::Vec2d (sdl_event.button.x, sdl_event.button.y);
-            plug_event = new plug::MouseReleasedEvent (plug::MouseButton::Left, position, false, false, false);
-            break;
-
-        //--------------------------------------------------
-
-        default: LOG_ERROR (BAD_ARGS); return;
-    }
-
-    //--------------------------------------------------
-    // handling event
-
-    plug::EHC context = { transform_stack_, false, false };
-    widgets_.onEvent (*plug_event, context);
-
-    delete plug_event;
-}
-
 
 void App::render (void) {
 

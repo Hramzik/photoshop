@@ -73,6 +73,7 @@ program:
 \
 	$(SRC_FOLDER)/main.cpp \
 	$(APP_FOLDER)/app.cpp \
+	$(APP_FOLDER)/events.cpp \
 	$(WIDGETS_FOLDER)/my_widget.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \

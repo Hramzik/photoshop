@@ -45,7 +45,8 @@ protected:
     void onMousePressed  (const plug::MousePressedEvent&  event, plug::EHC& context) override;
     void onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& context) override;
 
-    void onKeyboardPressed (const plug::KeyboardPressedEvent&  event, plug::EHC& context) override;
+    void onKeyboardPressed  (const plug::KeyboardPressedEvent&  event, plug::EHC& context) override;
+    void onKeyboardReleased (const plug::KeyboardReleasedEvent& event, plug::EHC& context) override;
 
 private:
 
