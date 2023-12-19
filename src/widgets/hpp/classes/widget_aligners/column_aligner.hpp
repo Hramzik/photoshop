@@ -7,13 +7,19 @@
 //--------------------------------------------------
 
 // распологает виджеты в столбец, растет вниз
-
+// local coordinates: left-top
 class Column_Aligner: public Widget_Aligner {
 
   public:
 
     Column_Aligner (My_Widget& background);
     Column_Aligner (My_Widget& background, plug::Vec2d relative_padding_size);
+
+    //--------------------------------------------------
+
+    void onEvent (const  plug::Event& event,  plug::EHC&          context) override;
+    void render  (plug::RenderTarget& target, plug::TransformStack& stack) override;
+    void setLayoutBox (const plug::LayoutBox& box)                         override;
 
   protected:
 

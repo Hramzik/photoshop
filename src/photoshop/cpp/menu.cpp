@@ -20,6 +20,7 @@ Menu::Menu (plug::LayoutBox& box):
 void Menu::add_widget (My_Widget& widget) {
 
     Widget_Hider& widget_hider = *new Widget_Hider (widget);
+    widget_hider.hide ();
 
     //--------------------------------------------------
     // creating showing button

@@ -15,6 +15,13 @@ Column_Aligner::Column_Aligner
 
         next_widget_vertical_offset_ (0)
 {
+    //--------------------------------------------------
+    // left-top coordinates
+
+    background_.getLayoutBox ().setPosition (getLayoutBox ().getSize () / 2);
+
+    //--------------------------------------------------
+
     next_widget_vertical_offset_ = tl_padding_size_.y * get_widget_width ();
 }
 
@@ -24,6 +31,9 @@ Column_Aligner::Column_Aligner (My_Widget& background):
 //--------------------------------------------------
 
 void Column_Aligner::post_adding_procedure (My_Widget& new_widget) {
+
+    //--------------------------------------------------
+    // next widget offset
 
     next_widget_vertical_offset_ += new_widget.getLayoutBox ().getSize ().y;
     next_widget_vertical_offset_ += inner_padding_size_.y * get_widget_width ();
@@ -81,13 +91,58 @@ void Column_Aligner::move_new_widget (My_Widget& new_widget) {
     plug::Vec2d new_position (x, y);
     plug::Vec2d widget_size = new_widget.getLayoutBox ().getSize ();
     new_position += widget_size / 2;
-    new_position -= getLayoutBox ().getSize () / 2;
 
     //--------------------------------------------------
 
     plug::LayoutBox& box = new_widget.getLayoutBox ();
     box.setPosition (new_position);
     new_widget.setLayoutBox (box);
+}
+
+//--------------------------------------------------
+
+void Column_Aligner::onEvent (const plug::Event& event, plug::EHC& context) {
+
+    plug::Transform coordinate_switcher (-0.5 * getLayoutBox ().getSize ());
+    context.stack.enter (coordinate_switcher);
+
+    //--------------------------------------------------
+
+    Widget_Container::onEvent (event, context);
+
+    //--------------------------------------------------
+
+    context.stack.leave ();
+}
+
+void Column_Aligner::render (plug::RenderTarget& target, plug::TransformStack& stack) {
+
+    plug::Transform coordinate_switcher (-0.5 * getLayoutBox ().getSize ());
+    stack.enter (coordinate_switcher);
+
+    //--------------------------------------------------
+
+    Widget_Container::render (target, stack);
+
+    //--------------------------------------------------
+
+    stack.leave ();
+}
+
+void Column_Aligner::setLayoutBox (const plug::LayoutBox& box) {
+
+    // rebuild widgets
+
+    //--------------------------------------------------
+    // default
+
+    My_Widget::setLayoutBox (box);
+
+    //--------------------------------------------------
+    // background needs a resize and move to center
+
+    background_.setLayoutBox (box);
+    background_.getLayoutBox ().setPosition (getLayoutBox ().getSize () / 2);
 }
 
 //--------------------------------------------------
