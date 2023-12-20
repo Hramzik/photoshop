@@ -15,6 +15,36 @@ typedef int           (__stdcall* Test_Function) (int n);
 
 //--------------------------------------------------
 
+void Plugin_Loader::load_plugins (void) {
+
+    char            file_name [MAX_PATH];
+    WIN32_FIND_DATA file_info;
+
+    //--------------------------------------------------
+    // find first file, get search describtor
+
+    HANDLE search_describtor = FindFirstFile ("dll/*.dll", &file_info);
+    if (search_describtor == INVALID_HANDLE_VALUE) return;
+
+    //--------------------------------------------------
+    // find next files
+
+    while (true) {
+
+        sprintf (file_name, "dll/%s", file_info.cFileName);
+        load_plugin (file_name);
+
+        //--------------------------------------------------
+
+        if (!FindNextFile (search_describtor, &file_info)) break;
+    };
+
+    //--------------------------------------------------
+    // close search describtor
+
+    FindClose (search_describtor);
+}
+
 void Plugin_Loader::load_plugin (const char* path) {
 
     HINSTANCE dll_handle = LoadLibrary (path);

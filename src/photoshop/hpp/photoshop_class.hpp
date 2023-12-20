@@ -33,6 +33,7 @@ class Photoshop: public Framed_Window {
 
     Canvas_Viewer* canvas_;
 
+    void load_plugins  (void);
     void init_colors   (void);
     void init_tools    (void);
     void init_filters  (void);

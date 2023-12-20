@@ -16,10 +16,11 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_ (nullptr)
 {
     init_colors ();
-    init_tools ();
     init_canvases ();
 
-    // filters need canvas
+    load_plugins ();
+
+    init_tools ();
     init_filters ();
 
     //--------------------------------------------------
@@ -28,6 +29,15 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 }
 
 //--------------------------------------------------
+
+void Photoshop::load_plugins (void) {
+
+    Plugin_Loader loader (*this);
+
+    //--------------------------------------------------
+
+    loader.load_plugins ();
+}
 
 void Photoshop::init_colors (void) {
 
@@ -58,14 +68,6 @@ void Photoshop::init_colors (void) {
 
 void Photoshop::init_tools (void) {
 
-    Plugin_Loader loader (*this);
-    loader.load_plugin ("dll/pencil.dll");
-    loader.load_plugin ("dll/brush.dll");
-    loader.load_plugin ("dll/line.dll");
-    loader.load_plugin ("dll/rect.dll");
-    loader.load_plugin ("dll/circle.dll");
-    loader.load_plugin ("dll/selection.dll");
-
     tool_palette_.set_active_tool (0);
 
     //--------------------------------------------------
@@ -81,14 +83,6 @@ void Photoshop::init_tools (void) {
 }
 
 void Photoshop::init_filters (void) {
-
-    Plugin_Loader loader (*this);
-    loader.load_plugin ("dll/monochrome.dll");
-    loader.load_plugin ("dll/negative.dll");
-    loader.load_plugin ("dll/posterize.dll");
-    loader.load_plugin ("dll/edge_detect.dll");
-
-    //--------------------------------------------------
 
     LayoutBox filters_box (150_px, 125_px);
     filters_box.setPosition (plug::Vec2d (-500, -350));

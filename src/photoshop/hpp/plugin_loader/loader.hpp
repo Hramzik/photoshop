@@ -16,7 +16,8 @@ class Plugin_Loader {
 
     //--------------------------------------------------
 
-    void load_plugin (const char* path);
+    void load_plugins (void);
+    void load_plugin  (const char* path);
 
   private:
 
