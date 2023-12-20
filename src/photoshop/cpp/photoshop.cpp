@@ -16,11 +16,22 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_ (nullptr)
 {
     init_colors ();
-    init_canvases ();
+
+    //--------------------------------------------------
 
     load_plugins ();
 
+    // idk why tools must be inited before canvases
     init_tools ();
+
+    //--------------------------------------------------
+    // to init canvas, tool_palette must be set
+
+    init_canvases ();
+
+    //--------------------------------------------------
+    // to init filters, canvas must be created
+
     init_filters ();
 
     //--------------------------------------------------

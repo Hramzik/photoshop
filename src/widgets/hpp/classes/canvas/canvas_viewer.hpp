@@ -25,6 +25,7 @@ class Canvas_Viewer: public My_Widget {
 
     //--------------------------------------------------
 
+    // tool palette must be set before focus
     void set_is_focused   (bool is_focused);
     void set_tool_palette (Tool_Palette& palette);
 

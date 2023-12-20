@@ -5,7 +5,7 @@
 
 #include "canvas_class.hpp"
 #include "canvas_viewer.hpp"
-#include "canvas_manager.hpp"
+//#include "canvas_manager.hpp"
 
 
 //--------------------------------------------------

@@ -61,6 +61,7 @@ void Plugin_Loader::load_plugin (const char* path) {
     if (!plugin) return;
 
     //--------------------------------------------------
+    // try tool loading
 
     size_t interface_id = static_cast <size_t> (plug::PluginGuid::Tool);
     plug::Tool*    tool = static_cast <plug::Tool*> (plugin->tryGetInterface (interface_id));
@@ -68,6 +69,7 @@ void Plugin_Loader::load_plugin (const char* path) {
     if (tool) photoshop_.add_tool (*tool);
 
     //--------------------------------------------------
+    // try filter loading
 
     interface_id         = static_cast <size_t> (plug::PluginGuid::Filter);
     plug::Filter* filter = static_cast <plug::Filter*> (plugin->tryGetInterface (interface_id));
