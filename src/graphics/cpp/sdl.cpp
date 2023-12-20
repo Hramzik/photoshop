@@ -12,12 +12,17 @@
 
 Return_code init_sdl (void) {
 
+    //--------------------------------------------------
+    // main sdl
+
     if (SDL_Init (SDL_INIT_VIDEO) < 0){
 
         LOG_MESSAGE ("SDL could not initialize!\n");
         return LIB_ERR;
     }
 
+    //--------------------------------------------------
+    // rendering
 
     if (!SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
 
@@ -25,6 +30,16 @@ Return_code init_sdl (void) {
         return LIB_ERR;
     }
 
+    //--------------------------------------------------
+    // text
+
+    if (TTF_Init() == -1) {
+
+        LOG_MESSAGE ("SDL_ttf could not initialize!");
+        return LIB_ERR;
+    }
+
+    //--------------------------------------------------
 
     return SUCCESS;
 }

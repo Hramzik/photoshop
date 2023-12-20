@@ -31,7 +31,7 @@ define flags
 endef
 
 define sdl_flags
-	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 endef
 
 define flags_sdl_version
@@ -77,6 +77,7 @@ program:
 	$(WIDGETS_FOLDER)/my_widget.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
+	$(WIDGETS_FOLDER)/texted.cpp \
 	$(WIDGETS_FOLDER)/actions.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
 	$(WIDGETS_FOLDER)/decorator.cpp \

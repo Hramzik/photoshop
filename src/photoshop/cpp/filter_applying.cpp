@@ -10,7 +10,7 @@
 
 Filter_Applying_Widget::Filter_Applying_Widget
 (plug::LayoutBox& box, Filter_Palette& palette, Canvas& canvas):
-        Column_Aligner (*new Colored_Window (box, C_LIGHT_GRAY), plug::Vec2d (0.1, 0.1)),
+        Column_Aligner (*new Colored_Window (box, C_DARK_GRAY), plug::Vec2d (0.05, 0.05)),
 
         palette_ (palette),
         canvas_  (canvas)
@@ -31,7 +31,9 @@ Filter_Applying_Widget::Filter_Applying_Widget
 void Filter_Applying_Widget::add_filter (plug::Filter& filter) {
 
     LayoutBox  box (666_px, 30_px);
-    My_Widget& model  = *new Colored_Window (box, C_BLACK); // width will be resized
+    const char* text = filter.getPluginData ()->getName ();
+    My_RGB      text_color (255, 255, 255);
+    My_Widget& model  = *new Texted_Window (box, text, text_color, C_DARK_GRAY); // width will be resized
     Button&    button = *new Button (model);
 
     //--------------------------------------------------

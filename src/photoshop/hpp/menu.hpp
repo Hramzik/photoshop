@@ -14,7 +14,7 @@ class Menu: public Row_Aligner {
 
     //--------------------------------------------------
 
-    void add_widget (My_Widget& widget);
+    void add_widget (My_Widget& widget, const char* name);
 };
 
 //--------------------------------------------------

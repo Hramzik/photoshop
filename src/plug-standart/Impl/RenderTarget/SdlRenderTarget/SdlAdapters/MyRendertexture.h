@@ -2,6 +2,8 @@
 #define __MY_RENDER_TEXTURE_H
 //--------------------------------------------------
 
+#include "my_rgb/hpp/my_rgb.hpp"
+
 #include "MyRenderTarget.h"
 
 //--------------------------------------------------
@@ -15,6 +17,7 @@ class MyRenderTexture: public MyRenderTarget {
     ~MyRenderTexture (void);
 
     void loadFromFile (const char* path);
+    void loadText     (const char* text, My_RGB text_color, My_RGB bg_color);
 
     const SDL_Surface* getSdlSurface (void) const;
     void               setSdlSurface (SDL_Surface* surface);

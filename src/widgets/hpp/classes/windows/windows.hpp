@@ -5,7 +5,7 @@
 
 #include "colored.hpp"
 #include "textured.hpp"
-
+#include "texted.hpp"
 
 //--------------------------------------------------
 #endif

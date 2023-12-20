@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 Monochrome_Filter::Monochrome_Filter (void):
-        Filter ("monochrome") {}
+        Filter ("Monochrome") {}
 
 //--------------------------------------------------
 

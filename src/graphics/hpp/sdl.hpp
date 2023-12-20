@@ -5,6 +5,7 @@
 
 #include "C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2/SDL.h"
 #include "C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2/SDL_image.h"
+#include "C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2/SDL_ttf.h"
 
 
 //--------------------------------------------------

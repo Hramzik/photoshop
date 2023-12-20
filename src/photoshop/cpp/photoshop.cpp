@@ -90,7 +90,7 @@ void Photoshop::init_filters (void) {
 
     //--------------------------------------------------
 
-    LayoutBox filters_box (250_px, 125_px);
+    LayoutBox filters_box (150_px, 125_px);
     filters_box.setPosition (plug::Vec2d (-500, -350));
 
     Filter_Applying_Widget& filters =
@@ -98,10 +98,10 @@ void Photoshop::init_filters (void) {
 
     //--------------------------------------------------
 
-    LayoutBox menu_box (250_px, 30_px);
-    menu_box.setPosition (plug::Vec2d (-700 + 125, -500 + 15));
+    LayoutBox menu_box (1400_px, 30_px);
+    menu_box.setPosition (plug::Vec2d (0, -500 + 15));
     Menu& menu = *new Menu (menu_box);
-    menu.add_widget (filters);
+    menu.add_widget (filters, "Filters");
 
     register_widget (&menu);
 }

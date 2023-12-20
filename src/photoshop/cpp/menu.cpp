@@ -9,15 +9,15 @@
 //--------------------------------------------------
 
 Menu::Menu (plug::LayoutBox& box):
-        Row_Aligner (*new Colored_Window (box, C_DARK_GRAY))
+        Row_Aligner (*new Colored_Window (box, (unsigned char) 0x32), plug::Vec2d (0.1, 0))
 {
-    set_top_left_padding     (plug::Vec2d (0, 0));
-    set_bottom_right_padding (plug::Vec2d (0, 0));
+    //set_top_left_padding     (plug::Vec2d (0, 0));
+    //set_bottom_right_padding (plug::Vec2d (0, 0));
 }
 
 //--------------------------------------------------
 
-void Menu::add_widget (My_Widget& widget) {
+void Menu::add_widget (My_Widget& widget, const char* name) {
 
     Widget_Hider& widget_hider = *new Widget_Hider (widget);
     widget_hider.hide ();
@@ -25,9 +25,10 @@ void Menu::add_widget (My_Widget& widget) {
     //--------------------------------------------------
     // creating showing button
 
-    LayoutBox  button_box (100_px, 100_px);
-    My_Widget& model  = *new Colored_Window (button_box, C_RED); // can be any size, will be resized after
-    Button&    button = *new Button (model);
+    LayoutBox button_box (100_px, 100_px);
+    My_RGB     text_color (196, 196, 196);
+    My_Widget& model  = *new Texted_Window (button_box, name, text_color, (unsigned char) 0x32); // can be any size, will be resized after
+    Button&   button = *new Button (model);
 
     //--------------------------------------------------
 
