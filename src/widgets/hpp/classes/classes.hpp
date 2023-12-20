@@ -10,6 +10,7 @@
 #include "actions/actions.hpp"
 
 #include "container.hpp"
+#include "manager.hpp"
 #include "decorator.hpp"
 
 #include "framed_window/framed_window.hpp"

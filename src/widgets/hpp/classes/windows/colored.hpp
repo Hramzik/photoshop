@@ -3,12 +3,13 @@
 //--------------------------------------------------
 
 #include "my_rgb/hpp/my_rgb.hpp"
-#include "widgets/hpp/classes/my_widget.hpp"
+
+#include "window.hpp"
 
 //--------------------------------------------------
 
 
-class Colored_Window: public My_Widget {
+class Colored_Window: public Visible_Window {
 
   public:
 

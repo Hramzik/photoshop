@@ -8,7 +8,7 @@
 
 //--------------------------------------------------
 
-class Photoshop: public Framed_Window {
+class Photoshop: public Widget_Manager {
 
   public:
 

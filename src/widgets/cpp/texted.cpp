@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 Texted_Window::Texted_Window (plug::LayoutBox& box, const char* text, My_RGB text_color, My_RGB bg_color):
-        My_Widget (box),
+        Visible_Window (box),
 
         texture_ (nullptr)
 {

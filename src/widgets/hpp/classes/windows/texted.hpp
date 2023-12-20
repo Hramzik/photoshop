@@ -2,12 +2,11 @@
 #define WIDGETS_CLASS_TEXTED_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "widgets/hpp/classes/my_widget.hpp"
+#include "window.hpp"
 
 //--------------------------------------------------
 
-
-class Texted_Window: public My_Widget {
+class Texted_Window: public Visible_Window {
 
   public:
 

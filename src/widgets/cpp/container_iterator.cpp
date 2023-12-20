@@ -28,6 +28,7 @@ Widget_Container::Iterator::Iterator (Widget_Container& container):
 }
 
 //--------------------------------------------------
+// getters && setters
 
 Widget_List* Widget_Container::Iterator::get_current_list (void) const {
 
@@ -86,7 +87,13 @@ Widget_List::iterator Widget_Container::Iterator::get_iterator (void) {
     return iterator_;
 }
 
+int Widget_Container::Iterator::get_current_list_index (void) {
+
+    return current_list_index_;
+}
+
 //--------------------------------------------------
+// operators
 
 Widget_Container::Iterator&
 Widget_Container::Iterator::operator++ (void) {
@@ -161,5 +168,4 @@ My_Widget* Widget_Container::Iterator::operator* (void) const {
 }
 
 //--------------------------------------------------
-// REVERSE ITERATOR CODE
 

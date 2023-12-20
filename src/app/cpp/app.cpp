@@ -118,7 +118,7 @@ void App::populate (void) {
 
     //--------------------------------------------------
 
-    widgets_.register_widget (&photoshop);
+    widgets_.register_widget (new Framed_Window (photoshop, false));
 }
 
 //--------------------------------------------------

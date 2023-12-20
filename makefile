@@ -75,12 +75,14 @@ program:
 	$(APP_FOLDER)/app.cpp \
 	$(APP_FOLDER)/events.cpp \
 	$(WIDGETS_FOLDER)/my_widget.cpp \
+	$(WIDGETS_FOLDER)/window.cpp \
 	$(WIDGETS_FOLDER)/colored.cpp \
 	$(WIDGETS_FOLDER)/textured.cpp \
 	$(WIDGETS_FOLDER)/texted.cpp \
 	$(WIDGETS_FOLDER)/actions.cpp \
 	$(WIDGETS_FOLDER)/button.cpp \
 	$(WIDGETS_FOLDER)/decorator.cpp \
+	$(WIDGETS_FOLDER)/manager.cpp \
 	$(WIDGETS_FOLDER)/container.cpp \
 	$(WIDGETS_FOLDER)/container_iterator.cpp \
 	$(WIDGETS_FOLDER)/container_riterator.cpp \

@@ -6,13 +6,8 @@
 
 //--------------------------------------------------
 
-Textured_Window::Textured_Window (plug::LayoutBox& box, plug::Texture& texture):
-        My_Widget (box),
-
-        texture_ (&texture) {}
-
 Textured_Window::Textured_Window (plug::LayoutBox& box, const char* texture_path):
-        My_Widget (box),
+        Visible_Window (box),
 
         texture_ (nullptr)
 {

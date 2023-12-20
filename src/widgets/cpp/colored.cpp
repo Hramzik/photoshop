@@ -6,9 +6,9 @@
 
 //--------------------------------------------------
 
-
 Colored_Window::Colored_Window (plug::LayoutBox& box, My_RGB color):
-        My_Widget (box),
+        Visible_Window (box),
+
         color_ (color) {}
 
 //--------------------------------------------------

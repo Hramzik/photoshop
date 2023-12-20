@@ -18,14 +18,19 @@ void Button::render (plug::RenderTarget& target, plug::TransformStack& stack) {
     model_.render (target, stack);
 }
 
-void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context){
+void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context) {
 
     if (context.stopped)          return;
     if (button_state_ == PRESSED) return;
 
     //--------------------------------------------------
 
-    context.stopped = covers (context.stack, event.pos);
+    // old version:
+    //context.stopped = covers (context.stack, event.pos);
+
+    // new version:
+    // will also stop event is needed
+    model_.onEvent (event, context);
 
     //--------------------------------------------------
     // not pressed
@@ -43,12 +48,13 @@ void Button::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& co
 
 void Button::onMouseReleased (const plug::MouseReleasedEvent& event, plug::EHC& context){
 
-    (void) context;
+    if (context.stopped)                            return;
+    if (button_state_   != PRESSED)                 return;
+    if (event.button_id != plug::MouseButton::Left) return;
 
     //--------------------------------------------------
 
-    if (button_state_   != PRESSED)                 return;
-    if (event.button_id != plug::MouseButton::Left) return;
+    model_.onEvent (event, context);
 
     //--------------------------------------------------
     // released

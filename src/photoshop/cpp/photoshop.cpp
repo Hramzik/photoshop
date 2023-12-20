@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 Photoshop::Photoshop (plug::LayoutBox& box):
-    Framed_Window (*new Colored_Window (box, C_GRAY), false),
+    Widget_Manager (box),
 
     color_palette_ (),
     tool_palette_  (),
@@ -15,6 +15,13 @@ Photoshop::Photoshop (plug::LayoutBox& box):
 
     canvas_ (nullptr)
 {
+
+    My_Widget& background = *new Colored_Window (box, C_GRAY);
+
+    register_background_widget (&background);
+
+    //--------------------------------------------------
+
     init_colors ();
 
     //--------------------------------------------------

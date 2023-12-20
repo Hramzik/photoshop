@@ -2,17 +2,15 @@
 #define WIDGETS_CLASS_TEXTURED_WINDOW_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "widgets/hpp/classes/my_widget.hpp"
+#include "window.hpp"
 
 //--------------------------------------------------
 
-
-class Textured_Window: public My_Widget {
+class Textured_Window: public Visible_Window {
 
   public:
 
     Textured_Window (plug::LayoutBox& box, const char* texture_path);
-    Textured_Window (plug::LayoutBox& box, plug::Texture& texture);
 
     //--------------------------------------------------
 

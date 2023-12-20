@@ -98,6 +98,7 @@ void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& c
 
 void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context) {
 
+    if (context.stopped)     return;
     if (!is_canvas_focused_) return;
     if (!get_active_tool ()) return;
 
@@ -118,10 +119,7 @@ void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::
 
 void Canvas_Viewer::onMouseReleased (const plug::MouseReleasedEvent &event, plug::EHC& context) {
 
-    (void) context;
-
-    //--------------------------------------------------
-
+    if (context.stopped)     return;
     if (!is_canvas_focused_) return;
     if (!get_active_tool ()) return;
 
