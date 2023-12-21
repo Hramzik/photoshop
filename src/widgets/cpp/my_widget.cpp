@@ -20,10 +20,14 @@ bool My_Widget::is_closed (void) {
     return false;
 }
 
-
 void My_Widget::close (void) {
 
     state_ = CLOSED;
+}
+
+void My_Widget::open (void) {
+
+    state_ = OPENED;
 }
 
 //--------------------------------------------------

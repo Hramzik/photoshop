@@ -2,13 +2,15 @@
 #define CLASS_CANVAS_MANAGER_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "observer/hpp/observer.hpp"
+#include "focus_manager.hpp"
 
 //--------------------------------------------------
 
 // observer for Canvas_Viewers,
-// stores active canvas
-class Canvas_Manager: public Observer {
+// handles canvas closing
+
+// also is a Canvas_Focus_Manager
+class Canvas_Manager: public Canvas_Focus_Manager {
 
   public:
 
@@ -16,17 +18,15 @@ class Canvas_Manager: public Observer {
 
     //--------------------------------------------------
 
-    void register_canvas_viewer (Canvas_Viewer& viewer);
-    plug::Canvas* get_active_canvas (void);
+    void save_active_canvas  (void);
+    void clear_active_canvas (void);
+
+    void close_canvas_viewer (Canvas_Viewer& viewer);
 
     //--------------------------------------------------
 
-    virtual void get_updated (Observable& initiator);
-
-  private:
-
-    Canvas_Viewer* active_canvas_viewer_; 
-}; 
+    void get_updated (Observable& initiator) override;
+};
 
 //--------------------------------------------------
 #endif

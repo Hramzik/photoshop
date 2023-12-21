@@ -92,8 +92,20 @@ Framed_Window::Framed_Window (My_Widget& controlled, bool overlapping_frame):
 
     //--------------------------------------------------
 
-    register_background_widget (&controlled_);
-    register_priority_widget   (frame_);
+    register_widget          (&controlled_);
+    register_priority_widget (frame_);
+}
+
+//--------------------------------------------------
+
+bool Framed_Window::is_closed (void) {
+
+    return controlled_.is_closed ();
+}
+
+void Framed_Window::close (void) {
+
+    controlled_.close ();
 }
 
 //--------------------------------------------------

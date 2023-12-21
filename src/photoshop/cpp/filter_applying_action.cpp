@@ -6,7 +6,7 @@
 
 //--------------------------------------------------
 
-Filter_Applying_Action::Filter_Applying_Action (Canvas_Manager& canvas_manager, plug::Filter& filter):
+Filter_Applying_Action::Filter_Applying_Action (Canvas_Focus_Manager& canvas_manager, plug::Filter& filter):
 
         filter_         (filter),
         canvas_manager_ (canvas_manager) {}

@@ -98,6 +98,7 @@ program:
 \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
+	$(WIDGETS_FOLDER)/canvas_focus_manager.cpp \
 	$(WIDGETS_FOLDER)/canvas_manager.cpp \
 \
 	$(PLUGIN_DATA_FOLDER)/plugin_data.cpp \

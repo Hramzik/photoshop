@@ -18,12 +18,17 @@ class Framed_Window: public Widget_Container {
     Framed_Window (const Framed_Window&) = delete;
     operator=     (const Framed_Window&) = delete;
 
+    //--------------------------------------------------
+
+    bool is_closed (void) override;
+    void close     (void) override;
+
 //--------------------------------------------------
 
   protected:
 
     My_Widget&    controlled_;
-    Window_Frame* frame_;
+    Window_Frame* frame_; // todo make a non pointer
 };
 
 

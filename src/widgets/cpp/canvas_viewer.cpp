@@ -21,6 +21,7 @@ Canvas_Viewer::Canvas_Viewer (const plug::LayoutBox& box, Canvas& canvas):
 void Canvas_Viewer::set_is_focused (bool is_focused) {
 
     is_canvas_focused_ = is_focused;
+    notify_observers ();
 
     //--------------------------------------------------
 
@@ -82,6 +83,17 @@ void Canvas_Viewer::render (plug::RenderTarget& target, plug::TransformStack& st
     stack.leave ();
 }
 
+void Canvas_Viewer::close (void) {
+
+    My_Widget::close ();
+
+    //--------------------------------------------------
+
+    notify_observers ();
+}
+
+//--------------------------------------------------
+
 void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& context) {
 
     if (!is_canvas_focused_) return;
@@ -110,8 +122,6 @@ void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::
     //--------------------------------------------------
 
     set_is_focused (true);
-    notify_observers ();
-
     if (!get_active_tool ()) return;
 
     //--------------------------------------------------

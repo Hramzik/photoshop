@@ -59,6 +59,10 @@ void Widget_Container::render (plug::RenderTarget& target, plug::TransformStack&
 
     for (auto i = rbegin (); i != rend (); ++i) {
 
+        if ((*i)->is_closed ()) continue;
+
+        //--------------------------------------------------
+
         (*i)->render (target, stack);
     }
 
@@ -66,7 +70,6 @@ void Widget_Container::render (plug::RenderTarget& target, plug::TransformStack&
 
     stack.leave ();
 }
-
 
 void Widget_Container::onEvent (const plug::Event& event, plug::EHC& context) {
 

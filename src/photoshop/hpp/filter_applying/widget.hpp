@@ -14,7 +14,7 @@ class Filter_Applying_Widget: public Column_Aligner {
 
   public:
 
-    Filter_Applying_Widget (plug::LayoutBox& box, Filter_Palette& palette, Canvas_Manager& canvas_manager);
+    Filter_Applying_Widget (plug::LayoutBox& box, Filter_Palette& palette, Canvas_Focus_Manager& canvas_manager);
 
     //--------------------------------------------------
 
@@ -25,7 +25,7 @@ class Filter_Applying_Widget: public Column_Aligner {
   private:
 
     Filter_Palette& palette_;
-    Canvas_Manager& canvas_manager_;
+    Canvas_Focus_Manager& canvas_manager_;
 };
 
 

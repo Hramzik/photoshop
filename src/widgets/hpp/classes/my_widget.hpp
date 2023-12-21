@@ -33,8 +33,9 @@ class My_Widget: public Widget {
 
     //--------------------------------------------------
 
-    bool is_closed (void);
-    void close     (void);
+    virtual bool is_closed (void);
+    virtual void open      (void);
+    virtual void close     (void);
 
     //Point2D   get_position  (void);
     //void      set_position  (Point2D position);

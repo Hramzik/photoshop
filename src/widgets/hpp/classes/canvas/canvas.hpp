@@ -4,6 +4,7 @@
 
 #include "canvas_class.hpp"
 #include "canvas_viewer.hpp"
+#include "focus_manager.hpp"
 #include "canvas_manager.hpp"
 
 //--------------------------------------------------

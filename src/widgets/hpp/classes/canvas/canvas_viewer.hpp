@@ -14,7 +14,7 @@ class Canvas;
 
 //--------------------------------------------------
 
-// is observed by Canvas_Manager
+// is observed by Canvas_Focus_Manager
 class Canvas_Viewer: public My_Widget, public Observable {
 
   public:
@@ -36,6 +36,7 @@ class Canvas_Viewer: public My_Widget, public Observable {
     //--------------------------------------------------
 
     void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
+    void close (void) override;
 
 protected:
 

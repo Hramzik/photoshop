@@ -7,50 +7,45 @@
 //--------------------------------------------------
 
 Canvas_Manager::Canvas_Manager (void):
-
-        active_canvas_viewer_ (nullptr) {}
+    Canvas_Focus_Manager () {}
 
 //--------------------------------------------------
 
 void Canvas_Manager::get_updated (Observable& initiator) {
 
     Canvas_Viewer* updated_viewer = static_cast <Canvas_Viewer*> (&initiator);
-    if (!updated_viewer)                    return;
+    if (!updated_viewer) return;
 
     //--------------------------------------------------
-    // focus lost
+    // viewer wants to close itself
 
-    if (!updated_viewer->get_is_focused ()) {
+    if (updated_viewer->is_closed ()) {
 
-        if (active_canvas_viewer_ != updated_viewer) return;
-        active_canvas_viewer_ = nullptr;
+        close_canvas_viewer (*updated_viewer);
+        return;
     }
 
     //--------------------------------------------------
-    // focus gained
+    // just some focus shit
 
-    Canvas_Viewer* prev_active_viever_ = active_canvas_viewer_;
-    active_canvas_viewer_ = updated_viewer;
-
-    if (!prev_active_viever_)                         return;
-    if (prev_active_viever_ == active_canvas_viewer_) return;
-    prev_active_viever_->set_is_focused (false);
+    Canvas_Focus_Manager::get_updated (initiator);
 }
 
 //--------------------------------------------------
 
-void Canvas_Manager::register_canvas_viewer (Canvas_Viewer& viewer) {
+void Canvas_Manager::save_active_canvas (void) {
 
-    viewer.attach_observer (*this);
+    return;
 }
 
-plug::Canvas* Canvas_Manager::get_active_canvas (void) {
+void Canvas_Manager::clear_active_canvas (void) {
 
-    if (!active_canvas_viewer_) return nullptr;
+    return;;
+}
 
-    //--------------------------------------------------
+void Canvas_Manager::close_canvas_viewer (Canvas_Viewer& viewer) {
 
-    return &active_canvas_viewer_->access_canvas ();
+    viewer.open ();
 }
 
 //--------------------------------------------------
