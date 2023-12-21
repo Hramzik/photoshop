@@ -10,6 +10,7 @@ APP_FOLDER       = src/app/cpp
 GRAPHICS_FOLDER  = src/graphics/cpp
 MY_RGB_FOLDER    = src/my_rgb/cpp
 VECTOR_FOLDER    = src/vector/cpp
+OBSERVER_FOLDER  = src/observer/cpp
 
 WIDGETS_FOLDER   = src/widgets/cpp
 TOOLS_FOLDER     = src/tools/cpp
@@ -57,6 +58,8 @@ program:
 	$(VECTOR_FOLDER)/point.cpp \
 	$(VECTOR_FOLDER)/vector2d.cpp \
 	$(VECTOR_FOLDER)/vector3d.cpp \
+	$(OBSERVER_FOLDER)/observer.cpp \
+	$(OBSERVER_FOLDER)/observable.cpp \
 	$(LIB_FOLDER)/logs.cpp \
 \
 	$(PLUGIN_IMPLEMENTATION_FOLDER)/LayoutBox/LayoutBox.cpp \
@@ -95,6 +98,7 @@ program:
 \
 	$(WIDGETS_FOLDER)/canvas.cpp \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
+	$(WIDGETS_FOLDER)/canvas_manager.cpp \
 \
 	$(PLUGIN_DATA_FOLDER)/plugin_data.cpp \
 \

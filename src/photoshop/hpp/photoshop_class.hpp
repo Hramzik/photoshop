@@ -31,7 +31,7 @@ class Photoshop: public Widget_Manager {
     Tool_Palette   tool_palette_;
     Filter_Palette filter_palette_;
 
-    Canvas_Viewer* canvas_;
+    Canvas_Manager canvas_manager_;
 
     void load_plugins  (void);
     void init_colors   (void);

@@ -6,15 +6,21 @@
 
 //--------------------------------------------------
 
-Filter_Applying_Action::Filter_Applying_Action (Canvas& canvas, plug::Filter& filter):
-        filter_ (filter),
-        canvas_ (canvas) {}
+Filter_Applying_Action::Filter_Applying_Action (Canvas_Manager& canvas_manager, plug::Filter& filter):
+
+        filter_         (filter),
+        canvas_manager_ (canvas_manager) {}
 
 //--------------------------------------------------
 
 void Filter_Applying_Action::act (void) {
 
-    filter_.applyFilter (canvas_);
+    plug::Canvas* active_canvas = canvas_manager_.get_active_canvas ();
+    if (!active_canvas) return;
+
+    //--------------------------------------------------
+
+    filter_.applyFilter (*active_canvas);
 }
 
 //--------------------------------------------------

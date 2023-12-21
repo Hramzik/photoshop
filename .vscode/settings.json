@@ -19,7 +19,7 @@
         "src\\widgets\\hpp\\widgets.hpp": true,
         "src\\tools\\hpp\\tools.hpp": true,
         "src\\tools": true,
-        "src\\app": false,
+        "src\\app": true,
         "src\\filters": true,
         "src\\widgets\\cpp\\widget.cpp": true,
         "src\\widgets\\cpp\\colored.cpp": false,
@@ -28,7 +28,7 @@
         "src\\widgets\\cpp\\container.cpp": true,
         "src\\widgets\\cpp\\container_iterator.cpp": true,
         "src\\widgets\\cpp\\container_riterator.cpp": true,
-        "dll": false,
+        "dll": true,
         "src\\plug-standart": false,
         "src\\widgets\\cpp\\row_aligner.cpp": true,
         "src\\widgets\\cpp\\square_aligner.cpp": true,
@@ -38,7 +38,9 @@
         "src\\widgets\\cpp\\aligner.cpp": true,
         "src\\widgets\\hpp\\classes\\widget_hider": true,
         "src\\widgets\\hpp\\classes\\widget_aligners": true,
-        "src\\widgets\\hpp\\classes\\buttons": true
+        "src\\widgets\\hpp\\classes\\buttons": true,
+        "src\\plugin_data": true,
+        "src\\plugins": true
     },
     "explorerExclude.backup": {},
     "files.associations": {

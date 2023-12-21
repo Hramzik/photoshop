@@ -13,7 +13,7 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     tool_palette_  (),
     filter_palette_  (),
 
-    canvas_ (nullptr)
+    canvas_manager_ ()
 {
 
     My_Widget& background = *new Colored_Window (box, C_GRAY);
@@ -105,8 +105,8 @@ void Photoshop::init_filters (void) {
     LayoutBox filters_box (150_px, 125_px);
     filters_box.setPosition (plug::Vec2d (-500, -350));
 
-    Filter_Applying_Widget& filters =
-            *new Filter_Applying_Widget (filters_box, filter_palette_, canvas_->access_canvas ());
+    Filter_Applying_Widget& filters = // todo rewrite with add_paletet
+            *new Filter_Applying_Widget (filters_box, filter_palette_, canvas_manager_);
 
     //--------------------------------------------------
 
@@ -120,15 +120,17 @@ void Photoshop::init_filters (void) {
 
 void Photoshop::init_canvases (void) {
 
-    LayoutBox canvas_box (800_px, 800_px);
-    canvas_box.setPosition (plug::Vec2d (100, 0));
+    LayoutBox viewer1_box (800_px, 800_px);
+    viewer1_box.setPosition (plug::Vec2d (100, 0));
 
-    Canvas& canvas = *new Canvas (500, 500, "media/cat.jpeg");
-    canvas_ = new Canvas_Viewer (canvas_box, canvas);
-    canvas_->set_tool_palette (tool_palette_);
-    canvas_->set_is_focused (true);
+    Canvas&        canvas1 = *new Canvas (500, 500, "media/cat.jpeg");
+    Canvas_Viewer& viewer1 = *new Canvas_Viewer (viewer1_box, canvas1);
+    viewer1.set_tool_palette (tool_palette_);
 
-    register_widget (new Framed_Window (*canvas_));
+    //--------------------------------------------------
+
+    canvas_manager_.register_canvas_viewer (viewer1);
+    register_widget (new Framed_Window (viewer1));
 }
 
 //--------------------------------------------------

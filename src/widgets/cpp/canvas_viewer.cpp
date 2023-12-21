@@ -24,7 +24,7 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
 
     //--------------------------------------------------
 
-    if (!is_focused || !get_active_tool ()) return;
+    if (!is_focused) return;
 
     //--------------------------------------------------
 
@@ -37,6 +37,11 @@ void Canvas_Viewer::set_is_focused (bool is_focused) {
 
         tool->setActiveCanvas (canvas_);
     }
+}
+
+bool Canvas_Viewer::get_is_focused (void) {
+
+    return is_canvas_focused_;
 }
 
 void Canvas_Viewer::set_tool_palette (Tool_Palette& palette) {
@@ -82,7 +87,7 @@ void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& c
     if (!is_canvas_focused_) return;
     if (!get_active_tool ()) return;
 
-    if (!covers (context.stack, event.pos)) return;
+    //if (!covers (context.stack, event.pos)) return;
 
     //--------------------------------------------------
 
@@ -98,12 +103,16 @@ void Canvas_Viewer::onMouseMove (const plug::MouseMoveEvent& event, plug::EHC& c
 
 void Canvas_Viewer::onMousePressed (const plug::MousePressedEvent& event, plug::EHC& context) {
 
-    if (context.stopped)     return;
-    if (!is_canvas_focused_) return;
-    if (!get_active_tool ()) return;
-
+    if (context.stopped) return;
     context.stopped = covers (context.stack, event.pos);
     if (!context.stopped) return;
+
+    //--------------------------------------------------
+
+    set_is_focused (true);
+    notify_observers ();
+
+    if (!get_active_tool ()) return;
 
     //--------------------------------------------------
 

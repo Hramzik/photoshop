@@ -8,11 +8,15 @@
 
 //--------------------------------------------------
 
+class Canvas_Manager;
+
+//--------------------------------------------------
+
 class Filter_Applying_Action: public Action {
 
   public:
 
-    Filter_Applying_Action (Canvas& canvas, plug::Filter& filter);
+    Filter_Applying_Action (Canvas_Manager& canvas_manager, plug::Filter& filter);
 
     //--------------------------------------------------
 
@@ -20,8 +24,8 @@ class Filter_Applying_Action: public Action {
 
   private:
 
-    plug::Filter& filter_;
-    Canvas&       canvas_;
+    plug::Filter&   filter_;
+    Canvas_Manager& canvas_manager_;
 };
 
 

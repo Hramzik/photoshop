@@ -9,11 +9,11 @@
 //--------------------------------------------------
 
 Filter_Applying_Widget::Filter_Applying_Widget
-(plug::LayoutBox& box, Filter_Palette& palette, Canvas& canvas):
+(plug::LayoutBox& box, Filter_Palette& palette, Canvas_Manager& canvas_manager):
         Column_Aligner (*new Colored_Window (box, C_DARK_GRAY), plug::Vec2d (0.05, 0.05)),
 
-        palette_ (palette),
-        canvas_  (canvas)
+        palette_        (palette),
+        canvas_manager_ (canvas_manager)
 {
     for (int i = 0; i < palette_.get_filters_count (); ++i) {
 
@@ -38,7 +38,7 @@ void Filter_Applying_Widget::add_filter (plug::Filter& filter) {
 
     //--------------------------------------------------
 
-    Action& action = *new Filter_Applying_Action (canvas_, filter);
+    Action& action = *new Filter_Applying_Action (canvas_manager_, filter);
     button.set_pressed_action (&action);
 
     //--------------------------------------------------

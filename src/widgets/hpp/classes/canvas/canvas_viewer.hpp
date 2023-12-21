@@ -2,6 +2,8 @@
 #define CLASS_CANVAS_VIEWER_HPP_INCLUDED
 //--------------------------------------------------
 
+#include "observer/hpp/observer.hpp"
+
 #include "tools/hpp/tools.hpp"
 
 #include "widgets/hpp/classes/my_widget.hpp"
@@ -10,11 +12,10 @@
 
 class Canvas;
 
-class Filter_Palette;
-
 //--------------------------------------------------
 
-class Canvas_Viewer: public My_Widget {
+// is observed by Canvas_Manager
+class Canvas_Viewer: public My_Widget, public Observable {
 
   public:
 
@@ -27,6 +28,7 @@ class Canvas_Viewer: public My_Widget {
 
     // tool palette must be set before focus
     void set_is_focused   (bool is_focused);
+    bool get_is_focused   (void);
     void set_tool_palette (Tool_Palette& palette);
 
     Canvas& access_canvas (void);
@@ -34,11 +36,6 @@ class Canvas_Viewer: public My_Widget {
     //--------------------------------------------------
 
     void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
-    //void onParentUpdate (const plug::LayoutBox& parent_box) override;
-
-    //void        setCanvasPos  (const plug::Vec2d& pos);
-    //plug::Vec2d getCanvasPos  (void);
-    //plug::Vec2d getCanvasSize (void);
 
 protected:
 
@@ -61,7 +58,6 @@ private:
     plug::Tool* get_active_tool (void);
     plug::Vec2d get_canvas_position (plug::Vec2d viewer_position);
 };
-
 
 //--------------------------------------------------
 #endif
