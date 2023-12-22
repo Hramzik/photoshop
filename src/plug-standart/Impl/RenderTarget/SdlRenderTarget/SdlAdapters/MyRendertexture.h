@@ -17,6 +17,7 @@ class MyRenderTexture: public MyRenderTarget {
     ~MyRenderTexture (void);
 
     void loadFromFile (const char* path);
+    void saveToFile   (const char* path);
     void loadText     (const char* text, My_RGB text_color, My_RGB bg_color);
 
     const SDL_Surface* getSdlSurface (void) const;

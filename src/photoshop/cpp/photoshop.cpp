@@ -145,7 +145,7 @@ void Photoshop::add_canvas (plug::Canvas& canvas) {
     if (active_viewer) {
 
         plug::Vec2d new_position = active_viewer->getLayoutBox ().getPosition ();
-        new_position += plug::Vec2d (50, 50);
+        new_position += plug::Vec2d (40, 40);
         viewer_box.setPosition (new_position);
     }
 
@@ -159,7 +159,7 @@ void Photoshop::add_canvas (plug::Canvas& canvas) {
     //--------------------------------------------------
 
     canvas_manager_.register_canvas_viewer (viewer);
-    register_widget (new Framed_Window (viewer));
+    register_widget (new Framed_Window (viewer), true);
 }
 
 //--------------------------------------------------
@@ -178,7 +178,7 @@ void Photoshop::init_menu (void) {
     //--------------------------------------------------
     // file entry
 
-    LayoutBox  file_box     (150_px, 1_px);
+    LayoutBox  file_box     (100_px, 1_px);
     My_Widget& file_entry = *new File_Menu_Entry (file_box, *this);
 
     menu_->add_widget (file_entry, "File");

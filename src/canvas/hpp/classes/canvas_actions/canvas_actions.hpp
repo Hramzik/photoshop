@@ -4,6 +4,8 @@
 
 #include "new.hpp"
 #include "clear.hpp"
+#include "open.hpp"
+#include "save.hpp"
 
 //--------------------------------------------------
 #endif

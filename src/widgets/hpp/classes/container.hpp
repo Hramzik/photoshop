@@ -109,7 +109,7 @@ class Widget_Container: public My_Widget {
     //--------------------------------------------------
 
     int get_widgets_count (void);
-    void register_widget            (My_Widget* widget);
+    void register_widget            (My_Widget* widget, bool push_to_the_front = false);
     void register_priority_widget   (My_Widget* widget);
     void register_background_widget (My_Widget* widget);
 

@@ -36,6 +36,10 @@ define sdl_flags
 	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 endef
 
+define windows_dialogs_flags
+	-LC:\Users\hramz_3vliuy6\gcc\x86_64-w64-mingw32\lib -lcomdlg32
+endef
+
 define flags_sdl_version
 	-Wshadow -Winit-self -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE
 endef
@@ -100,6 +104,8 @@ program:
 	$(CANVAS_FOLDER)/canvas.cpp \
 	$(CANVAS_FOLDER)/clear_action.cpp \
 	$(CANVAS_FOLDER)/new_action.cpp \
+	$(CANVAS_FOLDER)/open_action.cpp \
+	$(CANVAS_FOLDER)/save_action.cpp \
 \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 	$(WIDGETS_FOLDER)/canvas_focus_manager.cpp \
@@ -126,6 +132,7 @@ program:
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \
+	$(windows_dialogs_flags) \
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
 	-fcompare-debug-second \

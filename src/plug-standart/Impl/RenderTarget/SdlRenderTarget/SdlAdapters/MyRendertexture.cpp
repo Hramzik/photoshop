@@ -34,7 +34,11 @@ MyRenderTexture::~MyRenderTexture (void) {
 
 void MyRenderTexture::loadFromFile (const char* path) {
 
-    SDL_Surface* img_surface   = IMG_Load (path);
+    SDL_Surface* img_surface = IMG_Load (path);
+    if (!img_surface) return;
+
+    //--------------------------------------------------
+
     SDL_Surface* white_surface = SDL_CreateRGBSurface (0, img_surface->w, img_surface->h, 32,0,0,0,0);
     SDL_FillRect (white_surface, nullptr, -1);
 
@@ -57,6 +61,13 @@ void MyRenderTexture::loadFromFile (const char* path) {
 
     SDL_BlitScaled (result_surface, nullptr, m_surface, nullptr);
 }
+
+void MyRenderTexture::saveToFile (const char* path) {
+
+    SDL_SaveBMP (m_surface, path);
+}
+
+//--------------------------------------------------
 
 void MyRenderTexture::loadText (const char* text, My_RGB text_color, My_RGB bg_color) {
 

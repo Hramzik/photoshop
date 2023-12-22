@@ -26,7 +26,7 @@ void File_Menu_Entry::add_new_button () {
 
 void File_Menu_Entry::add_clear_button () {
 
-    Canvas_Manager&      manager = photoshop_.access_canvas_manager ();
+    Canvas_Manager&     manager = photoshop_.access_canvas_manager ();
     plug::ColorPalette& palette = photoshop_.access_color_palette  ();
 
     //--------------------------------------------------
@@ -37,12 +37,14 @@ void File_Menu_Entry::add_clear_button () {
 
 void File_Menu_Entry::add_open_button () {
 
-
+    Action& open_action = *new Canvas_Open_Action (photoshop_);
+    add_button_to_menu_entry ("Open", open_action);
 }
 
 void File_Menu_Entry::add_save_button () {
 
-
+    Action& save_action = *new Canvas_Save_Action (photoshop_);
+    add_button_to_menu_entry ("Save", save_action);
 }
 
 //--------------------------------------------------

@@ -22,9 +22,11 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
         top_frame_       (nullptr)
 {
     //--------------------------------------------------
-    // top frame
+    // top frame model
 
-    plug::Vec2d top_frame_position (0, -model.getLayoutBox ().getSize ().y / 2);
+    plug::Vec2d
+    top_frame_position    = plug::Vec2d (0, 0);
+    top_frame_position.y -= model.getLayoutBox ().getSize ().y / 2;
     top_frame_position.y += DEFAULT_FRAME_HEIGHT / 2;
 
     double top_frame_width = model.getLayoutBox ().getSize ().x;
@@ -35,14 +37,16 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
 
     My_Widget* top_frame_model = new Colored_Window (top_frame_box, DEFAULT_FRAME_COLOR);
 
-    top_frame_ = new Button (*top_frame_model);
+    //--------------------------------------------------
+    // top frame button
 
+    top_frame_                  = new Button (*top_frame_model);
     Button_Action* drive_action = new Driving_Action (controlled);
     top_frame_->set_held_action     (drive_action);
     top_frame_->set_released_action (drive_action);
 
     //--------------------------------------------------
-    // close button
+    // close button model
 
     LayoutBox close_button_box (Length (DEFAULT_CLOSE_BUTTON_WIDTH, Unit::Pixel),
                                 Length (DEFAULT_FRAME_HEIGHT,       Unit::Pixel));
@@ -54,10 +58,14 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
     My_Widget* close_button_model =
             new Colored_Window (close_button_box, DEFAULT_CLOSE_BUTTON_COLOR);
 
+    //--------------------------------------------------
+    // close button
+
     close_button_ = new Button (*close_button_model);
     close_button_->set_pressed_action (new Close_Action (controlled));
 
     //--------------------------------------------------
+    // register in reverse order
 
     register_widget (close_button_);
     register_widget (top_frame_);
@@ -67,14 +75,11 @@ Window_Frame::Window_Frame (My_Widget& controlled, My_Widget& model):
 // FRAMED WINDOW CODE
 
 Framed_Window::Framed_Window (My_Widget& controlled, bool overlapping_frame):
-        Widget_Container (controlled.getLayoutBox ()),
+        Widget_Container (LayoutBox (1_px, 1_px)),
 
         controlled_ (controlled),
         frame_  (nullptr)
 {
-    // window's position is mine now
-    controlled.getLayoutBox ().setPosition (plug::Vec2d (0, 0));
-
     //--------------------------------------------------
     // create frame
 

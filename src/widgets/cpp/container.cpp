@@ -30,18 +30,23 @@ int Widget_Container::get_widgets_count (void) {
     return widgets_count;
 }
 
+void Widget_Container::register_widget (My_Widget* widget, bool push_to_the_front) {
 
-void Widget_Container::register_widget (My_Widget* widget) {
+    if (push_to_the_front) {
+
+        widgets_.push_front (widget);
+        return;
+    }
+
+    //--------------------------------------------------
 
     widgets_.push_back (widget);
 }
-
 
 void Widget_Container::register_priority_widget (My_Widget* widget) {
 
     priority_widgets_.push_back (widget);
 }
-
 
 void Widget_Container::register_background_widget (My_Widget* widget) {
 
@@ -104,7 +109,6 @@ Widget_Container::Iterator Widget_Container::begin (void) {
     return Iterator (*this);
 }
 
-
 Widget_Container::Iterator Widget_Container::end (void) {
 
     Iterator iterator (*this);
@@ -116,13 +120,11 @@ Widget_Container::Iterator Widget_Container::end (void) {
     return iterator;
 }
 
-
 Widget_Container::Reverse_Iterator
 Widget_Container::rbegin (void) {
 
     return Reverse_Iterator (*this);
 }
-
 
 Widget_Container::Reverse_Iterator
 Widget_Container::rend (void) {
