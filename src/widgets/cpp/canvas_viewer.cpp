@@ -8,7 +8,7 @@
 
 //--------------------------------------------------
 
-Canvas_Viewer::Canvas_Viewer (const plug::LayoutBox& box, Canvas& canvas):
+Canvas_Viewer::Canvas_Viewer (const plug::LayoutBox& box, plug::Canvas& canvas):
         My_Widget (box),
 
         canvas_ (canvas),
@@ -55,7 +55,7 @@ Tool_Palette* Canvas_Viewer::get_tool_palette (void) {
     return tool_palette_;
 }
 
-Canvas& Canvas_Viewer::access_canvas (void) {
+plug::Canvas& Canvas_Viewer::access_canvas (void) {
 
     return canvas_;
 }

@@ -19,7 +19,7 @@ class Canvas_Viewer: public My_Widget, public Observable {
 
   public:
 
-    Canvas_Viewer (const plug::LayoutBox& box, Canvas& canvas);
+    Canvas_Viewer (const plug::LayoutBox& box, plug::Canvas& canvas);
 
     Canvas_Viewer (const Canvas_Viewer&) = delete;
     operator=     (const Canvas_Viewer&) = delete;
@@ -32,7 +32,7 @@ class Canvas_Viewer: public My_Widget, public Observable {
     void          set_tool_palette (Tool_Palette& palette);
     Tool_Palette* get_tool_palette (void);
 
-    Canvas& access_canvas (void);
+    plug::Canvas& access_canvas (void);
 
     //--------------------------------------------------
 
@@ -50,7 +50,7 @@ protected:
 
 private:
 
-    Canvas& canvas_;
+    plug::Canvas& canvas_;
     bool is_canvas_focused_;
 
     Tool_Palette* tool_palette_;

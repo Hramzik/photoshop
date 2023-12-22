@@ -26,6 +26,12 @@ class Photoshop: public Widget_Manager {
 
     void add_tool   (plug::Tool&   tool);
     void add_filter (plug::Filter& filter);
+    void add_canvas (plug::Canvas& canvas);
+
+    //--------------------------------------------------
+
+    plug::ColorPalette& access_color_palette  (void);
+    Canvas_Manager&     access_canvas_manager (void);
 
 //--------------------------------------------------
 

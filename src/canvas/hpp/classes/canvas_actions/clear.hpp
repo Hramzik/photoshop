@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 class Canvas_Manager;
-class Color_Palette;
+#include "Plug/Tool/ColorPalette.h"
 
 //--------------------------------------------------
 
@@ -15,7 +15,7 @@ class Canvas_Clear_Action: public Action {
 
   public:
 
-    Canvas_Clear_Action (Canvas_Manager& manager, Color_Palette& palette);
+    Canvas_Clear_Action (Canvas_Manager& manager, plug::ColorPalette& palette);
 
     //--------------------------------------------------
 
@@ -23,8 +23,8 @@ class Canvas_Clear_Action: public Action {
 
   private:
 
-    Canvas_Manager& canvas_manager_;
-    Color_Palette&  color_palette_;
+    Canvas_Manager&       canvas_manager_;
+    plug::ColorPalette&  color_palette_;
 };
 
 //--------------------------------------------------

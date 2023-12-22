@@ -81,7 +81,7 @@ plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
 
     for (size_t i = 0; i < 4; ++i) {
 
-        shape [i].color = plug::Color(255, 255, 255, 255);
+        shape [i].color = plug::Color (255, 255, 255, 255);
     }
 
     //--------------------------------------------------
@@ -91,3 +91,6 @@ plug::VertexArray My_Widget::get_render_shape (plug::TransformStack& stack) {
 
     return shape;
 }
+
+//--------------------------------------------------
+

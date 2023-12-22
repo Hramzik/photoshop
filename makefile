@@ -99,6 +99,7 @@ program:
 \
 	$(CANVAS_FOLDER)/canvas.cpp \
 	$(CANVAS_FOLDER)/clear_action.cpp \
+	$(CANVAS_FOLDER)/new_action.cpp \
 \
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 	$(WIDGETS_FOLDER)/canvas_focus_manager.cpp \
@@ -120,6 +121,8 @@ program:
 	$(PHOTOSHOP_FOLDER)/filter_applying.cpp \
 	$(PHOTOSHOP_FOLDER)/filter_applying_action.cpp \
 	$(PHOTOSHOP_FOLDER)/menu.cpp \
+	$(PHOTOSHOP_FOLDER)/menu_entry.cpp \
+	$(PHOTOSHOP_FOLDER)/file_menu_entry.cpp \
 \
 	-o $(default_path) \
 	$(sdl_flags) $(flags_standart_version) \

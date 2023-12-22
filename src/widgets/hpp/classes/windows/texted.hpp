@@ -14,7 +14,8 @@ class Texted_Window: public Visible_Window {
 
     //--------------------------------------------------
 
-    void set_text_size_ratio (void);
+    void set_text_size_ratio   (void);
+    void push_text_to_the_left (void);
 
     //--------------------------------------------------
 
@@ -25,6 +26,12 @@ class Texted_Window: public Visible_Window {
   private:
 
     plug::Texture* texture_;
+    plug::Color    bg_color_;
+
+    //--------------------------------------------------
+
+    bool is_text_pushed_to_the_left_;
+    void render_with_pushed_text (plug::RenderTarget& target, plug::TransformStack& stack);
 };
 
 

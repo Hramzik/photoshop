@@ -7,7 +7,7 @@
 
 //--------------------------------------------------
 
-Canvas_Clear_Action::Canvas_Clear_Action (Canvas_Manager& manager, Color_Palette& palette):
+Canvas_Clear_Action::Canvas_Clear_Action (Canvas_Manager& manager, plug::ColorPalette& palette):
 
         canvas_manager_ (manager),
         color_palette_  (palette) {}
