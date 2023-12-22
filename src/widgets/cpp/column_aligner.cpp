@@ -5,6 +5,9 @@
 
 //--------------------------------------------------
 
+Column_Aligner::Column_Aligner (My_Widget& background):
+        Column_Aligner (background, plug::Vec2d (0.3, 0.3)) {}
+
 Column_Aligner::Column_Aligner
 (My_Widget& background, plug::Vec2d relative_padding_size):
         Widget_Aligner (background),
@@ -24,9 +27,6 @@ Column_Aligner::Column_Aligner
 
     next_widget_vertical_offset_ = tl_padding_size_.y * get_widget_width ();
 }
-
-Column_Aligner::Column_Aligner (My_Widget& background):
-        Column_Aligner (background, plug::Vec2d (0.3, 0.3)) {}
 
 //--------------------------------------------------
 
@@ -131,8 +131,6 @@ void Column_Aligner::render (plug::RenderTarget& target, plug::TransformStack& s
 
 void Column_Aligner::setLayoutBox (const plug::LayoutBox& box) {
 
-    // rebuild widgets
-
     //--------------------------------------------------
     // default
 
@@ -143,6 +141,12 @@ void Column_Aligner::setLayoutBox (const plug::LayoutBox& box) {
 
     background_.setLayoutBox (box);
     background_.getLayoutBox ().setPosition (getLayoutBox ().getSize () / 2);
+
+    //--------------------------------------------------
+    // rebuild widgets (cringe)
+
+    if (widgets_.size ()) return;
+    next_widget_vertical_offset_ = tl_padding_size_.y * get_widget_width ();
 }
 
 //--------------------------------------------------

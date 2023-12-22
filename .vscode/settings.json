@@ -11,7 +11,7 @@
         ".gitignore": true,
         "media": true,
         "src\\lib": true,
-        "src\\graphics": false,
+        "src\\graphics": true,
         "src\\vector": true,
         "src\\my_rgb": true,
         ".VSCodeCounter": true,
@@ -42,7 +42,10 @@
         "src\\plugin_data": true,
         "src\\plugins": true,
         "src\\widgets\\cpp\\texted.cpp": true,
-        "src\\widgets\\cpp\\window.cpp": true
+        "src\\widgets\\cpp\\window.cpp": true,
+        "src\\observer": true,
+        "diagrams": true,
+        "src\\canvas\\hpp\\canvas.hpp": true
     },
     "explorerExclude.backup": {},
     "files.associations": {

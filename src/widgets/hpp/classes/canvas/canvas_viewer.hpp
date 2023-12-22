@@ -27,9 +27,10 @@ class Canvas_Viewer: public My_Widget, public Observable {
     //--------------------------------------------------
 
     // tool palette must be set before focus
-    void set_is_focused   (bool is_focused);
-    bool get_is_focused   (void);
-    void set_tool_palette (Tool_Palette& palette);
+    void          set_is_focused   (bool is_focused);
+    bool          get_is_focused   (void);
+    void          set_tool_palette (Tool_Palette& palette);
+    Tool_Palette* get_tool_palette (void);
 
     Canvas& access_canvas (void);
 

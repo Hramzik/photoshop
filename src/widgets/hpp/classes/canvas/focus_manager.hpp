@@ -17,7 +17,8 @@ class Canvas_Focus_Manager: public Observer {
     //--------------------------------------------------
 
     void register_canvas_viewer (Canvas_Viewer& viewer);
-    plug::Canvas* get_active_canvas (void);
+    plug::Canvas*  get_active_canvas        (void);
+    Canvas_Viewer* get_active_canvas_viewer (void);
 
     //--------------------------------------------------
 

@@ -8,6 +8,10 @@
 
 //--------------------------------------------------
 
+class Menu;
+
+//--------------------------------------------------
+
 class Photoshop: public Widget_Manager {
 
   public:
@@ -32,12 +36,16 @@ class Photoshop: public Widget_Manager {
     Filter_Palette filter_palette_;
 
     Canvas_Manager canvas_manager_;
+    Menu*          menu_;
 
     void load_plugins  (void);
     void init_colors   (void);
     void init_tools    (void);
-    void init_filters  (void);
     void init_canvases (void);
+
+    void init_menu           (void);
+    void init_file_button    (void);
+    void init_filters_button (void);
 };
 
 //--------------------------------------------------

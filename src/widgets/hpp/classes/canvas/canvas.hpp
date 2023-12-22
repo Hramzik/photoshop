@@ -1,8 +1,11 @@
-#ifndef CANVAS_HEADERS_HPP_INCLUDED
-#define CANVAS_HEADERS_HPP_INCLUDED
+#ifndef CANVAS_WIDGETS_HEADERS_HPP_INCLUDED
+#define CANVAS_WIDGETS_HEADERS_HPP_INCLUDED
 //--------------------------------------------------
 
-#include "canvas_class.hpp"
+#include "canvas/hpp/canvas.hpp"
+
+//--------------------------------------------------
+
 #include "canvas_viewer.hpp"
 #include "focus_manager.hpp"
 #include "canvas_manager.hpp"

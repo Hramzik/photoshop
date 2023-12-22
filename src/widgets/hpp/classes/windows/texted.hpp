@@ -14,6 +14,10 @@ class Texted_Window: public Visible_Window {
 
     //--------------------------------------------------
 
+    void set_text_size_ratio (void);
+
+    //--------------------------------------------------
+
     virtual void render (plug::RenderTarget& target, plug::TransformStack& stack) override;
 
 //--------------------------------------------------

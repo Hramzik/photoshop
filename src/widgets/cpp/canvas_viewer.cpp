@@ -50,6 +50,11 @@ void Canvas_Viewer::set_tool_palette (Tool_Palette& palette) {
     tool_palette_ = &palette;
 }
 
+Tool_Palette* Canvas_Viewer::get_tool_palette (void) {
+
+    return tool_palette_;
+}
+
 Canvas& Canvas_Viewer::access_canvas (void) {
 
     return canvas_;

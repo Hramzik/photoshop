@@ -21,6 +21,18 @@ Texted_Window::Texted_Window (plug::LayoutBox& box, const char* text, My_RGB tex
 
 //--------------------------------------------------
 
+void Texted_Window::set_text_size_ratio (void) {
+
+    double w_h_ratio = (double) texture_->width / (double) texture_->height;
+
+    //--------------------------------------------------
+
+    plug::Vec2d size = getLayoutBox ().getSize ();
+    size.x = w_h_ratio * size.y;
+
+    getLayoutBox ().setSize (size);
+}
+
 void Texted_Window::render (plug::RenderTarget& target, plug::TransformStack& stack) {
 
     if (!texture_) return;

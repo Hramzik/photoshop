@@ -49,6 +49,13 @@ void Canvas_Focus_Manager::register_canvas_viewer (Canvas_Viewer& viewer) {
     viewer.set_is_focused (true);
 }
 
+//--------------------------------------------------
+
+Canvas_Viewer* Canvas_Focus_Manager::get_active_canvas_viewer (void) {
+
+    return active_canvas_viewer_;
+}
+
 plug::Canvas* Canvas_Focus_Manager::get_active_canvas (void) {
 
     if (!active_canvas_viewer_) return nullptr;

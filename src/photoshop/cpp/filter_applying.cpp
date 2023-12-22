@@ -30,7 +30,7 @@ Filter_Applying_Widget::Filter_Applying_Widget
 
 void Filter_Applying_Widget::add_filter (plug::Filter& filter) {
 
-    LayoutBox  box (666_px, 30_px);
+    LayoutBox  box (1_px, 30_px);
     const char* text = filter.getPluginData ()->getName ();
     My_RGB      text_color (255, 255, 255);
     My_Widget& model  = *new Texted_Window (box, text, text_color, C_DARK_GRAY); // width will be resized

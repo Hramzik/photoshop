@@ -13,6 +13,7 @@ VECTOR_FOLDER    = src/vector/cpp
 OBSERVER_FOLDER  = src/observer/cpp
 
 WIDGETS_FOLDER   = src/widgets/cpp
+CANVAS_FOLDER    = src/canvas/cpp
 TOOLS_FOLDER     = src/tools/cpp
 FILTERS_FOLDER   = src/filters/cpp
 PLUGINS_FOLDER   = src/plugins/cpp
@@ -96,7 +97,9 @@ program:
 	$(WIDGETS_FOLDER)/column_aligner.cpp \
 	$(WIDGETS_FOLDER)/row_aligner.cpp \
 \
-	$(WIDGETS_FOLDER)/canvas.cpp \
+	$(CANVAS_FOLDER)/canvas.cpp \
+	$(CANVAS_FOLDER)/clear_action.cpp \
+\
 	$(WIDGETS_FOLDER)/canvas_viewer.cpp \
 	$(WIDGETS_FOLDER)/canvas_focus_manager.cpp \
 	$(WIDGETS_FOLDER)/canvas_manager.cpp \

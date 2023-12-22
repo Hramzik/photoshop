@@ -2,6 +2,8 @@
 
 //--------------------------------------------------
 
+#include "canvas/hpp/canvas.hpp"
+
 #include "photoshop/hpp/photoshop.hpp"
 
 //--------------------------------------------------
@@ -13,7 +15,8 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     tool_palette_  (),
     filter_palette_  (),
 
-    canvas_manager_ ()
+    canvas_manager_ (),
+    menu_           (nullptr)
 {
 
     My_Widget& background = *new Colored_Window (box, C_GRAY);
@@ -37,9 +40,9 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     init_canvases ();
 
     //--------------------------------------------------
-    // to init filters, canvas must be created
+    // to init filter buttons, canvas must be created
 
-    init_filters ();
+    init_menu ();
 
     //--------------------------------------------------
 
@@ -100,24 +103,6 @@ void Photoshop::init_tools (void) {
     register_widget (new Framed_Window (tools, false));
 }
 
-void Photoshop::init_filters (void) {
-
-    LayoutBox filters_box (150_px, 125_px);
-    filters_box.setPosition (plug::Vec2d (-500, -350));
-
-    Filter_Applying_Widget& filters = // todo rewrite with add_paletet
-            *new Filter_Applying_Widget (filters_box, filter_palette_, canvas_manager_);
-
-    //--------------------------------------------------
-
-    LayoutBox menu_box (1400_px, 30_px);
-    menu_box.setPosition (plug::Vec2d (0, -500 + 15));
-    Menu& menu = *new Menu (menu_box);
-    menu.add_widget (filters, "Filters");
-
-    register_widget (&menu);
-}
-
 void Photoshop::init_canvases (void) {
 
     LayoutBox viewer1_box (800_px, 800_px);
@@ -144,6 +129,76 @@ void Photoshop::add_tool (plug::Tool& tool) {
 void Photoshop::add_filter (plug::Filter& filter) {
 
     filter_palette_.add_filter (filter);
+}
+
+//--------------------------------------------------
+
+void Photoshop::init_menu (void) {
+
+    LayoutBox menu_box (1400_px, 30_px);
+    menu_box.setPosition (plug::Vec2d (0, -500 + 15));
+
+    //--------------------------------------------------
+
+    menu_ = new Menu (menu_box);
+    register_widget (menu_);
+
+    //--------------------------------------------------
+
+    init_file_button    ();
+    init_filters_button ();
+}
+
+void Photoshop::init_file_button (void) {
+
+    if (!menu_) return;
+
+    //--------------------------------------------------
+    // file button
+
+    LayoutBox       file_box (150_px, 1_px);
+    My_Widget&      file_button_background = *new Colored_Window (file_box, C_DARK_GRAY);
+    Widget_Aligner& file_buttons           = *new Column_Aligner (file_button_background, plug::Vec2d (0.05, 0.05));
+
+    //--------------------------------------------------
+    // clear button
+
+    LayoutBox   box (1_px, 30_px);
+    const char* text = "Clear";
+    My_RGB      text_color (255, 255, 255);
+    My_Widget&  model  = *new Texted_Window (box, text, text_color, C_DARK_GRAY);
+
+    Button& button = *new Button (model);
+    Action& action = *new Canvas_Clear_Action (canvas_manager_, color_palette_);
+    button.set_pressed_action (&action);
+
+    file_buttons.add_widget (button);
+
+    //--------------------------------------------------
+
+    menu_->add_widget (file_buttons, "File");
+
+    //--------------------------------------------------
+    // move file buttons to the left
+
+    plug::LayoutBox& file_buttons_box = file_buttons.getLayoutBox ();
+    plug::Vec2d new_position = file_buttons_box.getPosition ();
+    new_position.x -= 12;
+    file_buttons_box.setPosition (new_position);
+    file_buttons.setLayoutBox (file_buttons_box);
+}
+
+void Photoshop::init_filters_button (void) {
+
+    if (!menu_) return;
+
+    //--------------------------------------------------
+
+    LayoutBox               filters_box (150_px, 1_px);
+    Filter_Applying_Widget& filters = // todo rewrite with add_paletet
+            *new Filter_Applying_Widget (filters_box, filter_palette_, canvas_manager_);
+
+    menu_->add_widget (filters, "Filters");
 }
 
 //--------------------------------------------------
