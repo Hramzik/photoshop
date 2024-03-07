@@ -46,7 +46,8 @@ const char* Canvas_Open_Action::get_user_file_name (void) {
 
     ofn.lpstrFileTitle  = nullptr;
     ofn.nMaxFileTitle   = 0;
-    ofn.lpstrInitialDir = "C:/Users/hramz_3vliuy6/Pictures/my_photoshop";
+    ofn.lpstrInitialDir = "C:";
+    //ofn.lpstrInitialDir = "C:/Users/hramz_3vliuy6/Pictures/my_photoshop";
 
     ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
