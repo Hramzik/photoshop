@@ -2,9 +2,7 @@
 #define __MY_RENDER_TARGET_H
 //--------------------------------------------------
 
-#include "C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2/SDL.h"
-
-#include <SDL.h>
+#include "lib/SDL2/include/SDL2/SDL.h"
 
 #include "MyVertexArray.h"
 

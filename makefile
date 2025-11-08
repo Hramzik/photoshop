@@ -2,6 +2,7 @@
 
 cc = gcc
 
+ROOT_FOLDER = .
 SRC_FOLDER = src
 OBJ_FOLDER = obj
 LIB_FOLDER  = src/lib
@@ -33,7 +34,7 @@ define flags
 endef
 
 define sdl_flags
-	-LC:\Users\hramz_3vliuy6\Desktop\lib\SDL2\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+	-Llib/SDL2/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 endef
 
 define windows_dialogs_flags
@@ -136,9 +137,9 @@ program:
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
 	-fcompare-debug-second \
+	-I $(ROOT_FOLDER) \
 	-I $(SRC_FOLDER) \
 	-I $(PLUGIN_STANDART_FOLDER) \
-	-I C:/Users/hramz_3vliuy6/Desktop/lib/SDL2/include/SDL2
 
 
 pencil:
@@ -156,6 +157,7 @@ pencil:
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
 	-fcompare-debug-second \
+	-I $(ROOT_FOLDER) \
 	-I $(SRC_FOLDER) \
 	-I $(PLUGIN_STANDART_FOLDER) \
 
@@ -174,5 +176,6 @@ monochrome:
 	-lstdc++ -O0 \
 	-fmessage-length=60 \
 	-fcompare-debug-second \
+	-I $(ROOT_FOLDER) \
 	-I $(SRC_FOLDER) \
 	-I $(PLUGIN_STANDART_FOLDER) \
