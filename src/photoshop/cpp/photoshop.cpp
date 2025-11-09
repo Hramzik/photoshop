@@ -18,8 +18,8 @@ Photoshop::Photoshop (plug::LayoutBox& box):
     canvas_manager_ (),
     menu_           (nullptr)
 {
-
     My_Widget& background = *new Colored_Window (box, C_GRAY);
+    background.getLayoutBox().setPosition(plug::Vec2d(0, 0));
 
     register_background_widget (&background);
 
@@ -138,7 +138,7 @@ void Photoshop::add_canvas (plug::Canvas& canvas) {
     //--------------------------------------------------
     // finding viewer position
 
-    LayoutBox viewer_box   (800_px, 800_px);
+    LayoutBox viewer_box   (700_px, 700_px);
     viewer_box.setPosition (plug::Vec2d (100, 0));
 
     Canvas_Viewer* active_viewer = canvas_manager_.get_active_canvas_viewer ();

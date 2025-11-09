@@ -46,7 +46,7 @@ void Canvas_Manager::clear_active_canvas (void) {
 void Canvas_Manager::close_canvas_viewer (Canvas_Viewer& viewer) {
 
     (void) viewer;
-    //viewer.open ();
+    // viewer.open ();
 }
 
 //--------------------------------------------------

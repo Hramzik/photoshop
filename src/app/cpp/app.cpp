@@ -110,7 +110,7 @@ void App::render (void) {
 void App::populate (void) {
 
     LayoutBox box (1400_px, 1000_px);
-    //box.setPosition ()
+    box.setPosition (plug::Vec2d (0, 100));
 
     //--------------------------------------------------
 
